@@ -22,6 +22,9 @@
     <Filter Include="Sources\ImGui">
       <UniqueIdentifier>{0974bc9e-8927-402e-a771-a6c14de6ea1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Menus">
+      <UniqueIdentifier>{384c39b0-daef-4f00-8a98-2854a3f844c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -94,7 +97,7 @@
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ModuleUI.h">
-      <Filter>Sources\Modules</Filter>
+      <Filter>Sources\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +159,7 @@
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
-      <Filter>Sources\Modules</Filter>
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
