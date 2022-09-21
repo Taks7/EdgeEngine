@@ -3,7 +3,6 @@
 #include "Globals.h"
 #include "ImGui/imgui.h"
 
-
 class ModuleUI : public Module
 {
 public:
