@@ -2,8 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_glut.h"
-#include "ImGui/imgui_impl_opengl2.h"
+
 
 class ModuleUI : public Module
 {
