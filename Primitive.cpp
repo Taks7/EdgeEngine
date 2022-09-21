@@ -1,9 +1,9 @@
 
 #include "Globals.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
+#include "glew/include/GL/glew.h"
 #include "Primitive.h"
 
+#pragma comment( lib, "glew/lib/glew32.lib")
 
 // ------------------------------------------------------------
 Primitive::Primitive() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
@@ -22,6 +22,7 @@ void Primitive::Update()
 // ------------------------------------------------------------
 void Primitive::Render() const
 {
+	glewInit();
 	glPushMatrix();
 	glMultMatrixf(transform.M);
 
