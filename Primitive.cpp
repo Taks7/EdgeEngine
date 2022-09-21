@@ -1,9 +1,8 @@
 
 #include "Globals.h"
-#include "glew/include/GL/glew.h"
 #include "Primitive.h"
-
-#pragma comment( lib, "glew/lib/glew32.lib")
+#include <glew.h>
+#include <glfw3.h>
 
 // ------------------------------------------------------------
 Primitive::Primitive() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)

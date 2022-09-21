@@ -5,10 +5,11 @@ Application::Application() : debug(false)
 	window = new ModuleWindow();
 	input = new ModuleInput();
 	audio = new ModuleAudio();
+	ui = new ModuleUI();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
-	ui = new ModuleUI();
+	
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order

@@ -3,7 +3,11 @@
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleUI.h"
-#include "SDL\include\SDL_opengl.h"
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_glfw.h"
+#include <glew.h>
+#include <glfw3.h>
+
 
 
 
