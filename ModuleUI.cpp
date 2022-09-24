@@ -27,7 +27,7 @@ bool ModuleUI::Init()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
+	//io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
 	//io.BackendFlags 
 	ImGui::StyleColorsDark();
