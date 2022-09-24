@@ -1,24 +1,18 @@
+
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
-#include "ModuleWindow.h"
 #include "SDL\include\SDL_opengl.h"
-#include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_glfw.h"
-#include "ImGui/imgui_impl_sdl.h"
-#include "Imgui/imgui_impl_opengl3.h"
-#include <glew.h>
-#include <glfw3.h>
-/*
-#include <glew.h>
-#include <glfw3.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
-*/
+
+
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
+
+//#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 {
 }
@@ -53,15 +47,6 @@ bool ModuleRenderer3D::Init()
 
 		//Check for error
 		GLenum error = glGetError();
-
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		ImGui::DarkTheme();
-
-		ImGui_ImplSDL2_InitForOpenGL(app->window->window, context);
-		ImGui_ImplOpenGL3_Init();
 		if(error != GL_NO_ERROR)
 		{
 			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
@@ -115,6 +100,7 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
 	}
+	
 
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -137,12 +123,16 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
+	
+
 	return UPDATE_CONTINUE;
 }
 
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+	
+
 	SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
 }
@@ -151,9 +141,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
+
+	
 
 	SDL_GL_DeleteContext(context);
 

@@ -1,8 +1,9 @@
 
 #include "Globals.h"
+#include <gl/GL.h>
+#include <gl/GLU.h>
 #include "Primitive.h"
-#include <glew.h>
-#include <glfw3.h>
+
 
 // ------------------------------------------------------------
 Primitive::Primitive() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
@@ -16,12 +17,12 @@ PrimitiveTypes Primitive::GetType() const
 
 void Primitive::Update()
 {
+	//TODO 5: Set the primitive position and rotation to the PhysBody position and rotation
 }
 
 // ------------------------------------------------------------
 void Primitive::Render() const
 {
-	glewInit();
 	glPushMatrix();
 	glMultMatrixf(transform.M);
 
@@ -167,11 +168,12 @@ void Cube::InnerRender() const
 Sphere::Sphere(float _radius, float mass) : Primitive(), radius(_radius)
 {
 	type = PrimitiveTypes::Primitive_Sphere;
+	//TODO 4: Initialize the PhysBody to be a Sphere
 }
 
 void Sphere::InnerRender() const
 {
-	//glutSolidSphere(radius, 25, 25);
+
 }
 
 

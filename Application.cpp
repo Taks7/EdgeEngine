@@ -5,12 +5,10 @@ Application::Application() : debug(false)
 	window = new ModuleWindow();
 	input = new ModuleInput();
 	audio = new ModuleAudio();
-	ui = new ModuleUI();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
-	
-
+	ui = new ModuleUI();
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -21,7 +19,6 @@ Application::Application() : debug(false)
 	AddModule(input);
 	AddModule(audio);
 	AddModule(ui);
-
 	
 	// Scenes
 	AddModule(scene_intro);
@@ -65,7 +62,8 @@ bool Application::Init()
 		ret = item->data->Start();
 		item = item->next;
 	}
-
+	
+	ms_timer.Start();
 	return ret;
 }
 

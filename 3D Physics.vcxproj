@@ -47,16 +47,13 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <TranslateIncludes>true</TranslateIncludes>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/include/GLFW;$(SolutionDir)glew/include/GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL/include%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WINDOWS_IGNORE_PACKING_MISMATCH;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)glew/lib;$(SolutionDir)GLFW/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,9 +65,6 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <TranslateIncludes>true</TranslateIncludes>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/include/GLFW;$(SolutionDir)glew/include/GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -78,8 +72,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)glew/lib;$(SolutionDir)GLFW/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -87,6 +79,16 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="glmath.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_opengl2.h" />
+    <ClInclude Include="ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="ImGui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="ImGui\imgui_impl_sdl.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
@@ -106,6 +108,14 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="glmath.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="ImGui\imgui_tables.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />

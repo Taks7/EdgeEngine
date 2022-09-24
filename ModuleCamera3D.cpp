@@ -59,7 +59,7 @@ update_status ModuleCamera3D::Update(float dt)
 	Reference += newPos;
 
 	// Mouse motion ----------------
-
+	
 	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
@@ -94,7 +94,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 		Position = Reference + Z * length(Position);
 	}
-
+	
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 

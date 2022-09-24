@@ -4,6 +4,7 @@
 #include "Globals.h"
 
 class Primitive;
+class  PhysBody3D;
 
 class ModuleSceneIntro : public Module
 {
