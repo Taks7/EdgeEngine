@@ -12,6 +12,8 @@
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
 
+// USAR PARA STL: https://github.com/karansaxena/STL_Cheat_Sheets
+
 class Application
 {
 public:
