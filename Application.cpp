@@ -1,15 +1,20 @@
 #include "Application.h"
 #include "Globals.h"
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleRenderer3D.h"
+#include "ModuleCamera3D.h"
 
 Application::Application() : debug(false)
 {
 	window = new ModuleWindow();
 	input = new ModuleInput();
-	audio = new ModuleAudio();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	ui = new ModuleUI();
+	audio = new ModuleAudio();
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order

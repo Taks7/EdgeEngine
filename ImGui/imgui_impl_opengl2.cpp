@@ -39,6 +39,7 @@
 
 #include "imgui.h"
 #include "imgui_impl_opengl2.h"
+#include <stdio.h>
 #if defined(_MSC_VER) && _MSC_VER <= 1500 // MSVC 2008 or earlier
 #include <stddef.h>     // intptr_t
 #else
@@ -113,8 +114,8 @@ void    ImGui_ImplOpenGL2_NewFrame()
     ImGui_ImplOpenGL2_Data* bd = ImGui_ImplOpenGL2_GetBackendData();
     IM_ASSERT(bd != NULL && "Did you call ImGui_ImplOpenGL2_Init()?");
 
-    /*if (!bd->FontTexture)
-        ImGui_ImplOpenGL2_CreateDeviceObjects();*/
+    if (!bd->FontTexture)
+        ImGui_ImplOpenGL2_CreateDeviceObjects();
 }
 
 static void ImGui_ImplOpenGL2_SetupRenderState(ImDrawData* draw_data, int fb_width, int fb_height)
