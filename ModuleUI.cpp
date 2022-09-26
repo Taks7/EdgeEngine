@@ -41,22 +41,22 @@ bool ModuleUI::Init()
 	return true;
 }
 
-update_status ModuleUI::PreUpdate(float dt)
+bool ModuleUI::PreUpdate(float dt)
 {
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
-	return UPDATE_CONTINUE;
+	return true;
 }
 
-update_status ModuleUI::Update(float dt)
+bool ModuleUI::Update(float dt)
 {
 	
-	return UPDATE_CONTINUE;
+	return true;
 }
 
-update_status ModuleUI::PostUpdate(float dt)
+bool ModuleUI::PostUpdate(float dt)
 {
 	
 	ImGui::ShowDemoWindow();
@@ -71,7 +71,7 @@ update_status ModuleUI::PostUpdate(float dt)
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 
-	return UPDATE_CONTINUE;
+	return true;
 }
 
 // Called before quitting

@@ -113,8 +113,8 @@ void    ImGui_ImplOpenGL2_NewFrame()
     ImGui_ImplOpenGL2_Data* bd = ImGui_ImplOpenGL2_GetBackendData();
     IM_ASSERT(bd != NULL && "Did you call ImGui_ImplOpenGL2_Init()?");
 
-    if (!bd->FontTexture)
-        ImGui_ImplOpenGL2_CreateDeviceObjects();
+    /*if (!bd->FontTexture)
+        ImGui_ImplOpenGL2_CreateDeviceObjects();*/
 }
 
 static void ImGui_ImplOpenGL2_SetupRenderState(ImDrawData* draw_data, int fb_width, int fb_height)

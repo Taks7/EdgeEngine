@@ -13,8 +13,8 @@ public:
 	~ModuleSceneIntro();
 
 	bool Start();
-	update_status Update(float dt) override;
-	update_status PostUpdate(float dt) override;
+	bool Update(float dt) override;
+	bool PostUpdate();
 	bool CleanUp();
 
 	//TODO 9: Create an "OnCollision" method specific for this module

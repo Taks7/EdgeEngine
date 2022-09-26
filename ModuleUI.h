@@ -16,9 +16,9 @@ public:
 	virtual ~ModuleUI();
 
 	bool Init();
-	update_status PreUpdate(float dt);
-	update_status Update(float dt);
-	update_status PostUpdate(float dt);
+	bool PreUpdate(float dt);
+	bool Update(float dt);
+	bool PostUpdate(float dt);
 	bool CleanUp();
 
 	
