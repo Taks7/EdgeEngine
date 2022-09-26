@@ -1,4 +1,7 @@
 #include "Application.h"
+//#include "MathGeo/src/MathGeoLib.h"
+
+//#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
 
 Application::Application() : debug(false)
 {
@@ -43,7 +46,7 @@ bool Application::Init()
 	bool ret = true;
 
 	App = this;
-
+	//Clock::Day();
 	// Call Init() in all modules
 	p2List_item<Module*>* item = list_modules.getFirst();
 
@@ -54,7 +57,7 @@ bool Application::Init()
 	}
 
 	// After all Init calls we call Start() in all modules
-	LOG("Application Start --------------");
+	//LOG("Application Start --------------");
 	item = list_modules.getFirst();
 
 	while(item != NULL && ret == true)
