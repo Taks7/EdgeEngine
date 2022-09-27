@@ -169,7 +169,7 @@ JsonParsing JsonParsing::GetJsonArrayValue(JSON_Array* array, int index) const
 	return JsonParsing(json_array_get_value(array, index));
 }
 
-//Posible error de mathgeo !
+//Error Linker 2019!
 
 //float3 JsonParsing::GetJson3Number(JsonParsing& node, const char* name)
 //{
@@ -181,7 +181,7 @@ JsonParsing JsonParsing::GetJsonArrayValue(JSON_Array* array, int index) const
 //
 //	return float3(x,y,z);
 //}
-
+//
 //float4 JsonParsing::GetJson4Number(JsonParsing& node, const char* name)
 //{
 //	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
