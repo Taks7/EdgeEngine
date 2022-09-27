@@ -24,7 +24,13 @@ public:
 	
 
 public:
-	
+	void MainMenu();
+
+
+
+	bool fullscreen;
+	int screenWidth;
+	int screenHeight;
 };
 
 #endif // __ModuleWindow_H__

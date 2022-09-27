@@ -30,6 +30,7 @@ bool ModuleUI::Init()
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	//io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+	//io.ConfigFlags |= ImGuiConfigFlags_
 	//io.BackendFlags 
 	ImGui::StyleColorsDark();
 
@@ -49,29 +50,23 @@ bool ModuleUI::PreUpdate(float dt)
 
 bool ModuleUI::Update(float dt)
 {
-	
+	ImGui_ImplOpenGL2_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+
+	MainMenu();
+
+	ImGui::Render();
+	//ImGui::EndFrame();
+	//ImGui::UpdatePlatformWindows();
+
+	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	return true;
 }
 
 bool ModuleUI::PostUpdate(float dt)
 {
-	ImGui_ImplOpenGL2_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
-	ImGui::ShowDemoWindow();
-	ImGui::Begin("Edge Engine");                          
-	ImGui::SetWindowSize({ 250,250 }, 0);
-	ImGui::Text("First Window");
-	if (ImGui::Button("TEST", { 100,50 }))
-	{
-		exit(0);
-	}
-	/*ImGui::End();*/
-	ImGui::Render();
-	ImGui::EndFrame();
-	ImGui::UpdatePlatformWindows();
-
-	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+	
 
 	return true;
 }
@@ -84,4 +79,56 @@ bool ModuleUI::CleanUp()
 	ImGui::DestroyContext();
 
 	return true;
+}
+
+void ModuleUI::MainMenu()
+{
+	//MENUS 
+	ImGui::BeginMainMenuBar();
+	{
+		if (ImGui::BeginMenu("Configuration"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Application"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Window"))
+		{
+			
+			if(ImGui::Checkbox("Fullscreen",&fullscreen))
+			{
+				App->window->SetFullscreen(fullscreen);
+			}
+			if (ImGui::SliderInt("Width", &screenWidth, 0, 1920))
+			{
+				App->window->ModifyWidth(screenWidth);
+			}
+			if (ImGui::SliderInt("Height", &screenHeight, 0, 1920))
+			{
+				App->window->ModifyHeight(screenHeight);
+			}
+
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("File System"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Input"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Hardware"))
+		{
+			ImGui::EndMenu();
+
+		}
+	}
+	ImGui::EndMainMenuBar();
 }
