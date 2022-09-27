@@ -57,9 +57,6 @@ enum update_status
 	UPDATE_ERROR
 };
 
-
-
-
 class Application;
 //I hope no one notices this...
 extern Application* App;

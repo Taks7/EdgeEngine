@@ -44,10 +44,6 @@ bool ModuleUI::Init()
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	ImGui_ImplOpenGL2_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	/*ImGui::NewFrame();*/
-
 	return true;
 }
 
@@ -59,7 +55,9 @@ bool ModuleUI::Update(float dt)
 
 bool ModuleUI::PostUpdate(float dt)
 {
-	
+	ImGui_ImplOpenGL2_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
 	ImGui::ShowDemoWindow();
 	ImGui::Begin("Edge Engine");                          
 	ImGui::SetWindowSize({ 250,250 }, 0);
@@ -68,7 +66,7 @@ bool ModuleUI::PostUpdate(float dt)
 	{
 		exit(0);
 	}
-	ImGui::End();
+	/*ImGui::End();*/
 	ImGui::Render();
 	ImGui::EndFrame();
 	ImGui::UpdatePlatformWindows();
