@@ -7,6 +7,7 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl2.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/lib/Release/Win32/glew32.lib")
 
@@ -45,7 +46,7 @@ bool ModuleUI::PreUpdate(float dt)
 {
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
+	/*ImGui::NewFrame();*/
 
 	return true;
 }
@@ -70,6 +71,7 @@ bool ModuleUI::PostUpdate(float dt)
 	ImGui::End();
 	ImGui::Render();
 	ImGui::EndFrame();
+	ImGui::UpdatePlatformWindows();
 
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 

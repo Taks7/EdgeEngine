@@ -47,24 +47,27 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	char* buffer = nullptr;
+	App = this;
+
+	/*char* buffer = nullptr;
 
 	if (buffer != nullptr)
 	{
 		std::list<Module*>::iterator item;
 
 		RELEASE_ARRAY(buffer);
-	}
+	}*/
 
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
-
 	// After all Init calls we call Start() in all modules
 	LOG("Application Init");
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
+		ret = (*item)->Init();
 		ret = (*item)->Start();
+		/*ret = (*item)->Init();*/
 	}
 
 	return ret;
