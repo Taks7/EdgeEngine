@@ -109,8 +109,18 @@ void ModuleUI::MainMenu()
 	//MENUS 
 	ImGui::BeginMainMenuBar();
 	{
+		if (ImGui::BeginMenu("GeneralStuff"))
+		{
+			if (ImGui::Checkbox("AboutMenu", &enableAboutMenu))
+			{
+				aboutMenu->active = enableAboutMenu;
+			}
+			ImGui::EndMenu();
+
+		}
 		if (ImGui::BeginMenu("Configuration"))
 		{
+			
 			ImGui::EndMenu();
 
 		}

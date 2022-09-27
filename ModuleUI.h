@@ -32,6 +32,7 @@ public:
 	int screenWidth;
 	int screenHeight;
 	
+	bool enableAboutMenu;
 
 	AboutMenu* aboutMenu;
 private:

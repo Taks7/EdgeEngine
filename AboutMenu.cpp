@@ -2,7 +2,7 @@
 #include "ImGui/imgui.h"
 AboutMenu::AboutMenu()
 {
-	active = true;
+	active = false;
 }
 
 AboutMenu::~AboutMenu()
