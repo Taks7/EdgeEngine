@@ -149,6 +149,8 @@ void Application::AddModule(Module* mod)
 
 void Application::SaveConfig()
 {
+	LOG_COMMENT("Saving configuration");
+
 	JsonParsing jsonFile;
 
 	// Call Init() in all modules
@@ -170,6 +172,8 @@ void Application::SaveConfig()
 
 void Application::LoadConfig()
 {
+	LOG_COMMENT("Loading configuration");
+
 	char* buffer = nullptr;
 
 	if (buffer != nullptr)

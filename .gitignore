@@ -6,6 +6,9 @@
 *.dll
 !lib/*.dll
 
+!glew/glew-2.2.0/lib/Release/Win32/glew32.lib
+!glew/glew-2.2.0/lib/Release/Win32/glew32s.lib
+
 # User-specific files
 *.rsuser
 *.suo
