@@ -90,11 +90,11 @@ public:
 };
 
 // ============================================
-class Plane : public Primitive
+class NormalPlane : public Primitive
 {
 public:
-	Plane();
-	Plane(float x, float y, float z, float d);
+	NormalPlane();
+	NormalPlane(float x, float y, float z, float d);
 
 protected:
 	void InnerRender() const;

@@ -1,10 +1,9 @@
 #pragma once
-
+#include "Module.h"
 #include <list>
 #include <string>
 #include "Globals.h"
 #include "Timer.h"
-#include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
@@ -12,6 +11,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
+#include "JsonParsing.h"
 
 // USAR PARA STL: https://github.com/karansaxena/STL_Cheat_Sheets
 
@@ -32,6 +32,8 @@ private:
 	std::list<Module*> list_modules;
 	Timer	ms_timer;
 	float	dt;
+	bool saveRequest;
+	bool loadRequest;
 	
 public:
 
@@ -47,4 +49,7 @@ private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+
+	void SaveConfig();
+	void LoadConfig();
 };

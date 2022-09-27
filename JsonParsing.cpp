@@ -125,7 +125,7 @@ JSON_Object* JsonParsing::ValueToObject(JSON_Value* value) const
 	if(object != NULL)
 		return object;
 
-	/*LOG("Object has not been retrieved");*/
+	/*LOG_COMMENT("Object has not been retrieved");*/
 
 	return nullptr;
 }
@@ -200,7 +200,7 @@ JSON_Object* JsonParsing::GetJsonObject(JSON_Object* parentObject, const char* n
 
 	if (object) return object;
 
-	/*LOG("Node object has not been found");*/
+	/*LOG_COMMENT("Node object has not been found");*/
 
 	return nullptr;
 }

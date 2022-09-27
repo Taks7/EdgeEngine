@@ -84,7 +84,7 @@ CODE
 // [SECTION] DOCKING
 // [SECTION] PLATFORM DEPENDENT HELPERS
 // [SECTION] METRICS/DEBUGGER WINDOW
-// [SECTION] DEBUG LOG WINDOW
+// [SECTION] DEBUG LOG_COMMENT WINDOW
 // [SECTION] OTHER DEBUG TOOLS (ITEM PICKER, STACK TOOL)
 
 */
@@ -19022,7 +19022,7 @@ void ImGui::DebugNodeWindowsListByBeginStackParent(ImGuiWindow** windows, int wi
 }
 
 //-----------------------------------------------------------------------------
-// [SECTION] DEBUG LOG
+// [SECTION] DEBUG LOG_COMMENT
 //-----------------------------------------------------------------------------
 
 void ImGui::DebugLog(const char* fmt, ...)
