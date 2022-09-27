@@ -55,15 +55,15 @@ bool Application::Init()
 
 	App = this;
 
-	p2List_item<Module*>* item = list_modules.getFirst();
+	//p2List_item<Module*>* item = list_modules.getFirst();
 
-
+	char* buffer = nullptr;
 	if (buffer != nullptr)
 	{
 		std::list<Module*>::iterator item;
 
 		RELEASE_ARRAY(buffer);
-	}*/
+	}
 
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
@@ -72,7 +72,7 @@ bool Application::Init()
 	LOG("Application Init");
 
 	//LOG("Application Start --------------");
-	item = list_modules.getFirst();
+	//item = list_modules.getFirst();
 
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
