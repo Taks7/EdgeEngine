@@ -9,6 +9,9 @@
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 
+#include "UI.h"
+#include "AboutMenu.h"
+
 #pragma comment (lib, "glew/glew-2.2.0/lib/Release/Win32/glew32.lib")
 
 ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
@@ -40,11 +43,15 @@ bool ModuleUI::Init()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL2_Init();
 
+	//Way to add menus to the menu list
+	menus.push_back(aboutMenu = new AboutMenu());
 	return true;
 }
 
 bool ModuleUI::PreUpdate(float dt)
 {
+	
+	
 	return true;
 }
 
@@ -55,12 +62,20 @@ bool ModuleUI::Update(float dt)
 	ImGui::NewFrame();
 
 	MainMenu();
-
+	for (std::vector<UI*>::iterator it = menus.begin(); it != menus.end(); ++it)
+	{
+		if ((*it)->IsActive())
+		{
+			(*it)->Draw();
+		}
+	}
 	ImGui::Render();
 	//ImGui::EndFrame();
 	//ImGui::UpdatePlatformWindows();
 
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+
+	
 	return true;
 }
 
@@ -74,6 +89,14 @@ bool ModuleUI::PostUpdate(float dt)
 // Called before quitting
 bool ModuleUI::CleanUp()
 {
+
+	for (int i = 0; i < menus.size(); i++)
+	{
+		menus[i]->CleanUp();
+		delete menus[i];
+	}
+	menus.clear();
+
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
