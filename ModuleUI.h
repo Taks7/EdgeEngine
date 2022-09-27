@@ -3,8 +3,11 @@
 
 #include "Module.h"
 #include "SDL/include/SDL.h"
+#include <vector>
 
 class Application;
+class UI;
+class AboutMenu;
 
 class ModuleUI : public Module
 {
@@ -16,15 +19,25 @@ public:
 	virtual ~ModuleUI();
 
 	bool Init();
-	update_status PreUpdate(float dt);
-	update_status Update(float dt);
-	update_status PostUpdate(float dt);
+	bool PreUpdate(float dt);
+	bool Update(float dt);
+	bool PostUpdate(float dt);
 	bool CleanUp();
 
 	
 
 public:
+	void MainMenu();
+	bool fullscreen;
+	int screenWidth;
+	int screenHeight;
 	
+	bool enableAboutMenu;
+
+	AboutMenu* aboutMenu;
+private:
+
+	std::vector<UI*> menus;
 };
 
 #endif // __ModuleWindow_H__

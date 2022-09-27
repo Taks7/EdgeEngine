@@ -20,8 +20,8 @@ public:
 	~ModuleInput();
 
 	bool Init();
-	update_status PreUpdate(float dt) override;
-	update_status Update(float dt) override;
+	bool PreUpdate(float dt) override;
+	bool Update(float dt) override;
 	bool CleanUp();
 
 	KEY_STATE GetKey(int id) const

@@ -22,6 +22,12 @@
     <Filter Include="Sources\ImGui">
       <UniqueIdentifier>{72ee525a-6972-4677-ae2d-fea643a7b020}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\UI">
+      <UniqueIdentifier>{71478ded-1692-450e-a773-05884bb067c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\UI\Menus">
+      <UniqueIdentifier>{3667dcf0-5d7e-4fa5-95cc-238f5693ed10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -41,15 +47,6 @@
     </ClInclude>
     <ClInclude Include="ModuleWindow.h">
       <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="p2DynArray.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="p2List.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="p2Point.h">
-      <Filter>Sources\Containers</Filter>
     </ClInclude>
     <ClInclude Include="glmath.h">
       <Filter>Sources\Containers</Filter>
@@ -106,7 +103,13 @@
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ModuleUI.h">
-      <Filter>Sources\Modules</Filter>
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutMenu.h">
+      <Filter>Sources\Modules\UI\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +180,13 @@
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
-      <Filter>Sources\Modules</Filter>
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AboutMenu.cpp">
+      <Filter>Sources\Modules\UI\Menus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
