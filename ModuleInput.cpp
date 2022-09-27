@@ -117,9 +117,9 @@ bool ModuleInput::PreUpdate(float dt)
 	}
 
 	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
-		return UPDATE_STOP;
+		return false;
 	
-	return UPDATE_CONTINUE;
+	return true;
 }
 
 bool ModuleInput::Update(float dt)
@@ -127,7 +127,7 @@ bool ModuleInput::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		App->debug = !App->debug;
 
-	return UPDATE_CONTINUE;
+	return true;
 }
 
 // Called before quitting

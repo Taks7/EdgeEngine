@@ -9,7 +9,7 @@
 
 // Configuration -----------
 #define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 1024
+#define SCREEN_HEIGHT 800
 #define SCREEN_SIZE 1
 #define WIN_FULLSCREEN false
 #define WIN_RESIZABLE true
@@ -49,14 +49,14 @@ void log(const char file[], int line, const char* format, ...);
 	 }
 
 typedef unsigned int uint;
-
+/*
 enum update_status
 {
 	UPDATE_CONTINUE = 1,
 	UPDATE_STOP,
 	UPDATE_ERROR
 };
-
+*/
 class Application;
 //I hope no one notices this...
 extern Application* App;

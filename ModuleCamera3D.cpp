@@ -98,7 +98,7 @@ bool ModuleCamera3D::Update(float dt)
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
-	return UPDATE_CONTINUE;
+	return true;
 }
 
 // -----------------------------------------------------------------
