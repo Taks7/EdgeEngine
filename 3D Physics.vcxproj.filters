@@ -28,6 +28,9 @@
     <Filter Include="Sources\Modules\UI\Menus">
       <UniqueIdentifier>{3667dcf0-5d7e-4fa5-95cc-238f5693ed10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\JsonParsing">
+      <UniqueIdentifier>{07f4397a-3e56-4494-91f3-e937df679de0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -111,6 +114,12 @@
     <ClInclude Include="AboutMenu.h">
       <Filter>Sources\Modules\UI\Menus</Filter>
     </ClInclude>
+    <ClInclude Include="JsonParsing.h">
+      <Filter>Sources\Tools\JsonParsing</Filter>
+    </ClInclude>
+    <ClInclude Include="json\parson.h">
+      <Filter>Sources\Tools\JsonParsing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -187,6 +196,12 @@
     </ClCompile>
     <ClCompile Include="AboutMenu.cpp">
       <Filter>Sources\Modules\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonParsing.cpp">
+      <Filter>Sources\Tools\JsonParsing</Filter>
+    </ClCompile>
+    <ClCompile Include="json\parson.c">
+      <Filter>Sources\Tools\JsonParsing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
