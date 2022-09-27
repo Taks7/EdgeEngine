@@ -1,10 +1,16 @@
 #include "Application.h"
+
 #include "Globals.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+
+//#include "MathGeo/src/MathGeoLib.h"
+
+//#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
+
 
 Application::Application() : debug(false)
 {
@@ -49,7 +55,8 @@ bool Application::Init()
 
 	App = this;
 
-	/*char* buffer = nullptr;
+	p2List_item<Module*>* item = list_modules.getFirst();
+
 
 	if (buffer != nullptr)
 	{
@@ -61,7 +68,12 @@ bool Application::Init()
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
 	// After all Init calls we call Start() in all modules
+
 	LOG("Application Init");
+
+	//LOG("Application Start --------------");
+	item = list_modules.getFirst();
+
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
