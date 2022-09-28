@@ -116,61 +116,29 @@ Cube::Cube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 Cube::Cube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
 {
 	type = PrimitiveTypes::Primitive_Cube;
-	//FRONT
-	glBegin(GL_POLYGON);
-	glColor3f(0.0, 0.0, 0.0);
-	glVertex3f(-sizeX, sizeY, -sizeZ);
-	glVertex3f(-sizeX, -sizeY, -sizeZ);
-	glVertex3f(sizeX, -sizeY, -sizeZ);
-	glVertex3f(sizeX, sizeY, -sizeZ);
-	glEnd();
+	GLfloat vertices[] = { sizeX, sizeY, sizeZ,  -sizeX, sizeY, sizeZ,  -sizeX,-sizeY, sizeZ,   sizeX,-sizeY, sizeZ,   // v0,v1,v2,v3 (front)
+							sizeX, sizeY, sizeZ,   sizeX,-sizeY, sizeZ,   sizeX,-sizeY,-sizeZ,   sizeX, sizeY,-sizeZ,   // v0,v3,v4,v5 (right)
+							sizeX, sizeY, sizeZ,   sizeX, sizeY,-sizeZ,  -sizeX, sizeY,-sizeZ,  -sizeX, sizeY, sizeZ,   // v0,v5,v6,v1 (top)
+						  -sizeX, sizeY, sizeZ,  -sizeX, sizeY,-sizeZ,  -sizeX,-sizeY,-sizeZ,  -sizeX,-sizeY, sizeZ,   // v1,v6,v7,v2 (left)
+						  -sizeX,-sizeY,-sizeZ,   sizeX,-sizeY,-sizeZ,   sizeX,-sizeY, sizeZ,  -sizeX,-sizeY, sizeZ,   // v7,v4,v3,v2 (bottom)
+							sizeX,-sizeY,-sizeZ,  -sizeX,-sizeY,-sizeZ,  -sizeX, sizeY,-sizeZ,   sizeX, sizeY,-sizeZ }; // v4,v7,v6,v5 (back)
 
-	// White side - BACK
-	glBegin(GL_POLYGON);
-	glColor3f(1.0, 1.0, 1.0);
-	glVertex3f(sizeX, -sizeY, sizeZ);
-	glVertex3f(sizeX, sizeY, sizeZ);
-	glVertex3f(-sizeX, sizeY, sizeZ);
-	glVertex3f(-sizeX, -sizeY, sizeZ);
-	glEnd();
+	GLubyte indices[] = { 0, 1, 2,   2, 3, 0,      // front
+					   4, 5, 6,   6, 7, 4,      // right
+					   8, 9,10,  10,11, 8,      // top
+					  12,13,14,  14,15,12,      // left
+					  16,17,18,  18,19,16,      // bottom
+					  20,21,22,  22,23,20 };    // back
+	
+		// activate and specify pointer to vertex array
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertices);
 
-	// Purple side - RIGHT
-	glBegin(GL_POLYGON);
-	glColor3f(1.0, 0.0, 1.0);
-	glVertex3f(sizeX, -sizeY, -sizeZ);
-	glVertex3f(sizeX, sizeY, -sizeZ);
-	glVertex3f(sizeX, sizeY, sizeZ);
-	glVertex3f(sizeX, -sizeY, sizeZ);
-	glEnd();
+	// draw a cube
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, indices);
 
-	// Green side - LEFT
-	glBegin(GL_POLYGON);
-	glColor3f(0.0, 1.0, 0.0);
-	glVertex3f(-sizeX, -sizeY, sizeZ);
-	glVertex3f(-sizeX, sizeY, sizeZ);
-	glVertex3f(-sizeX, sizeY, -sizeZ);
-	glVertex3f(-sizeX, -sizeY, -sizeZ);
-	glEnd();
-
-	// Blue side - TOP
-	glBegin(GL_POLYGON);
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex3f(sizeX, sizeY, sizeZ);
-	glVertex3f(sizeX, sizeY, -sizeZ);
-	glVertex3f(-sizeX, sizeY, -sizeZ);
-	glVertex3f(-sizeX, sizeY, sizeZ);
-	glEnd();
-
-	// Red side - BOTTOM
-	glBegin(GL_POLYGON);
-	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(sizeX, -sizeY, -sizeZ);
-	glVertex3f(sizeX, -sizeY, sizeZ);
-	glVertex3f(-sizeX, -sizeY, sizeZ);
-	glVertex3f(-sizeX, -sizeY, -sizeZ);
-	glEnd();
-
-	glFlush();
+	// deactivate vertex arrays after drawing
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void Cube::InnerRender() const
