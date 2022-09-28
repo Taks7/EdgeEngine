@@ -178,23 +178,21 @@ void ModuleUI::MainMenu()
 		if (ImGui::BeginMenu("Render options"))
 		{
 
-			if (ImGui::Checkbox("GL_Depth_test", &fullscreen))
+			if (ImGui::Checkbox("GL_Depth_test", &App->renderer3D->atributes.Depth_test))
 			{
 				
 			}
-			if (ImGui::Checkbox("GL_Cull_face", &fullscreen))
+			if (ImGui::Checkbox("GL_Cull_face", &App->renderer3D->atributes.Cull_Face))
 			{
+				
 
 			}
-			if (ImGui::Checkbox("GL_Lightning", &fullscreen))
+			if (ImGui::Checkbox("GL_Lightning", &App->renderer3D->atributes.Lightning))
 			{
+				
 
 			}
-			if (ImGui::Checkbox("GL_Color_material", &fullscreen))
-			{
-
-			}
-			if (ImGui::Checkbox("GL_Color_material", &fullscreen))
+			if (ImGui::Checkbox("GL_Color_material", &App->renderer3D->atributes.Color_Materials))
 			{
 
 			}
