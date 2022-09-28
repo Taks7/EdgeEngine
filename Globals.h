@@ -16,7 +16,7 @@
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "3D Physics Playground"
+#define TITLE "Edge Engine"
 
 
 #define LOG_COMMENT(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
