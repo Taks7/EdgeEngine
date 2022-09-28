@@ -14,6 +14,7 @@ public:
 
 	virtual void Draw() {};
 	bool IsActive() const;
+	void switchActive();
 	virtual bool CleanUp() { return true; }
 
 	bool active = false;
