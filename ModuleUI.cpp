@@ -138,7 +138,7 @@ void ModuleUI::MainMenu()
 			}
 			if (ImGui::Checkbox("Vsync", &Vsync))
 			{
-				
+				App->window->Vsync(Vsync);
 			}
 			if (ImGui::SliderInt("Width", &screenWidth, 640, 1920))
 			{
