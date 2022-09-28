@@ -27,8 +27,10 @@ public:
 	
 
 public:
+	//MENU THINGYS
 	void MainMenu();
 	bool fullscreen;
+	bool Vsync;
 	int screenWidth;
 	int screenHeight;
 	

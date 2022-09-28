@@ -136,6 +136,10 @@ void ModuleUI::MainMenu()
 			{
 				App->window->SetFullscreen(fullscreen);
 			}
+			if (ImGui::Checkbox("Vsync", &Vsync))
+			{
+				//App->window.(Vsync);
+			}
 			if (ImGui::SliderInt("Width", &screenWidth, 0, 1920))
 			{
 				App->window->ModifyWidth(screenWidth);
