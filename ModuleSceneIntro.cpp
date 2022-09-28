@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
-
+#include "ModuleUI.h"
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
 }
@@ -42,15 +42,10 @@ bool ModuleSceneIntro::Update(float dt)
 	NormalPlane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-
-	if (App->debug == true)
+	
+	if (App->ui->testCube)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		{
-			//TODO 3: Create a "new" sphere, and add it to the "primitives" DynArray
-
-			//TODO 9: Push ModuleSceneIntro to the sphere collision listeners
-		}
+		Cube c(0.5, 0.5, 0.5);
 	}
 
 

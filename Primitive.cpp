@@ -18,6 +18,7 @@ PrimitiveTypes Primitive::GetType() const
 void Primitive::Update()
 {
 	//TODO 5: Set the primitive position and rotation to the PhysBody position and rotation
+	
 }
 
 // ------------------------------------------------------------
@@ -29,6 +30,7 @@ void Primitive::Render() const
 	if(axis == true)
 	{
 		// Draw Axis Grid
+		
 		glLineWidth(2.0f);
 
 		glBegin(GL_LINES);
@@ -56,14 +58,14 @@ void Primitive::Render() const
 		glEnd();
 
 		glLineWidth(1.0f);
+
+		
 	}
+
+	
 
 	glColor3f(color.r, color.g, color.b);
 
-	if(wire)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	InnerRender();
 
@@ -114,6 +116,61 @@ Cube::Cube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 Cube::Cube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
 {
 	type = PrimitiveTypes::Primitive_Cube;
+	//FRONT
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 0.0);
+	glVertex3f(-sizeX, sizeY, -sizeZ);
+	glVertex3f(-sizeX, -sizeY, -sizeZ);
+	glVertex3f(sizeX, -sizeY, -sizeZ);
+	glVertex3f(sizeX, sizeY, -sizeZ);
+	glEnd();
+
+	// White side - BACK
+	glBegin(GL_POLYGON);
+	glColor3f(1.0, 1.0, 1.0);
+	glVertex3f(sizeX, -sizeY, sizeZ);
+	glVertex3f(sizeX, sizeY, sizeZ);
+	glVertex3f(-sizeX, sizeY, sizeZ);
+	glVertex3f(-sizeX, -sizeY, sizeZ);
+	glEnd();
+
+	// Purple side - RIGHT
+	glBegin(GL_POLYGON);
+	glColor3f(1.0, 0.0, 1.0);
+	glVertex3f(sizeX, -sizeY, -sizeZ);
+	glVertex3f(sizeX, sizeY, -sizeZ);
+	glVertex3f(sizeX, sizeY, sizeZ);
+	glVertex3f(sizeX, -sizeY, sizeZ);
+	glEnd();
+
+	// Green side - LEFT
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 1.0, 0.0);
+	glVertex3f(-sizeX, -sizeY, sizeZ);
+	glVertex3f(-sizeX, sizeY, sizeZ);
+	glVertex3f(-sizeX, sizeY, -sizeZ);
+	glVertex3f(-sizeX, -sizeY, -sizeZ);
+	glEnd();
+
+	// Blue side - TOP
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex3f(sizeX, sizeY, sizeZ);
+	glVertex3f(sizeX, sizeY, -sizeZ);
+	glVertex3f(-sizeX, sizeY, -sizeZ);
+	glVertex3f(-sizeX, sizeY, sizeZ);
+	glEnd();
+
+	// Red side - BOTTOM
+	glBegin(GL_POLYGON);
+	glColor3f(1.0, 0.0, 0.0);
+	glVertex3f(sizeX, -sizeY, -sizeZ);
+	glVertex3f(sizeX, -sizeY, sizeZ);
+	glVertex3f(-sizeX, -sizeY, sizeZ);
+	glVertex3f(-sizeX, -sizeY, -sizeZ);
+	glEnd();
+
+	glFlush();
 }
 
 void Cube::InnerRender() const

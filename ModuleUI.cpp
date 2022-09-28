@@ -8,7 +8,9 @@
 #include "ImGui/imgui_impl_opengl2.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
-
+// Just a test to add a basic cube onto the map and test the wireframe option
+#include "Primitive.h"
+//
 #include "UI.h"
 #include "AboutMenu.h"
 
@@ -177,7 +179,10 @@ void ModuleUI::MainMenu()
 		}
 		if (ImGui::BeginMenu("Render options"))
 		{
+			if (ImGui::Checkbox("Wireframe Mode", &App->renderer3D->atributes.Wireframe))
+			{
 
+			}
 			if (ImGui::Checkbox("GL_Depth_test", &App->renderer3D->atributes.Depth_test))
 			{
 		
@@ -205,6 +210,14 @@ void ModuleUI::MainMenu()
 
 			}
 			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Primitives_test"))
+		{
+			if (ImGui::Checkbox("CreateTestCube", &testCube))
+			{
+			}
+			ImGui::EndMenu();
+
 		}
 	}
 	ImGui::EndMainMenuBar();

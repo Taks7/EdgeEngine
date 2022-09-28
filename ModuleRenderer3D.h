@@ -14,6 +14,7 @@ struct Gl_Attributes
 	bool Texture_2D;
 	bool Front;
 	bool AmbientOclussion;
+	bool Wireframe;
 };
 class ModuleRenderer3D : public Module
 {
@@ -27,8 +28,6 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-
-
 public:
 
 	Light lights[MAX_LIGHTS];

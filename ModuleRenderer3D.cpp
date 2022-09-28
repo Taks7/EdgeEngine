@@ -22,6 +22,7 @@ ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 	 atributes.Texture_2D = true;
 	 atributes.Front = true;
 	 atributes.AmbientOclussion = true;
+	 atributes.Wireframe = false;
 }
 
 // Destructor
@@ -167,6 +168,14 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	if (atributes.AmbientOclussion == false)
 	{
 		glDisable(GL_AMBIENT);
+	}
+	if (atributes.Wireframe == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	if (atributes.Wireframe == false)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 
 
