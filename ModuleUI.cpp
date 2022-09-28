@@ -45,6 +45,9 @@ bool ModuleUI::Init()
 
 	//Way to add menus to the menu list
 	menus.push_back(aboutMenu = new AboutMenu());
+
+	screenHeight = App->window->screen_surface->h;
+	screenWidth = App->window->screen_surface->w;
 	return true;
 }
 
