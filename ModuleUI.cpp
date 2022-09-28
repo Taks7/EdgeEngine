@@ -38,10 +38,10 @@ bool ModuleUI::Init()
 	//io.ConfigFlags |= ImGuiConfigFlags_
 	//io.BackendFlags 
 	ImGui::StyleColorsDark();
+	
 
 
 	ImGuiStyle& style = ImGui::GetStyle();
-
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL2_Init();
 
@@ -115,9 +115,9 @@ void ModuleUI::MainMenu()
 	//MENUS 
 	ImGui::BeginMainMenuBar();
 	{
-		if (ImGui::BeginMenu("GeneralStuff"))
+		if (ImGui::BeginMenu("Help"))
 		{
-			if (ImGui::Checkbox("AboutMenu", &enableAboutMenu))
+			if (ImGui::Checkbox("About", &enableAboutMenu))
 			{
 				aboutMenu->active = enableAboutMenu;
 			}
