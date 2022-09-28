@@ -1,7 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
-
+#include "ModuleRenderer3D.h"
 ModuleWindow::ModuleWindow(bool start_enabled) : Module(start_enabled)
 {
 	window = NULL;
@@ -99,8 +99,12 @@ void ModuleWindow::SetFullscreen(bool fullscreen)
 void ModuleWindow::ModifyWidth(int x)
 {
 	SDL_SetWindowSize(window, x, screen_surface->h);
+	App->renderer3D->OnResize(x, screen_surface->h);
+	screen_surface->w = x;
 }
 void ModuleWindow::ModifyHeight(int y)
 {
 	SDL_SetWindowSize(window, screen_surface->w, y);
+	App->renderer3D->OnResize(screen_surface->w, y);
+	screen_surface->h = y;
 }
