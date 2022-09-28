@@ -170,6 +170,31 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
+		if (ImGui::BeginMenu("Render options"))
+		{
+
+			if (ImGui::Checkbox("GL_Depth_test", &fullscreen))
+			{
+				
+			}
+			if (ImGui::Checkbox("GL_Cull_face", &fullscreen))
+			{
+
+			}
+			if (ImGui::Checkbox("GL_Lightning", &fullscreen))
+			{
+
+			}
+			if (ImGui::Checkbox("GL_Color_material", &fullscreen))
+			{
+
+			}
+			if (ImGui::Checkbox("GL_Color_material", &fullscreen))
+			{
+
+			}
+			ImGui::EndMenu();
+		}
 	}
 	ImGui::EndMainMenuBar();
 }

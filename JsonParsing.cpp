@@ -171,28 +171,28 @@ JsonParsing JsonParsing::GetJsonArrayValue(JSON_Array* array, int index) const
 
 //Error Linker 2019!
 
-//float3 JsonParsing::GetJson3Number(JsonParsing& node, const char* name)
-//{
-//	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
-//
-//	float x = json_array_get_number(array, 0);
-//	float y = json_array_get_number(array, 1);
-//	float z = json_array_get_number(array, 2);
-//
-//	return float3(x,y,z);
-//}
-//
-//float4 JsonParsing::GetJson4Number(JsonParsing& node, const char* name)
-//{
-//	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
-//
-//	float x = json_array_get_number(array, 0);
-//	float y = json_array_get_number(array, 1);
-//	float z = json_array_get_number(array, 2);
-//	float w = json_array_get_number(array, 3);
-//
-//	return float4(x, y, z, w);
-//}
+float3 JsonParsing::GetJson3Number(JsonParsing& node, const char* name)
+{
+	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
+
+	float x = json_array_get_number(array, 0);
+	float y = json_array_get_number(array, 1);
+	float z = json_array_get_number(array, 2);
+
+	return float3(x,y,z);
+}
+
+float4 JsonParsing::GetJson4Number(JsonParsing& node, const char* name)
+{
+	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
+
+	float x = json_array_get_number(array, 0);
+	float y = json_array_get_number(array, 1);
+	float z = json_array_get_number(array, 2);
+	float w = json_array_get_number(array, 3);
+
+	return float4(x, y, z, w);
+}
 
 JSON_Object* JsonParsing::GetJsonObject(JSON_Object* parentObject, const char* node) const
 {
