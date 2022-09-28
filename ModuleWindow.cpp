@@ -29,7 +29,7 @@ bool ModuleWindow::Init()
 		//Create window
 		int width = SCREEN_WIDTH * SCREEN_SIZE;
 		int height = SCREEN_HEIGHT * SCREEN_SIZE;
-		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
+		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN ;
 
 		//Use OpenGL 2.1
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
@@ -107,4 +107,8 @@ void ModuleWindow::ModifyHeight(int y)
 	SDL_SetWindowSize(window, screen_surface->w, y);
 	App->renderer3D->OnResize(screen_surface->w, y);
 	screen_surface->h = y;
+}
+void ModuleWindow::Vsync(bool vsync)
+{
+	vsync = SDL_HINT_RENDER_VSYNC;
 }
