@@ -93,12 +93,8 @@ bool ModuleRenderer3D::Init()
 
 		GLfloat MaterialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
-		
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
+	
 		lights[0].Active(true);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_COLOR_MATERIAL);
 	}
 	
 
@@ -116,6 +112,41 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetViewMatrix());
+
+	if (atributes.Depth_test == true)
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+	if (atributes.Depth_test == false)
+	{
+		glDisable(GL_DEPTH_TEST);
+	}
+	if (atributes.Cull_Face == true)
+	{
+		glEnable(GL_CULL_FACE);
+	}
+	if (atributes.Cull_Face == false)
+	{
+		glDisable(GL_CULL_FACE);
+	}
+	if (atributes.Lightning == true)
+	{
+		glEnable(GL_LIGHTING);
+	}
+	if (atributes.Lightning == false)
+	{
+		glDisable(GL_LIGHTING);
+	}
+	if (atributes.Color_Materials == true)
+	{
+		glEnable(GL_COLOR_MATERIAL);
+	}
+	if (atributes.Color_Materials == false)
+	{
+		glDisable(GL_COLOR_MATERIAL);
+	}
+
+
 
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
