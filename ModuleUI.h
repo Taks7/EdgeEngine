@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "SDL/include/SDL.h"
+#include "ModuleWindow.h"
 #include <vector>
 
 class Application;
@@ -29,8 +30,8 @@ public:
 public:
 	//MENU THINGYS
 	void MainMenu();
-	bool fullscreen;
-	bool Vsync;
+	bool fullscreen = false;
+	bool Vsync = false;
 	int screenWidth;
 	int screenHeight;
 	
