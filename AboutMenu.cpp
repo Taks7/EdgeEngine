@@ -23,11 +23,12 @@ void AboutMenu::Draw()
 		ImGui::NewLine();
 		ImGui::Text("3rd parties libraries used:");
 		//AQUI PONER TODAS LAS LIBRERIAS (hay que mirar)
-		ImGui::BulletText("SDL, Version: 2.0.4");
-		ImGui::BulletText("MathGeoLib, Version: 1.5");
-		ImGui::BulletText("Json, Version: 1.2.1");
-		ImGui::BulletText("ImGui, Version: 1.89");
-		ImGui::BulletText("Glew, Version: 2.2.0");
+		ImGui::BulletText("SDL 2.0.4");
+		ImGui::BulletText("MathGeoLib 1.5");
+		ImGui::BulletText("Json 1.2.1");
+		ImGui::BulletText("ImGui 1.89");
+		ImGui::BulletText("Glew 2.2.0");
+		ImGui::BulletText("OpenGL 2.0");
 		//
 		ImGui::NewLine();
 		ImGui::Text("MIT License");
