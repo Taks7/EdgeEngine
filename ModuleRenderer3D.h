@@ -7,11 +7,13 @@
 #define MAX_LIGHTS 8
 struct Gl_Attributes
 {
-	bool Depth_test = false;
-	bool Cull_Face = false;
-	bool Lightning = false;
-	bool Color_Materials = false;
-	bool Texture_2D = false;
+	bool Depth_test;
+	bool Cull_Face;
+	bool Lightning;
+	bool Color_Materials;
+	bool Texture_2D;
+	bool Front;
+	bool AmbientOclussion;
 };
 class ModuleRenderer3D : public Module
 {

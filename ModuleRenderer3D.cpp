@@ -15,6 +15,13 @@
 //#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 {
+	 atributes.Depth_test = true;
+	 atributes.Cull_Face = true;
+	 atributes.Lightning = true;
+	 atributes.Color_Materials = true;
+	 atributes.Texture_2D = true;
+	 atributes.Front = true;
+	 atributes.AmbientOclussion = true;
 }
 
 // Destructor
@@ -145,6 +152,22 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	{
 		glDisable(GL_COLOR_MATERIAL);
 	}
+	if (atributes.Front == true)
+	{
+		glEnable(GL_FRONT);
+	}
+	if (atributes.Front == false)
+	{
+		glDisable(GL_FRONT);
+	}
+	if (atributes.AmbientOclussion == true)
+	{
+		glEnable(GL_AMBIENT);
+	}
+	if (atributes.AmbientOclussion == false)
+	{
+		glDisable(GL_AMBIENT);
+	}
 
 
 
@@ -162,7 +185,6 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	
 
 	SDL_GL_SwapWindow(App->window->window);
 	return true;

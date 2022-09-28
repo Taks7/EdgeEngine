@@ -196,6 +196,14 @@ void ModuleUI::MainMenu()
 			{
 
 			}
+			if (ImGui::Checkbox("GL_Front", &App->renderer3D->atributes.Front))
+			{
+
+			}
+			if (ImGui::Checkbox("GL_AmbientOclussion", &App->renderer3D->atributes.AmbientOclussion))
+			{
+
+			}
 			ImGui::EndMenu();
 		}
 	}
