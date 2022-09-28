@@ -27,6 +27,8 @@ public:
 
 	void Vsync(bool vsync);
 
+	void ModifyBrightness(float brightness);
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;

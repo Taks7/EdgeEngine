@@ -34,6 +34,7 @@ public:
 	bool Vsync = false;
 	int screenWidth;
 	int screenHeight;
+	float screenBrightness;
 	
 	bool enableAboutMenu;
 

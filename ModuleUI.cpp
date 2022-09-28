@@ -46,6 +46,7 @@ bool ModuleUI::Init()
 	//Way to add menus to the menu list
 	menus.push_back(aboutMenu = new AboutMenu());
 
+	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
 	screenWidth = App->window->screen_surface->w;
 	return true;
@@ -151,6 +152,10 @@ void ModuleUI::MainMenu()
 			if (ImGui::SliderInt("Height", &screenHeight, 480, 1080))
 			{
 				App->window->ModifyHeight(screenHeight);
+			}
+			if (ImGui::SliderFloat("Brightness", &screenBrightness, 0.0001f, 1.0001f))
+			{
+				App->window->ModifyBrightness(screenBrightness);
 			}
 
 			ImGui::EndMenu();
