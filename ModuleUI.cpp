@@ -74,8 +74,8 @@ bool ModuleUI::Update(float dt)
 		}
 	}
 	ImGui::Render();
-	//ImGui::EndFrame();
-	//ImGui::UpdatePlatformWindows();
+	ImGui::EndFrame();
+	ImGui::UpdatePlatformWindows();
 
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 
