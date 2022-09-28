@@ -32,6 +32,8 @@ public:
 	void MainMenu();
 	bool fullscreen = false;
 	bool Vsync = false;
+	bool resizable = false;
+	bool FullDesktop = false;
 	int screenWidth;
 	int screenHeight;
 	float screenBrightness;

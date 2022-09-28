@@ -44,6 +44,7 @@ public:
 	bool Update();
 	bool CleanUp();
 
+	void RequestBrowser(const char* string);
 private:
 
 	void AddModule(Module* mod);

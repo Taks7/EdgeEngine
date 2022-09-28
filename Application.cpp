@@ -193,5 +193,9 @@ void Application::LoadConfig()
 
 	loadRequest = false;
 }
-
+void Application::RequestBrowser(const char* string)
+{
+	const char* link = string;
+	ShellExecuteA(NULL,"open",link, NULL, NULL,SW_SHOWNORMAL);
+}
 Application* App = nullptr;

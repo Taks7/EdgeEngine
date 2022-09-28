@@ -119,9 +119,21 @@ void ModuleUI::MainMenu()
 		if (ImGui::BeginMenu("Help"))
 		{
 			ImGui::SetNextWindowBgAlpha(1.0f);
-			if(ImGui::MenuItem("About"))
+			if(ImGui::MenuItem("About..."))
 			{
 				aboutMenu->switchActive();
+			}
+			if (ImGui::MenuItem("Documentation"))
+			{
+				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/wiki");
+			}
+			if (ImGui::MenuItem("Download latest"))
+			{
+				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/releases");
+			}
+			if (ImGui::MenuItem("Report a bug"))
+			{
+				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/issues");
 			}
 			if (ImGui::MenuItem("Exit engine"))
 			{
@@ -139,7 +151,6 @@ void ModuleUI::MainMenu()
 		}
 		if (ImGui::BeginMenu("Application"))
 		{
-			
 
 			ImGui::EndMenu();
 		}
@@ -150,9 +161,19 @@ void ModuleUI::MainMenu()
 			{
 				App->window->SetFullscreen(fullscreen);
 			}
+			ImGui::SameLine();
 			if (ImGui::Checkbox("Vsync", &Vsync))
 			{
 				App->window->Vsync(Vsync);
+			}
+			if (ImGui::Checkbox("Resizable", &resizable))
+			{
+				//not done yet
+			}
+			ImGui::SameLine();
+			if (ImGui::Checkbox("Full Desktop", &FullDesktop))
+			{
+				//not done yet
 			}
 			if (ImGui::SliderInt("Width", &screenWidth, 640, 1920))
 			{

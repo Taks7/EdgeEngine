@@ -26,7 +26,8 @@ public:
 	void ModifyHeight(int y);
 
 	void Vsync(bool vsync);
-
+	void SetResizable(bool resizable);
+	void SetFullDesktop(bool fullDesktop);
 	void ModifyBrightness(float brightness);
 
 public:

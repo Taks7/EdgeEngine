@@ -121,3 +121,11 @@ void ModuleWindow::ModifyBrightness(float brightness)
 		LOG_COMMENT("Setting Brightness Value");
 	}
 }
+void ModuleWindow::SetResizable(bool resizable)
+{
+	
+}
+void ModuleWindow::SetFullDesktop(bool fullDesktop)
+{
+
+}
