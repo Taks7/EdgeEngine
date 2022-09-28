@@ -5,7 +5,14 @@
 #include "Light.h"
 
 #define MAX_LIGHTS 8
-
+struct Gl_Attributes
+{
+	bool Depth_test;
+	bool Cull_Face;
+	bool Lightning;
+	bool Color_Materials;
+	bool Texture_2D;
+};
 class ModuleRenderer3D : public Module
 {
 public:
@@ -25,4 +32,5 @@ public:
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+
 };
