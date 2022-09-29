@@ -34,6 +34,9 @@
     <Filter Include="Sources\MathGeo">
       <UniqueIdentifier>{1ca6fb7b-db1c-40d8-a259-c078d3bfa006}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\Assimp">
+      <UniqueIdentifier>{4b3bf175-975f-4ae0-a76a-4dec1a9c3884}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -348,6 +351,15 @@
     <ClInclude Include="MathGeo\src\Algorithm\SAT.h">
       <Filter>Sources\MathGeo</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFileSystem.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpDefs.h">
+      <Filter>Sources\Tools\Assimp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -556,6 +568,12 @@
     </ClCompile>
     <ClCompile Include="MathGeo\src\Algorithm\SAT.cpp">
       <Filter>Sources\MathGeo</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFileSystem.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpDefs.cpp">
+      <Filter>Sources\Tools\Assimp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
