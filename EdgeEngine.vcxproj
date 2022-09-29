@@ -170,6 +170,8 @@
     <ClInclude Include="MathGeo\src\Math\TransformOps.h" />
     <ClInclude Include="MathGeo\src\Math\vec2d.h" />
     <ClInclude Include="MathGeo\src\Time\Clock.h" />
+    <ClInclude Include="mmgr\mmgr.h" />
+    <ClInclude Include="mmgr\nommgr.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleFileSystem.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
@@ -179,7 +181,11 @@
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="Optick\include\optick.config.h" />
+    <ClInclude Include="Optick\include\optick.h" />
+    <ClInclude Include="PhysFS\include\physfs.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Profiling.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UI.h" />
@@ -245,6 +251,7 @@
     <ClCompile Include="MathGeo\src\Math\SSEMath.cpp" />
     <ClCompile Include="MathGeo\src\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeo\src\Time\Clock.cpp" />
+    <ClCompile Include="mmgr\mmgr.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
