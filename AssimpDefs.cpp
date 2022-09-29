@@ -1,6 +1,8 @@
 #include "AssimpDefs.h"
 #include "Profiling.h"
 
+#pragma comment(lib, "PhysFS/lib/physfs.lib")
+
 size_t AssimpWrite(aiFile* file, const char* data, size_t size, size_t chunks)
 {
 	PHYSFS_sint64 ret = PHYSFS_write((PHYSFS_File*)file->UserData, (void*)data, size, chunks);
