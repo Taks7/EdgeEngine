@@ -15,7 +15,7 @@ void AboutMenu::Draw()
 	ImGui::SetNextWindowBgAlpha(1.0f);
 	ImGui::Begin("About");
 	{
-		
+		ImGui::SetWindowPos({ float(App->window->screen_surface->h - 130),20 });
 		ImGui::SetWindowSize({ 600,700 });
 		ImGui::Text("Edge Engine");
 		ImGui::Text("Next world revolution engine!");
