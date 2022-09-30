@@ -145,7 +145,12 @@ void ModuleUI::MainMenu()
 		}
 		if (ImGui::BeginMenu("Configuration"))
 		{
-			
+			if (ImGui::MenuItem("Save Configuration"))
+			{
+			}
+			if (ImGui::MenuItem("Load Configuration"))
+			{
+			}
 			ImGui::EndMenu();
 
 		}
