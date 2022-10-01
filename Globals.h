@@ -39,6 +39,9 @@ void log(const char file[], int line, const char* format, ...);
        }\
     }
 
+#define RESOURCES_FOLDER "Assets/Resources/"
+#define SETTINGS_FOLDER "Game/Settings/"
+
 #define RELEASE_ARRAY( x )\
 	{\
        if( x != nullptr )\

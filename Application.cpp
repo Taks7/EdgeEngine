@@ -6,6 +6,8 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleFileSystem.h"
+#include "Resource.h"
 
 //#include "MathGeo/src/MathGeoLib.h"
 
@@ -21,6 +23,8 @@ Application::Application() : debug(false)
 	camera = new ModuleCamera3D();
 	ui = new ModuleUI();
 	audio = new ModuleAudio();
+
+	fs = new ModuleFileSystem(RESOURCES_FOLDER);
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -50,6 +54,8 @@ Application::~Application()
 	{
 		RELEASE(*item);
 	}
+	RELEASE(fs);
+	list_modules.clear();
 }
 
 bool Application::Init()
@@ -61,8 +67,13 @@ bool Application::Init()
 	//p2List_item<Module*>* item = list_modules.getFirst();
 
 	char* buffer = nullptr;
+	fs->Load(SETTINGS_FOLDER "config.json", &buffer);
+
 	if (buffer != nullptr)
 	{
+		JsonParsing jsonFile((const char*)buffer);
+		jsonFile.ValueToObject(jsonFile.GetRootValue());
+
 		std::list<Module*>::iterator item;
 
 		RELEASE_ARRAY(buffer);
@@ -98,6 +109,8 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (loadRequest) LoadConfig();
+	if (saveRequest) SaveConfig();
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -164,6 +177,12 @@ void Application::SaveConfig()
 	char* buf;
 	uint size = jsonFile.Save(&buf);
 
+	if (fs->Save(SETTINGS_FOLDER CONFIG_FILENAME, buf, size) > 0)
+	{
+		LOG_COMMENT("Saved Engine Preferences");
+	}
+		
+
 	RELEASE_ARRAY(buf);
 
 	//jsonFile.SerializeFile(root, CONFIG_FILENAME);
@@ -175,6 +194,7 @@ void Application::LoadConfig()
 	LOG_COMMENT("Loading configuration");
 
 	char* buffer = nullptr;
+	fs->Load(SETTINGS_FOLDER "config.json", &buffer);
 
 	if (buffer != nullptr)
 	{

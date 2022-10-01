@@ -12,8 +12,13 @@
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
 #include "JsonParsing.h"
+#include "ModuleFileSystem.h"
 
 // USAR PARA STL: https://github.com/karansaxena/STL_Cheat_Sheets
+
+#define CONFIG_FILENAME	"config.json"
+#define APPLICATION_NAME "EdgeEngine"
+#define ORGANIZATION_NAME "Takomo Studios"
 
 class Application
 {
@@ -25,6 +30,10 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
+
+	ModuleFileSystem* fs;
+
+	JsonParsing jsonFile;
 
 	bool debug;
 private:
@@ -45,6 +54,13 @@ public:
 	bool CleanUp();
 
 	void RequestBrowser(const char* string);
+
+	inline const char* GetAppName() const { return APPLICATION_NAME; }
+	inline const char* GetOrganizationName() const { return ORGANIZATION_NAME; }
+
+	inline void SaveConfigRequest() { saveRequest = true; }
+	inline void LoadConfigRequest() { loadRequest = true; }
+
 private:
 
 	void AddModule(Module* mod);

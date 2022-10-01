@@ -147,9 +147,11 @@ void ModuleUI::MainMenu()
 		{
 			if (ImGui::MenuItem("Save Configuration"))
 			{
+				App->SaveConfigRequest();
 			}
 			if (ImGui::MenuItem("Load Configuration"))
 			{
+				App->LoadConfigRequest();
 			}
 			ImGui::EndMenu();
 
