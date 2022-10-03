@@ -5,6 +5,7 @@
 #include "ModuleUI.h"
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
+	name = "scene";
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()

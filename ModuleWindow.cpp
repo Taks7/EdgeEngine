@@ -4,6 +4,7 @@
 #include "ModuleRenderer3D.h"
 ModuleWindow::ModuleWindow(bool start_enabled) : Module(start_enabled)
 {
+	name = "Window";
 	window = NULL;
 	screen_surface = NULL;
 }

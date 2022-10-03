@@ -15,6 +15,8 @@
 //#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 {
+	name = "Renderer"; 
+
 	 atributes.Depth_test = true;
 	 atributes.Cull_Face = true;
 	 atributes.Lightning = true;

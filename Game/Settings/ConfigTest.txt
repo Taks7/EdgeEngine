@@ -1,0 +1,27 @@
+{
+  "Help": {},
+  "Configuration": {},
+  "Application": {},
+  "Window": {
+    "Fullscreen": false,
+    "Vsync": false,
+    "Resizable": false,
+    "Full desktop": false,
+    "Width": 1920,
+    "Height": 1080,
+    "Brightness": 1
+  },
+  "File System": {},
+  "Input": {},
+  "Hardware": {},
+  "Render options": {
+    "Wireframe Mode": false,
+    "GL_Depth_test": true,
+    "GL_Cull_face": true,
+    "GL_Lightning": true,
+    "GL_Color_material": true,
+    "GL_Front": true,
+    "GL_AmbientOclussion": true
+  },
+  "Primitives_test": {}
+} 
