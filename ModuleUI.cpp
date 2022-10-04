@@ -64,6 +64,7 @@ bool ModuleUI::PreUpdate(float dt)
 
 bool ModuleUI::Update(float dt)
 {
+
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
@@ -206,10 +207,41 @@ void ModuleUI::MainMenu()
 		if (ImGui::BeginMenu("Input"))
 		{
 			ImGui::EndMenu();
-
 		}
 		if (ImGui::BeginMenu("Hardware"))
 		{
+			if (frames.size() >= 100) 
+			{
+				for (size_t i = 1; i < frames.size(); i++)
+				{
+					frames[i - 1] = frames[i];
+				}
+				frames[frames.size() - 1] = float(ImGui::GetIO().Framerate);
+			}
+			else
+			{
+				frames.push_back(float(ImGui::GetIO().Framerate));
+			}
+			ImGui::Text("Frame rate = %f:", ImGui::GetIO().Framerate);
+			ImGui::PlotHistogram("Framerate", &frames[0], frames.size(), 0, NULL, 0.0f, 100.0f, ImVec2(300, 100));
+
+			if (miliseconds.size() >= 100)
+			{
+				for (size_t i = 1; i < miliseconds.size(); i++)
+				{
+					miliseconds[i - 1] = miliseconds[i];
+				}
+				miliseconds[miliseconds.size() - 1] = float(ImGui::GetIO().DeltaTime);
+			}
+			else
+			{
+				miliseconds.push_back(float(ImGui::GetIO().DeltaTime));
+			}
+			ImGui::Text("miliseconds = %f:", ImGui::GetIO().DeltaTime);
+			ImGui::PlotHistogram("miliseconds", &miliseconds[0], miliseconds.size(), 0, NULL, 0.0f, 0.5f, ImVec2(300, 100));
+			ImGui::NewLine();
+			ImGui::Text("Hardware information:");
+			ImGui::NewLine();
 			ImGui::EndMenu();
 
 		}

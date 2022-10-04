@@ -45,6 +45,8 @@ public:
 private:
 
 	std::vector<UI*> menus;
+	std::vector<float> frames;
+	std::vector<float> miliseconds;
 };
 
 #endif // __ModuleWindow_H__
