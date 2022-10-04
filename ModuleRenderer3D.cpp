@@ -213,6 +213,21 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
+bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
+{	
+	atributes.Depth_test = node.GetJsonBool("depth test");
+	/*SetDepthTest();*/
+	
+	return true;
+}
+
+bool ModuleRenderer3D::SaveConfig(JsonParsing& node) const
+{
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "depth test", atributes.Depth_test);
+
+	return true;
+}
+
 
 void ModuleRenderer3D::OnResize(int width, int height)
 {

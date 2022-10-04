@@ -28,6 +28,9 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
+
+	bool LoadConfig(JsonParsing& node) override;
+	bool SaveConfig(JsonParsing& node) const override;
 public:
 
 	Light lights[MAX_LIGHTS];
