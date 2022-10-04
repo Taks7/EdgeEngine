@@ -122,6 +122,22 @@ void ModuleWindow::ModifyBrightness(float brightness)
 		LOG_COMMENT("Setting Brightness Value");
 	}
 }
+bool ModuleWindow::LoadConfig(JsonParsing& node)
+{
+	App->ui->screenBrightness = node.GetJsonNumber("brightness");
+
+	App->window->ModifyBrightness(App->ui->screenBrightness);
+	
+	return true;
+}
+
+bool ModuleWindow::SaveConfig(JsonParsing& node) const
+{
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "brightness", App->ui->screenBrightness);
+	
+
+	return true;
+}
 void ModuleWindow::SetResizable(bool resizable)
 {
 	

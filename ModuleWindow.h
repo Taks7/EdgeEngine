@@ -30,6 +30,9 @@ public:
 	void SetFullDesktop(bool fullDesktop);
 	void ModifyBrightness(float brightness);
 
+	bool LoadConfig(JsonParsing& node) override;
+	bool SaveConfig(JsonParsing& node) const override;
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
