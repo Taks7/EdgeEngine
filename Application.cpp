@@ -25,6 +25,7 @@ Application::Application() : debug(false)
 	audio = new ModuleAudio();
 
 	fs = new ModuleFileSystem(RESOURCES_FOLDER);
+	loaderModels = new ModuleFBXLoader();
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -35,6 +36,7 @@ Application::Application() : debug(false)
 	AddModule(input);
 	AddModule(audio);
 	AddModule(ui);
+	AddModule(loaderModels);
 	
 	// Scenes
 	AddModule(scene_intro);
