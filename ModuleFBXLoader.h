@@ -16,6 +16,10 @@ struct VertexData
 	GLuint  id_vertex = 0; // unique vertex in VRAM
 	GLuint  num_vertex = 0;
 	float* vertex = nullptr;
+	std::vector<float>		vertices;
+	std::vector<float>		normals;
+	std::vector<uint>		indices;
+
 };
 class ModuleFBXLoader : public Module
 {

@@ -7,6 +7,9 @@
 #include "Assimp/include/assimp/cimport.h"
 #include "Assimp/include/assimp/scene.h"
 #include "Assimp/include/assimp/postprocess.h"
+#include "Assimp/include/assimp/ai_assert.h"
+
+#include <vector>
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
 
@@ -88,7 +91,86 @@ VertexData ModuleFBXLoader::LoadMesh(const char* file_path)
 	{
 		LOG_COMMENT("Error loading scene % s",file_path);
 	}
+	 
+	//---------------------------------------------------------------------------------------------
+	//char* buffer = nullptr;
+	//uint file_size = App->fs->Load(file_path, &buffer);
+	//if (file_size > 0)
+	//{
+	//	const aiScene* scene = aiImportFileFromMemory(buffer, file_size, aiProcessPreset_TargetRealtime_MaxQuality, nullptr);
 
+	//	if (scene == nullptr || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	//	{
+
+	//	}
+
+	//	for (uint i = 0; i < scene->mRootNode->mNumMeshes; i++)
+	//	{
+	//		aiMesh* aimesh = scene->mMeshes[scene->mRootNode->mMeshes[i]];
+
+	//		if (aimesh != nullptr && aimesh->HasFaces())
+	//		{
+	//			VertexData newMesh;
+
+	//			uint vertices_size = aimesh->mNumVertices * 3;
+	//			newMesh.vertices.resize(vertices_size);
+
+	//			uint normals_size = aimesh->mNumVertices * 3;
+	//			newMesh.normals.resize(normals_size);
+
+	//			uint indices_size = aimesh->mNumFaces * 3;
+	//			newMesh.indices.resize(indices_size);
+
+	//			if (aimesh->HasPositions())
+	//			{
+	//				memcpy(&newMesh.vertices[0], aimesh->mVertices, sizeof(float) * vertices_size);
+	//			}
+
+	//			if (aimesh->HasNormals())
+	//			{
+	//				memcpy(&newMesh.normals[0], aimesh->mNormals, sizeof(float) * normals_size);
+	//			}
+
+	//			if (aimesh->HasFaces())
+	//			{
+	//				uint ind = 0;
+
+	//				for (uint i = 0; i < aimesh->mNumFaces; i++)
+	//				{
+	//					aiFace face = aimesh->mFaces[i];
+
+	//					if (face.mNumIndices == 3)
+	//					{
+	//						for (uint j = 0; j < face.mNumIndices; j++)
+	//						{
+	//							newMesh.indices[ind] = face.mIndices[j];
+	//							ind++;
+	//						}
+	//					}
+	//				}
+	//			}
+
+	//			//Poner un metodo para que si newMesh != nullptr
+	//			//Haga un push_back de la (newMesh) en un vecto mesh
+	//			//Y que borre la newMesh:
+	//			//delete newMesh
+	//			//newMesh = nullptr
+
+	//			if (newMesh != nullptr)
+	//			{
+	//				meshes.push_back(newMesh);
+	//			}
+	//			else
+	//			{
+	//				delete newMesh;
+	//				newMesh = nullptr;
+	//			}
+
+	//			return newMesh;
+	//		}
+	//	}
+
+	//}
 }
 bool ModuleFBXLoader::LoadConfig(JsonParsing& node)
 {

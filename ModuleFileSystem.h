@@ -34,28 +34,6 @@ public:
 	inline const char* GetWritePath() const { return PHYSFS_getWriteDir(); }
 	const char* GetReadPaths() const;
 
-	void LoadFile(std::string& path);
-	void ImportFiles(std::string& path);
-	void LoadFiles();
-	void ImportFromOutside(std::string& source, std::string& destination);
-	ResourceType CheckExtension(std::string& path);
-
-	void DiscoverFilesAndDirs(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
-	void DiscoverFiles(const char* directory, std::vector<std::string>& fileList);
-	void DiscoverDirs(const char* directory, std::vector<std::string>& dirList);
-	inline const bool IsDirectory(const char* file) const { return PHYSFS_isDirectory(file) != 0; }
-
-	void NormalizePath(std::string& path);
-	void GetRelativeDirectory(std::string& path);
-	void GetFilenameWithExtension(std::string& path);
-	void GetFilenameWithoutExtension(std::string& path);
-
-	bool RemoveFile(const char* file);
-	
-	void CreateDir(const char* directory);
-private:
-	void CreateAssimp();
-
 private:
 	const char* name;
 	std::list<std::string> texExtension;
