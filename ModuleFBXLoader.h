@@ -3,15 +3,18 @@
 
 #include "Module.h"
 #include "SDL/include/SDL.h"
+#include "glew/glew-2.2.0/include/GL/glew.h"
+#include <gl/GL.h>
+#include <gl/GLU.h>
 
 class Application;
 struct VertexData
 {
-	uint id_index = 0; // index in VRAM
-	uint num_index = 0;
-	uint* index = nullptr;
-	uint id_vertex = 0; // unique vertex in VRAM
-	uint num_vertex = 0;
+	GLuint  id_index = 0; // index in VRAM
+	GLuint  num_index = 0;
+	GLuint* index = nullptr;
+	GLuint  id_vertex = 0; // unique vertex in VRAM
+	GLuint  num_vertex = 0;
 	float* vertex = nullptr;
 };
 class ModuleFBXLoader : public Module

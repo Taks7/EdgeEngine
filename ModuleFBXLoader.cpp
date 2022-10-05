@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleFBXLoader.h"
 #include "ModuleRenderer3D.h"
+#include "SDL/include/SDL_opengl.h"
 
 #include "Assimp/include/assimp/cimport.h"
 #include "Assimp/include/assimp/scene.h"
@@ -51,10 +52,7 @@ VertexData ModuleFBXLoader::LoadMesh(const char* file_path)
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
-			
-			
 			NewMesh.num_vertex = scene->mMeshes[i]->mNumVertices;
-			//REVISAR AKA
 			NewMesh.vertex = new float[NewMesh.num_vertex*3];
 
 			memcpy(NewMesh.vertex, scene->mMeshes[i]->mVertices, sizeof(float) * NewMesh.num_vertex * 3);
@@ -64,18 +62,22 @@ VertexData ModuleFBXLoader::LoadMesh(const char* file_path)
 			if (scene->mMeshes[i]->HasFaces())
 			{
 				NewMesh.num_index = scene->mMeshes[i]->mNumFaces * 3;
-				NewMesh.index = new uint[NewMesh.num_index]; // assume each face is a triangle
-				for (uint i = 0; i < scene->mMeshes[i]->mNumFaces; ++i)
+				NewMesh.index = new GLuint[NewMesh.num_index]; // assume each face is a triangle
+
+
+				for (uint z = 0; z < scene->mMeshes[i]->mNumFaces; z++)
 				{
-					if (scene->mMeshes[i]->mFaces[i].mNumIndices != 3)
+					if (scene->mMeshes[i]->mFaces[z].mNumIndices != 3)
 					{
 						LOG_COMMENT("WARNING, geometry face with != 3 indices!");
+
 					}
 					else
 					{
-						memcpy(&NewMesh.index[i * 3], scene->mMeshes[i]->mFaces[i].mIndices, 3 * sizeof(uint));
+						memcpy(&NewMesh.index[z * 3], scene->mMeshes[i]->mFaces[z].mIndices, 3 * sizeof(uint));
 					}
 				}
+				
 			}
 		}
 		aiReleaseImport(scene);

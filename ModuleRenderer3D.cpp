@@ -196,7 +196,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-
+	
 	SDL_GL_SwapWindow(App->window->window);
 	return true;
 }
@@ -219,12 +219,16 @@ void ModuleRenderer3D::DrawExampleMesh()
 	newMesh = App->loaderModels->LoadMesh("Assets/warrior.FBX");
 
 	glEnableClientState(GL_VERTEX_ARRAY);
+
+	
+	glBindBuffer(GL_ARRAY_BUFFER, newMesh.id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, newMesh.vertex);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh.id_index);
+	glDrawElements(GL_TRIANGLES, newMesh.num_index, GL_UNSIGNED_INT, newMesh.index);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	// draw a cube
-	glDrawElements(GL_TRIANGLES, newMesh.num_index, GL_UNSIGNED_BYTE, newMesh.index);
 
-	// deactivate vertex arrays after drawing
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 
