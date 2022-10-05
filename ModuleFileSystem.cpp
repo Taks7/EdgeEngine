@@ -19,6 +19,8 @@
 #include "SDL/include/SDL_filesystem.h"
 #include "Profiling.h"
 
+#pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
+
 ModuleFileSystem::ModuleFileSystem(const char* assetsPath) : name("ModuleFileSystem")
 {
 	name = "File System";
@@ -67,7 +69,7 @@ ModuleFileSystem::~ModuleFileSystem()
 {
 	//Errors
 	/*RELEASE(assimpIO);*/
-	/*aiDetachAllLogStreams();*/
+	aiDetachAllLogStreams();
 	PHYSFS_deinit();
 }
 
