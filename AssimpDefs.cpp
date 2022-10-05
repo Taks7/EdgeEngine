@@ -1,5 +1,5 @@
 #include "AssimpDefs.h"
-#include "Profiling.h"
+
 
 #pragma comment(lib, "PhysFS/lib/physfs.lib")
 

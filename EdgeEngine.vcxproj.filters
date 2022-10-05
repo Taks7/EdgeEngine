@@ -37,12 +37,6 @@
     <Filter Include="Sources\Tools\Assimp">
       <UniqueIdentifier>{4b3bf175-975f-4ae0-a76a-4dec1a9c3884}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Tools\Optick">
-      <UniqueIdentifier>{983eff4a-b3c7-4230-8196-d1b4d2324111}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Tools\mmgr">
-      <UniqueIdentifier>{ba7b28d1-462a-475c-9ddf-5561e1018243}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -369,21 +363,6 @@
     <ClInclude Include="PhysFS\include\physfs.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Profiling.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Optick\include\optick.config.h">
-      <Filter>Sources\Tools\Optick</Filter>
-    </ClInclude>
-    <ClInclude Include="Optick\include\optick.h">
-      <Filter>Sources\Tools\Optick</Filter>
-    </ClInclude>
-    <ClInclude Include="mmgr\nommgr.h">
-      <Filter>Sources\Tools\mmgr</Filter>
-    </ClInclude>
-    <ClInclude Include="mmgr\mmgr.h">
-      <Filter>Sources\Tools\mmgr</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleFBXLoader.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -601,9 +580,6 @@
     </ClCompile>
     <ClCompile Include="AssimpDefs.cpp">
       <Filter>Sources\Tools\Assimp</Filter>
-    </ClCompile>
-    <ClCompile Include="mmgr\mmgr.cpp">
-      <Filter>Sources\Tools\mmgr</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFBXLoader.cpp">
       <Filter>Sources\Modules</Filter>

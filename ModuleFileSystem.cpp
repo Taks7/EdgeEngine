@@ -10,14 +10,12 @@
 
 #include "Assimp/include/assimp/cimport.h"
 #include "AssimpDefs.h"
-#include "DevIL/include/IL/il.h"
 #include "Resource.h"
 
 #include <vector>
 #include <stack>
 
 #include "SDL/include/SDL_filesystem.h"
-#include "Profiling.h"
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
 
@@ -215,7 +213,7 @@ void ModuleFileSystem::LoadFile(std::string& path)
 	{
 		if (*s == extension)
 		{
-			RG_PROFILING_FUNCTION("Loading Model");
+			//RG_PROFILING_FUNCTION("Loading Model");
 			/*ModelImporter::LoadModel(path);*/
 			return;
 		}
@@ -227,7 +225,7 @@ void ModuleFileSystem::LoadFile(std::string& path)
 	{
 		if (*s == extension)
 		{
-			RG_PROFILING_FUNCTION("Loading Texture");
+			//RG_PROFILING_FUNCTION("Loading Texture");
 			// When mouse picking fixed, this will work correctly
 			//app->editor->GetGO()->GetComponent<MaterialComponent>()->SetTexture(ResourceManager::GetInstance()->IsTextureLoaded(path));
 			return;
@@ -342,7 +340,7 @@ ResourceType ModuleFileSystem::CheckExtension(std::string& path)
 	{
 		if (*s == extension)
 		{
-			RG_PROFILING_FUNCTION("Importing Model");
+			//RG_PROFILING_FUNCTION("Importing Model");
 			return ResourceType::MODEL;
 		}
 	}
@@ -353,7 +351,7 @@ ResourceType ModuleFileSystem::CheckExtension(std::string& path)
 	{
 		if (*s == extension)
 		{
-			RG_PROFILING_FUNCTION("Importing Texture");
+			//RG_PROFILING_FUNCTION("Importing Texture");
 			return ResourceType::TEXTURE;
 		}
 	}
