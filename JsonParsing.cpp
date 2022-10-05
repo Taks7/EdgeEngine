@@ -125,8 +125,6 @@ JSON_Object* JsonParsing::ValueToObject(JSON_Value* value) const
 	if(object != NULL)
 		return object;
 
-	/*LOG_COMMENT("Object has not been retrieved");*/
-
 	return nullptr;
 }
 
@@ -169,8 +167,6 @@ JsonParsing JsonParsing::GetJsonArrayValue(JSON_Array* array, int index) const
 	return JsonParsing(json_array_get_value(array, index));
 }
 
-//Error Linker 2019!
-
 float3 JsonParsing::GetJson3Number(JsonParsing& node, const char* name)
 {
 	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), name);
@@ -199,8 +195,6 @@ JSON_Object* JsonParsing::GetJsonObject(JSON_Object* parentObject, const char* n
 	JSON_Object* object = json_object_get_object(parentObject, node);
 
 	if (object) return object;
-
-	/*LOG_COMMENT("Node object has not been found");*/
 
 	return nullptr;
 }
