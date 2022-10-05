@@ -56,7 +56,7 @@ ModuleFileSystem::ModuleFileSystem(const char* assetsPath) : name("ModuleFileSys
 
 	//Errors
 	// Generate IO interfaces
-	/*CreateAssimpIO();*/
+	CreateAssimp();
 
 	//Errors
 	/*ilInit();*/
@@ -68,7 +68,7 @@ ModuleFileSystem::ModuleFileSystem(const char* assetsPath) : name("ModuleFileSys
 ModuleFileSystem::~ModuleFileSystem()
 {
 	//Errors
-	/*RELEASE(assimpIO);*/
+	RELEASE(assimpIO);
 	aiDetachAllLogStreams();
 	PHYSFS_deinit();
 }
@@ -471,13 +471,13 @@ void ModuleFileSystem::CreateDir(const char* directory)
 }
 
 //Errors
-//void ModuleFileSystem::CreateAssimpIO()
-//{
-//	assimpIO = new aiFileIO;
-//	assimpIO->OpenProc = AssimpOpen;
-//	assimpIO->CloseProc = AssimpClose;
-//
-//	aiLogStream stream;
-//	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
-//	aiAttachLogStream(&stream);
-//}
+void ModuleFileSystem::CreateAssimp()
+{
+	assimpIO = new aiFileIO;
+	assimpIO->OpenProc = AssimpOpen;
+	assimpIO->CloseProc = AssimpClose;
+
+	aiLogStream stream;
+	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
+	aiAttachLogStream(&stream);
+}

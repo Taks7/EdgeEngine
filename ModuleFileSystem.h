@@ -54,7 +54,7 @@ public:
 	
 	void CreateDir(const char* directory);
 private:
-	void CreateAssimpIO();
+	void CreateAssimp();
 
 private:
 	const char* name;
