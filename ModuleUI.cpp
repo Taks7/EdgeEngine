@@ -284,6 +284,10 @@ void ModuleUI::MainMenu()
 			if (ImGui::Checkbox("CreateTestCube", &testCube))
 			{
 			}
+			if (ImGui::MenuItem("Test mesh"))
+			{
+				App->renderer3D->DrawExampleMesh();
+			}
 			ImGui::EndMenu();
 
 		}

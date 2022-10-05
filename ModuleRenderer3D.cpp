@@ -213,6 +213,23 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
+void ModuleRenderer3D::DrawExampleMesh()
+{
+	VertexData newMesh;
+	newMesh = App->loaderModels->LoadMesh("Assets/warrior.FBX");
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, newMesh.vertex);
+
+	// draw a cube
+	glDrawElements(GL_TRIANGLES, newMesh.num_index, GL_UNSIGNED_BYTE, newMesh.index);
+
+	// deactivate vertex arrays after drawing
+	glDisableClientState(GL_VERTEX_ARRAY);
+
+
+}
+
 bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 {	
 	atributes.Depth_test = node.GetJsonBool("depth test");

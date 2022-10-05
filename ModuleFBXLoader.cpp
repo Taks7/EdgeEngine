@@ -11,7 +11,7 @@
 
 ModuleFBXLoader::ModuleFBXLoader(bool start_enabled) : Module(start_enabled)
 {
-	
+	name = "FBXloader";
 }
 
 // Destructor
@@ -42,6 +42,52 @@ bool ModuleFBXLoader::CleanUp()
 	return true;
 }
 
+VertexData ModuleFBXLoader::LoadMesh(const char* file_path)
+{
+	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
+	if (scene != nullptr && scene->HasMeshes())
+	{
+		VertexData NewMesh;
+		// Use scene->mNumMeshes to iterate on scene->mMeshes array
+		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
+		{
+			
+			
+			NewMesh.num_vertex = scene->mMeshes[i]->mNumVertices;
+			//REVISAR AKA
+			NewMesh.vertex = new float[NewMesh.num_vertex*3];
+
+			memcpy(NewMesh.vertex, scene->mMeshes[i]->mVertices, sizeof(float) * NewMesh.num_vertex * 3);
+			LOG_COMMENT("New mesh with %d vertices", NewMesh.num_vertex);
+
+			// copy faces
+			if (scene->mMeshes[i]->HasFaces())
+			{
+				NewMesh.num_index = scene->mMeshes[i]->mNumFaces * 3;
+				NewMesh.index = new uint[NewMesh.num_index]; // assume each face is a triangle
+				for (uint i = 0; i < scene->mMeshes[i]->mNumFaces; ++i)
+				{
+					if (scene->mMeshes[i]->mFaces[i].mNumIndices != 3)
+					{
+						LOG_COMMENT("WARNING, geometry face with != 3 indices!");
+					}
+					else
+					{
+						memcpy(&NewMesh.index[i * 3], scene->mMeshes[i]->mFaces[i].mIndices, 3 * sizeof(uint));
+					}
+				}
+			}
+		}
+		aiReleaseImport(scene);
+
+		return NewMesh;
+	}
+	else
+	{
+		LOG_COMMENT("Error loading scene % s",file_path);
+	}
+
+}
 bool ModuleFBXLoader::LoadConfig(JsonParsing& node)
 {
 
