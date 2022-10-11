@@ -35,14 +35,13 @@ Application::Application() : debug(false)
 	AddModule(camera);
 	AddModule(input);
 	AddModule(audio);
-	AddModule(ui);
-	AddModule(loaderModels);
+	
 	
 	// Scenes
 	AddModule(scene_intro);
-
-	// Renderer last!
 	AddModule(renderer3D);
+	AddModule(loaderModels);
+	AddModule(ui);
 
 	loadRequest = false;
 	saveRequest = false;

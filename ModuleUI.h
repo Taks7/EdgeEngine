@@ -38,6 +38,7 @@ public:
 	int screenHeight;
 	float screenBrightness;
 	bool testCube = false;
+	bool testMesh = false;
 	
 	bool enableAboutMenu;
 

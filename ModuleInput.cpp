@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleFBXLoader.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "MathGeoLib.h"
 #define MAX_KEYS 300
@@ -114,6 +115,14 @@ bool ModuleInput::PreUpdate(float dt)
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
 					App->renderer3D->OnResize(e.window.data1, e.window.data2);
 			}
+			/*
+			case SDL_DROPFILE:
+			dropped_filedir = e.drop.file;
+			App->loaderModels->LoadMesh(dropped_filedir);
+			SDL_free(dropped_filedir);
+			break;
+			*/
+			
 		}
 	}
 

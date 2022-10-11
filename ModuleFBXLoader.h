@@ -16,9 +16,9 @@ struct VertexData
 	GLuint  id_vertex = 0; // unique vertex in VRAM
 	GLuint  num_vertex = 0;
 	float* vertex = nullptr;
-	std::vector<float>		vertices;
-	std::vector<float>		normals;
-	std::vector<uint>		indices;
+	//std::vector<float>		vertices;
+	//std::vector<float>		normals;
+	//std::vector<uint>		indices;
 
 };
 class ModuleFBXLoader : public Module
@@ -33,12 +33,12 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	VertexData LoadMesh(const char* file_path);
+	bool LoadMesh(const char* file_path);
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
 public:
-	
+	std::vector<VertexData> meshes;
 };
 
 #endif // __ModuleWindow_H__

@@ -111,6 +111,14 @@ bool ModuleRenderer3D::Init()
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
+
+	GLenum error = glewInit();
+	if (GLEW_OK != error)
+	{
+		LOG_COMMENT("Glew failed error %s\n", glewGetErrorString(error));
+	}
+	LOG_COMMENT("Glew version: %s\n", glewGetString(GLEW_VERSION));
+
 	return ret;
 }
 
@@ -196,7 +204,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	
+	if(App->ui->testMesh == true) DrawExampleMesh();
 	SDL_GL_SwapWindow(App->window->window);
 	return true;
 }
@@ -215,22 +223,23 @@ bool ModuleRenderer3D::CleanUp()
 
 void ModuleRenderer3D::DrawExampleMesh()
 {
-	VertexData newMesh;
-	newMesh = App->loaderModels->LoadMesh("Assets/warrior.FBX");
+	for (int i = 0; i < App->loaderModels->meshes.size(); i++)
+	{
+		// Draw elements
+		VertexData* newMesh = &App->loaderModels->meshes[i];
+		{
+			glEnableClientState(GL_VERTEX_ARRAY);
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-
-	
-	glBindBuffer(GL_ARRAY_BUFFER, newMesh.id_vertex);
-	glVertexPointer(3, GL_FLOAT, 0, newMesh.vertex);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh.id_index);
-	glDrawElements(GL_TRIANGLES, newMesh.num_index, GL_UNSIGNED_INT, newMesh.index);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-
+			// Render things in Element mode
+			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_vertex);
+			glVertexPointer(3, GL_FLOAT, 0, NULL);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->id_index);
+			glDrawElements(GL_TRIANGLES, newMesh->num_index, GL_UNSIGNED_INT, NULL);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glDisableClientState(GL_VERTEX_ARRAY);
+		}
+	}
 
 }
 
