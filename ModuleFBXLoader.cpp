@@ -35,7 +35,7 @@ bool ModuleFBXLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
-	LoadMesh("Assets/BakerHouse.fbx");
+	LoadMesh("Game/Assets/BakerHouse.fbx");
 
 	return true;
 }
