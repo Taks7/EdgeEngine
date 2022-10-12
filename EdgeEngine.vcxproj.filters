@@ -369,6 +369,9 @@
     <ClInclude Include="DevIL.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleMaterials.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -585,6 +588,9 @@
       <Filter>Sources\Tools\Assimp</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFBXLoader.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMaterials.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>

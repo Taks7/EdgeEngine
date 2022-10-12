@@ -33,6 +33,7 @@ public:
 	inline const char* GetBasePath() const { return PHYSFS_getBaseDir(); }
 	inline const char* GetWritePath() const { return PHYSFS_getWriteDir(); }
 	const char* GetReadPaths() const;
+	std::string GetFileExtension(const char* path);
 
 private:
 	const char* name;

@@ -12,6 +12,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
 #include "ModuleFBXLoader.h"
+#include "ModuleMaterials.h"
 #include "JsonParsing.h"
 #include "ModuleFileSystem.h"
 
@@ -32,6 +33,7 @@ public:
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
 	ModuleFBXLoader* loaderModels;
+	ModuleMaterial* materialImport;
 
 	ModuleFileSystem* fs;
 

@@ -193,3 +193,15 @@ const char* ModuleFileSystem::GetReadPaths() const
 
 	return paths;
 }
+
+std::string ModuleFileSystem::GetFileExtension(const char* path)
+{
+	std::string full_path = path;
+	std::string extension = "";
+
+	size_t dot_position = full_path.find_last_of(".");
+
+	extension = full_path.substr(dot_position + 1);
+
+	return extension;
+}
