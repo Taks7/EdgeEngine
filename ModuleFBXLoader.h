@@ -9,6 +9,23 @@
 #include <gl/GLU.h>
 
 class Application;
+enum class TEXTURE_TYPE
+{
+	NONE = 0x0,
+	DIFFUSE = 0x1,
+	SPECULAR = 0x2,
+	UNKNOWN = 0xC
+};
+
+struct Texture
+{
+
+	std::string		path;
+	TEXTURE_TYPE	type;
+	uint			id;
+	uint			width;
+	uint			height;
+};
 struct VertexData
 {
 	GLuint  id_index = 0; // index in VRAM
@@ -21,6 +38,7 @@ struct VertexData
 	//std::vector<float>		vertices;
 	//std::vector<float>		normals;
 	//std::vector<uint>		indices;
+	Texture texture_data;
 
 };
 class ModuleFBXLoader : public Module

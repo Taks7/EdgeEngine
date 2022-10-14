@@ -42,7 +42,7 @@ bool ModuleMaterial::CleanUp()
 	return ret;
 }
 
-bool ModuleMaterial::Import(const char* file_path, MaterialData* newMaterial)
+bool ModuleMaterial::Import(const char* file_path, VertexData* newMaterial)
 {
 	bool ret = true;
 
