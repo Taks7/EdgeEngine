@@ -36,7 +36,7 @@ bool ModuleFBXLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
-	//LoadMesh("Assets/BakerHouse.fbx");
+	LoadMesh("Assets/BakerHouse.fbx");
 
 	/*MaterialData* material = new MaterialData();
 	App->materialImport->Import("Game/Assets/Resources/Baker_House.png", material);*/
@@ -101,8 +101,14 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh.id_index);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 		
+		/*MaterialData* material = new MaterialData();
+		App->materialImport->SetMaterial(material);
+		material = NewMesh.newMaterial;
+		App->materialImport->Import("Assets/Resources/Baker_House.png", NewMesh.newMaterial);*/
 		meshes.push_back(NewMesh);
+
 		return true;
 	}
 	else

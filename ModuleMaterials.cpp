@@ -154,3 +154,8 @@ uint ModuleMaterial::CreateTexture(const void* data, uint width, uint height, in
 	return textureId;
 
 }
+
+//void ModuleMaterial::SetMaterial(MaterialData* material)
+//{
+//	this->material = material;
+//}

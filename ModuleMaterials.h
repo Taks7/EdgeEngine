@@ -6,6 +6,8 @@
 #include "Module.h"
 #include "SDL/include/SDL.h"
 #include "ModuleWindow.h"
+#include "cimport.h"
+#include "material.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 #include <vector>
 #include <string>
@@ -13,7 +15,7 @@
 struct aiScene;
 struct aiMaterials;
 
-enum class TEXTURE_TYPE									// The enum values are set according to the values of Assimp's aiTextureType enum.
+enum class TEXTURE_TYPE								
 {
 	NONE = 0x0,
 	DIFFUSE = 0x1,
@@ -24,11 +26,11 @@ enum class TEXTURE_TYPE									// The enum values are set according to the valu
 struct Texture
 {
 
-	std::string		path;								// Path of the file in the directory. Will be used to avoid making duplicates.
-	TEXTURE_TYPE	type;								// Diffuse or Specular.
-	uint			id;									// Id of the texture.
-	uint			width;								// Width of the texture in pixels.
-	uint			height;								// Height of the texture in pixels.
+	std::string		path;
+	TEXTURE_TYPE	type;
+	uint			id;
+	uint			width;
+	uint			height;
 };
 
 struct MaterialData
@@ -59,15 +61,15 @@ public:
 
 	uint CreateTexture(const void* data, uint width,
 		uint height,
-		int internal_format = 0x1908,		// 0x1908 = GL_RGBA
-		uint format = 0x1908,				// 0x1908 = GL_RGBA
-		uint target = 0x0DE1,				// 0x0DE1 = GL_TEXTURE_2D
-		int filter_type = 0x2600,			// 0x2600 = GL_NEAREST
-		int filling_type = 0x2901);		// 0x2901 = GL_REPEAT
+		int internal_format = 0x1908,		
+		uint format = 0x1908,				
+		uint target = 0x0DE1,				
+		int filter_type = 0x2600,			
+		int filling_type = 0x2901);
 
-	uint64 Save(const MaterialData* r_material, char** buffer);
+	void SetMaterial(MaterialData* material);
 
-	void Load(const char* buffer, uint size, MaterialData* r_material);
+	aiMaterial material;
 
 };
 
