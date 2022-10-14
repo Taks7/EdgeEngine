@@ -157,11 +157,6 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
-		if (ImGui::BeginMenu("Application"))
-		{
-
-			ImGui::EndMenu();
-		}
 		if (ImGui::BeginMenu("Window"))
 		{
 			
@@ -197,15 +192,6 @@ void ModuleUI::MainMenu()
 				App->window->ModifyBrightness(screenBrightness);
 			}
 
-			ImGui::EndMenu();
-		}
-		if (ImGui::BeginMenu("File System"))
-		{
-			ImGui::EndMenu();
-
-		}
-		if (ImGui::BeginMenu("Input"))
-		{
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Hardware"))
@@ -278,18 +264,6 @@ void ModuleUI::MainMenu()
 
 			}
 			ImGui::EndMenu();
-		}
-		if (ImGui::BeginMenu("Primitives_test"))
-		{
-			if (ImGui::Checkbox("CreateTestCube", &testCube))
-			{
-			}
-			if (ImGui::Checkbox("Test mesh",&testMesh))
-			{
-				
-			}
-			ImGui::EndMenu();
-
 		}
 	}
 	ImGui::EndMainMenuBar();
