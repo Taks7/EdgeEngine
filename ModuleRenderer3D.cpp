@@ -229,14 +229,23 @@ void ModuleRenderer3D::DrawExampleMesh()
 		VertexData* newMesh = &App->loaderModels->meshes[i];
 		{
 			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 			// Render things in Element mode
 			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_vertex);
 			glVertexPointer(3, GL_FLOAT, 0, NULL);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->id_index);
+
+			glBindTexture(GL_TEXTURE_2D, newMesh->id_tex);
+			glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
 			glDrawElements(GL_TRIANGLES, newMesh->num_index, GL_UNSIGNED_INT, NULL);
+
+			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 			glDisableClientState(GL_VERTEX_ARRAY);
 		}
 	}
