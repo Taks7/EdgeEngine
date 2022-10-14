@@ -204,7 +204,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	if(App->ui->testMesh == true) DrawExampleMesh();
+	DrawExampleMesh();
 	SDL_GL_SwapWindow(App->window->window);
 	return true;
 }

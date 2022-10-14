@@ -4,6 +4,8 @@
 #include "ModuleFBXLoader.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "MathGeoLib.h"
+#include "Assimp/include/assimp/cimport.h"
+
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(bool start_enabled) : Module(start_enabled)
@@ -31,15 +33,15 @@ bool ModuleInput::Init()
 		LOG_COMMENT("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 	return ret;
 }
 
 // Called every draw update
 bool ModuleInput::PreUpdate(float dt)
 {
+	
 	SDL_PumpEvents();
-
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	//math::Clock::Day();
 	for(int i = 0; i < MAX_KEYS; ++i)
@@ -91,7 +93,7 @@ bool ModuleInput::PreUpdate(float dt)
 	while(SDL_PollEvent(&e))
 	{
 		ImGui_ImplSDL2_ProcessEvent(&e);
-
+		
 		switch(e.type)
 		{
 			case SDL_MOUSEWHEEL:
@@ -106,6 +108,15 @@ bool ModuleInput::PreUpdate(float dt)
 			mouse_y_motion = e.motion.yrel / SCREEN_SIZE;
 			break;
 
+			case SDL_DROPFILE:
+			{
+
+				const char* dropped_filedir = e.drop.file;
+				App->loaderModels->LoadMesh(dropped_filedir);
+				SDL_free(&dropped_filedir);
+			}
+			break;
+
 			case SDL_QUIT:
 			quit = true;
 			break;
@@ -115,14 +126,9 @@ bool ModuleInput::PreUpdate(float dt)
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
 					App->renderer3D->OnResize(e.window.data1, e.window.data2);
 			}
-			/*
-			case SDL_DROPFILE:
-			dropped_filedir = e.drop.file;
-			App->loaderModels->LoadMesh(dropped_filedir);
-			SDL_free(dropped_filedir);
-			break;
-			*/
 			
+			
+
 		}
 	}
 

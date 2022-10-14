@@ -36,7 +36,7 @@ bool ModuleFBXLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
-	LoadMesh("Game/Assets/BakerHouse.fbx");
+	//LoadMesh("Assets/BakerHouse.fbx");
 
 	/*MaterialData* material = new MaterialData();
 	App->materialImport->Import("Game/Assets/Resources/Baker_House.png", material);*/
