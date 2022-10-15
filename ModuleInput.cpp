@@ -110,9 +110,20 @@ bool ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 			{
+				VertexData* NewMaterial = new VertexData();
 
 				const char* dropped_filedir = e.drop.file;
-				App->loaderModels->LoadMesh(dropped_filedir);
+				if (App->fs->GetFileExtension(dropped_filedir) == "fbx" || App->fs->GetFileExtension(dropped_filedir) == "FBX")
+				{
+					App->loaderModels->LoadMesh(dropped_filedir);
+				}
+				if (App->fs->GetFileExtension(dropped_filedir) == "png" || App->fs->GetFileExtension(dropped_filedir) == "PNG")
+				{
+					App->materialImport->Import(dropped_filedir, NewMaterial);
+				}
+				
+				/*App->loaderModels->LoadMesh(dropped_filedir);*/
+				/*App->materialImport->Import(dropped_filedir, ),*/
 				SDL_free(&dropped_filedir);
 			}
 			break;

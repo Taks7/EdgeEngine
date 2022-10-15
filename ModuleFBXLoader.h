@@ -59,6 +59,7 @@ public:
 
 public:
 	std::vector<VertexData> meshes;
+	std::vector<VertexData*> textures;
 };
 
 #endif // __ModuleWindow_H__

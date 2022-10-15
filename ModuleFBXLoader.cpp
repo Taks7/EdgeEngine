@@ -60,7 +60,8 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		VertexData NewMesh;
-		VertexData NewMaterial;
+		VertexData* NewMaterial = new VertexData();
+		bool importMaterial = App->materialImport->Import("Assets/Resources/Baker_House.png", NewMaterial);
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
@@ -103,6 +104,10 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+		if (importMaterial)
+		{
+			meshes.push_back(*NewMaterial);
+		}
 		
 		/*VertexData* material = new VertexData();
 		App->materialImport->SetMaterial(material);
