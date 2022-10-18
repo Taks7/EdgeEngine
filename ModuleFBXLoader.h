@@ -36,7 +36,12 @@ struct VertexData
 	GLuint  id_vertex = 0; // unique vertex in VRAM
 	GLuint  num_vertex = 0;
 	float* vertex = nullptr;
-	std::vector<float2> uvs;
+
+	GLfloat* textCords = nullptr;
+	GLuint num_uvs = 0;
+	GLuint id_uvs = 0;
+
+
 	Texture texture_data;
 
 };

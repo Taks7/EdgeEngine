@@ -101,23 +101,19 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 
 			if (scene->mMeshes[i]->HasTextureCoords(0))
 			{
-				NewMesh.uvs.resize(scene->mMeshes[i]->mNumVertices);
+				NewMesh.num_uvs = scene->mMeshes[i]->mNumVertices;
 
-				if (*scene->mMeshes[i]->mNumUVComponents == 2)
-				{
-					for (int x = 0; x < scene->mMeshes[i]->mNumVertices; ++x)
-					{
-						memcpy(&NewMesh.uvs[x], &scene->mMeshes[i]->mTextureCoords[0][x], sizeof(float2));
-					}
-				}
-				else
-				{
-					memcpy(NewMesh.uvs.data(), &scene->mMeshes[i]->mTextureCoords[0], scene->mMeshes[i]->mNumVertices * sizeof(float3));
-				}
+				NewMesh.textCords = new float[NewMesh.num_uvs * 3];
 
+				memcpy(NewMesh.textCords,scene->mMeshes[i]->mTextureCoords[0],NewMesh.num_uvs* sizeof(float3));
 				
-				NewMesh.texture_data.uid = scene->mMeshes[i]->mMaterialIndex;
 			}
+			NewMesh.texture_data.id = scene->mMeshes[i]->mMaterialIndex;
+
+			glGenBuffers(1, &(NewMesh.id_uvs));
+			glBindBuffer(GL_ARRAY_BUFFER, NewMesh.id_uvs);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_uvs * 3, NewMesh.textCords, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
 		glGenBuffers(1, &NewMesh.id_index);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh.id_index);

@@ -204,7 +204,7 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	DrawExampleMesh();
+	DrawExampleMesh(true);
 	SDL_GL_SwapWindow(App->window->window);
 	return true;
 }
@@ -221,7 +221,7 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-void ModuleRenderer3D::DrawExampleMesh()
+void ModuleRenderer3D::DrawExampleMesh(bool hasTexture)
 {
 	for (int i = 0; i < App->loaderModels->meshes.size(); i++)
 	{
@@ -229,16 +229,19 @@ void ModuleRenderer3D::DrawExampleMesh()
 		VertexData* newMesh = &App->loaderModels->meshes[i];
 		{
 			glEnableClientState(GL_VERTEX_ARRAY);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
+			
 			// Render things in Element mode
 			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_vertex);
 			glVertexPointer(3, GL_FLOAT, 0, NULL);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->id_index);
 
+			
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_uvs);
+			glTexCoordPointer(3, GL_FLOAT, 0, NULL);
 			glBindTexture(GL_TEXTURE_2D, newMesh->texture_data.id);
-			glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-			//glTexCoordPointer(2, GL_FLOAT, 0, &newMesh->texture_data.uid);
+			
+
 			glDrawElements(GL_TRIANGLES, newMesh->num_index, GL_UNSIGNED_INT, NULL);
 
 			glBindTexture(GL_TEXTURE_2D, 0);
