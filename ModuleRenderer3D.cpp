@@ -238,7 +238,7 @@ void ModuleRenderer3D::DrawExampleMesh()
 
 			glBindTexture(GL_TEXTURE_2D, newMesh->texture_data.id);
 			glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-
+			//glTexCoordPointer(2, GL_FLOAT, 0, &newMesh->texture_data.uid);
 			glDrawElements(GL_TRIANGLES, newMesh->num_index, GL_UNSIGNED_INT, NULL);
 
 			glBindTexture(GL_TEXTURE_2D, 0);

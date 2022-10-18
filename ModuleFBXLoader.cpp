@@ -116,7 +116,7 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 				}
 
 				
-				NewMesh.texture_data.id = scene->mMeshes[i]->mMaterialIndex;
+				NewMesh.texture_data.uid = scene->mMeshes[i]->mMaterialIndex;
 			}
 		}
 		glGenBuffers(1, &NewMesh.id_index);

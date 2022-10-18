@@ -26,6 +26,7 @@ struct Texture
 	uint			id;
 	uint			width;
 	uint			height;
+	uint			uid;
 };
 struct VertexData
 {
