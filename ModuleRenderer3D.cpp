@@ -236,7 +236,7 @@ void ModuleRenderer3D::DrawExampleMesh()
 			glVertexPointer(3, GL_FLOAT, 0, NULL);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->id_index);
 
-			/*glBindTexture(GL_TEXTURE_2D, newMesh);*/
+			glBindTexture(GL_TEXTURE_2D, newMesh->texture_data.id);
 			glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
 			glDrawElements(GL_TRIANGLES, newMesh->num_index, GL_UNSIGNED_INT, NULL);

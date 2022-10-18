@@ -14,7 +14,7 @@
 #include "UI.h"
 #include "AboutMenu.h"
 
-#pragma comment (lib, "glew/glew-2.2.0/libGlew/Release/Win32/glew32.lib")
+#pragma comment (lib, "glew/glew-2.2.0/lib/Release/Win32/glew32.lib")
 
 ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
 {

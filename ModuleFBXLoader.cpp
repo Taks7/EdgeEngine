@@ -104,11 +104,6 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		if (importMaterial)
-		{
-			meshes.push_back(*NewMaterial);
-		}
-		
 		/*VertexData* material = new VertexData();
 		App->materialImport->SetMaterial(material);
 		material = NewMesh.newMaterial;*/
