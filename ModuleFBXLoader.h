@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "material.h"
 #include "SDL/include/SDL.h"
+#include "float2.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -34,10 +35,7 @@ struct VertexData
 	GLuint  id_vertex = 0; // unique vertex in VRAM
 	GLuint  num_vertex = 0;
 	float* vertex = nullptr;
-	aiMaterial newMaterial;
-	//std::vector<float>		vertices;
-	//std::vector<float>		normals;
-	//std::vector<uint>		indices;
+	std::vector<float2> uvs;
 	Texture texture_data;
 
 };
@@ -53,7 +51,7 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	bool LoadMesh(const char* file_path);
+	bool LoadMesh(const char* file_path,const char* texture_path);
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 

@@ -36,7 +36,7 @@ bool ModuleFBXLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
-	LoadMesh("Assets/BakerHouse.fbx");
+	LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
 
 	/*MaterialData* material = new MaterialData();
 	App->materialImport->Import("Game/Assets/Resources/Baker_House.png", material);*/
@@ -54,7 +54,7 @@ bool ModuleFBXLoader::CleanUp()
 	return true;
 }
 
-bool ModuleFBXLoader::LoadMesh(const char* file_path)
+bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 {
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
@@ -83,7 +83,7 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 				NewMesh.num_index = scene->mMeshes[i]->mNumFaces * 3;
 				NewMesh.index = new GLuint[NewMesh.num_index]; // assume each face is a triangle
 
-
+				
 				for (uint z = 0; z < scene->mMeshes[i]->mNumFaces; z++)
 				{
 					if (scene->mMeshes[i]->mFaces[z].mNumIndices != 3)
@@ -98,16 +98,37 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 				}
 				
 			}
+
+			if (scene->mMeshes[i]->HasTextureCoords(0))
+			{
+				NewMesh.uvs.resize(scene->mMeshes[i]->mNumVertices);
+
+				if (*scene->mMeshes[i]->mNumUVComponents == 2)
+				{
+					for (int x = 0; x < scene->mMeshes[i]->mNumVertices; ++x)
+					{
+						memcpy(&NewMesh.uvs[x], &scene->mMeshes[i]->mTextureCoords[0][x], sizeof(float2));
+					}
+				}
+				else
+				{
+					memcpy(NewMesh.uvs.data(), &scene->mMeshes[i]->mTextureCoords[0], scene->mMeshes[i]->mNumVertices * sizeof(float3));
+				}
+
+				
+				NewMesh.texture_data.id = scene->mMeshes[i]->mMaterialIndex;
+			}
 		}
 		glGenBuffers(1, &NewMesh.id_index);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh.id_index);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		/*VertexData* material = new VertexData();
-		App->materialImport->SetMaterial(material);
-		material = NewMesh.newMaterial;*/
-		App->materialImport->Import("Assets/Resources/Baker_House.png", &NewMesh);
+		if (texturePath != nullptr)
+		{
+			App->materialImport->Import(texturePath, &NewMesh);
+		}
+		
 		meshes.push_back(NewMesh);
 
 		return true;
