@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleMaterials.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -118,6 +119,8 @@ bool ModuleRenderer3D::Init()
 		LOG_COMMENT("Glew failed error %s\n", glewGetErrorString(error));
 	}
 	LOG_COMMENT("Glew version: %s\n", glewGetString(GLEW_VERSION));
+
+	App->materialImport->Init();
 
 	return ret;
 }
