@@ -94,8 +94,15 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 					else
 					{
 						memcpy(&NewMesh.index[z * 3], scene->mMeshes[i]->mFaces[z].mIndices, 3 * sizeof(uint));
+
+						
 					}
 				}
+
+				glGenBuffers(1, &NewMesh.id_index);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh.id_index);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				
 			}
 
@@ -106,26 +113,28 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 				NewMesh.textCords = new float[NewMesh.num_uvs * 3];
 
 				memcpy(NewMesh.textCords,scene->mMeshes[i]->mTextureCoords[0],NewMesh.num_uvs* sizeof(float3));
-				
+				int x = scene->mMeshes[i]->mNumUVComponents[0];
 			}
 			NewMesh.texture_data.id = scene->mMeshes[i]->mMaterialIndex;
 
 			glGenBuffers(1, &(NewMesh.id_uvs));
 			glBindBuffer(GL_ARRAY_BUFFER, NewMesh.id_uvs);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_uvs * 3, NewMesh.textCords, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NewMesh.num_uvs * 3, NewMesh.textCords, GL_STATIC_DRAW);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		}
-		glGenBuffers(1, &NewMesh.id_index);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh.id_index);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		if (texturePath != nullptr)
-		{
-			App->materialImport->Import(texturePath, &NewMesh);
+
+			if (texturePath != nullptr)
+			{
+				App->materialImport->Import(texturePath, &NewMesh);
+			}
+
+			meshes.push_back(NewMesh);
 		}
 		
-		meshes.push_back(NewMesh);
+
+		
+		
+		
 
 		return true;
 	}
