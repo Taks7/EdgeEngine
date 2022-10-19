@@ -8,9 +8,7 @@
 #include "ImGui/imgui_impl_opengl2.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
-// Just a test to add a basic cube onto the map and test the wireframe option
 #include "Primitive.h"
-//
 #include "UI.h"
 #include "AboutMenu.h"
 
@@ -33,10 +31,7 @@ bool ModuleUI::Init()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-	//io.ConfigFlags |= ImGuiConfigFlags_
-	//io.BackendFlags 
 	ImGui::StyleColorsDark();
 	
 
@@ -57,8 +52,6 @@ bool ModuleUI::Init()
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	
-	
 	return true;
 }
 

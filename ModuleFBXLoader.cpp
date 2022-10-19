@@ -3,7 +3,6 @@
 #include "ModuleFBXLoader.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleMaterials.h"
-//#include "SDL/include/SDL_opengl.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -24,6 +23,7 @@ ModuleFBXLoader::ModuleFBXLoader(bool start_enabled) : Module(start_enabled)
 // Destructor
 ModuleFBXLoader::~ModuleFBXLoader()
 {
+
 }
 
 // Called before render is available
@@ -37,9 +37,6 @@ bool ModuleFBXLoader::Init()
 	aiAttachLogStream(&stream);
 
 	LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
-
-	/*MaterialData* material = new MaterialData();
-	App->materialImport->Import("Game/Assets/Resources/Baker_House.png", material);*/
 
 	return true;
 }
@@ -60,8 +57,6 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		VertexData NewMesh;
-		VertexData* NewMaterial = new VertexData();
-		bool importMaterial = App->materialImport->Import("Assets/Resources/Baker_House.png", NewMaterial);
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
@@ -130,11 +125,6 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 
 			meshes.push_back(NewMesh);
 		}
-		
-
-		
-		
-		
 
 		return true;
 	}

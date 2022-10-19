@@ -3,7 +3,6 @@
 #include "ModuleFBXLoader.h"
 #include "ModuleRenderer3D.h"
 #include "DevIL.h"
-//#include "SDL/include/SDL_opengl.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -154,8 +153,3 @@ uint ModuleMaterial::CreateTexture(const void* data, uint width, uint height, in
 	return textureId;
 
 }
-
-//void ModuleMaterial::SetMaterial(MaterialData* material)
-//{
-//	this->material = material;
-//}

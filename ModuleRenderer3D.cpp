@@ -7,13 +7,9 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
-
-
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
-
-//#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 {
 	name = "Renderer"; 
@@ -266,7 +262,6 @@ bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
 	atributes.Front = node.GetJsonBool("front");
 	atributes.AmbientOclussion = node.GetJsonBool("ambient oclussion");
 	atributes.Wireframe = node.GetJsonBool("wireframe");
-	/*SetDepthTest();*/
 	
 	return true;
 }

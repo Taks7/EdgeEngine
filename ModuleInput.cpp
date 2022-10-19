@@ -121,9 +121,7 @@ bool ModuleInput::PreUpdate(float dt)
 				{
 					App->materialImport->Import(dropped_filedir, NewMaterial);
 				}
-				
-				/*App->loaderModels->LoadMesh(dropped_filedir);*/
-				/*App->materialImport->Import(dropped_filedir, ),*/
+
 				SDL_free(&dropped_filedir);
 			}
 			break;
