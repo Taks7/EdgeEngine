@@ -37,6 +37,12 @@
     <Filter Include="Sources\Tools\Assimp">
       <UniqueIdentifier>{4b3bf175-975f-4ae0-a76a-4dec1a9c3884}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\GameObject">
+      <UniqueIdentifier>{d0addfdb-e6bb-4ff6-bd02-88ac3b6301c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\GameObject\Components">
+      <UniqueIdentifier>{caf8c7d5-4330-4b08-a6d5-9e7fa44fb60d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -372,6 +378,12 @@
     <ClInclude Include="ModuleMaterials.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleGameObject.h">
+      <Filter>Sources\Modules\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponent.h">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -592,6 +604,12 @@
     </ClCompile>
     <ClCompile Include="ModuleMaterials.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGameObject.cpp">
+      <Filter>Sources\Modules\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponent.cpp">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

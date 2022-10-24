@@ -27,6 +27,7 @@ Application::Application() : debug(false)
 	fs = new ModuleFileSystem(RESOURCES_FOLDER);
 	loaderModels = new ModuleFBXLoader();
 	materialImport = new ModuleMaterial();
+	gameObject = new ModuleGameObject();
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order

@@ -21,7 +21,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -172,8 +172,10 @@
     <ClInclude Include="MathGeo\src\Math\vec2d.h" />
     <ClInclude Include="MathGeo\src\Time\Clock.h" />
     <ClInclude Include="ModuleCamera3D.h" />
+    <ClInclude Include="ModuleComponent.h" />
     <ClInclude Include="ModuleFBXLoader.h" />
     <ClInclude Include="ModuleFileSystem.h" />
+    <ClInclude Include="ModuleGameObject.h" />
     <ClInclude Include="ModuleMaterials.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleUI.h" />
@@ -251,8 +253,10 @@
     <ClCompile Include="MathGeo\src\Time\Clock.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
+    <ClCompile Include="ModuleComponent.cpp" />
     <ClCompile Include="ModuleFBXLoader.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
+    <ClCompile Include="ModuleGameObject.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleMaterials.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />

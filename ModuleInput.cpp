@@ -119,6 +119,7 @@ bool ModuleInput::PreUpdate(float dt)
 				}
 				if (App->fs->GetFileExtension(dropped_filedir) == "png" || App->fs->GetFileExtension(dropped_filedir) == "PNG")
 				{
+					//Add here function to change texture for the object
 					App->materialImport->Import(dropped_filedir, NewMaterial);
 				}
 
