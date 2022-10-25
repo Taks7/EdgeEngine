@@ -172,6 +172,7 @@ void ModuleCamera3D::CalculateViewMatrix()
 void ModuleCamera3D::Zoom()
 {
 	Position -= Z * App->input->GetMouseZ() * zoomSpeed;
+	/*Z = normalize(Position - Reference);*/
 }
 
 void ModuleCamera3D::SetZoomSpeed(const float& zoom_speed)

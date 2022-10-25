@@ -2,6 +2,7 @@
 #define __ModuleFBXLoader_H__
 
 #include "Module.h"
+#include "ModuleComponentMaterial.h"
 #include "material.h"
 #include "SDL/include/SDL.h"
 #include "float2.h"
