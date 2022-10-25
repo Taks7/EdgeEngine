@@ -41,6 +41,7 @@ public:
 	bool testMesh = false;
 	
 	bool enableAboutMenu;
+	bool showGUIPreferences = false;
 
 	AboutMenu* aboutMenu;
 private:

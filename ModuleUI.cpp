@@ -152,7 +152,6 @@ void ModuleUI::MainMenu()
 		}
 		if (ImGui::BeginMenu("Window"))
 		{
-			
 			if(ImGui::Checkbox("Fullscreen",&fullscreen))
 			{
 				App->window->SetFullscreen(fullscreen);
@@ -183,6 +182,10 @@ void ModuleUI::MainMenu()
 			if (ImGui::SliderFloat("Brightness", &screenBrightness, 0.0001f, 1.0001f))
 			{
 				App->window->ModifyBrightness(screenBrightness);
+			}
+			if (ImGui::MenuItem("ImGui Settings"))
+			{
+				showGUIPreferences = !showGUIPreferences;
 			}
 
 			ImGui::EndMenu();
@@ -259,5 +262,13 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 		}
 	}
+
+	if (showGUIPreferences)
+	{
+		ImGui::Begin("ImGui Settings", &showGUIPreferences);
+		ImGui::ShowStyleEditor();
+		ImGui::End();
+	}
+
 	ImGui::EndMainMenuBar();
 }
