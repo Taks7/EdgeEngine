@@ -32,7 +32,6 @@ bool ModuleComponents::CleanUp()
 	return ret;
 }
 
-// --- COMPONENT METHODS ---
 const char* ModuleComponents::GetName() const
 {
 	return name;

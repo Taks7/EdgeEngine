@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 
+#define ZOOM_SPEED 2.0f
+
 ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
 	name = "Camera";
@@ -14,6 +16,8 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
+
+	zoomSpeed = ZOOM_SPEED;
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -59,6 +63,8 @@ bool ModuleCamera3D::Update(float dt)
 
 	Position += newPos;
 	Reference += newPos;
+	zoomSpeed = App->camera->GetZoomSpeed();
+	App->camera->SetZoomSpeed(zoomSpeed);
 
 	// Mouse motion ----------------
 	
@@ -95,6 +101,11 @@ bool ModuleCamera3D::Update(float dt)
 		}
 
 		Position = Reference + Z * length(Position);
+	}
+
+	if (App->input->GetMouseZ() != 0)
+	{
+		Zoom();
 	}
 	
 	// Recalculate matrix -------------
@@ -155,4 +166,20 @@ void ModuleCamera3D::CalculateViewMatrix()
 {
 	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
+}
+
+//------------------------------------------------------------------
+void ModuleCamera3D::Zoom()
+{
+	Position -= Z * App->input->GetMouseZ() * zoomSpeed;
+}
+
+void ModuleCamera3D::SetZoomSpeed(const float& zoom_speed)
+{
+	this->zoomSpeed = zoom_speed;
+}
+
+float ModuleCamera3D::GetZoomSpeed() const
+{
+	return zoomSpeed;
 }

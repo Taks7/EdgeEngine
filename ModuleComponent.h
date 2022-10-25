@@ -42,4 +42,4 @@ private:
 	bool		is_active;
 };
 
-#endif // !__COMPONENT_H__
+#endif // !__Component_H__

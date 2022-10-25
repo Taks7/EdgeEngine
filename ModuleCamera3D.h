@@ -21,10 +21,15 @@ public:
 private:
 
 	void CalculateViewMatrix();
+	void Zoom();
+	void SetZoomSpeed(const float& zoom_speed);
+	float GetZoomSpeed() const;
 
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
+
+	float zoomSpeed;
 
 private:
 

@@ -384,6 +384,15 @@
     <ClInclude Include="ModuleComponent.h">
       <Filter>Sources\Modules\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleComponentMesh.h">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponentMaterial.h">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponentTransform.h">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -609,6 +618,15 @@
       <Filter>Sources\Modules\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ModuleComponent.cpp">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentMesh.cpp">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentMaterial.cpp">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentTransform.cpp">
       <Filter>Sources\Modules\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
