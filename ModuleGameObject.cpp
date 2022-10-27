@@ -85,7 +85,18 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 	return component;
 }
 
+ModuleComponents* ModuleGameObject::GetComponent(COMPONENT_TYPES type)
+{
+	for (uint i = 0; i < components.size(); ++i)
+	{
+		if (components[i]->type == type)
+		{
+			return components[i];
+		}
+	}
 
+	return nullptr;
+}
 bool ModuleGameObject::IsActive()
 {
 	return is_active;

@@ -27,6 +27,7 @@ public:
 	bool IsStatic();
 
 	std::string GetName();
+	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 
 public:

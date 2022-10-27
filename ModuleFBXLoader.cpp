@@ -12,6 +12,9 @@
 #include "Assimp/include/assimp/ai_assert.h"
 #include "ModuleGameObject.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleComponentMesh.h"
+#include "ModuleComponent.h"
+#include "ModuleComponentMaterial.h"
 #include <vector>
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
@@ -138,6 +141,94 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 	aiReleaseImport(scene);
 	 
 	
+}
+
+bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* file_path, const char* texturePath)
+{
+	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
+	if (scene != nullptr && scene->HasMeshes())
+	{
+		ModuleComponentsMesh* NewMesh = (ModuleComponentsMesh*)owner->GetComponent(COMPONENT_TYPES::MESH);
+		// Use scene->mNumMeshes to iterate on scene->mMeshes array
+		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
+		{
+			NewMesh->mesh.num_vertex = scene->mMeshes[i]->mNumVertices;
+			NewMesh->mesh.vertex = new float[NewMesh->mesh.num_vertex * 3];
+
+			memcpy(NewMesh->mesh.vertex, scene->mMeshes[i]->mVertices, sizeof(float3) * NewMesh->mesh.num_vertex);
+
+			glGenBuffers(1, &NewMesh->mesh.id_vertex);
+			glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_vertex);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NewMesh->mesh.num_vertex * 3, NewMesh->mesh.vertex, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+			LOG_COMMENT("New mesh with %d vertices", NewMesh->mesh.num_vertex);
+
+			// copy faces
+			if (scene->mMeshes[i]->HasFaces())
+			{
+				NewMesh->mesh.num_index = scene->mMeshes[i]->mNumFaces * 3;
+				NewMesh->mesh.index = new GLuint[NewMesh->mesh.num_index]; // assume each face is a triangle
+
+
+				for (uint z = 0; z < scene->mMeshes[i]->mNumFaces; z++)
+				{
+					if (scene->mMeshes[i]->mFaces[z].mNumIndices != 3)
+					{
+						LOG_COMMENT("WARNING, geometry face with != 3 indices!");
+
+					}
+					else
+					{
+						memcpy(&NewMesh->mesh.index[z * 3], scene->mMeshes[i]->mFaces[z].mIndices, 3 * sizeof(uint));
+
+
+					}
+				}
+
+				glGenBuffers(1, &NewMesh->mesh.id_index);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh->mesh.id_index);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh->mesh.num_index, NewMesh->mesh.index, GL_STATIC_DRAW);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+			}
+
+			if (scene->mMeshes[i]->HasTextureCoords(0))
+			{
+				NewMesh->mesh.num_uvs = scene->mMeshes[i]->mNumVertices;
+
+				NewMesh->mesh.textCords = new float[NewMesh->mesh.num_uvs * 3];
+
+				memcpy(NewMesh->mesh.textCords, scene->mMeshes[i]->mTextureCoords[0], NewMesh->mesh.num_uvs * sizeof(float3));
+				int x = scene->mMeshes[i]->mNumUVComponents[0];
+			}
+			NewMesh->mesh.texture_data.id = scene->mMeshes[i]->mMaterialIndex;
+
+			glGenBuffers(1, &(NewMesh->mesh.id_uvs));
+			glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_uvs);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NewMesh->mesh.num_uvs * 3, NewMesh->mesh.textCords, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+			if (texturePath != nullptr)
+			{
+				App->materialImport->Import(texturePath, &NewMesh->mesh);
+			}
+
+			//meshes.push_back(NewMesh);
+
+		}
+
+		return true;
+	}
+	else
+	{
+		LOG_COMMENT("Error loading scene % s", file_path);
+	}
+
+	aiReleaseImport(scene);
+
+
 }
 bool ModuleFBXLoader::LoadConfig(JsonParsing& node)
 {

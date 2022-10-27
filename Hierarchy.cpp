@@ -30,19 +30,19 @@ void Hierarchy::GameObjectList()
 		for (uint i = 0; i < App->scene_intro->game_objects.size(); i++)
 		{
 			ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
-			{
-				PopUpOptions();
-			}
+
 		}
 	}
 }
 
 void Hierarchy::PopUpOptions()
 {
-	ImGui::BeginPopup(0);
+	ImGui::BeginPopup("Options");
 	{
-		
+		if (ImGui::MenuItem("Delete Game Object"))
+		{
 
+		}
 	}
 	ImGui::EndPopup();
 }

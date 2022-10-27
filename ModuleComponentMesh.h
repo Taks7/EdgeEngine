@@ -23,16 +23,19 @@ public:
 	void SetMesh(VertexData mesh);
 
 	VertexData GetMesh();
+
 	/*
 	std::string GetMeshPath() const;
 	void SetMeshPath(const char* path);
 
 	void GetMeshData(uint& num_vertices, uint& num_normals, uint& num_tex_coords, uint& num_indices);
 	*/
-
-private:
 	//mesh needed here 
 	VertexData mesh;
+
+	const char* meshPath;
+
+	const char* texturePath;
 };
 
 #endif 
