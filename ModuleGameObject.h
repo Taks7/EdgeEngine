@@ -25,6 +25,8 @@ public:
 	bool CleanUp();
 	bool IsActive();
 	bool IsStatic();
+
+	std::string GetName();
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 
 public:

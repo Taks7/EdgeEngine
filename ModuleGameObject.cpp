@@ -55,8 +55,8 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 		break;
 
 	case COMPONENT_TYPES::MATERIAL:
-		component = new ModuleComponentMaterial(this);
-		findDuplicates = true;
+	/*	component = new ModuleComponentMaterial(this);
+		findDuplicates = true;*/
 		break;
 
 	}
@@ -94,4 +94,9 @@ bool ModuleGameObject::IsActive()
 bool ModuleGameObject::IsStatic()
 {
 	return is_static;
+}
+
+std::string ModuleGameObject::GetName()
+{
+	return name;
 }

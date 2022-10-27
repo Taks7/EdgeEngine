@@ -79,7 +79,7 @@ bool ModuleSceneIntro::PostUpdate()
 	return true;
 }
 
-ModuleGameObject* ModuleSceneIntro::CreateGameObject(const char* name, ModuleGameObject* parent)
+ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, ModuleGameObject* parent)
 {
 	std::string gameObjName = name;
 

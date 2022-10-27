@@ -18,7 +18,7 @@ public:
 	bool CleanUp();
 
 	//TODO 9: Create an "OnCollision" method specific for this module
-	ModuleGameObject* CreateGameObject(const char* name = nullptr, ModuleGameObject* parent = nullptr);
+	ModuleGameObject* CreateEmptyGameObject(const char* name = nullptr, ModuleGameObject* parent = nullptr);
 public:
 	std::vector<ModuleGameObject*> game_objects;
 	ModuleGameObject* rootObject;

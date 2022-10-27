@@ -10,7 +10,8 @@
 #include "Assimp/include/assimp/scene.h"
 #include "Assimp/include/assimp/postprocess.h"
 #include "Assimp/include/assimp/ai_assert.h"
-
+#include "ModuleGameObject.h"
+#include "ModuleSceneIntro.h"
 #include <vector>
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
@@ -36,7 +37,7 @@ bool ModuleFBXLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
-	LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
+	//LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
 
 	return true;
 }
@@ -124,6 +125,7 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path,const char* texturePath)
 			}
 
 			meshes.push_back(NewMesh);
+			
 		}
 
 		return true;
