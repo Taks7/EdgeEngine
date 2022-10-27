@@ -1,9 +1,9 @@
-//
-//#include "Globals.h"
-//#include "Module.h"
-//#include "ModuleComponent.h"
-//#include "ModuleGameObject.h"
-//
+
+#include "Globals.h"
+#include "Module.h"
+#include "ModuleComponent.h"
+#include "ModuleGameObject.h"
+
 //ModuleComponents::ModuleComponents(ModuleGameObject* owner, COMPONENT_TYPES type, const char* name, bool is_active) :
 //type(type),
 //owner(owner),

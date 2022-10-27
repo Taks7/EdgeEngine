@@ -35,7 +35,6 @@ public:
 	ModuleUI* ui;
 	ModuleFBXLoader* loaderModels;
 	ModuleMaterial* materialImport;
-	ModuleGameObject* gameObject;
 
 	ModuleFileSystem* fs;
 

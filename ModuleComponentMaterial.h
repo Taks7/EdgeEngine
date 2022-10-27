@@ -20,12 +20,6 @@ public:
 	bool	Update();
 	bool	CleanUp();
 
-public:
-	const char*     GetName() const;
-	void			SetName(const char* new_name);
-
-	bool			IsActive() const;
-	void			SetIsActive(const bool& is_active);
 
 public:
 	std::vector<ModuleFBXLoader*> textures;
