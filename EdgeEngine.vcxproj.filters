@@ -393,6 +393,12 @@
     <ClInclude Include="ModuleComponentTransform.h">
       <Filter>Sources\Modules\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Hierarchy.h">
+      <Filter>Sources\Modules\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>Sources\Modules\UI\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -628,6 +634,12 @@
     </ClCompile>
     <ClCompile Include="ModuleComponentTransform.cpp">
       <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Hierarchy.cpp">
+      <Filter>Sources\Modules\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>Sources\Modules\UI\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -219,7 +219,7 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-void ModuleRenderer3D::DrawExampleMesh(bool hasTexture)
+void ModuleRenderer3D::DrawGameObjects(VertexData meshOfGameObject)
 {
 	for (int i = 0; i < App->loaderModels->meshes.size(); i++)
 	{

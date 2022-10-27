@@ -1,5 +1,5 @@
-//#ifndef __ModuleComponentMesh_H__
-//#define __ModuleComponentMesh_H__
+//#ifndef __ModuleComponentTransform_H__
+//#define __ModuleComponentTransform_H__
 //
 //#include "Module.h"
 //#include "ModuleGameObject.h"

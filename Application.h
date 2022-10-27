@@ -13,7 +13,6 @@
 #include "ModuleUI.h"
 #include "ModuleFBXLoader.h"
 #include "ModuleMaterials.h"
-#include "ModuleGameObject.h"
 #include "JsonParsing.h"
 #include "ModuleFileSystem.h"
 
@@ -21,7 +20,7 @@
 
 #define CONFIG_FILENAME	"config.json"
 #define APPLICATION_NAME "EdgeEngine"
-#define ORGANIZATION_NAME "Takomo Studios"
+#define ORGANIZATION_NAME "UPC"
 
 class Application
 {
@@ -35,7 +34,7 @@ public:
 	ModuleUI* ui;
 	ModuleFBXLoader* loaderModels;
 	ModuleMaterial* materialImport;
-	ModuleGameObject* gameObject;
+
 
 	ModuleFileSystem* fs;
 

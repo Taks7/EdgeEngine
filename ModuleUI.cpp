@@ -11,6 +11,7 @@
 #include "Primitive.h"
 #include "UI.h"
 #include "AboutMenu.h"
+#include "Hierarchy.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/libGlew/Release/Win32/glew32.lib")
 
@@ -43,6 +44,7 @@ bool ModuleUI::Init()
 
 	//Way to add menus to the menu list
 	menus.push_back(aboutMenu = new AboutMenu());
+	menus.push_back(hierarchy = new Hierarchy());
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
@@ -260,6 +262,16 @@ void ModuleUI::MainMenu()
 
 			}
 			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("GameObjects"))
+		{
+			if (ImGui::MenuItem("CreateEmpty"))
+			{
+				App->scene_intro->CreateEmptyGameObject("empty", nullptr);
+			}
+			
+			ImGui::EndMenu();
+
 		}
 	}
 

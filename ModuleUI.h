@@ -9,6 +9,7 @@
 class Application;
 class UI;
 class AboutMenu;
+class Hierarchy;
 
 class ModuleUI : public Module
 {
@@ -44,6 +45,7 @@ public:
 	bool showGUIPreferences = false;
 
 	AboutMenu* aboutMenu;
+	Hierarchy* hierarchy;
 private:
 
 	std::vector<UI*> menus;

@@ -11,20 +11,22 @@ typedef unsigned int uint;
 class ModuleComponents;
 enum class COMPONENT_TYPES;
 
-class ModuleGameObject : public Module
+class ModuleGameObject
 {
 public:
 
-	ModuleGameObject(bool start_enabled = true);
+	ModuleGameObject(uint id, std::string name, bool isActive, bool isStatic);
 
 	// Destructor
 	virtual ~ModuleGameObject();
 
-	bool Init();
-	bool Update(float dt);
+	bool Update();
 	void Render();
 	bool CleanUp();
+	bool IsActive();
+	bool IsStatic();
 
+	std::string GetName();
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 
 public:
@@ -36,6 +38,8 @@ private:
 
 	uint id;
 	std::string name;
+	bool is_active;
+	bool is_static;
 };
 
 #endif // __ModuleGameObject_H__

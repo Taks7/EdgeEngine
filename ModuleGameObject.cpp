@@ -3,9 +3,14 @@
 #include "ModuleGameObject.h"
 #include "ModuleComponent.h"
 
-ModuleGameObject::ModuleGameObject(bool start_enabled) : Module(start_enabled)
+#include "ModuleComponentMaterial.h"
+#include "ModuleComponentTransform.h"
+#include "ModuleComponentMesh.h"
+
+ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic)
 {
 	name = "GameObject";
+	CreateComponent(COMPONENT_TYPES::MESH);
 }
 
 // Destructor
@@ -13,17 +18,15 @@ ModuleGameObject::~ModuleGameObject()
 {
 
 }
-
-// Called before render is available
-bool ModuleGameObject::Init()
+bool ModuleGameObject::Update()
 {
-	bool ret = true;
-
-	return true;
-}
-
-bool ModuleGameObject::Update(float dt)
-{
+	for (uint i = 0; i < components.size(); ++i)
+	{
+		if (components[i]->IsActive())
+		{
+			components[i]->Update();
+		}
+	}
 	return true;
 }
 
@@ -33,7 +36,7 @@ bool ModuleGameObject::CleanUp()
 	return true;
 }
 
-/*
+
 ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 {
 	ModuleComponents* component = nullptr;
@@ -43,17 +46,17 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 	switch (type)
 	{
 	case COMPONENT_TYPES::TRANSFORM:
-		component = new transformComponent(this); // Add
-		findDuplicates = true;
+		//component = new (this)ModuleComponentsTransform; // Add
+		//findDuplicates = true;
 		break;
 
 	case COMPONENT_TYPES::MESH:
-		component = new meshComponent(this);
+		component = new ModuleComponentsMesh(this);
 		break;
 
 	case COMPONENT_TYPES::MATERIAL:
-		component = new materialComponent(this);
-		findDuplicates = true;
+	/*	component = new ModuleComponentMaterial(this);
+		findDuplicates = true;*/
 		break;
 
 	}
@@ -81,4 +84,19 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 
 	return component;
 }
-*/
+
+
+bool ModuleGameObject::IsActive()
+{
+	return is_active;
+}
+
+bool ModuleGameObject::IsStatic()
+{
+	return is_static;
+}
+
+std::string ModuleGameObject::GetName()
+{
+	return name;
+}
