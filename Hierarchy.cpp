@@ -29,7 +29,10 @@ void Hierarchy::GameObjectList()
 	{
 		for (uint i = 0; i < App->scene_intro->game_objects.size(); i++)
 		{
-			ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
+			ImGui::Checkbox(App->scene_intro->game_objects[i]->GetName().c_str(), &showPopUp);
+			{
+				App->scene_intro->game_objects[i]->SelectItem();
+			}
 
 		}
 	}
@@ -37,12 +40,26 @@ void Hierarchy::GameObjectList()
 
 void Hierarchy::PopUpOptions()
 {
-	ImGui::BeginPopup("Options");
+	ImGui::OpenPopup("Tools");
+
+	if(ImGui::BeginPopupModal("Hierarchy Tools"))
 	{
-		if (ImGui::MenuItem("Delete Game Object"))
+		if (ImGui::MenuItem("Delete Selected"))
+		{
+			
+		}
+
+		if (ImGui::MenuItem("Create Empty Child GameObject"))
 		{
 
 		}
+
+		ImGui::EndPopup();
 	}
-	ImGui::EndPopup();
+	
+}
+
+void Hierarchy::ProcessGameObject(ModuleGameObject* gameObject)
+{
+
 }

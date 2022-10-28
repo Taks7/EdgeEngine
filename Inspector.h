@@ -1,15 +1,15 @@
-//#ifndef _ABOUT_MENU_H
-//#define _ABOUT_MENU_H
-//
-//#include "UI.h"
-//
-//class AboutMenu : public UI
-//{
-//public:
-//	AboutMenu();
-//	virtual ~AboutMenu();
-//
-//	void Draw() override;
-//};
-//#endif // !_ABOUT_MENU_H
-//
+#ifndef _INSPECTOR_MENU_H
+#define _INSPECTOR_MENU_H
+
+#include "UI.h"
+
+class InspectorMenu : public UI
+{
+public:
+	InspectorMenu();
+	virtual ~InspectorMenu();
+
+	void Draw() override;
+};
+#endif // !_ABOUT_MENU_H
+

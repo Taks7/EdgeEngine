@@ -221,26 +221,27 @@ bool ModuleRenderer3D::CleanUp()
 
 void ModuleRenderer3D::DrawGameObjects(VertexData meshOfGameObject)
 {
-	for (int i = 0; i < App->loaderModels->meshes.size(); i++)
-	{
+	//for (int i = 0; i < App->loaderModels->meshes.size(); i++)
+	//{
 		// Draw elements
-		VertexData* newMesh = &App->loaderModels->meshes[i];
-		{
+		//VertexData* newMesh = &App->loaderModels->meshes[i];
+		//{
+	
 			glEnableClientState(GL_VERTEX_ARRAY);
 			
 			// Render things in Element mode
-			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_vertex);
+			glBindBuffer(GL_ARRAY_BUFFER, meshOfGameObject.id_vertex);
 			glVertexPointer(3, GL_FLOAT, 0, NULL);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->id_index);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, meshOfGameObject.id_index);
 
 			
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_uvs);
+			glBindBuffer(GL_ARRAY_BUFFER, meshOfGameObject.id_uvs);
 			glTexCoordPointer(3, GL_FLOAT, 0, NULL);
-			glBindTexture(GL_TEXTURE_2D, newMesh->texture_data.id);
+			glBindTexture(GL_TEXTURE_2D, meshOfGameObject.texture_data.id);
 			
 
-			glDrawElements(GL_TRIANGLES, newMesh->num_index, GL_UNSIGNED_INT, NULL);
+			glDrawElements(GL_TRIANGLES, meshOfGameObject.num_index, GL_UNSIGNED_INT, NULL);
 
 			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -248,8 +249,8 @@ void ModuleRenderer3D::DrawGameObjects(VertexData meshOfGameObject)
 
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 			glDisableClientState(GL_VERTEX_ARRAY);
-		}
-	}
+		//}
+	//}
 }
 
 bool ModuleRenderer3D::LoadConfig(JsonParsing& node)

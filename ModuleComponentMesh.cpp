@@ -9,7 +9,7 @@
 
 ModuleComponentsMesh::ModuleComponentsMesh(ModuleGameObject* owner) : ModuleComponents(owner,COMPONENT_TYPES::MESH,"Mesh")
 {
-	App->loaderModels->LoadMeshToGameObject(owner, meshPath, texturePath);
+	//App->loaderModels->LoadMeshToGameObject(owner, meshPath, texturePath);
 }
 
 ModuleComponentsMesh::~ModuleComponentsMesh()
@@ -22,7 +22,9 @@ bool ModuleComponentsMesh::Update()
 	bool ret = true;
 
 	//here we should draw the mesh I believe, 
-	//App->loaderModels->LoadMesh()
+	
+	App->renderer3D->DrawGameObjects(mesh);
+	
 	return ret;
 }
 
