@@ -148,10 +148,20 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		ModuleComponentsMesh* NewMesh = (ModuleComponentsMesh*)owner->GetComponent(COMPONENT_TYPES::MESH);
+		
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
+			ModuleComponentsMesh* NewMesh; 
+			if(i==0) NewMesh = (ModuleComponentsMesh*)owner->GetComponent(COMPONENT_TYPES::MESH);
+			if (i > 0)
+			{
+				ModuleGameObject* child = App->scene_intro->CreateEmptyGameObject("test");
+				owner->AddChild(child);
+
+				NewMesh = (ModuleComponentsMesh*)child->GetComponent(COMPONENT_TYPES::MESH);
+			}
+			
 			NewMesh->mesh.num_vertex = scene->mMeshes[i]->mNumVertices;
 			NewMesh->mesh.vertex = new float[NewMesh->mesh.num_vertex * 3];
 

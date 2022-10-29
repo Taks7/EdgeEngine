@@ -29,7 +29,7 @@ void Hierarchy::GameObjectList()
 	{
 		for (uint i = 0; i < App->scene_intro->game_objects.size(); i++)
 		{
-			ImGui::Checkbox(App->scene_intro->game_objects[i]->GetName().c_str(), &showPopUp);
+			ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
 			{
 				App->scene_intro->game_objects[i]->SelectItem();
 			}

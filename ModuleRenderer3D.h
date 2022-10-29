@@ -29,7 +29,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	void DrawGameObjects(VertexData meshOfGameObject);
+	void DrawGameObjects(ModuleGameObject gameObject);
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;

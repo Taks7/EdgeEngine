@@ -23,7 +23,7 @@ bool ModuleComponentsMesh::Update()
 
 	//here we should draw the mesh I believe, 
 	
-	App->renderer3D->DrawGameObjects(mesh);
+	App->renderer3D->DrawGameObjects(*owner);
 	
 	return ret;
 }
