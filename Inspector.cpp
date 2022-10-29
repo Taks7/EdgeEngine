@@ -1,8 +1,9 @@
 #include "Inspector.h"
 #include "ImGui/imgui.h"
+#include "Application.h"
 InspectorMenu::InspectorMenu()
 {
-	active = false;
+	active = true;
 }
 
 InspectorMenu::~InspectorMenu()
@@ -14,7 +15,9 @@ void InspectorMenu::Draw()
 {
 	ImGui::Begin("Inspector");
 	{
-		
+		ImGui::SetWindowPos({ float(App->window->screen_surface->h + 180),20 });
+		ImGui::SetWindowSize({ 300,550 });
+	
 	}
 	ImGui::End();
 

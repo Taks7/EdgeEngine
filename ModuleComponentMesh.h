@@ -24,13 +24,6 @@ public:
 
 	VertexData GetMesh();
 
-	/*
-	std::string GetMeshPath() const;
-	void SetMeshPath(const char* path);
-
-	void GetMeshData(uint& num_vertices, uint& num_normals, uint& num_tex_coords, uint& num_indices);
-	*/
-	//mesh needed here 
 	VertexData mesh;
 
 	const char* meshPath;

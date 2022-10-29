@@ -3,6 +3,7 @@
 Hierarchy::Hierarchy()
 {
 	active = true;
+
 }
 
 Hierarchy::~Hierarchy()
@@ -15,8 +16,8 @@ void Hierarchy::Draw()
 	ImGui::SetNextWindowBgAlpha(1.0f);
 	ImGui::Begin("Hierarchy");
 	{
-		ImGui::SetWindowPos({ float(App->window->screen_surface->h - 130),20 });
-		ImGui::SetWindowSize({ 600,700 });
+		ImGui::SetWindowPos({ 0,20 });
+		ImGui::SetWindowSize({ 300,550});
 		GameObjectList();
 	}
 	ImGui::End();
@@ -32,10 +33,13 @@ void Hierarchy::GameObjectList()
 			ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
 			{
 				App->scene_intro->game_objects[i]->SelectItem();
+				//ProcessGameObject(App->scene_intro->game_objects[i]);
 			}
 
 		}
 	}
+
+	
 }
 
 void Hierarchy::PopUpOptions()
@@ -61,5 +65,13 @@ void Hierarchy::PopUpOptions()
 
 void Hierarchy::ProcessGameObject(ModuleGameObject* gameObject)
 {
+
+	ImGui::TreeNodeEx(gameObject->GetName().c_str());
+	{
+		if (ImGui::IsItemClicked(ImGuiMouseButton_Left))								
+		{
+			gameObject->SelectItem();
+		}
+	}
 
 }

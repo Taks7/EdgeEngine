@@ -1,53 +1,71 @@
 
-#include "Globals.h"
+#include "Application.h"
 #include "Module.h"
-#include "ModuleComponent.h"
+#include "ModuleComponentTransform.h"
+
 #include "ModuleGameObject.h"
 
-//ModuleComponents::ModuleComponents(ModuleGameObject* owner, COMPONENT_TYPES type, const char* name, bool is_active) :
-//type(type),
-//owner(owner),
-//name(name),
-//is_active(is_active)
-//{
-//
-//}
-//
-//ModuleComponents::~ModuleComponents()
-//{
-//
-//}
-//
-//bool ModuleComponents::Update()
-//{
-//	bool ret = true;
-//
-//	return ret;
-//}
-//
-//bool ModuleComponents::CleanUp()
-//{
-//	bool ret = true;
-//
-//	return ret;
-//}
-//
-//const char* ModuleComponents::GetName() const
-//{
-//	return name;
-//}
-//
-//void ModuleComponents::SetName(const char* new_name)
-//{
-//	name = new_name;
-//}
-//
-//bool ModuleComponents::IsActive() const
-//{
-//	return is_active;
-//}
-//
-//void ModuleComponents::SetIsActive(const bool& set_to)
-//{
-//	is_active = set_to;
-//}
+ModuleComponentsTransform::ModuleComponentsTransform(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::TRANSFORM, "Transform")
+{
+
+}
+
+ModuleComponentsTransform::~ModuleComponentsTransform()
+{
+
+}
+
+bool ModuleComponentsTransform::Update()
+{
+	bool ret = true;
+
+	return ret;
+}
+
+bool ModuleComponentsTransform::CleanUp()
+{
+	bool ret = true;
+
+	return ret;
+}
+
+void ModuleComponentsTransform::Transform()
+{
+	//Aqui poner todo lo que tenga que ver con rotación y posicion y todo
+}
+float3 ModuleComponentsTransform::GetPosition() const
+{
+	return position;
+}
+
+float3 ModuleComponentsTransform::GetRotation() const
+{
+	return euler_rotation;
+}
+
+float3 ModuleComponentsTransform::GetScale() const
+{
+	return scale;
+}
+
+void ModuleComponentsTransform::SetPosition(const float3& position)
+{
+	this->position = position;
+
+}
+
+void ModuleComponentsTransform::SetRotation(const float3& rotation)
+{
+	euler_rotation = rotation;
+
+	this->rotation.RotateX(euler_rotation.x);
+	this->rotation.RotateY(euler_rotation.y);
+	this->rotation.RotateZ(euler_rotation.z);
+
+}
+
+void ModuleComponentsTransform::SetScale(const float3& scale)
+{
+	this->scale = scale;
+
+}

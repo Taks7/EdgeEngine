@@ -1,45 +1,50 @@
-//#ifndef __ModuleComponentTransform_H__
-//#define __ModuleComponentTransform_H__
-//
-//#include "Module.h"
-//#include "ModuleGameObject.h"
-//#include <string>
-//
-//class ModuleGameObject;
-//
-//enum class COMPONENT_TYPES
-//{
-//	NONE,
-//	TRANSFORM,
-//	MESH,
-//	MATERIAL,
-//	UNKNOWN = -1
-//};
-//
-//class ModuleComponents : public Module
-//{
-//public:
-//	ModuleComponents(ModuleGameObject* owner, COMPONENT_TYPES type, const char* name, bool is_active = true);
-//	virtual ~ModuleComponents();
-//
-//	virtual bool	Update();
-//	virtual bool	CleanUp();
-//
-//public:
-//	const char*     GetName() const;
-//	void			SetName(const char* new_name);
-//
-//	bool			IsActive() const;
-//	void			SetIsActive(const bool& is_active);
-//
-//public:
-//	COMPONENT_TYPES	type;
-//
-//	ModuleGameObject* owner;
-//
-//private:
-//	const char* name;
-//	bool		is_active;
-//};
-//
-//#endif // !__ComponentMesh_H__
+#ifndef _ModuleComponentTransform_H_
+#define _ModuleComponentTransform_H_
+
+#include "Module.h"
+#include "ModuleGameObject.h"
+#include "Math/float4x4.h"
+#include "Math/float3.h"
+#include <string>
+
+class ModuleGameObject;
+
+class ModuleComponentsTransform : ModuleComponents
+{
+public:
+	ModuleComponentsTransform(ModuleGameObject* owner);
+	virtual ~ModuleComponentsTransform();
+
+	virtual bool	Update();
+	virtual bool	CleanUp();
+
+	void Transform();
+
+	float3 GetPosition() const;
+	float3 GetRotation() const;
+	float3 GetScale() const;
+
+	void SetPosition(const float3& position);
+	void SetRotation(const float3& rotation);
+	void SetScale(const float3& scale);
+
+public:
+
+	float4x4	matrix;
+
+	float3		position;
+	float4x4	rotation;
+	float3		scale;
+
+	float3		euler_rotation;
+
+public:
+	COMPONENT_TYPES	type;
+	ModuleGameObject* owner;
+
+private:
+	const char* name;
+	bool		is_active;
+};
+
+#endif // !__ComponentMesh_H__
