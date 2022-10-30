@@ -49,6 +49,11 @@ bool ModuleUI::Init()
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
 	screenWidth = App->window->screen_surface->w;
+
+	GPUSeller = (const char*)glGetString(GL_VENDOR);
+	GPUSpecs = (const char*)glGetString(GL_RENDERER);
+	GPUDrivers = (const char*)glGetString(GL_VERSION);
+
 	return true;
 }
 
@@ -226,6 +231,14 @@ void ModuleUI::MainMenu()
 			ImGui::NewLine();
 			ImGui::Text("Hardware information:");
 			ImGui::NewLine();
+			int count, size;
+			App->GetCPU(count, size);
+			ImGui::Text("CPUs: %d (%dKb)", count, size);
+			ImGui::Separator();
+			float ram = App->GetRAM();
+			ImGui::Text("RAM: %.2fGb", ram);
+			ImGui::Separator();
+			ImGui::Text("GPU Seller: %s\nGPU Specifications: %s\nGPU Drivers: %s", GPUSeller.c_str(), GPUSpecs.c_str(), GPUDrivers.c_str());
 			ImGui::EndMenu();
 
 		}

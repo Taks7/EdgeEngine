@@ -66,6 +66,9 @@ public:
 	inline void SaveConfigRequest() { saveRequest = true; }
 	inline void LoadConfigRequest() { loadRequest = true; }
 
+	void GetCPU(int& count, int& size);
+	float GetRAM();
+
 private:
 
 	void AddModule(Module* mod);

@@ -46,6 +46,11 @@ public:
 
 	AboutMenu* aboutMenu;
 	Hierarchy* hierarchy;
+
+	std::string GPUSeller;
+	std::string GPUSpecs;
+	std::string GPUDrivers;
+
 private:
 
 	std::vector<UI*> menus;

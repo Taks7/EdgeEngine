@@ -9,6 +9,7 @@
 #include "ModuleFileSystem.h"
 #include "Resource.h"
 
+#include "glew/glew-2.2.0/include/GL/glew.h"
 //#include "MathGeo/src/MathGeoLib.h"
 
 //#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
@@ -222,4 +223,26 @@ void Application::RequestBrowser(const char* string)
 	const char* link = string;
 	ShellExecuteA(NULL,"open",link, NULL, NULL,SW_SHOWNORMAL);
 }
+
+void Application::GetCPU(int& count, int& size)
+{
+	count = SDL_GetCPUCount();
+	size = SDL_GetCPUCacheLineSize();
+}
+
+float Application::GetRAM()
+{
+	return (float)SDL_GetSystemRAM() / 1000.0f;
+}
+
+const GLubyte* GetGPUVendor()
+{
+	return glGetString(GL_VENDOR);
+}
+
+const GLubyte* GetGPURenderer()
+{
+	return glGetString(GL_RENDERER);
+}
+
 Application* App = nullptr;
