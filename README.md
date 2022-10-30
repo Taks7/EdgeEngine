@@ -1,5 +1,7 @@
 # EdgeEngine
 
+![EdgeEngine](https://user-images.githubusercontent.com/72123380/198906428-5ab2db1d-a51b-4143-9c39-c5ab097b3490.png)
+
 Edge Engine its a 3D graphics Engine for Game Development developed with C++ and [OpenGL](https://www.opengl.org/). It has been developed by students of the [Degree in Videogame Design and Development](https://www.citm.upc.edu/ing/estudis/graus-videojocs/) of the [Universitat Politècnica de Catalunya](https://www.upc.edu/ca).
 
 ## Libraries & Tools
@@ -51,6 +53,10 @@ It's easy to instalate the Edge Engine in your computer. Just go in the releases
   - GL_AmbientOclussion: Calculates how much the pixel is exposed to the ambient light source.
   
 - **Game Objects**: Here you can add the game objects to the Engine.
+
+### Drag&Drop
+
+Models and textures can be dropped from a directory directly into the engine. That's made by creating a new game object per mesh in the model and the texture will also be applied into that model. 
 
 ## Engine Controls
 
