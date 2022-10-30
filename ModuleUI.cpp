@@ -239,6 +239,10 @@ void ModuleUI::MainMenu()
 			ImGui::Text("RAM: %.2fGb", ram);
 			ImGui::Separator();
 			ImGui::Text("GPU Seller: %s\nGPU Specifications: %s\nGPU Drivers: %s", GPUSeller.c_str(), GPUSpecs.c_str(), GPUDrivers.c_str());
+			ImGui::Separator();
+			int major, minor, patch;
+		    App->GetSDLVersion(major, minor, patch);
+		    ImGui::Text("SDL Version: %d.%d.%d", major, minor, patch);
 			ImGui::EndMenu();
 
 		}

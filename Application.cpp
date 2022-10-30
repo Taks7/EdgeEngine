@@ -245,4 +245,13 @@ const GLubyte* GetGPURenderer()
 	return glGetString(GL_RENDERER);
 }
 
+void Application::GetSDLVersion(int& major, int& minor, int& patch)
+{
+	SDL_version v;
+	SDL_GetVersion(&v);
+	major = v.major;
+	minor = v.minor;
+	patch = v.patch;
+}
+
 Application* App = nullptr;
