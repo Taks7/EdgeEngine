@@ -156,8 +156,7 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 			if(i==0) NewMesh = (ModuleComponentsMesh*)owner->GetComponent(COMPONENT_TYPES::MESH);
 			if (i > 0)
 			{
-				ModuleGameObject* child = App->scene_intro->CreateEmptyGameObject("test");
-				owner->AddChild(child);
+				ModuleGameObject* child = App->scene_intro->CreateEmptyGameObject("child",owner);
 
 				NewMesh = (ModuleComponentsMesh*)child->GetComponent(COMPONENT_TYPES::MESH);
 			}

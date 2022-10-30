@@ -30,10 +30,23 @@ void Hierarchy::GameObjectList()
 	{
 		for (uint i = 0; i < App->scene_intro->game_objects.size(); i++)
 		{
-			ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
+			
+			if (App->scene_intro->game_objects[i]->childs.empty())
 			{
-				App->scene_intro->game_objects[i]->SelectItem();
-				//ProcessGameObject(App->scene_intro->game_objects[i]);
+				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
+			}
+			
+			if (!App->scene_intro->game_objects[i]->childs.empty())
+			{
+				ImGui::TreeNode(App->scene_intro->game_objects[i]->GetName().c_str());
+				{
+					for (int j = 0; j < App->scene_intro->game_objects[i]->childs.size(); j++)
+					{
+						ImGui::MenuItem(App->scene_intro->game_objects[i]->childs.at(j)->GetName().c_str());
+					}
+					//ImGui::TreePop();
+				}
+				
 			}
 
 		}
