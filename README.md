@@ -26,10 +26,31 @@ It's easy to instalate the Edge Engine in your computer. Just go in the releases
 ### UI
 ![Captura](https://user-images.githubusercontent.com/72123380/198897943-5197fc2b-91a8-4721-a32c-ff061b5348c8.PNG)
 
-- **Help**: In the help section we can find the information about the license, developers of the engine and the tools and libraries used. We can also find options to download the latest version or go to the wiki page of the EdgeEngine and finally, there is a button specifically to report a bug.
+- **Help**: In that section we can find the information about the license, developers of the engine and the tools and libraries used. We can also find options to download the latest version or go to the wiki page of the EdgeEngine and finally, there is a button specifically to report a bug.
 
+- **Configuration**: Here you can Save and Load an existing configuration of your Engine Window and Render Options preferences. 
 
+- **Window**: In the window section we can find multiple window configuration options. Here you can toggle on/off fullscreen, resizable, full desktops as well as the vsync or adjust the widht, height and brightness of your screen. It is here that you can also select the ImGui prefrences in the bottom section of the window menu.
 
+- **Hardware**: It displays the information regarding your frame rate(FPS) and your computer hardware.
+
+- **Render Options**: Multiple render options that can be toggled on/off:
+
+  - WireFrame Mode: Transforms a mesh into a wireframe by iterating over its faces, collecting all edges and turning those edges into four-sided polygons.
+  
+  - GL_Depth_test: Tests the depth value of a fragment against the content of the depth buffer.
+  
+  - GL_Cull_face: Determines whether a polygon of a graphical object is visible.
+  
+  - GL_Lightning: Use the current lighting parameters to compute the vertex color.
+  
+  - GL_Color_material: Specifies which material parameters track the current color.
+  
+  - GL_Front: Culls only the front faces.
+  
+  - GL_AmbientOclussion: Calculates how much the pixel is exposed to the ambient light source.
+  
+- **Game Objects**: Here you can add the game objects to the Engine.
 
 ## Engine Controls
 
