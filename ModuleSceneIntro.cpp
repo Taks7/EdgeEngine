@@ -81,16 +81,28 @@ bool ModuleSceneIntro::PostUpdate()
 
 ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, ModuleGameObject* parent)
 {
-	std::string gameObjName = name;
-
-	if (!game_objects.empty())
+	if (parent == nullptr)
 	{
-		gameObjName += std::to_string(game_objects.size());
+		std::string gameObjName = name;
+
+		if (!game_objects.empty())
+		{
+			gameObjName += std::to_string(game_objects.size());
+		}
+		ModuleGameObject* gameObject = new ModuleGameObject(game_objects.size(), gameObjName, true, false);
+
+		game_objects.push_back(gameObject);
+		return gameObject;
 	}
-	ModuleGameObject* gameObject = new ModuleGameObject(game_objects.size(), gameObjName,true,false);
+	
 
-	game_objects.push_back(gameObject);
+	if (parent != nullptr)
+	{
+		ModuleGameObject* gameObject = new ModuleGameObject(parent->childs.size(), name, true, false);
+		parent->childs.push_back(gameObject);
+		return gameObject;
 
-	return gameObject;
+	}
+	
 }
 //TODO 9: And change the color of the colliding bodies, so we can visualize it working!

@@ -3,6 +3,7 @@
 Hierarchy::Hierarchy()
 {
 	active = true;
+
 }
 
 Hierarchy::~Hierarchy()
@@ -15,8 +16,8 @@ void Hierarchy::Draw()
 	ImGui::SetNextWindowBgAlpha(1.0f);
 	ImGui::Begin("Hierarchy");
 	{
-		ImGui::SetWindowPos({ float(App->window->screen_surface->h - 130),20 });
-		ImGui::SetWindowSize({ 600,700 });
+		ImGui::SetWindowPos({ 0,20 });
+		ImGui::SetWindowSize({ 300,550});
 		GameObjectList();
 	}
 	ImGui::End();
@@ -29,20 +30,61 @@ void Hierarchy::GameObjectList()
 	{
 		for (uint i = 0; i < App->scene_intro->game_objects.size(); i++)
 		{
-			ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
+			
+			if (App->scene_intro->game_objects[i]->childs.empty())
 			{
-				PopUpOptions();
+				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
 			}
+			
+			if (!App->scene_intro->game_objects[i]->childs.empty())
+			{
+				ImGui::TreeNode(App->scene_intro->game_objects[i]->GetName().c_str());
+				{
+					for (int j = 0; j < App->scene_intro->game_objects[i]->childs.size(); j++)
+					{
+						ImGui::MenuItem(App->scene_intro->game_objects[i]->childs.at(j)->GetName().c_str());
+					}
+					//ImGui::TreePop();
+				}
+				
+			}
+
 		}
 	}
+
+	
 }
 
 void Hierarchy::PopUpOptions()
 {
-	ImGui::BeginPopup(0);
-	{
-		
+	ImGui::OpenPopup("Tools");
 
+	if(ImGui::BeginPopupModal("Hierarchy Tools"))
+	{
+		if (ImGui::MenuItem("Delete Selected"))
+		{
+			
+		}
+
+		if (ImGui::MenuItem("Create Empty Child GameObject"))
+		{
+
+		}
+
+		ImGui::EndPopup();
 	}
-	ImGui::EndPopup();
+	
+}
+
+void Hierarchy::ProcessGameObject(ModuleGameObject* gameObject)
+{
+
+	ImGui::TreeNodeEx(gameObject->GetName().c_str());
+	{
+		if (ImGui::IsItemClicked(ImGuiMouseButton_Left))								
+		{
+			gameObject->SelectItem();
+		}
+	}
+
 }

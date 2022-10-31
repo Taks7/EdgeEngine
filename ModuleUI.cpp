@@ -12,6 +12,7 @@
 #include "UI.h"
 #include "AboutMenu.h"
 #include "Hierarchy.h"
+#include "Inspector.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/libGlew/Release/Win32/glew32.lib")
 
@@ -45,6 +46,7 @@ bool ModuleUI::Init()
 	//Way to add menus to the menu list
 	menus.push_back(aboutMenu = new AboutMenu());
 	menus.push_back(hierarchy = new Hierarchy());
+	menus.push_back(inspector = new InspectorMenu());
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
@@ -286,7 +288,10 @@ void ModuleUI::MainMenu()
 			{
 				App->scene_intro->CreateEmptyGameObject("empty", nullptr);
 			}
-			
+			if (ImGui::MenuItem("Create GameObjectWithMesh"))
+			{
+				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/BakerHouse.fbx", "Assets/Resources/Baker_House.png");
+			}
 			ImGui::EndMenu();
 
 		}

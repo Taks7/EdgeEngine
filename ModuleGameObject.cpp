@@ -85,7 +85,18 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 	return component;
 }
 
+ModuleComponents* ModuleGameObject::GetComponent(COMPONENT_TYPES type)
+{
+	for (uint i = 0; i < components.size(); ++i)
+	{
+		if (components[i]->type == type)
+		{
+			return components[i];
+		}
+	}
 
+	return nullptr;
+}
 bool ModuleGameObject::IsActive()
 {
 	return is_active;
@@ -99,4 +110,40 @@ bool ModuleGameObject::IsStatic()
 std::string ModuleGameObject::GetName()
 {
 	return name;
+}
+
+bool ModuleGameObject::IsSelected()
+{
+	return selectedForInspector;
+}
+
+void ModuleGameObject::SelectItem()
+{
+	selectedForInspector = !selectedForInspector;
+}
+
+bool ModuleGameObject::AddChild(ModuleGameObject* child)
+{
+	child->parent = this;
+
+	childs.push_back(child);
+	
+	return true;
+}
+
+bool ModuleGameObject::DeleteChild(ModuleGameObject* child)
+{
+	bool ret = false;
+
+	for (uint i = 0; i < childs.size(); ++i)
+	{
+		if (childs[i] == child)
+		{
+			childs.erase(childs.begin() + i);
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
 }

@@ -9,7 +9,7 @@
 
 ModuleComponentsMesh::ModuleComponentsMesh(ModuleGameObject* owner) : ModuleComponents(owner,COMPONENT_TYPES::MESH,"Mesh")
 {
-
+	
 }
 
 ModuleComponentsMesh::~ModuleComponentsMesh()
@@ -21,6 +21,13 @@ bool ModuleComponentsMesh::Update()
 {
 	bool ret = true;
 
+	App->renderer3D->DrawGameObjects(*owner);
+	for (int i = 0; i < owner->childs.size(); i++)
+	{
+		App->renderer3D->DrawGameObjects(*owner->childs.at(i));
+	}
+	
+	
 	return ret;
 }
 

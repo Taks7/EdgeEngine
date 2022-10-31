@@ -39,7 +39,7 @@ public:
 
 private:
 	const char* name;
-	bool		is_active;
+	bool is_active;
 };
 
 #endif // !__Component_H__

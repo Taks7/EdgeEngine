@@ -25,21 +25,30 @@ public:
 	bool CleanUp();
 	bool IsActive();
 	bool IsStatic();
+	bool IsSelected();
+
+	void SelectItem();
+
+	bool AddChild(ModuleGameObject* child);
+	bool DeleteChild(ModuleGameObject* child);
 
 	std::string GetName();
+	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 
 public:
 
 	std::vector<ModuleComponents*>	components;
 	std::vector<ModuleGameObject*>	childs;
-
+	
+	ModuleGameObject* parent;
 private:
 
 	uint id;
 	std::string name;
 	bool is_active;
 	bool is_static;
+	bool selectedForInspector = false;
 };
 
 #endif // __ModuleGameObject_H__

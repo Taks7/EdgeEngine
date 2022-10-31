@@ -10,6 +10,7 @@ class Application;
 class UI;
 class AboutMenu;
 class Hierarchy;
+class InspectorMenu;
 
 class ModuleUI : public Module
 {
@@ -47,9 +48,13 @@ public:
 	AboutMenu* aboutMenu;
 	Hierarchy* hierarchy;
 
+	InspectorMenu* inspector;
+
+
 	std::string GPUSeller;
 	std::string GPUSpecs;
 	std::string GPUDrivers;
+
 
 private:
 

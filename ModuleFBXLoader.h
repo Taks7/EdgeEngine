@@ -7,6 +7,7 @@
 #include "SDL/include/SDL.h"
 #include "float2.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
+#include "ModuleGameObject.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
@@ -59,6 +60,7 @@ public:
 	bool CleanUp();
 
 	bool LoadMesh(const char* file_path,const char* texture_path);
+	bool LoadMeshToGameObject(ModuleGameObject* owner,const char* file_path, const char* texture_path);
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
