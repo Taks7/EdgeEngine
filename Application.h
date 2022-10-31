@@ -2,6 +2,7 @@
 #include "Module.h"
 #include <list>
 #include <string>
+#include <vector>
 #include "Globals.h"
 #include "Timer.h"
 #include "ModuleWindow.h"
@@ -34,7 +35,6 @@ public:
 	ModuleUI* ui;
 	ModuleFBXLoader* loaderModels;
 	ModuleMaterial* materialImport;
-
 
 	ModuleFileSystem* fs;
 
@@ -69,6 +69,7 @@ public:
 	void GetCPU(int& count, int& size);
 	float GetRAM();
 	void GetSDLVersion(int& major, int& minor, int& patch);
+	void AddConsoleLogs(const char* log);
 	
 private:
 

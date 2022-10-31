@@ -115,7 +115,7 @@ bool ModuleInput::PreUpdate(float dt)
 				const char* dropped_filedir = e.drop.file;
 				if (App->fs->GetFileExtension(dropped_filedir) == "fbx" || App->fs->GetFileExtension(dropped_filedir) == "FBX")
 				{
-					App->loaderModels->LoadMesh(dropped_filedir, nullptr);
+					App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), dropped_filedir, nullptr);
 				}
 				if (App->fs->GetFileExtension(dropped_filedir) == "png" || App->fs->GetFileExtension(dropped_filedir) == "PNG")
 				{
