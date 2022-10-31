@@ -6,9 +6,9 @@
 
 //#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
-ModuleConsole::ModuleConsole(bool start_enabled) : Module(start_enabled)
+ModuleConsole::ModuleConsole()
 {
-	name = "Console";
+	active = true;
 	scrollBottom = true;
 }
 
@@ -17,61 +17,45 @@ ModuleConsole::~ModuleConsole()
 
 }
 
-bool ModuleConsole::DrawConsole(ImGuiIO& io)
+void ModuleConsole::Draw()
 {
-	bool ret = true;
-
-	ImGui::Begin(GetName(), NULL, ImGuiWindowFlags_MenuBar);
-
-	ConsoleMenu();
-	ConsoleOutput();
-	ConsoleScroll();
-
+	ImGui::Begin("Console", NULL, ImGuiWindowFlags_MenuBar);
+	{
+		ImGui::SetWindowPos({ float(App->window->screen_surface->h -800),660 });
+		ImGui::SetWindowSize({ 800,140 });
+		ConsoleMenu();
+		ConsoleOutput();
+		/*ConsoleScroll();*/	
+	}
 	ImGui::End();
-
-	return ret;
-}
-
-bool ModuleConsole::CleanUp()
-{
-	bool ret = true;
-
-	ClearLog();
-
-	return ret;
 }
 
 void ModuleConsole::AddLog(const char* log)
 {
 	char* tmp = strdup(log);											
 
-	logs.push_back(tmp);
+	logsConsole.push_back(tmp);
 
 	scrollBottom = true;
 }
 
 void ModuleConsole::ClearLog()
 {
-	for (uint i = 0; i < logs.size(); ++i)										
+	for (uint i = 0; i < logsConsole.size(); ++i)
 	{
-		free(logs[i]);
+		free(logsConsole[i]);
 	}
 
-	logs.clear();
+	logsConsole.clear();
 
 	scrollBottom = true;
-}
-
-const char* ModuleConsole::GetName() const
-{
-	return name;
 }
 
 void ModuleConsole::ConsoleMenu()
 {
 	ImGui::BeginMenuBar();
 
-	if (ImGui::BeginMenu("Options"))											
+	if (ImGui::BeginMenu("Console Options"))											
 	{
 		if (ImGui::MenuItem("Clear Console"))									
 		{
@@ -88,32 +72,32 @@ void ModuleConsole::ConsoleOutput()
 {
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
 
-	for (int i = 0; i < logs.size(); ++i)
+	for (int i = 0; i < logsConsole.size(); ++i)
 	{
 		ImVec4 textColor = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-		if (strstr(logs[i], "[ERROR]") != nullptr)
+		if (strstr(logsConsole[i], "[ERROR]") != nullptr)
 		{
-			textColor = { 1.0f, 1.0f, 0.0f, 1.0f };							
+			textColor = { 1.0f, 0.0f, 0.0f, 1.0f };
 		}
 
-		if (strstr(logs[i], "[WARNING]") != nullptr)
+		if (strstr(logsConsole[i], "[WARNING]") != nullptr)
 		{
-			textColor = { 1.0f, 0.0f, 1.0f, 1.0f };							
+			textColor = { 1.0f, 1.0f, 0.0f, 1.0f };
 		}
 
-		if (strstr(logs[i], "[STATUS]") != nullptr)
+		if (strstr(logsConsole[i], "[STATUS]") != nullptr)
 		{
 			textColor = { 1.0f, 0.0f, 1.0f, 1.0f };
 		}
 
-		if (strstr(logs[i], "[SCENE]") != nullptr)
+		if (strstr(logsConsole[i], "[SCENE]") != nullptr)
 		{
 			textColor = { 0.0f, 1.0f, 1.0f, 1.0f };
 		}
 
 		ImGui::PushStyleColor(ImGuiCol_Text, textColor);
-		ImGui::TextUnformatted(logs[i]);										
+		ImGui::TextUnformatted(logsConsole[i]);
 		ImGui::PopStyleColor();
 	}
 

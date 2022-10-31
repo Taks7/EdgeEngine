@@ -1,27 +1,25 @@
 #ifndef __ModuleConsole_H__
 #define __ModuleConsole_H__
 
-#include "Module.h"
 #include <string>
 #include <vector>
+#include "Module.h"
 #include "ImGui/imgui.h"
 #include "Globals.h"
+#include "UI.h"
 
-class ModuleConsole : public Module
+class ModuleConsole : public UI
 {
 public:
 
-	ModuleConsole(bool start_enabled = true);
-	~ModuleConsole();
+	ModuleConsole();
+	virtual ~ModuleConsole();
 
-	bool DrawConsole(ImGuiIO& io);
-	
-	bool CleanUp();
+	void Draw();
 
 public:
 
 	void AddLog(const char* log);
-	const char* GetName() const;
 
 private:
 
@@ -32,7 +30,7 @@ private:
 
 private:
 
-	std::vector<char*> logs;
+	std::vector<char*> logsConsole;
 	bool scrollBottom;
 };
 

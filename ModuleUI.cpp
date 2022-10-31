@@ -48,7 +48,7 @@ bool ModuleUI::Init()
 	menus.push_back(aboutMenu = new AboutMenu());
 	menus.push_back(hierarchy = new Hierarchy());
 	menus.push_back(inspector = new InspectorMenu());
-
+	menus.push_back(consoleMenu = new ModuleConsole());
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
@@ -289,10 +289,12 @@ void ModuleUI::MainMenu()
 			if (ImGui::MenuItem("CreateEmpty"))
 			{
 				App->scene_intro->CreateEmptyGameObject("empty", nullptr);
+				LOG_COMMENT("[SCENE] Created an Empty Game Object")
 			}
 			if (ImGui::MenuItem("Create GameObjectWithMesh"))
 			{
 				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/BakerHouse.fbx", "Assets/Resources/Baker_House.png");
+				LOG_COMMENT("[SCENE] Created a Game Object with Mesh and Textures")
 			}
 			ImGui::EndMenu();
 
@@ -307,4 +309,9 @@ void ModuleUI::MainMenu()
 	}
 
 	ImGui::EndMainMenuBar();
+}
+
+void ModuleUI::ConsoleLogs(const char* log)
+{	
+	consoleMenu->AddLog(log);
 }

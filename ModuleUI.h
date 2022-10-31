@@ -33,6 +33,7 @@ public:
 public:
 	//MENU THINGYS
 	void MainMenu();
+	void ConsoleLogs(const char* log);
 	bool fullscreen = false;
 	bool Vsync = false;
 	bool resizable = false;
