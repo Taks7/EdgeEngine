@@ -24,7 +24,7 @@ public:
 
 	bool CleanUp();
 
-	bool Import(const char* path, VertexData* newMaterial);
+	bool Import(const char* path, Texture* newMaterial);
 	
 	uint CreateTexture(const void* data, uint width,
 		uint height,

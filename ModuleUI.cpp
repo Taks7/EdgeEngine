@@ -301,6 +301,17 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
+
+		if (ImGui::BeginMenu("Primitives"))
+		{
+			if (ImGui::MenuItem("Cube primitive"))
+			{
+				testCube = !testCube;
+				LOG_COMMENT("[SCENE] Created a cube primitive");
+			}
+
+			ImGui::EndMenu();
+		}
 	}
 
 	if (showGUIPreferences)

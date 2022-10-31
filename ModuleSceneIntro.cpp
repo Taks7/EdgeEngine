@@ -49,6 +49,8 @@ bool ModuleSceneIntro::Update(float dt)
 		Cube c(0.5, 0.5, 0.5);
 		
 		//SpherePrimitive s(1, 12, 24);
+
+		//CylinderPrimitive k(10, 10);
 	}
 	
 	//TODO 3: Nothing to do here. But it's good to know where all primitives are being updated
@@ -96,7 +98,6 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 			gameObjName += std::to_string(game_objects.size());
 		}
 		ModuleGameObject* gameObject = new ModuleGameObject(game_objects.size(), gameObjName, true, false);
-
 		game_objects.push_back(gameObject);
 		return gameObject;
 	}

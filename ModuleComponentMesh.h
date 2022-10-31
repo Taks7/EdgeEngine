@@ -28,7 +28,6 @@ public:
 
 	const char* meshPath;
 
-	const char* texturePath;
 };
 
 #endif 

@@ -11,6 +11,8 @@ ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool
 {
 	name = "GameObject";
 	CreateComponent(COMPONENT_TYPES::MESH);
+	CreateComponent(COMPONENT_TYPES::MATERIAL);
+	CreateComponent(COMPONENT_TYPES::TRANSFORM);
 }
 
 // Destructor
@@ -61,17 +63,18 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 	switch (type)
 	{
 	case COMPONENT_TYPES::TRANSFORM:
-		//component = new (this)ModuleComponentsTransform; // Add
-		//findDuplicates = true;
+		component = new ModuleComponentsTransform(this);
+		findDuplicates = true;
 		break;
 
 	case COMPONENT_TYPES::MESH:
 		component = new ModuleComponentsMesh(this);
+		findDuplicates = true;
 		break;
 
 	case COMPONENT_TYPES::MATERIAL:
-	/*	component = new ModuleComponentMaterial(this);
-		findDuplicates = true;*/
+		component = new ModuleComponentMaterial(this);
+		findDuplicates = true;
 		break;
 
 	}
