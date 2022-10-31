@@ -13,6 +13,7 @@
 #include "AboutMenu.h"
 #include "Hierarchy.h"
 #include "Inspector.h"
+#include "ModuleConsole.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/libGlew/Release/Win32/glew32.lib")
 
@@ -47,6 +48,7 @@ bool ModuleUI::Init()
 	menus.push_back(aboutMenu = new AboutMenu());
 	menus.push_back(hierarchy = new Hierarchy());
 	menus.push_back(inspector = new InspectorMenu());
+
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;

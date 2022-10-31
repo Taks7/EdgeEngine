@@ -43,6 +43,9 @@
     <Filter Include="Sources\Modules\GameObject\Components">
       <UniqueIdentifier>{caf8c7d5-4330-4b08-a6d5-9e7fa44fb60d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\UI\Console">
+      <UniqueIdentifier>{bebda96b-041c-43a7-92ae-1bcb510a451b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -399,6 +402,9 @@
     <ClInclude Include="Inspector.h">
       <Filter>Sources\Modules\UI\Menus</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleConsole.h">
+      <Filter>Sources\Modules\UI\Console</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -640,6 +646,9 @@
     </ClCompile>
     <ClCompile Include="Inspector.cpp">
       <Filter>Sources\Modules\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleConsole.cpp">
+      <Filter>Sources\Modules\UI\Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

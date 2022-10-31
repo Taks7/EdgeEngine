@@ -11,6 +11,7 @@ class UI;
 class AboutMenu;
 class Hierarchy;
 class InspectorMenu;
+class ModuleConsole;
 
 class ModuleUI : public Module
 {
@@ -49,7 +50,7 @@ public:
 	Hierarchy* hierarchy;
 
 	InspectorMenu* inspector;
-
+	ModuleConsole* consoleMenu;
 
 	std::string GPUSeller;
 	std::string GPUSpecs;
