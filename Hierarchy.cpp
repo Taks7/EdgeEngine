@@ -38,13 +38,16 @@ void Hierarchy::GameObjectList()
 			
 			if (!App->scene_intro->game_objects[i]->childs.empty())
 			{
-				ImGui::TreeNode(App->scene_intro->game_objects[i]->GetName().c_str());
+				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
 				{
+					//Por ahora dejamos esto comentado que no workea del todo bien //
+					/*
 					for (int j = 0; j < App->scene_intro->game_objects[i]->childs.size(); j++)
 					{
 						ImGui::MenuItem(App->scene_intro->game_objects[i]->childs.at(j)->GetName().c_str());
 					}
 					//ImGui::TreePop();
+					*/
 				}
 				
 			}

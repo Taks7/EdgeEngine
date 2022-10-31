@@ -33,7 +33,7 @@ void ModuleConsole::Draw()
 void ModuleConsole::AddLog(const char* log)
 {
 	char* tmp = strdup(log);											
-
+	
 	logsConsole.push_back(tmp);
 
 	scrollBottom = true;
@@ -41,11 +41,12 @@ void ModuleConsole::AddLog(const char* log)
 
 void ModuleConsole::ClearLog()
 {
+	
 	for (uint i = 0; i < logsConsole.size(); ++i)
 	{
 		free(logsConsole[i]);
 	}
-
+	
 	logsConsole.clear();
 
 	scrollBottom = true;

@@ -20,6 +20,11 @@
 ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
 {
 	name = "UI";
+
+	menus.push_back(aboutMenu = new AboutMenu());
+	menus.push_back(hierarchy = new Hierarchy());
+	menus.push_back(inspector = new InspectorMenu());
+	menus.push_back(consoleMenu = new ModuleConsole());
 }
 
 // Destructor
@@ -45,10 +50,7 @@ bool ModuleUI::Init()
 	ImGui_ImplOpenGL2_Init();
 
 	//Way to add menus to the menu list
-	menus.push_back(aboutMenu = new AboutMenu());
-	menus.push_back(hierarchy = new Hierarchy());
-	menus.push_back(inspector = new InspectorMenu());
-	menus.push_back(consoleMenu = new ModuleConsole());
+	
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
@@ -313,5 +315,9 @@ void ModuleUI::MainMenu()
 
 void ModuleUI::ConsoleLogs(const char* log)
 {	
-	consoleMenu->AddLog(log);
+	if (consoleMenu != nullptr)
+	{
+		consoleMenu->AddLog(log);
+	}
+	
 }

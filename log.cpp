@@ -1,6 +1,7 @@
 #pragma once
 #include "Globals.h"
 #include "Application.h"
+#include <vector>
 
 void log(const char file[], int line, const char* format, ...)
 {

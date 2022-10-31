@@ -57,6 +57,11 @@ bool ModuleSceneIntro::Update(float dt)
 		primitives[n]->Update();
 	}
 
+	for (uint j = 0; j < game_objects.size(); j++)
+	{
+		game_objects.at(j)->Render();
+	}
+	
 	return true;
 }
 
@@ -73,6 +78,7 @@ bool ModuleSceneIntro::PostUpdate()
 		if (game_objects[i]->IsActive())
 		{
 			game_objects[i]->Update();
+			
 		}
 	}
 	

@@ -258,7 +258,7 @@ void Application::GetSDLVersion(int& major, int& minor, int& patch)
 
 void Application::AddConsoleLogs(const char* log)
 {
-	if (ui->consoleMenu != nullptr)												
+	if (ui != nullptr)												
 	{
 		std::string full_log = log;
 

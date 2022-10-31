@@ -36,6 +36,21 @@ bool ModuleGameObject::CleanUp()
 	return true;
 }
 
+void ModuleGameObject::Render()
+{
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i));
+		ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
+		for (int j = 0; j < owner->childs.size(); j++)
+		{
+			App->renderer3D->DrawGameObjects(*owner->childs.at(j));
+		}
+	}
+	
+	
+
+}
 
 ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 {
