@@ -24,7 +24,9 @@ public:
 	void Render();
 	bool CleanUp();
 	bool IsActive();
+	void SetActive(bool state);
 	bool IsStatic();
+	void SetStatic(bool state);
 	bool IsSelected();
 
 	void SelectItem();

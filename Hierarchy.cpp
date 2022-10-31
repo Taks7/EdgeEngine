@@ -1,5 +1,6 @@
 #include "Hierarchy.h"
 #include "ImGui/imgui.h"
+
 Hierarchy::Hierarchy()
 {
 	active = true;
@@ -87,17 +88,4 @@ void Hierarchy::PopUpOptions()
 		ImGui::EndPopup();
 	}
 	
-}
-
-void Hierarchy::ProcessGameObject(ModuleGameObject* gameObject)
-{
-
-	ImGui::TreeNodeEx(gameObject->GetName().c_str());
-	{
-		if (ImGui::IsItemClicked(ImGuiMouseButton_Left))								
-		{
-			gameObject->SelectItem();
-		}
-	}
-
 }

@@ -116,10 +116,18 @@ bool ModuleGameObject::IsActive()
 {
 	return is_active;
 }
-
+void ModuleGameObject::SetActive(bool state)
+{
+	is_active = state;
+}
 bool ModuleGameObject::IsStatic()
 {
 	return is_static;
+}
+
+void ModuleGameObject::SetStatic(bool state)
+{
+	is_static = state;
 }
 
 std::string ModuleGameObject::GetName()
