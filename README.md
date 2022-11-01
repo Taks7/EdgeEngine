@@ -76,6 +76,8 @@ Models and textures can be dropped from a directory directly into the engine. Th
 
 - **Mouse Right Click**: Changes the Rotation of the Camera
 
+- **ALTL + Mouse Left Click**: Orbit around the Object
+
 - **Mouse Wheel Forward**: Camera Zoom Forward
 
 - **Mouse Wheel Backward**: Camera Zoom Backwards
