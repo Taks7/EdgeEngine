@@ -22,7 +22,8 @@ void InspectorMenu::Draw()
 
 	ImGui::Begin("Inspector");
 	{
-		ImGui::SetWindowPos({ float(App->window->screen_surface->h + 180),20 });
+		ImGui::SetNextWindowBgAlpha(1.0f);
+		ImGui::SetWindowPos({ float(App->window->GetWidht() - 300),20});
 		ImGui::SetWindowSize({ 300,550 });
 		
 		

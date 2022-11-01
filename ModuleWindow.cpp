@@ -151,3 +151,13 @@ void ModuleWindow::SetFullDesktop(bool fullDesktop)
 {
 
 }
+
+float ModuleWindow::GetHeight()
+{
+	return screen_surface->h;
+}
+
+float ModuleWindow::GetWidht()
+{
+	return screen_surface->w;
+}

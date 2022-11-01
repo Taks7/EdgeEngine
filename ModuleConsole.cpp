@@ -21,11 +21,12 @@ void ModuleConsole::Draw()
 {
 	ImGui::Begin("Console", NULL, ImGuiWindowFlags_MenuBar);
 	{
-		ImGui::SetWindowPos({ float(App->window->screen_surface->h -800),660 });
-		ImGui::SetWindowSize({ 800,140 });
+		ImGui::SetNextWindowBgAlpha(1.0f);
+		ImGui::SetWindowPos({ 0,572 });
+		ImGui::SetWindowSize({ App->window->GetWidht() ,230 });
 		ConsoleMenu();
 		ConsoleOutput();
-		/*ConsoleScroll();*/	
+		ConsoleScroll();
 	}
 	ImGui::End();
 }
