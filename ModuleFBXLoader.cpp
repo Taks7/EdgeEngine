@@ -41,6 +41,7 @@ bool ModuleFBXLoader::Init()
 	aiAttachLogStream(&stream);
 
 	//LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
+	App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/BakerHouse.fbx", "Assets/Resources/Baker_House.png");
 
 	return true;
 }
