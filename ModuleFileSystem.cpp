@@ -205,3 +205,19 @@ std::string ModuleFileSystem::GetFileExtension(const char* path)
 
 	return extension;
 }
+
+
+std::string ModuleFileSystem::FixPath(const char* path) const
+{
+	std::string normalized_path(path);
+
+	for (uint i = 0; i < normalized_path.size(); ++i)
+	{
+		if (normalized_path[i] == '\\')
+		{
+			normalized_path[i] = '/';
+		}
+	}
+
+	return normalized_path;
+}

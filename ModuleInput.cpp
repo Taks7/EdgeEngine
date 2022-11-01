@@ -113,14 +113,44 @@ bool ModuleInput::PreUpdate(float dt)
 				VertexData* NewMaterial = new VertexData();
 
 				const char* dropped_filedir = e.drop.file;
+
+				std::string path = App->fs->FixPath(dropped_filedir);
+
+				uint directory_path_start = path.find_last_of("A");
+				uint directory_path_end = path.size();
+
+				path = path.substr(directory_path_start, directory_path_end);
+
 				if (App->fs->GetFileExtension(dropped_filedir) == "fbx" || App->fs->GetFileExtension(dropped_filedir) == "FBX")
 				{
-					App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), dropped_filedir, nullptr);
+					App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), path.c_str(), nullptr);
 				}
 				if (App->fs->GetFileExtension(dropped_filedir) == "png" || App->fs->GetFileExtension(dropped_filedir) == "PNG")
 				{
 					//Add here function to change texture for the object
-					//App->materialImport->Import(dropped_filedir, NewMaterial);
+					for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+					{
+						if (App->scene_intro->game_objects[i]->IsSelected())
+						{
+							ModuleComponentMaterial* material = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::MATERIAL);
+							
+							if(App->scene_intro->game_objects[i]->childs.size() > 0)
+							{
+								for (int j = 0; j < App->scene_intro->game_objects[i]->childs.size(); j++)
+								{
+									ModuleComponentMaterial* materialChild = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->childs[j]->GetComponent(COMPONENT_TYPES::MATERIAL);
+									Texture* newTexture = new Texture();
+									App->materialImport->Import(path.c_str(), newTexture);
+									if (materialChild->materialUsed != nullptr) materialChild->materialUsed = nullptr;
+									materialChild->materialUsed = newTexture;
+								}
+							}
+							Texture* newTexture = new Texture();
+							App->materialImport->Import(path.c_str(), newTexture);
+							if (material->materialUsed != nullptr) material->materialUsed = nullptr;
+							material->materialUsed = newTexture;
+						}
+					}
 				}
 
 				SDL_free(&dropped_filedir);

@@ -25,6 +25,8 @@ public:
 
 	bool AddPath(const char* path);
 
+	std::string FixPath(const char* path) const;
+
 	uint Load(const char* file, char** buffer);
 	uint Save(const char* file, const void* buffer, unsigned int size, bool append = false);
 

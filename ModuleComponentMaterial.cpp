@@ -35,3 +35,13 @@ bool ModuleComponentMaterial::CleanUp()
 
 	return ret;
 }
+
+Texture* ModuleComponentMaterial::GetTexture()
+{
+	return materialUsed;
+}
+
+void ModuleComponentMaterial::SetTexture(Texture* texture)
+{
+	materialUsed = texture;
+}

@@ -20,6 +20,10 @@ public:
 	bool	Update();
 	bool	CleanUp();
 
+	Texture* GetTexture();
+
+	void SetTexture(Texture* texture);
+
 
 public:
 	std::vector<Texture*> textures;
