@@ -3,6 +3,8 @@
 #include "ModuleCamera3D.h"
 
 #define ZOOM_SPEED 2.0f
+#define ROTATION_SPEED 0.2f
+
 
 ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
@@ -108,12 +110,51 @@ bool ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
+	{
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+			int dx = -App->input->GetMouseXMotion();
+			int dy = -App->input->GetMouseYMotion();
+
+			float sensitivity = ROTATION_SPEED;
+
+			Position -= Reference;
+
+			if (dx != 0)
+			{
+				float delta_X = (float)dx * sensitivity;
+
+				X = rotate(X, delta_X, vec3(0.0f, 1.0f, 0.0f));
+				Y = rotate(Y, delta_X, vec3(0.0f, 1.0f, 0.0f));
+				Z = rotate(Z, delta_X, vec3(0.0f, 1.0f, 0.0f));
+			}
+
+			if (dy != 0)
+			{
+				float delta_Y = (float)dy * sensitivity;
+
+				Y = rotate(Y, delta_Y, X);
+				Z = rotate(Z, delta_Y, X);
+
+				if (Y.y < 0.0f)
+				{
+					Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+					Y = cross(Z, X);
+				}
+			}
+
+			Position = Reference + Z * length(Position);
+		}
+	}
+
 	if (App->input->GetMouseZ() != 0)
 	{
 		Zoom();
 	}
-	
-	// Recalculate matrix -------------
+
+	//Recalculate Matrix -------------
+
 	CalculateViewMatrix();
 
 	return true;
@@ -188,4 +229,11 @@ void ModuleCamera3D::SetZoomSpeed(const float& zoom_speed)
 float ModuleCamera3D::GetZoomSpeed() const
 {
 	return zoomSpeed;
+}
+
+float3 ModuleCamera3D::ToFloat3(vec3 vec) {
+	return float3(vec.x, vec.y, vec.z);
+}
+vec3 ModuleCamera3D::ToVec3(float3 vec) {
+	return vec3(vec.x, vec.y, vec.z);
 }
