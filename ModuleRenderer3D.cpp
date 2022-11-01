@@ -23,6 +23,8 @@ ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 	 atributes.Front = true;
 	 atributes.AmbientOclussion = true;
 	 atributes.Wireframe = false;
+
+	 ckeckerTextureid = 0;
 }
 
 // Destructor
@@ -250,6 +252,11 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
 					}
 				}
 
+				if (App->renderer3D->checkerTextureApplied)
+				{
+					glBindTexture(GL_TEXTURE_2D, ckeckerTextureid);
+				}
+
 
 
 				glDrawElements(GL_TRIANGLES, NewMesh->mesh.num_index, GL_UNSIGNED_INT, NULL);
@@ -308,4 +315,37 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void ModuleRenderer3D::LoadCheckerTexture()
+{
+	GLubyte checker[CHEIGHT][CWIDTH][4];					
+
+	for (int i = 0; i < CHEIGHT; ++i)									
+	{
+		for (int j = 0; j < CWIDTH; ++j)								
+		{
+			int color = ((((i & 0x8) == 0) ^ ((j & 0x8) == 0))) * 255;			
+
+			checker[i][j][0] = (GLubyte)color;
+			checker[i][j][1] = (GLubyte)color;
+			checker[i][j][2] = (GLubyte)color;
+			checker[i][j][3] = (GLubyte)255;
+
+		}
+	}
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);																									
+	glGenTextures(1, &ckeckerTextureid);
+	glBindTexture(GL_TEXTURE_2D, ckeckerTextureid);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);				
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);				
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);			
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);	
+	
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CWIDTH, CHEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checker);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

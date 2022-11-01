@@ -220,6 +220,11 @@ void InspectorMenu::DrawMaterialComponent()
 				material->SetIsActive(active);
 			}
 
+			if (ImGui::Checkbox("Checker Texture", &App->renderer3D->checkerTextureApplied))
+			{
+				App->renderer3D->LoadCheckerTexture();
+			}
+
 			ImGui::Separator();
 
 		

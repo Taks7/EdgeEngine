@@ -6,6 +6,9 @@
 #include "ModuleFBXLoader.h"
 
 #define MAX_LIGHTS 8
+#define CWIDTH 64
+#define CHEIGHT 64
+
 struct Gl_Attributes
 {
 	bool Depth_test;
@@ -34,7 +37,8 @@ public:
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
-	
+	void			LoadCheckerTexture();
+
 public:
 
 	Light lights[MAX_LIGHTS];
@@ -42,5 +46,7 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 	Gl_Attributes atributes;
+	uint ckeckerTextureid;
+	bool checkerTextureApplied = false;
 
 };
