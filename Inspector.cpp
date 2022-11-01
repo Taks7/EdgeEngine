@@ -199,10 +199,7 @@ void InspectorMenu::DrawMeshComponent()
 
 
 		}
-		else
-		{
-			LOG_COMMENT("[ERROR] Non existen mesh in game object");
-		}
+		
 	}
 }
 
@@ -212,7 +209,7 @@ void InspectorMenu::DrawMaterialComponent()
 	{
 		ModuleComponentMaterial* material = (ModuleComponentMaterial*)selectedGameObject->GetComponent(COMPONENT_TYPES::MATERIAL);
 
-		if (material != nullptr)
+		if (material->materialUsed != nullptr)
 		{
 			bool active = material->IsActive();
 			if (ImGui::Checkbox("Material Active", &active))
@@ -241,9 +238,6 @@ void InspectorMenu::DrawMaterialComponent()
 
 			ImGui::Separator();
 		}
-		else
-		{
-			LOG_COMMENT("[ERROR] Non existen material in game object");
-		}
+		
 	}
 }

@@ -224,6 +224,8 @@ bool ModuleRenderer3D::CleanUp()
 
 void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
 {
+	if (GameObject.IsActive())
+	{
 		ModuleComponentsMesh* NewMesh = (ModuleComponentsMesh*)GameObject.GetComponent(COMPONENT_TYPES::MESH);
 		ModuleComponentMaterial* NewMaterial = (ModuleComponentMaterial*)GameObject.GetComponent(COMPONENT_TYPES::MATERIAL);
 		if (NewMesh->IsActive())
@@ -269,9 +271,9 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
 				glDisableClientState(GL_VERTEX_ARRAY);
 
 			}
-			
+
 		}
-		
+	}
 
 }
 

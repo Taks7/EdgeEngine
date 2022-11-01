@@ -120,6 +120,11 @@ bool ModuleGameObject::IsActive()
 void ModuleGameObject::SetActive(bool state)
 {
 	is_active = state;
+
+	for (int j = 0; j < childs.size(); j++)
+	{
+		childs[j]->SetActive(state);
+	}
 }
 bool ModuleGameObject::IsStatic()
 {
