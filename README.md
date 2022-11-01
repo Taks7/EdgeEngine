@@ -58,6 +58,9 @@ It's easy to instalate the Edge Engine in your computer. Just go in the releases
 
 Models and textures can be dropped from a directory directly into the engine. That's made by creating a new game object per mesh in the model and the texture will also be applied into that model. 
 
+:heavy_exclamation_mark: ```Caution: You can only drop .fbx and .png files from the Assets folder that is inside the current project.``` :heavy_exclamation_mark:
+
+
 ## Engine Controls
 
 - **W**: Move Forward
