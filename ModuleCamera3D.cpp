@@ -54,6 +54,7 @@ bool ModuleCamera3D::Update(float dt)
 		speed = 8.0f * dt;
 
 	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) newPos.y += speed;
+
 	if(App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT) newPos.y -= speed;
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
@@ -67,6 +68,8 @@ bool ModuleCamera3D::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= X * speed;
 	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
+
+	// Aqui con poner Look at(gameObjectSelected position ya estaria)if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) LookAt();
 
 	Position += newPos;
 	Reference += newPos;

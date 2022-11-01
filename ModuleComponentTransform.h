@@ -9,7 +9,7 @@
 
 class ModuleGameObject;
 
-class ModuleComponentsTransform : ModuleComponents
+class ModuleComponentsTransform : public ModuleComponents
 {
 public:
 	ModuleComponentsTransform(ModuleGameObject* owner);
@@ -38,9 +38,7 @@ public:
 
 	float3		euler_rotation;
 
-public:
-	COMPONENT_TYPES	type;
-	ModuleGameObject* owner;
+
 
 private:
 	const char* name;

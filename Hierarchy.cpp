@@ -1,5 +1,6 @@
 #include "Hierarchy.h"
 #include "ImGui/imgui.h"
+
 Hierarchy::Hierarchy()
 {
 	active = true;
@@ -34,12 +35,27 @@ void Hierarchy::GameObjectList()
 			if (App->scene_intro->game_objects[i]->childs.empty())
 			{
 				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
+				{
+					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
+					{
+						App->scene_intro->game_objects[i]->SelectItem();
+					}
+				}
 			}
 			
 			if (!App->scene_intro->game_objects[i]->childs.empty())
 			{
 				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
 				{
+					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
+					{
+						App->scene_intro->game_objects[i]->SelectItem();
+					}
+
+					if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
+					{
+						PopUpOptions(App->scene_intro->game_objects[i]);
+					}
 					//Por ahora dejamos esto comentado que no workea del todo bien //
 					/*
 					for (int j = 0; j < App->scene_intro->game_objects[i]->childs.size(); j++)
@@ -58,11 +74,11 @@ void Hierarchy::GameObjectList()
 	
 }
 
-void Hierarchy::PopUpOptions()
+void Hierarchy::PopUpOptions(ModuleGameObject* gameObject)
 {
-	ImGui::OpenPopup("Tools");
+	ImGui::Begin("Tools");
 
-	if(ImGui::BeginPopupModal("Hierarchy Tools"))
+	if(ImGui::BeginChild("Hierarchy Tools"))
 	{
 		if (ImGui::MenuItem("Delete Selected"))
 		{
@@ -74,20 +90,7 @@ void Hierarchy::PopUpOptions()
 
 		}
 
-		ImGui::EndPopup();
+		ImGui::EndChild();
 	}
-	
-}
-
-void Hierarchy::ProcessGameObject(ModuleGameObject* gameObject)
-{
-
-	ImGui::TreeNodeEx(gameObject->GetName().c_str());
-	{
-		if (ImGui::IsItemClicked(ImGuiMouseButton_Left))								
-		{
-			gameObject->SelectItem();
-		}
-	}
-
+	ImGui::End();
 }

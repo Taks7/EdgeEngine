@@ -13,9 +13,9 @@ public:
 
 	void GameObjectList();
 
-	void PopUpOptions();
+	void PopUpOptions(ModuleGameObject* gameObject);
 
-	void ProcessGameObject(ModuleGameObject* gameObject);
+	
 public:
 
 	bool showPopUp;

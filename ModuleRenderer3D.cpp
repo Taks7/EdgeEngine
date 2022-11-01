@@ -223,31 +223,49 @@ bool ModuleRenderer3D::CleanUp()
 void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
 {
 		ModuleComponentsMesh* NewMesh = (ModuleComponentsMesh*)GameObject.GetComponent(COMPONENT_TYPES::MESH);
-	
-		glEnableClientState(GL_VERTEX_ARRAY);
+		ModuleComponentMaterial* NewMaterial = (ModuleComponentMaterial*)GameObject.GetComponent(COMPONENT_TYPES::MATERIAL);
+		if (NewMesh->IsActive())
+		{
+			if (NewMesh != nullptr)
+			{
+
+
+				glEnableClientState(GL_VERTEX_ARRAY);
+
+				// Render things in Element mode
+				glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_vertex);
+				glVertexPointer(3, GL_FLOAT, 0, NULL);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh->mesh.id_index);
+
+
+				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+				glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_uvs);
+
+				if (NewMaterial->IsActive())
+				{
+					if (NewMaterial->materialUsed != nullptr)
+					{
+						glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+						glBindTexture(GL_TEXTURE_2D, NewMaterial->materialUsed->id);
+					}
+				}
+
+
+
+				glDrawElements(GL_TRIANGLES, NewMesh->mesh.num_index, GL_UNSIGNED_INT, NULL);
+
+				glBindTexture(GL_TEXTURE_2D, 0);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+				glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+				glDisableClientState(GL_VERTEX_ARRAY);
+
+			}
 			
-			// Render things in Element mode
-		glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_vertex);
-		glVertexPointer(3, GL_FLOAT, 0, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh->mesh.id_index);
+		}
+		
 
-			
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_uvs);
-		glTexCoordPointer(3, GL_FLOAT, 0, NULL);
-		glBindTexture(GL_TEXTURE_2D, NewMesh->mesh.texture_data.id);
-			
-
-		glDrawElements(GL_TRIANGLES, NewMesh->mesh.num_index, GL_UNSIGNED_INT, NULL);
-
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_VERTEX_ARRAY);
-
-	
 }
 
 bool ModuleRenderer3D::LoadConfig(JsonParsing& node)

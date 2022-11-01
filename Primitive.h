@@ -62,11 +62,11 @@ public:
 };
 
 // ============================================
-class Cylinder : public Primitive
+class CylinderPrimitive : public Primitive
 {
 public:
-	Cylinder();
-	Cylinder(float radius, float height);
+	CylinderPrimitive();
+	CylinderPrimitive(float radius, float height);
 
 protected:
 	void InnerRender() const;

@@ -24,7 +24,9 @@ public:
 	void Render();
 	bool CleanUp();
 	bool IsActive();
+	void SetActive(bool state);
 	bool IsStatic();
+	void SetStatic(bool state);
 	bool IsSelected();
 
 	void SelectItem();
@@ -33,6 +35,7 @@ public:
 	bool DeleteChild(ModuleGameObject* child);
 
 	std::string GetName();
+	void SetName(const char* newName);
 	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 

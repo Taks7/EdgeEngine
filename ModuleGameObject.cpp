@@ -11,6 +11,8 @@ ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool
 {
 	name = "GameObject";
 	CreateComponent(COMPONENT_TYPES::MESH);
+	CreateComponent(COMPONENT_TYPES::MATERIAL);
+	CreateComponent(COMPONENT_TYPES::TRANSFORM);
 }
 
 // Destructor
@@ -47,8 +49,6 @@ void ModuleGameObject::Render()
 			App->renderer3D->DrawGameObjects(*owner->childs.at(j));
 		}
 	}
-	
-	
 
 }
 
@@ -61,17 +61,18 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 	switch (type)
 	{
 	case COMPONENT_TYPES::TRANSFORM:
-		//component = new (this)ModuleComponentsTransform; // Add
-		//findDuplicates = true;
+		component = new ModuleComponentsTransform(this);
+		findDuplicates = true;
 		break;
 
 	case COMPONENT_TYPES::MESH:
 		component = new ModuleComponentsMesh(this);
+		findDuplicates = true;
 		break;
 
 	case COMPONENT_TYPES::MATERIAL:
-	/*	component = new ModuleComponentMaterial(this);
-		findDuplicates = true;*/
+		component = new ModuleComponentMaterial(this);
+		findDuplicates = true;
 		break;
 
 	}
@@ -116,15 +117,28 @@ bool ModuleGameObject::IsActive()
 {
 	return is_active;
 }
-
+void ModuleGameObject::SetActive(bool state)
+{
+	is_active = state;
+}
 bool ModuleGameObject::IsStatic()
 {
 	return is_static;
 }
 
+void ModuleGameObject::SetStatic(bool state)
+{
+	is_static = state;
+}
+
 std::string ModuleGameObject::GetName()
 {
 	return name;
+}
+
+void ModuleGameObject::SetName(const char* newName)
+{
+	name = newName;
 }
 
 bool ModuleGameObject::IsSelected()
@@ -134,6 +148,13 @@ bool ModuleGameObject::IsSelected()
 
 void ModuleGameObject::SelectItem()
 {
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		if (App->scene_intro->game_objects.at(i)->IsActive() && this != App->scene_intro->game_objects.at(i))
+		{
+			App->scene_intro->game_objects.at(i)->selectedForInspector = false;
+		}
+	}
 	selectedForInspector = !selectedForInspector;
 }
 
