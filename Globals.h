@@ -43,7 +43,7 @@ typedef unsigned __int64 uint64;
     }
 
 #define RESOURCES_FOLDER "Assets/Resources/"
-#define SETTINGS_FOLDER "Game/Settings/"
+#define SETTINGS_FOLDER "Settings/"
 
 #define RELEASE_ARRAY( x )\
 	{\
