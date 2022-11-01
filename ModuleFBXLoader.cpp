@@ -163,6 +163,7 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 				NewMesh = (ModuleComponentsMesh*)owner->GetComponent(COMPONENT_TYPES::MESH);
 				MaterialUsed = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
 				
+				
 			}
 			if (i > 0)
 			{

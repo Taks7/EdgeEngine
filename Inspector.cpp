@@ -59,8 +59,7 @@ void InspectorMenu::DrawInfoOfGameObject(ModuleGameObject* game_object)
 	{
 		game_object->SetActive(gameObjectActive);
 	}
-	ImGui::SameLine();
-
+	
 	ImGui::SetNextItemWidth(ImGui::GetWindowWidth() * 0.33f);
 	static char buffer[64];
 	strcpy(buffer, game_object->GetName().c_str());
@@ -119,7 +118,51 @@ void InspectorMenu::DrawTransformComponent()
 {
 	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
 	{
-		
+		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)selectedGameObject->GetComponent(COMPONENT_TYPES::TRANSFORM);
+
+		if (transform != nullptr)
+		{
+			bool active = transform->IsActive();
+			if (ImGui::Checkbox("Transform Active", &active))
+			{
+				transform->SetIsActive(active);
+			}
+
+			ImGui::Separator();
+
+			ImGui::Text("Position");
+
+			ImGui::SameLine(100.0f);
+
+			float3 position = transform->GetPosition();
+			float pos[3] = { position.x, position.y, position.z };
+			if (ImGui::DragFloat3("Position", pos, 1.0f, 0.0f, 0.0f, "%.3f", NULL))
+			{
+				transform->SetPosition(float3(pos[0], pos[1], pos[2]));
+			}
+
+			ImGui::Text("Rotation");
+
+			ImGui::SameLine(100.0f);
+
+			float3 rotation = transform->GetRotation();
+			float rot[3] = { rotation.x, rotation.y, rotation.z };
+			if (ImGui::DragFloat3("Rotation", rot, 1.0f, 0.0f, 0.0f, "%.3f", NULL))
+			{
+				transform->SetRotation(float3(rot[0], rot[1], rot[2]));
+			}
+
+			ImGui::Text("Scale");
+
+			ImGui::SameLine(100.0f);
+
+			float3 scale = transform->GetScale();
+			float scl[3] = { scale.x, scale.y, scale.z };
+			if (ImGui::DragFloat3("Scale", scl, 1.0f, 0.0f, 0.0f, "%.3f", NULL))
+			{
+				transform->SetScale(float3(scl[0], scl[1], scl[2]));
+			}
+		}
 	}
 }
 
@@ -136,6 +179,29 @@ void InspectorMenu::DrawMeshComponent()
 			{
 				mesh->SetIsActive(active);
 			}
+
+			ImGui::Separator();
+
+			ImGui::Text("File path:");
+
+			ImGui::SameLine();
+
+			ImGui::Text("WIP");
+			ImGui::Separator();
+
+			ImGui::Text("Mesh Info:");
+
+			ImGui::Text("Vertices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "  %u", mesh->mesh.num_vertex);
+			ImGui::Text("Indices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_index);
+			ImGui::Text("UVS:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_uvs);
+
+			ImGui::Separator();
+
+
+		}
+		else
+		{
+			LOG_COMMENT("[ERROR] Non existen mesh in game object");
 		}
 	}
 }
@@ -153,6 +219,26 @@ void InspectorMenu::DrawMaterialComponent()
 			{
 				material->SetIsActive(active);
 			}
+
+			ImGui::Separator();
+
+		
+			ImGui::Text("File:");		
+			ImGui::SameLine(); 
+			ImGui::Text("WIP");
+
+			ImGui::Separator();
+
+			ImGui::Text("Texture Data:");
+
+			ImGui::Text("Width:");	ImGui::SameLine(); ImGui::Text(" %u", material->materialUsed->width);
+			ImGui::Text("Height:");	ImGui::SameLine(); ImGui::Text("%u", material->materialUsed->height);
+
+			ImGui::Separator();
+		}
+		else
+		{
+			LOG_COMMENT("[ERROR] Non existen material in game object");
 		}
 	}
 }

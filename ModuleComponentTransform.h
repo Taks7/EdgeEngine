@@ -32,11 +32,11 @@ public:
 
 	float4x4	matrix;
 
-	float3		position;
+	float3		position = {0,0,0};
 	float4x4	rotation;
-	float3		scale;
+	float3		scale = {0,0,0};
 
-	float3		euler_rotation;
+	float3		euler_rotation = {0,0,0};
 
 
 

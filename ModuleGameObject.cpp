@@ -183,3 +183,29 @@ bool ModuleGameObject::DeleteChild(ModuleGameObject* child)
 
 	return ret;
 }
+
+std::string ModuleGameObject::GetMeshPath()
+{
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		if (App->scene_intro->game_objects[i]->IsSelected())
+		{
+			ModuleComponentsMesh* meshUsed = (ModuleComponentsMesh*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::MESH);
+
+			return meshUsed->meshPath;
+		}
+	}
+}
+
+std::string ModuleGameObject::GetTexturePath()
+{
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		if (App->scene_intro->game_objects[i]->IsSelected())
+		{
+			ModuleComponentMaterial* materialUsed = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::MATERIAL);
+
+			return materialUsed->materialUsed->path;
+		}
+	}
+}

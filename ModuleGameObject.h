@@ -35,6 +35,8 @@ public:
 	bool DeleteChild(ModuleGameObject* child);
 
 	std::string GetName();
+	std::string GetMeshPath();
+	std::string GetTexturePath();
 	void SetName(const char* newName);
 	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
