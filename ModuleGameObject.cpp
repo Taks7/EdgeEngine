@@ -49,8 +49,6 @@ void ModuleGameObject::Render()
 			App->renderer3D->DrawGameObjects(*owner->childs.at(j));
 		}
 	}
-	
-	
 
 }
 

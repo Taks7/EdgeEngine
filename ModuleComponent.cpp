@@ -21,7 +21,8 @@ ModuleComponents::~ModuleComponents()
 bool ModuleComponents::Update()
 {
 	bool ret = true;
-
+	
+	
 	return ret;
 }
 
@@ -50,4 +51,12 @@ bool ModuleComponents::IsActive() const
 void ModuleComponents::SetIsActive(const bool& set_to)
 {
 	is_active = set_to;
+
+	for (int j = 0; j < owner->childs.size(); j++)
+	{
+		for (int i = 0; i < owner->components.size(); i++)
+		{
+			owner->childs[j]->components[i]->SetIsActive(owner->components[i]->IsActive());
+		}
+	}
 }

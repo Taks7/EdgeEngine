@@ -2,6 +2,9 @@
 #include "ImGui/imgui.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleComponentMaterial.h"
+#include "ModuleComponentMesh.h"
+#include "ModuleComponentTransform.h"
 
 InspectorMenu::InspectorMenu()
 {
@@ -123,7 +126,16 @@ void InspectorMenu::DrawMeshComponent()
 {
 	if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
 	{
+		ModuleComponentsMesh* mesh = (ModuleComponentsMesh*)selectedGameObject->GetComponent(COMPONENT_TYPES::MESH);
 
+		if (mesh != nullptr)
+		{
+			bool active = mesh->IsActive();
+			if (ImGui::Checkbox("Mesh Active", &active))
+			{
+				mesh->SetIsActive(active);
+			}
+		}
 	}
 }
 
@@ -131,6 +143,15 @@ void InspectorMenu::DrawMaterialComponent()
 {
 	if (ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
 	{
+		ModuleComponentMaterial* material = (ModuleComponentMaterial*)selectedGameObject->GetComponent(COMPONENT_TYPES::MATERIAL);
 
+		if (material != nullptr)
+		{
+			bool active = material->IsActive();
+			if (ImGui::Checkbox("Material Active", &active))
+			{
+				material->SetIsActive(active);
+			}
+		}
 	}
 }
