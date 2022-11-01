@@ -85,7 +85,7 @@ bool ModuleCamera3D::Update(float dt)
 
 		float Sensitivity = 0.25f;
 
-		Position -= Reference;
+		/*Position -= Reference;*/
 
 		if(dx != 0)
 		{
@@ -110,7 +110,7 @@ bool ModuleCamera3D::Update(float dt)
 			}
 		}
 
-		Position = Reference + Z * length(Position);
+		/*Position = Reference + Z * length(Position);*/
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
