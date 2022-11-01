@@ -46,11 +46,20 @@ bool ModuleSceneIntro::Update(float dt)
 	
 	if (App->ui->testCube)
 	{
-		Cube c(0.5, 0.5, 0.5);
-		
+		Cube c(0.5, 0.5, 0.5);		
 		//SpherePrimitive s(1, 12, 24);
 
 		//CylinderPrimitive k(10, 10);
+	}
+
+	if (App->ui->testCylinder)
+	{
+		CylinderPrimitive k(20, 10);
+	}
+
+	if (App->ui->testSphere)
+	{
+		SpherePrimitive s(12, 12, 24);
 	}
 	
 	//TODO 3: Nothing to do here. But it's good to know where all primitives are being updated
