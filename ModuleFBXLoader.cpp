@@ -156,7 +156,7 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 			
 			ModuleComponentsMesh* NewMesh; 
 			ModuleComponentMaterial* MaterialUsed;
-			//Texture* textureUsed = new Texture();
+			Texture* textureUsed = new Texture();
 			if (i == 0)
 			{
 				NewMesh = (ModuleComponentsMesh*)owner->GetComponent(COMPONENT_TYPES::MESH);
@@ -223,6 +223,7 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 			}
 			NewMesh->mesh.texture_data.id = scene->mMeshes[i]->mMaterialIndex;
 
+
 			glGenBuffers(1, &(NewMesh->mesh.id_uvs));
 			glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_uvs);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NewMesh->mesh.num_uvs * 3, NewMesh->mesh.textCords, GL_STATIC_DRAW);
@@ -231,8 +232,9 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 
 			if (texturePath != nullptr)
 			{
-				App->materialImport->Import(texturePath, &NewMesh->mesh.texture_data);
-				MaterialUsed->textures.push_back(&NewMesh->mesh.texture_data);
+				App->materialImport->Import(texturePath,textureUsed);
+				MaterialUsed->materialUsed = textureUsed;
+				MaterialUsed->textures.push_back(textureUsed);
 			}
 
 			//meshes.push_back(NewMesh);
