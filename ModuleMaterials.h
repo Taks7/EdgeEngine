@@ -7,8 +7,8 @@
 #include "SDL/include/SDL.h"
 #include "ModuleWindow.h"
 #include "ModuleFBXLoader.h"
-#include "cimport.h"
-#include "material.h"
+#include "Assimp/include/assimp/cimport.h"
+#include "Assimp/include/assimp/material.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 #include <vector>
 #include <string>

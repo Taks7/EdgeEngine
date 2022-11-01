@@ -3,7 +3,7 @@
 #include "ModuleInput.h"
 #include "ModuleFBXLoader.h"
 #include "ImGui/imgui_impl_sdl.h"
-#include "MathGeoLib.h"
+#include "MathGeo/src/MathGeoLib.h"
 #include "Assimp/include/assimp/cimport.h"
 
 #define MAX_KEYS 300

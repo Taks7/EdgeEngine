@@ -3,8 +3,8 @@
 
 #include "Module.h"
 #include "ModuleGameObject.h"
-#include "Math/float4x4.h"
-#include "Math/float3.h"
+#include "MathGeo/src/Math/float4x4.h"
+#include "MathGeo/src/Math/float3.h"
 #include <string>
 
 class ModuleGameObject;

@@ -3,9 +3,9 @@
 
 #include "Module.h"
 #include "ModuleComponentMaterial.h"
-#include "material.h"
+#include "Assimp/include/assimp/material.h"
 #include "SDL/include/SDL.h"
-#include "float2.h"
+#include "MathGeo/src/Math/float2.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 #include "ModuleGameObject.h"
 #include <gl/GL.h>

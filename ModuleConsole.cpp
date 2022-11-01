@@ -22,7 +22,7 @@ void ModuleConsole::Draw()
 	ImGui::Begin("Console", NULL, ImGuiWindowFlags_MenuBar);
 	{
 		ImGui::SetNextWindowBgAlpha(1.0f);
-		ImGui::SetWindowPos({ 0,572 });
+		ImGui::SetWindowPos({ 0,App->window->GetHeight()-230});
 		ImGui::SetWindowSize({ App->window->GetWidht() ,230 });
 		ConsoleMenu();
 		ConsoleOutput();
