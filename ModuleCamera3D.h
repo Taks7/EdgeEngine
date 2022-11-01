@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
+#include "Frustum.h"
 
 class ModuleCamera3D : public Module
 {
@@ -24,12 +25,16 @@ private:
 	void Zoom();
 	void SetZoomSpeed(const float& zoom_speed);
 	float GetZoomSpeed() const;
+	vec3 ToVec3(float3 float3);
+	float3 ToFloat3(vec3 vec3);
 
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
 
 	float zoomSpeed;
+
+	Frustum frustum;
 
 private:
 
