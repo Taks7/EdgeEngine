@@ -211,33 +211,35 @@ void InspectorMenu::DrawMaterialComponent()
 
 		if (material->materialUsed != nullptr)
 		{
-			bool active = material->IsActive();
-			if (ImGui::Checkbox("Material Active", &active))
+			if (material->materialUsed != nullptr)
 			{
-				material->SetIsActive(active);
-			}
+				bool active = material->IsActive();
+				if (ImGui::Checkbox("Material Active", &active))
+				{
+					material->SetIsActive(active);
+				}
 
-			if (ImGui::Checkbox("Checker Texture", &App->renderer3D->checkerTextureApplied))
-			{
-				App->renderer3D->LoadCheckerTexture();
-			}
+				if (ImGui::Checkbox("Checker Texture", &App->renderer3D->checkerTextureApplied))
+				{
+					App->renderer3D->LoadCheckerTexture();
+				}
 
-			ImGui::Separator();
+				ImGui::Separator();
 
-		
-			ImGui::Text("File:");		
-			ImGui::SameLine(); 
-			ImGui::Text("WIP");
 
-			ImGui::Separator();
+				ImGui::Text("File:");
+				ImGui::SameLine();
+				ImGui::Text("WIP");
 
-			ImGui::Text("Texture Data:");
+				ImGui::Separator();
 
-			ImGui::Text("Width:");	ImGui::SameLine(); ImGui::Text(" %u", material->materialUsed->width);
-			ImGui::Text("Height:");	ImGui::SameLine(); ImGui::Text("%u", material->materialUsed->height);
+				ImGui::Text("Texture Data:");
 
-			ImGui::Separator();
-		}
-		
+				ImGui::Text("Width:");	ImGui::SameLine(); ImGui::Text(" %u", material->materialUsed->width);
+				ImGui::Text("Height:");	ImGui::SameLine(); ImGui::Text("%u", material->materialUsed->height);
+
+				ImGui::Separator();
+			}		
+		}		
 	}
 }
