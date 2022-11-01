@@ -125,7 +125,7 @@ bool ModuleInput::PreUpdate(float dt)
 				{
 					App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), path.c_str(), nullptr);
 				}
-				if (App->fs->GetFileExtension(dropped_filedir) == "png" || App->fs->GetFileExtension(dropped_filedir) == "PNG")
+				if (App->fs->GetFileExtension(dropped_filedir) == "png" || App->fs->GetFileExtension(dropped_filedir) == "PNG" || App->fs->GetFileExtension(dropped_filedir) == "dds" || App->fs->GetFileExtension(dropped_filedir) == "DDS")
 				{
 					//Add here function to change texture for the object
 					for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
