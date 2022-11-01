@@ -70,7 +70,9 @@ Models and textures can be dropped from a directory directly into the engine. Th
 
 - **R**: Move Upward
 
-- **F**: Move Downward
+- **C**: Move Downward
+
+- **F**: Focuses the Camera Around the Geometry
 
 - **Mouse Right Click**: Changes the Rotation of the Camera
 
