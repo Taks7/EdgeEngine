@@ -11,6 +11,10 @@ public:
 
 	ModuleGameObject* GetSelectedGameObject();
 	void DrawInfoOfGameObject(ModuleGameObject* game_object);
+	void DrawGameObjectComponents();
+	void DrawTransformComponent();
+	void DrawMeshComponent();
+	void DrawMaterialComponent();
 	void Draw() override;
 
 	ModuleGameObject* selectedGameObject;

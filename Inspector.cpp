@@ -27,6 +27,7 @@ void InspectorMenu::Draw()
 		if (selectedGameObject != nullptr)
 		{
 			DrawInfoOfGameObject(selectedGameObject);
+			DrawGameObjectComponents();
 		}
 	}
 	ImGui::End();
@@ -56,5 +57,80 @@ void InspectorMenu::DrawInfoOfGameObject(ModuleGameObject* game_object)
 	}
 	ImGui::SameLine();
 
-	ImGui::Text(game_object->GetName().c_str());
+	ImGui::SetNextItemWidth(ImGui::GetWindowWidth() * 0.33f);
+	static char buffer[64];
+	strcpy(buffer, game_object->GetName().c_str());
+	if (ImGui::InputText("Name", buffer, IM_ARRAYSIZE(buffer), ImGuiInputTextFlags_EnterReturnsTrue))
+	{
+		game_object->SetName(buffer);
+	}
+
+	bool gameObjectStatic = true;
+	if (ImGui::Checkbox("Is Static", &gameObjectStatic))
+	{
+		game_object->SetStatic(gameObjectStatic);
+	}
+	
+	ImGui::Separator();
+
+}
+
+void InspectorMenu::DrawGameObjectComponents()
+{
+	for (uint i = 0; i < selectedGameObject->components.size(); i++)
+	{
+		ModuleComponents* components = selectedGameObject->components[i];
+
+		if (components != nullptr)
+		{
+			switch (components->type)
+			{
+				case COMPONENT_TYPES::MESH:
+				{
+					DrawMeshComponent();
+					break;
+				}
+				case COMPONENT_TYPES::MATERIAL:
+				{
+					DrawMaterialComponent();
+					break;
+				}
+				case COMPONENT_TYPES::TRANSFORM:
+				{
+					DrawTransformComponent();
+					break;
+				}
+
+			}
+
+			if (components->type == COMPONENT_TYPES::NONE || components->type == COMPONENT_TYPES::UNKNOWN)
+			{
+				LOG_COMMENT("[WARNING] Components invalid");
+			}
+		}
+	}
+}
+
+void InspectorMenu::DrawTransformComponent()
+{
+	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
+	{
+		
+	}
+}
+
+void InspectorMenu::DrawMeshComponent()
+{
+	if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
+	{
+
+	}
+}
+
+void InspectorMenu::DrawMaterialComponent()
+{
+	if (ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
+	{
+
+	}
 }

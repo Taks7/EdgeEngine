@@ -138,6 +138,11 @@ std::string ModuleGameObject::GetName()
 	return name;
 }
 
+void ModuleGameObject::SetName(const char* newName)
+{
+	name = newName;
+}
+
 bool ModuleGameObject::IsSelected()
 {
 	return selectedForInspector;

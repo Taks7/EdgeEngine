@@ -35,6 +35,7 @@ public:
 	bool DeleteChild(ModuleGameObject* child);
 
 	std::string GetName();
+	void SetName(const char* newName);
 	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 
