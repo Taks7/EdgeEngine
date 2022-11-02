@@ -13,6 +13,8 @@ public:
 
 	void GameObjectList();
 
+	void ChildrenList(ModuleGameObject* gameObject);
+
 	void PopUpOptions(ModuleGameObject* gameObject);
 
 	

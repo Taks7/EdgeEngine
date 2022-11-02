@@ -32,7 +32,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	void DrawGameObjects(ModuleGameObject gameObject);
+	void DrawGameObjects(ModuleGameObject gameObject,float3 position);
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;

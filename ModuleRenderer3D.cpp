@@ -222,7 +222,7 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
+void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float3 position)
 {
 	if (GameObject.IsActive())
 	{
@@ -233,7 +233,7 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
 			if (NewMesh != nullptr)
 			{
 
-
+				
 				glEnableClientState(GL_VERTEX_ARRAY);
 
 				// Render things in Element mode
@@ -266,7 +266,7 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
 				glBindTexture(GL_TEXTURE_2D, 0);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+				glRasterPos3f(position.x, position.y, position.z);
 				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 				glDisableClientState(GL_VERTEX_ARRAY);
 
