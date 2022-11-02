@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleUI.h"
 #include "ModuleInput.h"
 #include "ModuleFBXLoader.h"
 #include "ImGui/imgui_impl_sdl.h"
@@ -172,8 +173,10 @@ bool ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
-		return false;
+	if (keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
+	{
+		App->ui->exitPopUp = true;
+	}
 	
 	return true;
 }

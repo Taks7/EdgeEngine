@@ -144,7 +144,7 @@ void ModuleUI::MainMenu()
 			}
 			if (ImGui::MenuItem("Exit engine"))
 			{
-				exit(0);
+				exitPopUp = true;
 			}
 
 			ImGui::EndMenu();
@@ -345,6 +345,26 @@ void ModuleUI::MainMenu()
 	{
 		ImGui::Begin("ImGui Settings", &showGUIPreferences);
 		ImGui::ShowStyleEditor();
+		ImGui::End();
+	}
+
+	if (exitPopUp)
+	{
+		const ImVec4 color(1.0f, 0.0f, 1.0f, 1.0f);
+		ImGui::Begin("Exit PopUp", &exitTrue);
+		ImGui::Text("You are about to exit EdgeEngine, are you sure?");
+		ImGui::NewLine();
+		if (ImGui::Button("Exit Engine", { 200.0f, 40.0f }))
+		{
+			exit(0);
+		}
+
+		ImGui::SameLine();
+		if (ImGui::Button("Remain in the Engine", { 200.0f, 40.0f }))
+		{
+			exitPopUp = false;
+		}
+		
 		ImGui::End();
 	}
 

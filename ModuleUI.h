@@ -48,6 +48,8 @@ public:
 	
 	bool enableAboutMenu;
 	bool showGUIPreferences = false;
+	bool exitPopUp = false;
+	bool exitTrue = false;
 
 	AboutMenu* aboutMenu;
 	Hierarchy* hierarchy;
