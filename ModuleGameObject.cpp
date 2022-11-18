@@ -10,9 +10,9 @@
 ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic)
 {
 	name = "GameObject";
-	CreateComponent(COMPONENT_TYPES::MESH);
-	CreateComponent(COMPONENT_TYPES::MATERIAL);
-	CreateComponent(COMPONENT_TYPES::TRANSFORM);
+	//CreateComponent(COMPONENT_TYPES::MESH);
+	//CreateComponent(COMPONENT_TYPES::MATERIAL);
+	
 }
 
 // Destructor
@@ -43,11 +43,12 @@ void ModuleGameObject::Render()
 	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 	{
 		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
-		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i),transform->position);
+		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i),transform->matrix);
 		ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
 		for (int j = 0; j < owner->childs.size(); j++)
 		{
-			App->renderer3D->DrawGameObjects(*owner->childs.at(j), transform->position);
+			ModuleComponentsTransform* transformChild = (ModuleComponentsTransform*)App->scene_intro->game_objects[i]->childs[j]->GetComponent(COMPONENT_TYPES::TRANSFORM);
+			App->renderer3D->DrawGameObjects(*owner->childs.at(j), transformChild->matrix);
 		}
 	}
 

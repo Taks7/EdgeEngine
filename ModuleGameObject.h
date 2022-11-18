@@ -3,6 +3,8 @@
 
 #include "Module.h"
 #include "ModuleComponent.h"
+#include "MathGeo/src/Geometry/AABB.h"
+#include "MathGeo/src/Geometry/OBB.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -47,6 +49,15 @@ public:
 	std::vector<ModuleGameObject*>	childs;
 	
 	ModuleGameObject* parent;
+
+
+	//FOR BOUNDING BOXES
+
+	OBB	obb;
+	AABB aabb;
+
+	float3* obb_vertices;
+	float3* aabb_vertices;
 private:
 
 	uint id;
@@ -54,6 +65,7 @@ private:
 	bool is_active;
 	bool is_static;
 	bool selectedForInspector = false;
+	bool bouindingBoxes = false;
 };
 
 #endif // __ModuleGameObject_H__

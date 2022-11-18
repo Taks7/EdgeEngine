@@ -25,16 +25,18 @@ public:
 	float3 GetScale() const;
 
 	void SetPosition(const float3& position);
-	void SetRotation(const float3& rotation);
+	void SetRotation(const float3& rotation_);
 	void SetScale(const float3& scale);
+
+	void UpdateMatrix();
 
 public:
 
 	float4x4	matrix;
 
 	float3		position = {0,0,0};
-	float4x4	rotation;
-	float3		scale = {0,0,0};
+	Quat	rotation;
+	float3		scale = {1,1,1};
 
 	float3		euler_rotation = {0,0,0};
 

@@ -7,7 +7,7 @@
 
 ModuleComponentsTransform::ModuleComponentsTransform(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::TRANSFORM, "Transform")
 {
-
+	matrix = float4x4::identity;
 }
 
 ModuleComponentsTransform::~ModuleComponentsTransform()
@@ -29,9 +29,9 @@ bool ModuleComponentsTransform::CleanUp()
 	return ret;
 }
 
-void ModuleComponentsTransform::Transform()
+void ModuleComponentsTransform::UpdateMatrix()
 {
-	//Aqui poner todo lo que tenga que ver con rotación y posicion y todo
+	matrix = float4x4::FromTRS(position, rotation, scale);
 }
 float3 ModuleComponentsTransform::GetPosition() const
 {
@@ -51,21 +51,23 @@ float3 ModuleComponentsTransform::GetScale() const
 void ModuleComponentsTransform::SetPosition(const float3& position)
 {
 	this->position = position;
+	UpdateMatrix();
 
 }
 
-void ModuleComponentsTransform::SetRotation(const float3& rotation)
+void ModuleComponentsTransform::SetRotation(const float3& rotation_)
 {
-	euler_rotation = rotation;
+	euler_rotation = rotation_;
 
-	this->rotation.RotateX(euler_rotation.x);
-	this->rotation.RotateY(euler_rotation.y);
-	this->rotation.RotateZ(euler_rotation.z);
+	rotation = Quat::FromEulerXYZ(rotation_.x, rotation_.y, rotation_.z);
+
+	UpdateMatrix();
 
 }
 
 void ModuleComponentsTransform::SetScale(const float3& scale)
 {
 	this->scale = scale;
+	UpdateMatrix();
 
 }

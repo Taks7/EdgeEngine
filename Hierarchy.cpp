@@ -54,7 +54,7 @@ void Hierarchy::GameObjectList()
 				
 				if(ImGui::TreeNodeEx(App->scene_intro->game_objects[i]->GetName().c_str(),flags))
 				{
-					ChildrenList((App->scene_intro->game_objects[i]));
+					//ChildrenList((App->scene_intro->game_objects[i]));
 
 					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
 					{
