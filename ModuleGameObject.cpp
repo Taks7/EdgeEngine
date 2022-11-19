@@ -42,13 +42,11 @@ void ModuleGameObject::Render()
 {
 	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 	{
-		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
-		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i),transform->matrix);
+		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i));
 		ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
 		for (int j = 0; j < owner->childs.size(); j++)
 		{
-			ModuleComponentsTransform* transformChild = (ModuleComponentsTransform*)App->scene_intro->game_objects[i]->childs[j]->GetComponent(COMPONENT_TYPES::TRANSFORM);
-			App->renderer3D->DrawGameObjects(*owner->childs.at(j), transformChild->matrix);
+			App->renderer3D->DrawGameObjects(*owner->childs.at(j));
 		}
 	}
 

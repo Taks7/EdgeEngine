@@ -4,6 +4,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleMaterials.h"
 #include "ModuleComponentMesh.h"
+#include "ModuleComponentTransform.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -222,18 +223,19 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 transform)
+void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
 {
 	if (GameObject.IsActive())
 	{
 		ModuleComponentsMesh* NewMesh = (ModuleComponentsMesh*)GameObject.GetComponent(COMPONENT_TYPES::MESH);
 		ModuleComponentMaterial* NewMaterial = (ModuleComponentMaterial*)GameObject.GetComponent(COMPONENT_TYPES::MATERIAL);
+		ModuleComponentsTransform* NewTransform = (ModuleComponentsTransform*)GameObject.GetComponent(COMPONENT_TYPES::TRANSFORM);
 		if (NewMesh->IsActive())
 		{
 			if (NewMesh != nullptr)
 			{
 				glPushMatrix();
-				glMultMatrixf((GLfloat*)&transform.Transposed());
+				glMultMatrixf((GLfloat*)&NewTransform->matrix.Transposed());
 				
 				glEnableClientState(GL_VERTEX_ARRAY);
 

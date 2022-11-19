@@ -48,9 +48,9 @@ float3 ModuleComponentsTransform::GetScale() const
 	return scale;
 }
 
-void ModuleComponentsTransform::SetPosition(const float3& position)
+void ModuleComponentsTransform::SetPosition(const float3& position_)
 {
-	this->position = position;
+	position = position_;
 	UpdateMatrix();
 
 }

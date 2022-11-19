@@ -51,7 +51,7 @@ public:
 	ModuleGameObject* parent;
 
 
-	//FOR BOUNDING BOXES
+	//FOR BOUNDING BOXES will be used later
 
 	OBB	obb;
 	AABB aabb;
