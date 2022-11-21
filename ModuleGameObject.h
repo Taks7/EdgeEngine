@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "ModuleComponent.h"
+#include "ModuleComponentTransform.h"
 #include "MathGeo/src/Geometry/AABB.h"
 #include "MathGeo/src/Geometry/OBB.h"
 #include <vector>
@@ -10,9 +11,10 @@
 #include <string>
 
 typedef unsigned int uint;
-class ModuleComponents;
+
 enum class COMPONENT_TYPES;
 
+class ModuleComponents;
 class ModuleGameObject
 {
 public:
@@ -42,6 +44,8 @@ public:
 	void SetName(const char* newName);
 	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
+
+	ModuleComponentsTransform* GetTransform();
 
 public:
 

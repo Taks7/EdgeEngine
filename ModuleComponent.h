@@ -29,6 +29,8 @@ public:
 	const char*     GetName() const;
 	void			SetName(const char* new_name);
 
+	ModuleGameObject* GetOwner() const;
+
 	bool			IsActive() const;
 	void			SetIsActive(const bool& is_active);
 

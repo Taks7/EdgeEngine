@@ -10,9 +10,6 @@
 ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic)
 {
 	name = "GameObject";
-	//CreateComponent(COMPONENT_TYPES::MESH);
-	//CreateComponent(COMPONENT_TYPES::MATERIAL);
-	
 }
 
 // Destructor
@@ -42,11 +39,11 @@ void ModuleGameObject::Render()
 {
 	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 	{
-		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i));
-		ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
-		for (int j = 0; j < owner->childs.size(); j++)
+		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i), App->scene_intro->game_objects.at(i)->GetTransform()->GetGlobalMatrix());
+		//ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
+		for (int j = 0; j < App->scene_intro->game_objects.at(i)->childs.size(); j++)
 		{
-			App->renderer3D->DrawGameObjects(*owner->childs.at(j));
+			App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i)->childs.at(j), App->scene_intro->game_objects.at(i)->childs.at(j)->GetTransform()->GetGlobalMatrix());
 		}
 	}
 
@@ -213,4 +210,9 @@ std::string ModuleGameObject::GetTexturePath()
 			return materialUsed->materialUsed->path;
 		}
 	}
+}
+
+ModuleComponentsTransform* ModuleGameObject::GetTransform()
+{
+	return (ModuleComponentsTransform*)GetComponent(COMPONENT_TYPES::TRANSFORM);
 }

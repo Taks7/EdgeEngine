@@ -61,3 +61,8 @@ void ModuleComponents::SetIsActive(const bool& set_to)
 	}
 }
 
+ModuleGameObject* ModuleComponents::GetOwner() const
+{
+	return owner;
+}
+

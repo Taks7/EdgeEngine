@@ -1,13 +1,15 @@
 
 #include "Application.h"
 #include "Module.h"
+#include "ModuleComponent.h"
 #include "ModuleComponentTransform.h"
-
 #include "ModuleGameObject.h"
 
-ModuleComponentsTransform::ModuleComponentsTransform(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::TRANSFORM, "Transform")
+ModuleComponentsTransform::ModuleComponentsTransform(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::TRANSFORM, "Transform"),
+matrix (float4x4::identity),
+GlobalMatrix (float4x4::identity)
 {
-	matrix = float4x4::identity;
+	matrix.Decompose(position, rotation, scale);
 }
 
 ModuleComponentsTransform::~ModuleComponentsTransform()
@@ -28,10 +30,35 @@ bool ModuleComponentsTransform::CleanUp()
 
 	return ret;
 }
+void ModuleComponentsTransform::UpdateGlobalMatrix()
+{
+	ModuleGameObject* NewOwner = GetOwner();
 
+	if (NewOwner->parent != nullptr)
+	{
+		
+		GlobalMatrix = NewOwner->parent->GetTransform()->GlobalMatrix * matrix;
+	}
+	else
+	{
+		GlobalMatrix = matrix;
+	}
+
+	for (uint i = 0; i < NewOwner->childs.size(); ++i)
+	{
+		NewOwner->childs[i]->GetTransform()->UpdateGlobalMatrix();
+	}
+
+}
 void ModuleComponentsTransform::UpdateMatrix()
 {
 	matrix = float4x4::FromTRS(position, rotation, scale);
+	UpdateGlobalMatrix();
+}
+
+float4x4 ModuleComponentsTransform::GetGlobalMatrix()
+{
+	return GlobalMatrix;
 }
 float3 ModuleComponentsTransform::GetPosition() const
 {
@@ -65,9 +92,9 @@ void ModuleComponentsTransform::SetRotation(const float3& rotation_)
 
 }
 
-void ModuleComponentsTransform::SetScale(const float3& scale)
+void ModuleComponentsTransform::SetScale(const float3& scale_)
 {
-	this->scale = scale;
+	scale = scale_;
 	UpdateMatrix();
 
 }

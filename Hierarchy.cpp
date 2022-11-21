@@ -51,27 +51,33 @@ void Hierarchy::GameObjectList()
 			
 			if (!App->scene_intro->game_objects[i]->childs.empty())
 			{
-				
-				if(ImGui::TreeNodeEx(App->scene_intro->game_objects[i]->GetName().c_str(),flags))
+				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
 				{
-					//ChildrenList((App->scene_intro->game_objects[i]));
-
 					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
 					{
 						App->scene_intro->game_objects[i]->SelectItem();
-
 					}
-
-					if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
-					{
-						PopUpOptions(App->scene_intro->game_objects[i]);
-					}
-					//Por ahora dejamos esto comentado que no workea del todo bien //
-					
-					
-				
-					ImGui::TreePop();
 				}
+				//if(ImGui::TreeNodeEx(App->scene_intro->game_objects[i]->GetName().c_str(),flags))
+				//{
+				//	//ChildrenList((App->scene_intro->game_objects[i]));
+
+				//	if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
+				//	{
+				//		App->scene_intro->game_objects[i]->SelectItem();
+
+				//	}
+
+				//	if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
+				//	{
+				//		PopUpOptions(App->scene_intro->game_objects[i]);
+				//	}
+				//	//Por ahora dejamos esto comentado que no workea del todo bien //
+				//	
+				//	
+				//
+				//	ImGui::TreePop();
+				//}
 			
 			}
 

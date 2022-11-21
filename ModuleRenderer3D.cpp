@@ -223,22 +223,20 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject)
+void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 transform)
 {
 	if (GameObject.IsActive())
 	{
 		ModuleComponentsMesh* NewMesh = (ModuleComponentsMesh*)GameObject.GetComponent(COMPONENT_TYPES::MESH);
 		ModuleComponentMaterial* NewMaterial = (ModuleComponentMaterial*)GameObject.GetComponent(COMPONENT_TYPES::MATERIAL);
-		ModuleComponentsTransform* NewTransform = (ModuleComponentsTransform*)GameObject.GetComponent(COMPONENT_TYPES::TRANSFORM);
 		if (NewMesh->IsActive())
 		{
 			if (NewMesh != nullptr)
 			{
 				glPushMatrix();
-				glMultMatrixf((GLfloat*)&NewTransform->matrix.Transposed());
+				glMultMatrixf((GLfloat*)&transform.Transposed());
 				
 				glEnableClientState(GL_VERTEX_ARRAY);
-
 				// Render things in Element mode
 				glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_vertex);
 				glVertexPointer(3, GL_FLOAT, 0, NULL);

@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "ModuleGameObject.h"
+#include "MathGeo/src/Math/Quat.h"
 #include "MathGeo/src/Math/float4x4.h"
 #include "MathGeo/src/Math/float3.h"
 #include <string>
@@ -26,13 +27,17 @@ public:
 
 	void SetPosition(const float3& position_);
 	void SetRotation(const float3& rotation_);
-	void SetScale(const float3& scale);
+	void SetScale(const float3& scale_);
 
-	void UpdateMatrix();
+	
 
-public:
+	float4x4 GetGlobalMatrix();
+
+private:
 
 	float4x4	matrix;
+
+	float4x4	GlobalMatrix;
 
 	float3		position = {0,0,0};
 	Quat	rotation;
@@ -45,6 +50,10 @@ public:
 private:
 	const char* name;
 	bool		is_active;
+
+private: 
+	void UpdateMatrix();
+	void UpdateGlobalMatrix();
 };
 
 #endif // !__ComponentMesh_H__
