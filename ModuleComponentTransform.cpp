@@ -3,13 +3,13 @@
 #include "Module.h"
 #include "ModuleComponent.h"
 #include "ModuleComponentTransform.h"
+
 #include "ModuleGameObject.h"
 
-ModuleComponentsTransform::ModuleComponentsTransform(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::TRANSFORM, "Transform"),
-matrix (float4x4::identity),
-GlobalMatrix (float4x4::identity)
+ModuleComponentsTransform::ModuleComponentsTransform(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::TRANSFORM, "Transform")
 {
-	matrix.Decompose(position, rotation, scale);
+	matrix = float4x4::identity;
+	GlobalMatrix = matrix;
 }
 
 ModuleComponentsTransform::~ModuleComponentsTransform()
@@ -32,21 +32,24 @@ bool ModuleComponentsTransform::CleanUp()
 }
 void ModuleComponentsTransform::UpdateGlobalMatrix()
 {
-	ModuleGameObject* NewOwner = GetOwner();
-
-	if (NewOwner->parent != nullptr)
+	///**/ModuleGameObject* NewOwner = GetOwner();
+	
+	if (owner->parent != nullptr)
 	{
-		
-		GlobalMatrix = NewOwner->parent->GetTransform()->GlobalMatrix * matrix;
+		ModuleComponentsTransform* newTransform = (ModuleComponentsTransform*)owner->parent->GetComponent(COMPONENT_TYPES::TRANSFORM);
+		/*ModuleComponentsTransform* newTransform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::TRANSFORM);*/
+		GlobalMatrix = newTransform->GlobalMatrix * matrix;
 	}
 	else
 	{
 		GlobalMatrix = matrix;
+
 	}
 
-	for (uint i = 0; i < NewOwner->childs.size(); ++i)
+	for (int i = 0; i < owner->childs.size(); i++)
 	{
-		NewOwner->childs[i]->GetTransform()->UpdateGlobalMatrix();
+		ModuleComponentsTransform* newTransform_child = (ModuleComponentsTransform*)owner->childs[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
+		newTransform_child->GlobalMatrix = matrix;
 	}
 
 }

@@ -270,6 +270,8 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 				glDisableClientState(GL_VERTEX_ARRAY);
 
+
+				glPopMatrix();
 			}
 
 		}

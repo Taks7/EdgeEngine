@@ -3,7 +3,7 @@
 
 #include "Module.h"
 #include "ModuleComponent.h"
-#include "ModuleComponentTransform.h"
+//#include "ModuleComponentTransform.h"
 #include "MathGeo/src/Geometry/AABB.h"
 #include "MathGeo/src/Geometry/OBB.h"
 #include <vector>
@@ -45,7 +45,7 @@ public:
 	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 
-	ModuleComponentsTransform* GetTransform();
+	//ModuleComponentsTransform* GetTransform();
 
 public:
 

@@ -7,7 +7,8 @@
 #include "ModuleComponentTransform.h"
 #include "ModuleComponentMesh.h"
 
-ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic)
+ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic) 
+,parent(nullptr)
 {
 	name = "GameObject";
 }
@@ -39,11 +40,13 @@ void ModuleGameObject::Render()
 {
 	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 	{
-		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i), App->scene_intro->game_objects.at(i)->GetTransform()->GetGlobalMatrix());
-		//ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
-		for (int j = 0; j < App->scene_intro->game_objects.at(i)->childs.size(); j++)
+		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)App->scene_intro->game_objects.at(i)->GetComponent(COMPONENT_TYPES::TRANSFORM);
+		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i), transform->GetGlobalMatrix());
+		ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
+		for (int j = 0; j < owner->childs.size(); j++)
 		{
-			App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i)->childs.at(j), App->scene_intro->game_objects.at(i)->childs.at(j)->GetTransform()->GetGlobalMatrix());
+			ModuleComponentsTransform* transform_childs = (ModuleComponentsTransform*)owner->childs.at(j)->GetComponent(COMPONENT_TYPES::TRANSFORM);
+			App->renderer3D->DrawGameObjects(*owner->childs.at(j),transform_childs->GetGlobalMatrix());
 		}
 	}
 
@@ -212,7 +215,7 @@ std::string ModuleGameObject::GetTexturePath()
 	}
 }
 
-ModuleComponentsTransform* ModuleGameObject::GetTransform()
-{
-	return (ModuleComponentsTransform*)GetComponent(COMPONENT_TYPES::TRANSFORM);
-}
+//ModuleComponentsTransform* ModuleGameObject::GetTransform()
+//{
+//	return (ModuleComponentsTransform*)GetComponent(COMPONENT_TYPES::TRANSFORM);
+//}

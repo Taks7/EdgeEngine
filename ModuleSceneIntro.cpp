@@ -117,12 +117,12 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 
 	if (parent != nullptr)
 	{
-		ModuleGameObject* gameObject = new ModuleGameObject(parent->childs.size(), name, true, false);
-		gameObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
-		gameObject->CreateComponent(COMPONENT_TYPES::MESH);
-		gameObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
-		parent->childs.push_back(gameObject);
-		return gameObject;
+		ModuleGameObject* gameObject_child = new ModuleGameObject(parent->childs.size(), name, true, false);
+		gameObject_child->CreateComponent(COMPONENT_TYPES::MATERIAL);
+		gameObject_child->CreateComponent(COMPONENT_TYPES::MESH);
+		gameObject_child->CreateComponent(COMPONENT_TYPES::TRANSFORM);
+		parent->childs.push_back(gameObject_child);
+		return gameObject_child;
 
 	}
 	
