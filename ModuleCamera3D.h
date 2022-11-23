@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
+#include "MathGeo/src/Geometry/LineSegment.h";
 #include "MathGeo/src/Geometry/Frustum.h"
 
 class ModuleCamera3D : public Module
@@ -18,7 +19,7 @@ public:
 	void LookAt(const vec3 &Spot);
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
-
+	void CastRay();
 private:
 
 	void CalculateViewMatrix();
@@ -35,6 +36,8 @@ public:
 	float zoomSpeed;
 
 	Frustum frustum;
+
+	LineSegment	last_raycast;
 
 private:
 

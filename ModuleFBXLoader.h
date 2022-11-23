@@ -46,6 +46,11 @@ struct VertexData
 
 	Texture texture_data;
 
+	AABB aabb;
+
+	AABB GetAABB();
+	void SetAABB();
+
 };
 class ModuleFBXLoader : public Module
 {

@@ -32,6 +32,7 @@ public:
 	
 
 	float4x4 GetGlobalMatrix();
+	float3 GetGlobalPosition();
 
 private:
 

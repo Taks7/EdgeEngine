@@ -44,6 +44,8 @@ bool ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 	
+	
+
 	if (App->ui->testCube)
 	{
 		Cube c(0.5, 0.5, 0.5);		
@@ -127,4 +129,74 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 	}
 	
 }
+void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, ModuleGameObject*>& hits)
+{
+	for (uint i = 0; i < game_objects.size(); ++i)
+	{
+		ModuleComponentsMesh* gameObjMesh = (ModuleComponentsMesh*)game_objects[i]->GetComponent(COMPONENT_TYPES::MESH);
+		if (ray.Intersects(gameObjMesh->mesh.aabb))
+		{
+			ModuleComponentsTransform* gameObjTransform = (ModuleComponentsTransform*)game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
+			float3 position = gameObjTransform->GetGlobalPosition();
+			hits.emplace(ray.Distance(position), game_objects[i]);
+		}
+	}
+}
+/*
 //TODO 9: And change the color of the colliding bodies, so we can visualize it working!
+void ModuleSceneIntro::SelectThroughRaycast(const LineSegment& ray)
+{
+	std::map<float, ModuleGameObject*> hits;
+	getRaycastHits(ray, hits);
+
+	if (hits.size() == 0)
+	{
+		hits.clear();
+		return;
+	}
+
+	std::map<float, ModuleGameObject*>::iterator item;
+	for (item = hits.begin(); item != hits.end(); ++item)
+	{
+		item->second->GetAllMeshComponents(c_meshes);
+
+		std::vector<Triangle> faces;
+		for (uint m = 0; m < c_meshes.size(); ++m)
+		{
+			R_Mesh* r_mesh = c_meshes[m]->GetMesh();
+
+			if (r_mesh == nullptr)
+			{
+				continue;
+			}
+
+			LineSegment local_ray = ray;
+			local_ray.Transform(item->second->GetTransformComponent()->GetWorldTransform().Inverted());
+
+			GetFaces(r_mesh->vertices, faces);
+			for (uint f = 0; f < faces.size(); ++f)
+			{
+				if (local_ray.Intersects(faces[f], nullptr, nullptr))
+				{
+					SetSelectedGameObject(item->second);
+
+					faces.clear();
+					c_meshes.clear();
+					hits.clear();
+
+					return;
+				}
+			}
+
+			faces.clear();
+		}
+
+		c_meshes.clear();
+	}
+
+	// If no GameObject was hit
+	SetSelectedGameObject(nullptr);
+
+	hits.clear();
+}
+*/

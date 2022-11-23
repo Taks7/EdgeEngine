@@ -1,8 +1,11 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "MathGeo/src/Geometry/LineSegment.h";
 #include <vector>
 #include "ModuleGameObject.h"
+#include "ModuleComponentMesh.h"
+#include "ModuleComponentTransform.h"
 class Primitive;
 class  PhysBody3D;
 
@@ -19,6 +22,9 @@ public:
 
 	//TODO 9: Create an "OnCollision" method specific for this module
 	ModuleGameObject* CreateEmptyGameObject(const char* name = nullptr, ModuleGameObject* parent = nullptr);
+	//RAYCASTING GAMEOBJECTS
+	void getRaycastHits(const LineSegment& ray, std::map<float, ModuleGameObject*>& hits);
+	void SelectThroughRaycast(const LineSegment& ray);
 public:
 	std::vector<ModuleGameObject*> game_objects;
 	ModuleGameObject* rootObject;

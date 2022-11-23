@@ -50,6 +50,11 @@ bool ModuleCamera3D::Update(float dt)
 
 	vec3 newPos(0,0,0);
 	float speed = 3.0f * dt;
+
+	
+		
+	
+
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * dt;
 
@@ -158,7 +163,23 @@ bool ModuleCamera3D::Update(float dt)
 
 	return true;
 }
+void ModuleCamera3D::CastRay()
+{
+	float2 mouse_pos = { (float)App->input->GetMouseX(),(float)App->input->GetMouseY() };
 
+	float norm_mouse_X = mouse_pos.x / (float)App->window->GetWidht();
+	float norm_mouse_Y = mouse_pos.y / (float)App->window->GetHeight();
+
+	float ray_origin_X = (norm_mouse_X - 0.5f) * 2;
+	float ray_origin_Y = (norm_mouse_Y - 0.5f) * 2;
+
+	last_raycast = frustum.UnProjectLineSegment(ray_origin_X, ray_origin_Y);
+
+	std::map<float, ModuleGameObject*> hits;
+	App->scene_intro->getRaycastHits(last_raycast, hits);
+
+	//App->scene->SelectGameObjectThroughRaycast(last_raycast);
+}
 // -----------------------------------------------------------------
 void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
 {
@@ -236,3 +257,4 @@ float3 ModuleCamera3D::ToFloat3(vec3 vec) {
 vec3 ModuleCamera3D::ToVec3(float3 vec) {
 	return vec3(vec.x, vec.y, vec.z);
 }
+

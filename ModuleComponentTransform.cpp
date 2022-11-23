@@ -101,3 +101,8 @@ void ModuleComponentsTransform::SetScale(const float3& scale_)
 	UpdateMatrix();
 
 }
+
+float3 ModuleComponentsTransform::GetGlobalPosition()
+{
+	return GlobalMatrix.TranslatePart();
+}

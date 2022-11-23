@@ -90,12 +90,17 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 
 			memcpy(NewMesh->mesh.vertex, scene->mMeshes[i]->mVertices, sizeof(float3) * NewMesh->mesh.num_vertex);
 
+			//CREATING AABB FOR EACH MESH
+			NewMesh->mesh.aabb.SetNegativeInfinity();
+			NewMesh->mesh.aabb.Enclose((float3*)&NewMesh->mesh.vertex[0], NewMesh->mesh.num_vertex);
+
 			glGenBuffers(1, &NewMesh->mesh.id_vertex);
 			glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_vertex);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NewMesh->mesh.num_vertex * 3, NewMesh->mesh.vertex, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			LOG_COMMENT("New mesh with %d vertices", NewMesh->mesh.num_vertex);
+			
 
 			// copy faces
 			if (scene->mMeshes[i]->HasFaces())
