@@ -151,17 +151,7 @@ bool ModuleGameObject::IsSelected()
 	return selectedForInspector;
 }
 
-void ModuleGameObject::SelectItem()
-{
-	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
-	{
-		if (App->scene_intro->game_objects.at(i)->IsActive() && this != App->scene_intro->game_objects.at(i))
-		{
-			App->scene_intro->game_objects.at(i)->selectedForInspector = false;
-		}
-	}
-	selectedForInspector = !selectedForInspector;
-}
+
 
 bool ModuleGameObject::AddChild(ModuleGameObject* child)
 {

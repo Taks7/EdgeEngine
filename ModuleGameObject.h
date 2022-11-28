@@ -33,7 +33,7 @@ public:
 	void SetStatic(bool state);
 	bool IsSelected();
 
-	void SelectItem();
+	
 
 	bool AddChild(ModuleGameObject* child);
 	bool DeleteChild(ModuleGameObject* child);
@@ -62,14 +62,15 @@ public:
 
 	float3* obb_vertices;
 	float3* aabb_vertices;
-private:
 
-	uint id;
 	std::string name;
 	bool is_active;
 	bool is_static;
 	bool selectedForInspector = false;
 	bool bouindingBoxes = false;
+private:
+	uint id;
+	
 };
 
 #endif // __ModuleGameObject_H__

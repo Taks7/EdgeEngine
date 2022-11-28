@@ -52,7 +52,10 @@ bool ModuleCamera3D::Update(float dt)
 	float speed = 3.0f * dt;
 
 	
-		
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
+	{
+		CastRay();
+	}
 	
 
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
@@ -178,7 +181,7 @@ void ModuleCamera3D::CastRay()
 	std::map<float, ModuleGameObject*> hits;
 	App->scene_intro->getRaycastHits(last_raycast, hits);
 
-	//App->scene->SelectGameObjectThroughRaycast(last_raycast);
+	App->scene_intro->SelectThroughRaycast(last_raycast);
 }
 // -----------------------------------------------------------------
 void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)

@@ -44,7 +44,7 @@ void Hierarchy::GameObjectList()
 				{
 					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
 					{
-						App->scene_intro->game_objects[i]->SelectItem();
+						App->scene_intro->SelectItem(App->scene_intro->game_objects[i]);
 					}
 				}
 			}
@@ -55,7 +55,7 @@ void Hierarchy::GameObjectList()
 				{
 					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
 					{
-						App->scene_intro->game_objects[i]->SelectItem();
+						App->scene_intro->SelectItem(App->scene_intro->game_objects[i]);
 					}
 				}
 				//if(ImGui::TreeNodeEx(App->scene_intro->game_objects[i]->GetName().c_str(),flags))

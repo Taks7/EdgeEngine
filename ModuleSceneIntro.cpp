@@ -43,8 +43,7 @@ bool ModuleSceneIntro::Update(float dt)
 	NormalPlane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-	
-	
+
 
 	if (App->ui->testCube)
 	{
@@ -142,7 +141,7 @@ void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, Mo
 		}
 	}
 }
-/*
+
 //TODO 9: And change the color of the colliding bodies, so we can visualize it working!
 void ModuleSceneIntro::SelectThroughRaycast(const LineSegment& ray)
 {
@@ -158,45 +157,33 @@ void ModuleSceneIntro::SelectThroughRaycast(const LineSegment& ray)
 	std::map<float, ModuleGameObject*>::iterator item;
 	for (item = hits.begin(); item != hits.end(); ++item)
 	{
-		item->second->GetAllMeshComponents(c_meshes);
-
-		std::vector<Triangle> faces;
-		for (uint m = 0; m < c_meshes.size(); ++m)
-		{
-			R_Mesh* r_mesh = c_meshes[m]->GetMesh();
-
-			if (r_mesh == nullptr)
-			{
-				continue;
-			}
-
-			LineSegment local_ray = ray;
-			local_ray.Transform(item->second->GetTransformComponent()->GetWorldTransform().Inverted());
-
-			GetFaces(r_mesh->vertices, faces);
-			for (uint f = 0; f < faces.size(); ++f)
-			{
-				if (local_ray.Intersects(faces[f], nullptr, nullptr))
-				{
-					SetSelectedGameObject(item->second);
-
-					faces.clear();
-					c_meshes.clear();
-					hits.clear();
-
-					return;
-				}
-			}
-
-			faces.clear();
-		}
-
-		c_meshes.clear();
+		
+		    LineSegment local_ray = ray;
+			ModuleComponentsTransform* transform = (ModuleComponentsTransform*)item->second->GetComponent(COMPONENT_TYPES::TRANSFORM);
+			local_ray.Transform(transform->GetGlobalMatrix().Inverted());
+			SelectItem(item->second);
+			hits.clear();
+			return;
 	}
 
 	// If no GameObject was hit
-	SetSelectedGameObject(nullptr);
+	SelectItem(nullptr);
 
 	hits.clear();
 }
-*/
+
+void ModuleSceneIntro::SelectItem(ModuleGameObject* game_object)
+{
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		if (App->scene_intro->game_objects.at(i)->IsActive() && game_object != App->scene_intro->game_objects.at(i))
+		{
+			App->scene_intro->game_objects.at(i)->selectedForInspector = false;
+			App->scene_intro->game_objects.at(i)->bouindingBoxes = false;
+		}
+	}
+	game_object->bouindingBoxes = true;
+	game_object->selectedForInspector = !game_object->selectedForInspector;
+	App->scene_intro->rootObject = game_object;
+}
+

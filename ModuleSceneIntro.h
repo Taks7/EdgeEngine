@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "MathGeo/src/Geometry/LineSegment.h";
 #include <vector>
+#include <map>
 #include "ModuleGameObject.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
@@ -25,6 +26,11 @@ public:
 	//RAYCASTING GAMEOBJECTS
 	void getRaycastHits(const LineSegment& ray, std::map<float, ModuleGameObject*>& hits);
 	void SelectThroughRaycast(const LineSegment& ray);
+
+	void SetSelectedGameObject(ModuleGameObject* game_object);
+
+	void SelectItem(ModuleGameObject* game_object);
+
 public:
 	std::vector<ModuleGameObject*> game_objects;
 	ModuleGameObject* rootObject;
