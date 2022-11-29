@@ -246,6 +246,49 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 				glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_uvs);
 
+				if (GameObject.bouindingBoxes)
+				{
+					glBegin(GL_LINES);
+
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
+					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
+
+
+					glEnd();
+				}
 				if (NewMaterial->IsActive())
 				{
 					if (NewMaterial->materialUsed != nullptr)
@@ -352,57 +395,4 @@ void ModuleRenderer3D::LoadCheckerTexture()
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void ModuleRenderer3D::DrawBoundingBox(ModuleGameObject* game_object, float3 transform)
-{
-	ModuleComponentsMesh* NewMesh = (ModuleComponentsMesh*)game_object->GetComponent(COMPONENT_TYPES::MESH);
-
-	//NewMesh->mesh.aabb.maxPoint += transform;
-	//NewMesh->mesh.aabb.minPoint += transform;
-
-	glDisable(GL_LIGHTING);
-
-	glBegin(GL_LINES);
-
-	glColor3f(0.f, 1.f, 0.f);
-
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.minPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
-	glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
-
-	
-	glEnd();
 }

@@ -74,7 +74,12 @@ void InspectorMenu::DrawInfoOfGameObject(ModuleGameObject* game_object)
 		game_object->SetStatic(gameObjectStatic);
 	}
 	
-	ImGui::Separator();
+	ImGui::SameLine();
+	bool BoundingBoxActive = game_object->IsBBActive();
+	if (ImGui::Checkbox("Bounding box", &BoundingBoxActive));
+	{
+		game_object->SetBB(BoundingBoxActive);
+	}
 
 }
 

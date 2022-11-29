@@ -33,6 +33,9 @@ public:
 	void SetStatic(bool state);
 	bool IsSelected();
 
+	void SetBB(bool state);
+	bool IsBBActive();
+
 	
 
 	bool AddChild(ModuleGameObject* child);
@@ -68,7 +71,7 @@ public:
 	bool is_active;
 	bool is_static;
 	bool selectedForInspector = false;
-	bool bouindingBoxes = false;
+	bool bouindingBoxes = true;
 private:
 	uint id;
 	

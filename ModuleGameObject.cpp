@@ -42,10 +42,6 @@ void ModuleGameObject::Render()
 	{
 		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)App->scene_intro->game_objects.at(i)->GetComponent(COMPONENT_TYPES::TRANSFORM);
 		App->renderer3D->DrawGameObjects(*App->scene_intro->game_objects.at(i), transform->GetGlobalMatrix());
-		if (App->scene_intro->game_objects.at(i)->bouindingBoxes = true)
-		{
-			App->renderer3D->DrawBoundingBox(App->scene_intro->game_objects.at(i), transform->GetPosition());
-		}
 		ModuleGameObject* owner = App->scene_intro->game_objects.at(i);
 		for (int j = 0; j < owner->childs.size(); j++)
 		{
@@ -155,7 +151,15 @@ bool ModuleGameObject::IsSelected()
 	return selectedForInspector;
 }
 
+bool ModuleGameObject::IsBBActive()
+{
+	return bouindingBoxes;
+}
 
+void ModuleGameObject::SetBB(bool state)
+{
+	bouindingBoxes = state;
+}
 
 bool ModuleGameObject::AddChild(ModuleGameObject* child)
 {
