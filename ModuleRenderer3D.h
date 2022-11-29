@@ -33,11 +33,12 @@ public:
 
 	void OnResize(int width, int height);
 	void DrawGameObjects(ModuleGameObject gameObject,float4x4 transform);
+	void DrawBoundingBox(ModuleGameObject* game_object, float3 transform);
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
-	void			LoadCheckerTexture();
+	void LoadCheckerTexture();
 
 public:
 

@@ -47,6 +47,7 @@ public:
 
 	//ModuleComponentsTransform* GetTransform();
 
+
 public:
 
 	std::vector<ModuleComponents*>	components;
