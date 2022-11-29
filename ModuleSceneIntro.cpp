@@ -179,10 +179,10 @@ void ModuleSceneIntro::SelectItem(ModuleGameObject* game_object)
 		if (App->scene_intro->game_objects.at(i)->IsActive() && game_object != App->scene_intro->game_objects.at(i))
 		{
 			App->scene_intro->game_objects.at(i)->selectedForInspector = false;
-			App->scene_intro->game_objects.at(i)->bouindingBoxes = false;
+			
 		}
 	}
-	game_object->bouindingBoxes = true;
+	
 	game_object->selectedForInspector = !game_object->selectedForInspector;
 	App->scene_intro->rootObject = game_object;
 }

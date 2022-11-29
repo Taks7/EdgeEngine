@@ -129,11 +129,18 @@ void ModuleGameObject::SetActive(bool state)
 bool ModuleGameObject::IsStatic()
 {
 	return is_static;
+
+
 }
 
 void ModuleGameObject::SetStatic(bool state)
 {
 	is_static = state;
+
+	for (int j = 0; j < childs.size(); j++)
+	{
+		childs[j]->SetStatic(state);
+	}
 }
 
 std::string ModuleGameObject::GetName()
@@ -159,6 +166,11 @@ bool ModuleGameObject::IsBBActive()
 void ModuleGameObject::SetBB(bool state)
 {
 	bouindingBoxes = state;
+
+	for (int j = 0; j < childs.size(); j++)
+	{
+		childs[j]->SetBB(state);
+	}
 }
 
 bool ModuleGameObject::AddChild(ModuleGameObject* child)
