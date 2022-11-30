@@ -2,17 +2,13 @@
 #define __ModuleComponentCamera_H__
 
 #include "Module.h"
-#include "Frustum.h"
 #include "ModuleComponent.h"
 #include "MathGeo/src/Math/float2.h"
 #include "ModuleGameObject.h"
-#include <string>
+#include "MathGeo/src/Geometry/Frustum.h"
+#include "MathGeo/src/Geometry/Plane.h"
 
 class ModuleGameObject;
-class ModuleMaterial;
-class ModuleFBXLoader;
-
-struct Texture;
 
 class ModuleComponentCamera : public ModuleComponents
 {

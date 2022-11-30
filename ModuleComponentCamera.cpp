@@ -5,8 +5,9 @@
 #include "ModuleGameObject.h"
 #include "ModuleComponentCamera.h"
 #include "ModuleFBXLoader.h"
-#include "Plane.h"
-#include "MathGeo/src/Geometry/Frustum.h"
+
+#include "MathGeoLib.h"
+#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
 
 #define MAX_FRUSTUM_PLANES		6																			
 #define MAX_FRUSTUM_VERTICES	8																	
@@ -22,7 +23,7 @@ projection_update(true)
 	frustum_planes = new Plane[MAX_FRUSTUM_PLANES];
 	frustum_vertices = new float3[MAX_FRUSTUM_VERTICES];
 
-	/*InitFrustum();*/
+	InitFrustum();
 }
 
 ModuleComponentCamera::~ModuleComponentCamera()
@@ -57,6 +58,26 @@ void ModuleComponentCamera::InitFrustum()
 	frustum.SetViewPlaneDistances(1.0f, 300.0f);
 	frustum.SetPerspective(1.0f, 1.0f);
 
-	/*UpdateFrustumPlanes();
-	UpdateFrustumVertices();*/
+	UpdateFrustumPlanes();
+	UpdateFrustumVertices();
+}
+
+void ModuleComponentCamera::UpdateFrustumPlanes()
+{
+	frustum.GetPlanes(frustum_planes);
+}
+
+void ModuleComponentCamera::UpdateFrustumVertices()
+{
+	frustum.GetCornerPoints(frustum_vertices);
+}
+
+Plane* ModuleComponentCamera::GetFrustumPlanes() const
+{
+	return frustum_planes;
+}
+
+float3* ModuleComponentCamera::GetFrustumVertices() const
+{
+	return frustum_vertices;
 }
