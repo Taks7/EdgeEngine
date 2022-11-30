@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleCamera3D.h"
+#include "Frustum.h"
 
 #define ZOOM_SPEED 2.0f
 #define ROTATION_SPEED 0.2f
@@ -166,6 +167,14 @@ bool ModuleCamera3D::Update(float dt)
 
 	return true;
 }
+
+void ModuleCamera3D::CreateGameCamera()
+{
+	game_camera->SetName("GameCamera");
+	game_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
+
+}
+
 void ModuleCamera3D::CastRay()
 {
 	float2 mouse_pos = { (float)App->input->GetMouseX(),(float)App->input->GetMouseY() };

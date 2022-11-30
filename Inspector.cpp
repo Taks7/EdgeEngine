@@ -108,6 +108,11 @@ void InspectorMenu::DrawGameObjectComponents()
 					DrawTransformComponent();
 					break;
 				}
+				case COMPONENT_TYPES::CAMERA:
+				{
+					DrawCameraComponent();
+					break;
+				}
 
 			}
 
@@ -247,4 +252,9 @@ void InspectorMenu::DrawMaterialComponent()
 			}		
 		}		
 	}
+}
+
+void InspectorMenu::DrawCameraComponent()
+{
+	
 }

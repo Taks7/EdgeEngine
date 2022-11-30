@@ -21,12 +21,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -175,6 +175,7 @@
     <ClInclude Include="MathGeo\src\Time\Clock.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleComponent.h" />
+    <ClInclude Include="ModuleComponentCamera.h" />
     <ClInclude Include="ModuleComponentMaterial.h" />
     <ClInclude Include="ModuleComponentMesh.h" />
     <ClInclude Include="ModuleComponentTransform.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleComponent.cpp" />
+    <ClCompile Include="ModuleComponentCamera.cpp" />
     <ClCompile Include="ModuleComponentMaterial.cpp" />
     <ClCompile Include="ModuleComponentMesh.cpp" />
     <ClCompile Include="ModuleComponentTransform.cpp" />

@@ -405,6 +405,9 @@
     <ClInclude Include="ModuleConsole.h">
       <Filter>Sources\Modules\UI\Console</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleComponentCamera.h">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -649,6 +652,9 @@
     </ClCompile>
     <ClCompile Include="ModuleConsole.cpp">
       <Filter>Sources\Modules\UI\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentCamera.cpp">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

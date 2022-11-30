@@ -6,6 +6,7 @@
 #include "ModuleComponentMaterial.h"
 #include "ModuleComponentTransform.h"
 #include "ModuleComponentMesh.h"
+#include "ModuleComponentCamera.h"
 
 ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic) 
 ,parent(nullptr)
@@ -72,6 +73,11 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 
 	case COMPONENT_TYPES::MATERIAL:
 		component = new ModuleComponentMaterial(this);
+		findDuplicates = true;
+		break;
+
+	case COMPONENT_TYPES::CAMERA:
+		component = new ModuleComponentCamera(this);
 		findDuplicates = true;
 		break;
 

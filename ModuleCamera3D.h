@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "ModuleGameObject.h"
 #include "Globals.h"
 #include "glmath.h"
 #include "MathGeo/src/Geometry/LineSegment.h";
@@ -20,6 +21,7 @@ public:
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
 	void CastRay();
+	void CreateGameCamera();
 private:
 
 	void CalculateViewMatrix();
@@ -38,6 +40,8 @@ public:
 	Frustum frustum;
 
 	LineSegment	last_raycast;
+
+	ModuleGameObject* game_camera;
 
 private:
 

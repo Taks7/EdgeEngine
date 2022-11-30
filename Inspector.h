@@ -15,6 +15,7 @@ public:
 	void DrawTransformComponent();
 	void DrawMeshComponent();
 	void DrawMaterialComponent();
+	void DrawCameraComponent();
 	void Draw() override;
 
 	ModuleGameObject* selectedGameObject;
