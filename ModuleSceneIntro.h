@@ -29,6 +29,9 @@ public:
 
 	void SetSelectedGameObject(ModuleGameObject* game_object);
 
+
+	float2 getWorldMosuePosition();
+
 	void SelectItem(ModuleGameObject* game_object);
 
 public:

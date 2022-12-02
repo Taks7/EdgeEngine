@@ -230,8 +230,3 @@ std::string ModuleGameObject::GetTexturePath()
 		}
 	}
 }
-
-//ModuleComponentsTransform* ModuleGameObject::GetTransform()
-//{
-//	return (ModuleComponentsTransform*)GetComponent(COMPONENT_TYPES::TRANSFORM);
-//}

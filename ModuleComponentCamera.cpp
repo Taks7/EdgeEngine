@@ -81,3 +81,8 @@ float3* ModuleComponentCamera::GetFrustumVertices() const
 {
 	return frustum_vertices;
 }
+
+Frustum ModuleComponentCamera::GetFrustum() const
+{
+	return frustum;
+}

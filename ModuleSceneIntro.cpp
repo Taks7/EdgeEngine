@@ -16,7 +16,7 @@ bool ModuleSceneIntro::Start()
 {
 	LOG_COMMENT("Loading Intro assets");
 	bool ret = true;
-
+	App->camera->CreateGameCamera();
 	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));*/
 
@@ -111,7 +111,7 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 		gameObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
 		gameObject->CreateComponent(COMPONENT_TYPES::MESH);
 		gameObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
-		gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
+		//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
 		game_objects.push_back(gameObject);
 		return gameObject;
 	}
@@ -123,7 +123,7 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 		gameObject_child->CreateComponent(COMPONENT_TYPES::MATERIAL);
 		gameObject_child->CreateComponent(COMPONENT_TYPES::MESH);
 		gameObject_child->CreateComponent(COMPONENT_TYPES::TRANSFORM);
-		gameObject_child->CreateComponent(COMPONENT_TYPES::CAMERA);
+		//gameObject_child->CreateComponent(COMPONENT_TYPES::CAMERA);
 		parent->childs.push_back(gameObject_child);
 		return gameObject_child;
 
@@ -142,6 +142,8 @@ void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, Mo
 			hits.emplace(ray.Distance(position), game_objects[i]);
 		}
 	}
+
+	
 }
 
 //TODO 9: And change the color of the colliding bodies, so we can visualize it working!
@@ -187,5 +189,25 @@ void ModuleSceneIntro::SelectItem(ModuleGameObject* game_object)
 	
 	game_object->selectedForInspector = !game_object->selectedForInspector;
 	App->scene_intro->rootObject = game_object;
+}
+
+
+float2 ModuleSceneIntro::getWorldMosuePosition()
+{
+	float win_width = (float)App->window->GetWidht();
+	float win_height = (float)App->window->GetHeight();
+
+	/*float tex_width = tex_size.x;
+	float tex_height = tex_size.y;*/
+
+	float mouse_X = (float)App->input->GetMouseX();
+	float mouse_Y = (float)App->input->GetMouseY();
+
+	float2 screen_mouse_pos = float2(mouse_X, win_height - mouse_Y); //- float2(tex_origin.x, tex_origin.y + 22.5f);				
+	//float2 screen_mouse_pos = GetScreenMousePosition();
+	float2 norm_screen_pos = float2(screen_mouse_pos.x , screen_mouse_pos.y );
+	float2 world_mouse_pos = float2(norm_screen_pos.x * win_width, norm_screen_pos.y * win_height);
+
+	return world_mouse_pos;
 }
 

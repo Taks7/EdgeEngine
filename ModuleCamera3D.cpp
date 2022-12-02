@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 #include "Frustum.h"
+#include "ModuleComponentCamera.h"
 
 #define ZOOM_SPEED 2.0f
 #define ROTATION_SPEED 0.2f
@@ -21,6 +22,8 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 
 	zoomSpeed = ZOOM_SPEED;
+
+	
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -53,7 +56,7 @@ bool ModuleCamera3D::Update(float dt)
 	float speed = 3.0f * dt;
 
 	
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 	{
 		CastRay();
 	}
@@ -170,14 +173,17 @@ bool ModuleCamera3D::Update(float dt)
 
 void ModuleCamera3D::CreateGameCamera()
 {
-	game_camera->SetName("GameCamera");
+	game_camera = App->scene_intro->CreateEmptyGameObject("MasterCamera", nullptr);
+	//game_camera->SetName("GameCamera");
 	game_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
 
 }
 
 void ModuleCamera3D::CastRay()
 {
-	float2 mouse_pos = { (float)App->input->GetMouseX(),(float)App->input->GetMouseY() };
+	
+	ModuleComponentCamera* currentCam = (ModuleComponentCamera*)game_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+	float2 mouse_pos = App->scene_intro->getWorldMosuePosition();
 
 	float norm_mouse_X = mouse_pos.x / (float)App->window->GetWidht();
 	float norm_mouse_Y = mouse_pos.y / (float)App->window->GetHeight();
@@ -185,12 +191,14 @@ void ModuleCamera3D::CastRay()
 	float ray_origin_X = (norm_mouse_X - 0.5f) * 2;
 	float ray_origin_Y = (norm_mouse_Y - 0.5f) * 2;
 
-	last_raycast = frustum.UnProjectLineSegment(ray_origin_X, ray_origin_Y);
+	last_raycast = currentCam->GetFrustum().UnProjectLineSegment(ray_origin_X, ray_origin_Y);
 
-	std::map<float, ModuleGameObject*> hits;
-	App->scene_intro->getRaycastHits(last_raycast, hits);
+	/*std::map<float, ModuleGameObject*> hits;
+	App->scene_intro->getRaycastHits(helperRay, hits);*/
 
 	App->scene_intro->SelectThroughRaycast(last_raycast);
+	
+	
 }
 // -----------------------------------------------------------------
 void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
