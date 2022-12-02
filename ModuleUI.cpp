@@ -14,6 +14,7 @@
 #include "Hierarchy.h"
 #include "Inspector.h"
 #include "ModuleConsole.h"
+#include "Project.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/libGlew/Release/Win32/glew32.lib")
 
@@ -25,6 +26,7 @@ ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
 	menus.push_back(hierarchy = new Hierarchy());
 	menus.push_back(inspector = new InspectorMenu());
 	menus.push_back(consoleMenu = new ModuleConsole());
+	menus.push_back(consoleProject = new Project());
 }
 
 // Destructor

@@ -46,6 +46,9 @@
     <Filter Include="Sources\Modules\UI\Console">
       <UniqueIdentifier>{bebda96b-041c-43a7-92ae-1bcb510a451b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\UI\Project">
+      <UniqueIdentifier>{3ce957fa-3cb2-4def-992a-55ab65e330f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -408,6 +411,9 @@
     <ClInclude Include="ModuleComponentCamera.h">
       <Filter>Sources\Modules\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Project.h">
+      <Filter>Sources\Modules\UI\Project</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -655,6 +661,9 @@
     </ClCompile>
     <ClCompile Include="ModuleComponentCamera.cpp">
       <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Project.cpp">
+      <Filter>Sources\Modules\UI\Project</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

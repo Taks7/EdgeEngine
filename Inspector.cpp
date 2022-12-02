@@ -236,10 +236,11 @@ void InspectorMenu::DrawMaterialComponent()
 
 				ImGui::Separator();
 
+				std::string texturePath= material->materialUsed->path.c_str();
 
-				ImGui::Text("File:");
-				ImGui::SameLine();
-				ImGui::Text("WIP");
+				ImGui::Text("File: %s",texturePath.c_str());
+				
+				ImGui::Image(ImTextureID(material->materialUsed->id), { 128,128 });
 
 				ImGui::Separator();
 

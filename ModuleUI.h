@@ -12,6 +12,7 @@ class AboutMenu;
 class Hierarchy;
 class InspectorMenu;
 class ModuleConsole;
+class Project;
 
 class ModuleUI : public Module
 {
@@ -56,6 +57,8 @@ public:
 
 	InspectorMenu* inspector;
 	ModuleConsole* consoleMenu;
+
+	Project* consoleProject;
 
 	std::string GPUSeller;
 	std::string GPUSpecs;
