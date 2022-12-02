@@ -396,3 +396,14 @@ void ModuleRenderer3D::LoadCheckerTexture()
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+void ModuleRenderer3D::DrawRaycast()
+{
+	glBegin(GL_LINES);
+
+	glVertex3d(App->camera->last_raycast.a.x, App->camera->last_raycast.a.y, App->camera->last_raycast.a.z);
+	glVertex3d(App->camera->last_raycast.b.x, App->camera->last_raycast.b.y, App->camera->last_raycast.b.z);
+
+	glEnd();
+
+}

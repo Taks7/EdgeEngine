@@ -39,6 +39,8 @@ public:
 
 	void LoadCheckerTexture();
 
+	void DrawRaycast();
+
 public:
 
 	Light lights[MAX_LIGHTS];

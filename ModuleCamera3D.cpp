@@ -4,6 +4,9 @@
 #include "Frustum.h"
 #include "ModuleComponentCamera.h"
 
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_sdl.h"
+#include "ImGui/imgui_impl_opengl2.h"
 #define ZOOM_SPEED 2.0f
 #define ROTATION_SPEED 0.2f
 
@@ -55,7 +58,8 @@ bool ModuleCamera3D::Update(float dt)
 	vec3 newPos(0,0,0);
 	float speed = 3.0f * dt;
 
-	
+	App->renderer3D->DrawRaycast();
+
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 	{
 		CastRay();
@@ -191,12 +195,15 @@ void ModuleCamera3D::CastRay()
 	float ray_origin_X = (norm_mouse_X - 0.5f) * 2;
 	float ray_origin_Y = (norm_mouse_Y - 0.5f) * 2;
 
+	//float x = ((ImGui::GetMousePos().x / (float)App->window->GetWidht()) * 2.0f)/* - 1.0f*/;
+	//float y = 1 - ((ImGui::GetMousePos().y / (float)App->window->GetHeight()) * 2.0f);
+
 	last_raycast = currentCam->GetFrustum().UnProjectLineSegment(ray_origin_X, ray_origin_Y);
 
 	/*std::map<float, ModuleGameObject*> hits;
 	App->scene_intro->getRaycastHits(helperRay, hits);*/
 
-	App->scene_intro->SelectThroughRaycast(last_raycast);
+	App->scene_intro->RaycastSelection(last_raycast);
 	
 	
 }

@@ -7,6 +7,7 @@
 #include "ModuleGameObject.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
+
 class Primitive;
 class  PhysBody3D;
 
@@ -25,9 +26,9 @@ public:
 	ModuleGameObject* CreateEmptyGameObject(const char* name = nullptr, ModuleGameObject* parent = nullptr);
 	//RAYCASTING GAMEOBJECTS
 	void getRaycastHits(const LineSegment& ray, std::map<float, ModuleGameObject*>& hits);
-	void SelectThroughRaycast(const LineSegment& ray);
+	bool RaycastSelection(const LineSegment& ray);
 
-	void SetSelectedGameObject(ModuleGameObject* game_object);
+	//bool SetSelectedGameObject(ModuleGameObject* game_object);
 
 
 	float2 getWorldMosuePosition();
@@ -35,6 +36,7 @@ public:
 	void SelectItem(ModuleGameObject* game_object);
 
 public:
+
 	std::vector<ModuleGameObject*> game_objects;
 	ModuleGameObject* rootObject;
 private:

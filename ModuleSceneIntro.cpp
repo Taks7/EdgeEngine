@@ -3,9 +3,11 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "ModuleUI.h"
+
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
 	name = "scene";
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -135,7 +137,7 @@ void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, Mo
 	for (uint i = 0; i < game_objects.size(); ++i)
 	{
 		ModuleComponentsMesh* gameObjMesh = (ModuleComponentsMesh*)game_objects[i]->GetComponent(COMPONENT_TYPES::MESH);
-		if (ray.Intersects(gameObjMesh->mesh.aabb))
+		if (ray.ToRay().Intersects(gameObjMesh->mesh.aabb))
 		{
 			ModuleComponentsTransform* gameObjTransform = (ModuleComponentsTransform*)game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
 			float3 position = gameObjTransform->GetGlobalPosition();
@@ -147,15 +149,16 @@ void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, Mo
 }
 
 //TODO 9: And change the color of the colliding bodies, so we can visualize it working!
-void ModuleSceneIntro::SelectThroughRaycast(const LineSegment& ray)
+bool ModuleSceneIntro::RaycastSelection(const LineSegment& ray)
 {
+	LOG_COMMENT("[SCENE] RayCast selection");
 	std::map<float, ModuleGameObject*> hits;
 	getRaycastHits(ray, hits);
 
 	if (hits.size() == 0)
 	{
 		hits.clear();
-		return;
+		return true;
 	}
 
 	std::map<float, ModuleGameObject*>::iterator item;
@@ -167,13 +170,18 @@ void ModuleSceneIntro::SelectThroughRaycast(const LineSegment& ray)
 			local_ray.Transform(transform->GetGlobalMatrix().Inverted());
 			SelectItem(item->second);
 			hits.clear();
-			return;
+			return true;
 	}
 
 	// If no GameObject was hit
 	SelectItem(nullptr);
 
 	hits.clear();
+	
+	return true;
+
+	
+
 }
 
 void ModuleSceneIntro::SelectItem(ModuleGameObject* game_object)
@@ -203,11 +211,12 @@ float2 ModuleSceneIntro::getWorldMosuePosition()
 	float mouse_X = (float)App->input->GetMouseX();
 	float mouse_Y = (float)App->input->GetMouseY();
 
-	float2 screen_mouse_pos = float2(mouse_X, win_height - mouse_Y); //- float2(tex_origin.x, tex_origin.y + 22.5f);				
+	float2 screen_mouse_pos = float2(mouse_X, win_height - mouse_Y); /*- float2(tex_origin.x, tex_origin.y + 22.5f);	*/			
 	//float2 screen_mouse_pos = GetScreenMousePosition();
 	float2 norm_screen_pos = float2(screen_mouse_pos.x , screen_mouse_pos.y );
 	float2 world_mouse_pos = float2(norm_screen_pos.x * win_width, norm_screen_pos.y * win_height);
 
-	return world_mouse_pos;
+	//return world_mouse_pos;
+	return screen_mouse_pos;
 }
 
