@@ -18,12 +18,15 @@
 #define ROTATION_SPEED 0.2f
 
 
-ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
+ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled),
+game_camera(nullptr),
+current_camera(nullptr)
 {
-	/*CreateGameCamera();*/
 	name = "Camera";
 
-	CalculateViewMatrix();
+	/*CreateGameCamera();*/
+
+	/*CalculateViewMatrix();*/
 
 	X = vec3(1.0f, 0.0f, 0.0f);
 	Y = vec3(0.0f, 1.0f, 0.0f);
@@ -38,13 +41,31 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 }
 
 ModuleCamera3D::~ModuleCamera3D()
-{}
+{
+	current_camera = nullptr;
+
+	game_camera->CleanUp();
+	RELEASE(game_camera);
+}
+
+bool ModuleCamera3D::Init()
+{
+	CreateGameCamera();
+
+	ModuleComponentsTransform* masterCameraTransform = (ModuleComponentsTransform*)game_camera->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	masterCameraTransform->SetPosition(float3(60.0f, 40.0f, 60.0f));
+	LookAt(0);
+
+	return true;
+}
 
 // -----------------------------------------------------------------
 bool ModuleCamera3D::Start()
 {
 	LOG_COMMENT("Setting up the camera");
 	bool ret = true;
+
+	/*CreateGameCamera();*/
 
 	return ret;
 }
@@ -242,19 +263,19 @@ void ModuleCamera3D::SetMasterCameraAsCurrentCamera()
 {
 	current_camera->SetFrustumIsHidden(false);
 	
-	if (master_camera == nullptr)
+	if (game_camera == nullptr)
 	{
 		CreateGameCamera();
 	}
 
-	ModuleComponentCamera* masterCamera = (ModuleComponentCamera*)master_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+	ModuleComponentCamera* masterCamera = (ModuleComponentCamera*)game_camera->GetComponent(COMPONENT_TYPES::CAMERA);
 	if (masterCamera == nullptr)
 	{
-		master_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
-		/*ModuleComponentCamera* masterCamera = (ModuleComponentCamera*)master_camera;*/
+		game_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
+		/*ModuleComponentCamera* masterCamera = (ModuleComponentCamera*)game_camera;*/
 	}
 
-	current_camera = (ModuleComponentCamera*)master_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+	current_camera = (ModuleComponentCamera*)game_camera->GetComponent(COMPONENT_TYPES::CAMERA);
 	current_camera->SetUpdateProjectionMatrix(true);
 }
 

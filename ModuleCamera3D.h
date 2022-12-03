@@ -14,6 +14,7 @@ public:
 	ModuleCamera3D(bool start_enabled = true);
 	~ModuleCamera3D();
 
+	bool Init();
 	bool Start();
 	bool Update(float dt) override;
 	bool CleanUp();
@@ -38,7 +39,6 @@ private:
 
 public:
 
-	ModuleGameObject* master_camera;
 	vec3 X, Y, Z, Position, Reference;
 
 	float zoomSpeed;
