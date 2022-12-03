@@ -3,7 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "ModuleUI.h"
-
+#include "AABB.h"
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
 	name = "scene";
@@ -152,36 +152,54 @@ void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, Mo
 bool ModuleSceneIntro::RaycastSelection(const LineSegment& ray)
 {
 	LOG_COMMENT("[SCENE] RayCast selection");
-	std::map<float, ModuleGameObject*> hits;
-	getRaycastHits(ray, hits);
+	//std::map<float, ModuleGameObject*> hits;
+	//getRaycastHits(ray, hits);
 
-	if (hits.size() == 0)
-	{
-		hits.clear();
-		return true;
-	}
+	//if (hits.size() == 0)
+	//{
+	//	hits.clear();
+	//	return true;
+	//}
 
-	std::map<float, ModuleGameObject*>::iterator item;
-	for (item = hits.begin(); item != hits.end(); ++item)
-	{
-		
-		    LineSegment local_ray = ray;
-			ModuleComponentsTransform* transform = (ModuleComponentsTransform*)item->second->GetComponent(COMPONENT_TYPES::TRANSFORM);
-			local_ray.Transform(transform->GetGlobalMatrix().Inverted());
-			SelectItem(item->second);
-			hits.clear();
-			return true;
-	}
+	//std::map<float, ModuleGameObject*>::iterator item;
+	//for (item = hits.begin(); item != hits.end(); ++item)
+	//{
+	//	
+	//	    LineSegment local_ray = ray;
+	//		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)item->second->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	//		local_ray.Transform(transform->GetGlobalMatrix().Inverted());
+	//		SelectItem(item->second);
+	//		hits.clear();
+	//		return true;
+	//}
 
-	// If no GameObject was hit
-	SelectItem(nullptr);
+	//// If no GameObject was hit
+	//SelectItem(nullptr);
 
-	hits.clear();
-	
-	return true;
+	//hits.clear();
+	//
+	//return true;
+		bool hit = false;
+		std::vector<ModuleGameObject*> gameObjects = App->scene_intro->game_objects;
 
-	
+		std::vector<ModuleGameObject*>::iterator it = gameObjects.begin();
 
+		for (; it < gameObjects.end(); ++it)
+		{
+			ModuleComponentsTransform* transform = (ModuleComponentsTransform*)(*it)->GetComponent(COMPONENT_TYPES::TRANSFORM);
+			ModuleComponentsMesh* mesh = (ModuleComponentsMesh*)(*it)->GetComponent(COMPONENT_TYPES::MESH);
+			if (mesh->mesh.GetAABB().IsFinite() && transform)
+			{
+				hit = ray.Intersects(mesh->mesh.GetAABB());
+
+				if (hit)
+				{
+					App->scene_intro->SelectItem(*it);
+					return true;
+				}
+			}
+		}
+		return false;
 }
 
 void ModuleSceneIntro::SelectItem(ModuleGameObject* game_object)

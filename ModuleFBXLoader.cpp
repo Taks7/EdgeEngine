@@ -183,3 +183,8 @@ bool ModuleFBXLoader::SaveConfig(JsonParsing& node) const
 
 	return true;
 }
+
+AABB VertexData::GetAABB()
+{
+	return aabb;
+}
