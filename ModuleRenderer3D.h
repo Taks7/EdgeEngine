@@ -4,6 +4,12 @@
 #include "glmath.h"
 #include "Light.h"
 #include "ModuleFBXLoader.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleCamera3D.h"
+#include "Frustum.h"
+#include "ModuleComponent.h"
+#include "ModuleComponentMesh.h"
+#include "ModuleComponentMaterial.h"
 
 #define MAX_LIGHTS 8
 #define CWIDTH 64
@@ -20,6 +26,7 @@ struct Gl_Attributes
 	bool AmbientOclussion;
 	bool Wireframe;
 };
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -38,6 +45,8 @@ public:
 	bool SaveConfig(JsonParsing& node) const override;
 
 	void LoadCheckerTexture();
+	void RecalculateProjectionMatrix();
+	/*void RenderScene();*/
 
 	void DrawRaycast();
 
@@ -50,5 +59,6 @@ public:
 	Gl_Attributes atributes;
 	uint ckeckerTextureid;
 	bool checkerTextureApplied = false;
+
 
 };

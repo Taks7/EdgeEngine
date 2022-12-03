@@ -5,12 +5,15 @@
 #include "ModuleMaterials.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
+#include "ModuleComponentCamera.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
+
+#define WORLD_GRID_SIZE 64
 
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 {
@@ -122,6 +125,8 @@ bool ModuleRenderer3D::Init()
 
 	App->materialImport->Init();
 
+
+
 	return ret;
 }
 
@@ -132,7 +137,31 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	glLoadIdentity();
 
 	glMatrixMode(GL_MODELVIEW);
+	/*glLoadMatrixf(App->camera->GetViewMatrix());*/
+
+	ModuleComponentCamera* camera = App->camera->GetCurrentCamera();
+
+	if (camera != nullptr)
+	{
+		if (camera->GetUpdateProjectionMatrix())
+		{
+			RecalculateProjectionMatrix();
+			camera->SetUpdateProjectionMatrix(false);
+		}
+	}
+
 	glLoadMatrixf(App->camera->GetViewMatrix());
+	/*glLoadMatrixf((GLfloat*)camera->GetOGLViewMatrix());*/
+
+	float3 camera_position = float3::zero;
+	if (App->camera->GetCurrentCamera() != nullptr)
+	{
+		camera_position = App->camera->GetPosition();
+	}
+	else
+	{
+		camera_position = float3(0.0f, 20.0f, 0.0f);
+	}
 
 	if (atributes.Depth_test == true)
 	{
@@ -207,6 +236,8 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
+	/*Render();*/
+
 	SDL_GL_SwapWindow(App->window->window);
 	return true;
 }
@@ -215,8 +246,6 @@ bool ModuleRenderer3D::PostUpdate()
 bool ModuleRenderer3D::CleanUp()
 {
 	LOG_COMMENT("Destroying 3D Renderer");
-
-	
 
 	SDL_GL_DeleteContext(context);
 
@@ -395,6 +424,24 @@ void ModuleRenderer3D::LoadCheckerTexture()
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void ModuleRenderer3D::RecalculateProjectionMatrix()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	if (App->camera->GetCurrentCamera() != nullptr)
+	{
+		glLoadMatrixf((GLfloat*)App->camera->GetCurrentCamera()->GetOGLProjectionMatrix());
+	}
+	else
+	{
+		LOG_COMMENT("[ERROR] The Camera was nullptr.");
+	}
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 void ModuleRenderer3D::DrawRaycast()

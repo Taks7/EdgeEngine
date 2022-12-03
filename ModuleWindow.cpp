@@ -161,3 +161,8 @@ float ModuleWindow::GetWidht()
 {
 	return screen_surface->w;
 }
+
+SDL_Window* ModuleWindow::GetWindow() const
+{
+	return window;
+}

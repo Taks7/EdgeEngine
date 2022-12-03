@@ -27,6 +27,7 @@ public:
 
 	float GetWidht();
 	float GetHeight();
+	SDL_Window* GetWindow() const;
 	void Vsync(bool vsync);
 	void SetResizable(bool resizable);
 	void SetFullDesktop(bool fullDesktop);

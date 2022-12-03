@@ -304,6 +304,12 @@ void ModuleCamera3D::CastRay()
 	
 }
 // -----------------------------------------------------------------
+
+float3 ModuleCamera3D::GetPosition() const
+{
+	return current_camera->GetFrustum().Pos();
+}
+
 void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
 {
 	this->Position = Position;
