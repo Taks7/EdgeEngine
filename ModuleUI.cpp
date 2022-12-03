@@ -295,26 +295,6 @@ void ModuleUI::MainMenu()
 				App->scene_intro->CreateEmptyGameObject("empty", nullptr);
 				LOG_COMMENT("[SCENE] Created an Empty Game Object")
 			}
-			if (ImGui::MenuItem("Create Baker House With Mesh"))
-			{
-				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/BakerHouse.fbx", "Assets/Resources/Baker_House.png");
-				LOG_COMMENT("[SCENE] Created a Game Object with Mesh and Textures")
-			}
-			if (ImGui::MenuItem("Create Weapon 1911"))
-			{
-				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("1911", nullptr), "Assets/1911.fbx", nullptr);
-				LOG_COMMENT("[SCENE] Created a Weapon 1911 with Mesh")
-			}
-			if (ImGui::MenuItem("Create Weapon AK47"))
-			{
-				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("AK47", nullptr), "Assets/AK47.fbx", nullptr);
-				LOG_COMMENT("[SCENE] Created a Weapon AK47 with Mesh")
-			}
-			if (ImGui::MenuItem("Create Weapon MP7"))
-			{
-				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("MP7", nullptr), "Assets/MP7.fbx", nullptr);
-				LOG_COMMENT("[SCENE] Created a Weapon MP7 with Mesh")
-			}
 			ImGui::EndMenu();
 
 		}
