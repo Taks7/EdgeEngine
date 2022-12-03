@@ -243,11 +243,11 @@ void ModuleCamera3D::SetCurrentCamera(ModuleComponentCamera* module_component_ca
 		LOG_COMMENT("[ERROR] Camera: Could not set a new current camera! Error: Given Camera Component's owner was nullptr.");
 		return;
 	}
-	//Error Frustum
-	/*if (current_camera != nullptr)
+
+	if (current_camera != nullptr)
 	{
 		current_camera->SetFrustumIsHidden(false);
-	}*/
+	}
 	
 	module_component_camera->SetFrustumIsHidden(true);
 	current_camera = module_component_camera;

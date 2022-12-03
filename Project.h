@@ -4,6 +4,7 @@
 
 #include "Globals.h"
 #include "UI.h"
+#include "FSdefinitions.h"
 
 class Project : public UI
 {
@@ -14,14 +15,13 @@ public:
 
 	void Draw();
 
-public:
+	void DrawDirectoriesTree(const char* root_directory, const char* extension_to_filter);
 
-	
-
+	void HandleSelectedItem(const char* file_path);
 private:
 
-
-private:
+	char* selected_file;																				
+	bool	ready_to_load;
 
 };
 

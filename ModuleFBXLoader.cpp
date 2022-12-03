@@ -15,6 +15,7 @@
 #include "ModuleComponentMesh.h"
 #include "ModuleComponent.h"
 #include "ModuleComponentMaterial.h"
+#include "FSdefinitions.h"
 #include <vector>
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
@@ -41,7 +42,7 @@ bool ModuleFBXLoader::Init()
 	aiAttachLogStream(&stream);
 
 	//LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
-	App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/BakerHouse.fbx", "Assets/Resources/Baker_House.png");
+	App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/Models/BakerHouse.fbx", "Assets/Textures/Baker_House.png");
 
 	return true;
 }

@@ -414,6 +414,9 @@
     <ClInclude Include="Project.h">
       <Filter>Sources\Modules\UI\Project</Filter>
     </ClInclude>
+    <ClInclude Include="FSdefinitions.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">

@@ -111,16 +111,10 @@ bool ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 			{
-				VertexData* NewMaterial = new VertexData();
 
 				const char* dropped_filedir = e.drop.file;
 
-				std::string path = App->fs->FixPath(dropped_filedir);
-
-				uint directory_path_start = path.find_last_of("A");
-				uint directory_path_end = path.size();
-
-				path = path.substr(directory_path_start, directory_path_end);
+				std::string path = App->fs->GetValidPath(dropped_filedir);
 
 				if (App->fs->GetFileExtension(dropped_filedir) == "fbx" || App->fs->GetFileExtension(dropped_filedir) == "FBX")
 				{

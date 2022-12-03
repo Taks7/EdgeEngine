@@ -37,6 +37,12 @@ public:
 	const char* GetReadPaths() const;
 	std::string GetFileExtension(const char* path);
 
+	void DiscoverFiles(const char* directory, std::vector<std::string>& file_list, std::vector<std::string>& dir_list) const;
+
+	bool IsDirectory(const char* file) const;
+
+	const char* GetValidPath(const char* path);
+
 private:
 	const char* name;
 	std::list<std::string> texExtension;

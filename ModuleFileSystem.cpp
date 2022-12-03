@@ -221,3 +221,50 @@ std::string ModuleFileSystem::FixPath(const char* path) const
 
 	return normalized_path;
 }
+
+void ModuleFileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& file_list, std::vector<std::string>& dir_list) const
+{
+	char** file_listing = PHYSFS_enumerateFiles(directory);									
+
+	for (char** file = file_listing; *file != nullptr; ++file)								
+	{
+		std::string path = std::string(directory) + std::string("/") + std::string(*file);	
+
+		if (IsDirectory(path.c_str()))
+		{
+			dir_list.push_back(*file);													
+		}
+		else
+		{
+			file_list.push_back(*file);												
+		}
+	}
+
+	PHYSFS_freeList(file_listing);												
+}
+
+
+bool ModuleFileSystem::IsDirectory(const char* file) const
+{
+	return PHYSFS_isDirectory(file);														
+}
+
+const char* ModuleFileSystem::GetValidPath(const char* path)
+{
+	std::string norm_path = FixPath(path);
+
+	uint dir_path_start = norm_path.find("Assets");
+	if (dir_path_start != std::string::npos)
+	{
+		norm_path = norm_path.substr(dir_path_start, norm_path.size());
+		path = _strdup(norm_path.c_str());
+	}
+	else
+	{
+		path = nullptr;
+	}
+
+	norm_path.clear();
+
+	return path;
+}
