@@ -341,23 +341,6 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
-
-		if (ImGui::BeginMenu("Camera"))
-		{
-			if (ImGui::MenuItem("Set Game Camera"))
-			{
-				/*App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSCube", nullptr), "Assets/BSCube.fbx", nullptr);
-				LOG_COMMENT("[SCENE] Created a Cube Basic Shape")*/
-			}
-			if (ImGui::MenuItem("Return to Editor View Camera"))
-			{
-				/*App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSTriangle", nullptr), "Assets/BSTriangle.fbx", nullptr);
-				LOG_COMMENT("[SCENE] Created a Triangle Basic Shape")*/
-			}
-
-			ImGui::EndMenu();
-
-		}
 	}
 
 	if (showGUIPreferences)

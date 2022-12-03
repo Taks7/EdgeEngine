@@ -2,10 +2,13 @@
 #include "Globals.h"
 #include "Module.h"
 #include "ModuleComponent.h"
+#include "ModuleComponentTransform.h"
 #include "ModuleGameObject.h"
 #include "ModuleComponentCamera.h"
+#include "ModuleCamera3D.h"
 #include "ModuleFBXLoader.h"
 
+#include <vector>
 #include "MathGeoLib.h"
 #pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
 
@@ -62,10 +65,65 @@ void ModuleComponentCamera::InitFrustum()
 	UpdateFrustumVertices();
 }
 
+//void ModuleComponentCamera::UpdateFrustumTransform()
+//{
+//	float4x4 world_transform = this->GetOwner()->GetTransformComponent()->GetWorldTransform();
+//	float3x4 world_matrix = float3x4::identity;
+//
+//	world_matrix.SetTranslatePart(world_transform.TranslatePart());
+//	world_matrix.SetRotatePart(world_transform.RotatePart());
+//	world_matrix.Scale(world_transform.GetScale());
+//
+//	frustum.SetWorldMatrix(world_matrix);
+//
+//	UpdateFrustumPlanes();
+//	UpdateFrustumVertices();
+//
+//	projection_update = true;
+//}
+
+Frustum ModuleComponentCamera::GetFrustum() const
+{
+	return frustum;
+}
+void ModuleComponentCamera::SetUpdateProjectionMatrix(const bool& set_to)
+{
+	projection_update = set_to;
+}
+
+bool ModuleComponentCamera::GetUpdateProjectionMatrix() const
+{
+	return projection_update;
+}
+
+float* ModuleComponentCamera::GetOGLViewMatrix()
+{
+	static float4x4 view_matrix;
+
+	view_matrix = frustum.ViewMatrix();
+	view_matrix.Transpose();
+
+	return (float*)view_matrix.v;
+}
+
+float* ModuleComponentCamera::GetOGLProjectionMatrix()
+{
+	static float4x4 projection_matrix;
+
+	projection_matrix = frustum.ProjectionMatrix().Transposed();
+
+	return (float*)projection_matrix.v;
+}
+
 void ModuleComponentCamera::UpdateFrustumPlanes()
 {
 	frustum.GetPlanes(frustum_planes);
 }
+
+//void ModuleComponentCamera::SetPosition(const float3& position)
+//{
+//	this->GetOwner()->GetTransformComponent()->SetWorldPosition(position);
+//}
 
 void ModuleComponentCamera::UpdateFrustumVertices()
 {
@@ -82,7 +140,44 @@ float3* ModuleComponentCamera::GetFrustumVertices() const
 	return frustum_vertices;
 }
 
-Frustum ModuleComponentCamera::GetFrustum() const
+void ModuleComponentCamera::SetFarPlaneDistance(const float& far_distance)
 {
-	return frustum;
+	if (far_distance < 0)
+	{
+		LOG_COMMENT("[ERROR] Far distance < 0.");
+		return;
+	}
+
+	if (far_distance < frustum.NearPlaneDistance())
+	{
+		LOG_COMMENT("[ERROR] Far distance < Near distance");
+		return;
+	}
+
+	frustum.SetViewPlaneDistances(frustum.NearPlaneDistance(), far_distance);
+
+	UpdateFrustumPlanes();
+	UpdateFrustumVertices();
+
+	projection_update = true;
 }
+
+void ModuleComponentCamera::SetAspectRatio(const float& aspect_ratio)
+{
+	frustum.SetHorizontalFovAndAspectRatio(frustum.HorizontalFov(), aspect_ratio);
+
+	UpdateFrustumPlanes();
+	UpdateFrustumVertices();
+
+	projection_update = true;
+}
+
+void ModuleComponentCamera::SetFrustumIsHidden(const bool& set_to)
+{
+	hide_frustum = set_to;
+}
+
+//Frustum ModuleComponentCamera::GetFrustum() const
+//{
+//	return frustum;
+//}

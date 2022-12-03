@@ -39,6 +39,10 @@ public:
 	bool FrustumCointainsAABB(const AABB& aabb) const;										
 	bool FrustumIntersectsAABB(const AABB& aabb) const;
 
+	void SetFarPlaneDistance(const float& far_distance);
+	void SetAspectRatio(const float& aspect_ratio);
+	void SetFrustumIsHidden(const bool& set_to);
+
 
 private:
 	Frustum frustum;																						

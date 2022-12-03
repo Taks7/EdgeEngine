@@ -1,6 +1,8 @@
 #pragma once
 #include "Module.h"
 #include "ModuleGameObject.h"
+#include "ModuleComponent.h"
+#include "ModuleComponentCamera.h"
 #include "Globals.h"
 #include "glmath.h"
 #include "MathGeo/src/Geometry/LineSegment.h";
@@ -22,6 +24,9 @@ public:
 	float* GetViewMatrix();
 	void CastRay();
 	void CreateGameCamera();
+	ModuleComponentCamera* GetCurrentCamera() const;
+	void SetCurrentCamera(ModuleComponentCamera* c_camera);
+	void SetMasterCameraAsCurrentCamera();
 private:
 
 	void CalculateViewMatrix();
@@ -32,7 +37,8 @@ private:
 	float3 ToFloat3(vec3 vec3);
 
 public:
-	
+
+	ModuleGameObject* master_camera;
 	vec3 X, Y, Z, Position, Reference;
 
 	float zoomSpeed;
@@ -42,6 +48,7 @@ public:
 	LineSegment	last_raycast;
 
 	ModuleGameObject* game_camera;
+	ModuleComponentCamera* current_camera;
 
 private:
 

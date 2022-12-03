@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleSceneIntro.h"
 #include "ModuleCamera3D.h"
 #include "Frustum.h"
 #include "ModuleComponentCamera.h"
@@ -7,12 +8,19 @@
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl2.h"
+
+#include <vector>
+#include "Frustum.h"
+#include "MathGeoLib.h"
+#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
+
 #define ZOOM_SPEED 2.0f
 #define ROTATION_SPEED 0.2f
 
 
 ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
+	/*CreateGameCamera();*/
 	name = "Camera";
 
 	CalculateViewMatrix();
@@ -177,10 +185,77 @@ bool ModuleCamera3D::Update(float dt)
 
 void ModuleCamera3D::CreateGameCamera()
 {
-	game_camera = App->scene_intro->CreateEmptyGameObject("MasterCamera", nullptr);
+	game_camera = App->scene_intro->CreateEmptyGameObject("GameCamera", nullptr);
 	//game_camera->SetName("GameCamera");
 	game_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
+	/*game_camera->GetCameraComponent()->SetFarPlaneDistance(1000.0f);*/
+	ModuleComponentCamera* cameraCreated = (ModuleComponentCamera*)game_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+	cameraCreated->SetFarPlaneDistance(1000.0f);
 
+	SetCurrentCamera(cameraCreated);
+
+	if (App != nullptr)
+	{
+		float win_width = (float)App->window->GetWidht();
+		float win_height = (float)App->window->GetHeight();
+
+		cameraCreated->SetAspectRatio(win_width / win_height);
+	}
+
+}
+
+ModuleComponentCamera* ModuleCamera3D::GetCurrentCamera() const
+{
+	return current_camera;
+}
+
+void ModuleCamera3D::SetCurrentCamera(ModuleComponentCamera* module_component_camera)
+{
+	if (module_component_camera == nullptr)
+	{
+		LOG_COMMENT("[ERROR] Camera: Could not set a new current camera! Error: Given Camera Component was nullptr.");
+		return;
+	}
+
+	if (module_component_camera->GetOwner() == nullptr)																						
+	{
+		LOG_COMMENT("[ERROR] Camera: Could not set a new current camera! Error: Given Camera Component's owner was nullptr.");
+		return;
+	}
+	//Error Frustum
+	/*if (current_camera != nullptr)
+	{
+		current_camera->SetFrustumIsHidden(false);
+	}*/
+	
+	module_component_camera->SetFrustumIsHidden(true);
+	current_camera = module_component_camera;
+	current_camera->SetUpdateProjectionMatrix(true);
+	
+	if (App != nullptr)																										
+	{
+		current_camera->SetAspectRatio(((float)App->window->GetHeight()) / ((float)App->window->GetHeight()));
+	}
+}
+
+void ModuleCamera3D::SetMasterCameraAsCurrentCamera()
+{
+	current_camera->SetFrustumIsHidden(false);
+	
+	if (master_camera == nullptr)
+	{
+		CreateGameCamera();
+	}
+
+	ModuleComponentCamera* masterCamera = (ModuleComponentCamera*)master_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+	if (masterCamera == nullptr)
+	{
+		master_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
+		/*ModuleComponentCamera* masterCamera = (ModuleComponentCamera*)master_camera;*/
+	}
+
+	current_camera = (ModuleComponentCamera*)master_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+	current_camera->SetUpdateProjectionMatrix(true);
 }
 
 void ModuleCamera3D::CastRay()

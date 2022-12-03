@@ -5,6 +5,7 @@
 #include "ModuleComponentMaterial.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
+#include "ModuleComponentCamera.h"
 
 InspectorMenu::InspectorMenu()
 {
@@ -218,7 +219,7 @@ void InspectorMenu::DrawMaterialComponent()
 	if (ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		ModuleComponentMaterial* material = (ModuleComponentMaterial*)selectedGameObject->GetComponent(COMPONENT_TYPES::MATERIAL);
-
+		
 		if (material->materialUsed != nullptr)
 		{
 			if (material->materialUsed != nullptr)
@@ -257,5 +258,18 @@ void InspectorMenu::DrawMaterialComponent()
 
 void InspectorMenu::DrawCameraComponent()
 {
-	
+	if (ImGui::CollapsingHeader("Camera View Selector", ImGuiTreeNodeFlags_DefaultOpen))
+	{
+		ModuleComponentCamera* camera = (ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA);
+
+		if (ImGui::Button("Set Game Camera"))
+		{
+			App->camera->SetCurrentCamera(camera);
+		}
+
+		if (ImGui::Button("Return to Editor View Camera"))
+		{
+			App->camera->SetMasterCameraAsCurrentCamera();
+		}
+	}
 }
