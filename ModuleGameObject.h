@@ -46,6 +46,7 @@ public:
 	void SetName(const char* newName);
 	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
+	void UpdateBoundingBoxes();
 
 
 public:

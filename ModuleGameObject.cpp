@@ -28,6 +28,9 @@ bool ModuleGameObject::Update()
 			components[i]->Update();
 		}
 	}
+
+	UpdateBoundingBoxes();
+
 	return true;
 }
 
@@ -179,6 +182,25 @@ void ModuleGameObject::SetBB(bool state)
 	}
 }
 
+void ModuleGameObject::UpdateBoundingBoxes()
+{
+
+	for (uint i = 0; i < App->scene_intro->game_objects.size(); ++i)
+	{
+		ModuleComponentsMesh* mesh = (ModuleComponentsMesh*)App->scene_intro->game_objects.at(i)->GetComponent(COMPONENT_TYPES::MESH);
+		if (mesh == nullptr)
+		{
+			continue;
+		}
+		obb = mesh->mesh.GetAABB();
+		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)this->GetComponent(COMPONENT_TYPES::TRANSFORM);
+		obb.Transform(transform->GetGlobalMatrix());
+
+		aabb.SetNegativeInfinity();
+		aabb.Enclose(obb);
+	}
+}
+
 bool ModuleGameObject::AddChild(ModuleGameObject* child)
 {
 	child->parent = this;
@@ -230,3 +252,4 @@ std::string ModuleGameObject::GetTexturePath()
 		}
 	}
 }
+

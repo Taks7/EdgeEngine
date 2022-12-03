@@ -66,3 +66,8 @@ ModuleGameObject* ModuleComponents::GetOwner() const
 	return owner;
 }
 
+COMPONENT_TYPES ModuleComponents::GetType() const
+{
+	return type;
+}
+
