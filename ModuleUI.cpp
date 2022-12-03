@@ -303,18 +303,18 @@ void ModuleUI::MainMenu()
 		{
 			if (ImGui::MenuItem("Load Cube"))
 			{
-				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSCube", nullptr), "Assets/BSCube.fbx", nullptr);
+				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSCube", nullptr), "Assets/Models/BSCube.fbx", nullptr);
 				LOG_COMMENT("[SCENE] Created a Cube Basic Shape")
 			}
 			if (ImGui::MenuItem("Load Triangle"))
 			{
-				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSTriangle", nullptr), "Assets/BSTriangle.fbx", nullptr);
+				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSTriangle", nullptr), "Assets/Models/BSTriangle.fbx", nullptr);
 				LOG_COMMENT("[SCENE] Created a Triangle Basic Shape")
 			}
 
 			if (ImGui::MenuItem("Load Sphere"))
 			{
-				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSSphere", nullptr), "Assets/BSSphere.fbx", nullptr);
+				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("BSSphere", nullptr), "Assets/Models/BSSphere.fbx", nullptr);
 				LOG_COMMENT("[SCENE] Created a Sphere Basic Shape")
 			}
 
