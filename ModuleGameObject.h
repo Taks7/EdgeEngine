@@ -48,6 +48,7 @@ public:
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 	void UpdateBoundingBoxes();
 
+	AABB GetAABB();
 
 public:
 
@@ -69,7 +70,7 @@ public:
 	bool is_active;
 	bool is_static;
 	bool selectedForInspector = false;
-	bool bouindingBoxes = true;
+	bool bouindingBoxes = false;
 private:
 	uint id;
 	

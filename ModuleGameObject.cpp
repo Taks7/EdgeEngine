@@ -253,3 +253,7 @@ std::string ModuleGameObject::GetTexturePath()
 	}
 }
 
+AABB ModuleGameObject::GetAABB()
+{
+	return aabb;
+}
