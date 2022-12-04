@@ -11,14 +11,17 @@ public:
 
 	void Draw() override;
 
-	void PopUpOptions(ModuleGameObject* gameObject);
+	void PopUpOptions();
 
 	void ProcessGameObject(ModuleGameObject* GameObject);
+
+	void SetHovered();
 
 	
 public:
 
-	bool showPopUp;
+	bool showPopUp = false;
+	bool hovered = false;
 };
 #endif // !_ABOUT_MENU_H
 

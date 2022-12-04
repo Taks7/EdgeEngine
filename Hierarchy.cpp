@@ -23,30 +23,46 @@ void Hierarchy::Draw()
 		ImGui::SetWindowPos({ 0,20 });
 		ImGui::SetWindowSize({ 300,550});
 		ProcessGameObject(App->scene_intro->rootObject);
+		if (showPopUp)
+		{
+			PopUpOptions();
+		}
 	}
 	ImGui::End();
 
 }
 
-void Hierarchy::PopUpOptions(ModuleGameObject* gameObject)
+void Hierarchy::PopUpOptions()
 {
-	ImGui::Begin("Tools");
-
-	if(ImGui::BeginChild("Hierarchy Tools"))
+	ImGui::OpenPopup("Hierarchy Tools");
+	if (ImGui::BeginPopup("Hierarchy Tools"))
 	{
 		if (ImGui::MenuItem("Delete Selected"))
 		{
-			
+			if (App->scene_intro->GetSelectedGameObject() != App->scene_intro->rootObject)
+			{
+				
+				showPopUp = false;
+			}
+			else
+			{
+				LOG_COMMENT("[WARNING] The Scene's Root Object cannot be deleted!");
+			}
 		}
 
 		if (ImGui::MenuItem("Create Empty Child GameObject"))
 		{
-
+			App->scene_intro->CreateEmptyGameObject("Empty Child", App->scene_intro->GetSelectedGameObject());
+			showPopUp = false;
 		}
 
-		ImGui::EndChild();
+		ImGui::EndPopup();
 	}
-	ImGui::End();
+
+	if (ImGui::IsMouseReleased(0))
+	{
+		showPopUp = false;
+	}
 }
 
 void Hierarchy::ProcessGameObject(ModuleGameObject* GameObject)
@@ -78,6 +94,7 @@ void Hierarchy::ProcessGameObject(ModuleGameObject* GameObject)
 			if (ImGui::IsItemClicked(ImGuiMouseButton_Right))								
 			{																				
 				App->scene_intro->SelectItem(GameObject);
+				showPopUp = true;
 			}																				
 			
 		}
@@ -91,5 +108,17 @@ void Hierarchy::ProcessGameObject(ModuleGameObject* GameObject)
 		}
 
 		ImGui::TreePop();
+	}
+}
+
+void Hierarchy::SetHovered()
+{
+	if (ImGui::IsWindowHovered())
+	{
+		hovered = true;
+	}
+	else
+	{
+		hovered = false;
 	}
 }

@@ -268,7 +268,7 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 				glEnableClientState(GL_VERTEX_ARRAY);
 				// Render things in Element mode
 				glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_vertex);
-				glVertexPointer(3, GL_FLOAT, 0, NULL);
+				glVertexPointer(3, GL_FLOAT, 0, nullptr);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh->mesh.id_index);
 
 
@@ -322,7 +322,7 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 				{
 					if (NewMaterial->materialUsed != nullptr)
 					{
-						glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+						glTexCoordPointer(3, GL_FLOAT, 0, nullptr);
 						glBindTexture(GL_TEXTURE_2D, NewMaterial->materialUsed->id);
 					}
 				}
@@ -334,7 +334,7 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 
 
 
-				glDrawElements(GL_TRIANGLES, NewMesh->mesh.num_index, GL_UNSIGNED_INT, NULL);
+				glDrawElements(GL_TRIANGLES, NewMesh->mesh.num_index, GL_UNSIGNED_INT, nullptr);
 
 				glBindTexture(GL_TEXTURE_2D, 0);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
