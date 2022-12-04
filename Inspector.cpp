@@ -19,7 +19,7 @@ InspectorMenu::~InspectorMenu()
 
 void InspectorMenu::Draw()
 {
-	selectedGameObject = GetSelectedGameObject();
+	ModuleGameObject* selectedGameObject = App->scene_intro->GetSelectedGameObject();
 
 	ImGui::Begin("Inspector");
 	{
@@ -29,30 +29,17 @@ void InspectorMenu::Draw()
 		
 		
 		
-		if (selectedGameObject != nullptr)
+		if (selectedGameObject != nullptr && selectedGameObject != App->scene_intro->rootObject)
 		{
 			DrawInfoOfGameObject(selectedGameObject);
-			DrawGameObjectComponents();
+			DrawGameObjectComponents(selectedGameObject);
 		}
 	}
 	ImGui::End();
 
 }
 
-ModuleGameObject* InspectorMenu::GetSelectedGameObject()
-{
-	ModuleGameObject* selectedGameObject;
-	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
-	{
-		if (App->scene_intro->game_objects[i]->IsSelected())
-		{
-			selectedGameObject = App->scene_intro->game_objects[i];
-			return selectedGameObject;
-		}
-	}
 
-	return nullptr;
-}
 void InspectorMenu::DrawInfoOfGameObject(ModuleGameObject* game_object)
 {
 	bool gameObjectActive = game_object->IsActive();
@@ -84,7 +71,7 @@ void InspectorMenu::DrawInfoOfGameObject(ModuleGameObject* game_object)
 
 }
 
-void InspectorMenu::DrawGameObjectComponents()
+void InspectorMenu::DrawGameObjectComponents(ModuleGameObject* selectedGameObject)
 {
 	for (uint i = 0; i < selectedGameObject->components.size(); i++)
 	{
@@ -96,22 +83,22 @@ void InspectorMenu::DrawGameObjectComponents()
 			{
 				case COMPONENT_TYPES::MESH:
 				{
-					DrawMeshComponent();
+					DrawMeshComponent(selectedGameObject);
 					break;
 				}
 				case COMPONENT_TYPES::MATERIAL:
 				{
-					DrawMaterialComponent();
+					DrawMaterialComponent(selectedGameObject);
 					break;
 				}
 				case COMPONENT_TYPES::TRANSFORM:
 				{
-					DrawTransformComponent();
+					DrawTransformComponent(selectedGameObject);
 					break;
 				}
 				case COMPONENT_TYPES::CAMERA:
 				{
-					DrawCameraComponent();
+					DrawCameraComponent(selectedGameObject);
 					break;
 				}
 
@@ -125,7 +112,7 @@ void InspectorMenu::DrawGameObjectComponents()
 	}
 }
 
-void InspectorMenu::DrawTransformComponent()
+void InspectorMenu::DrawTransformComponent(ModuleGameObject* selectedGameObject)
 {
 	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
 	{
@@ -177,7 +164,7 @@ void InspectorMenu::DrawTransformComponent()
 	}
 }
 
-void InspectorMenu::DrawMeshComponent()
+void InspectorMenu::DrawMeshComponent(ModuleGameObject* selectedGameObject)
 {
 	if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
 	{
@@ -214,7 +201,7 @@ void InspectorMenu::DrawMeshComponent()
 	}
 }
 
-void InspectorMenu::DrawMaterialComponent()
+void InspectorMenu::DrawMaterialComponent(ModuleGameObject* selectedGameObject)
 {
 	if (ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
 	{
@@ -256,7 +243,7 @@ void InspectorMenu::DrawMaterialComponent()
 	}
 }
 
-void InspectorMenu::DrawCameraComponent()
+void InspectorMenu::DrawCameraComponent(ModuleGameObject* selectedGameObject)
 {
 	if (ImGui::CollapsingHeader("Camera View Selector", ImGuiTreeNodeFlags_DefaultOpen))
 	{

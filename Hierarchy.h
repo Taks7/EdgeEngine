@@ -11,11 +11,9 @@ public:
 
 	void Draw() override;
 
-	void GameObjectList();
-
-	void ChildrenList(ModuleGameObject* gameObject);
-
 	void PopUpOptions(ModuleGameObject* gameObject);
+
+	void ProcessGameObject(ModuleGameObject* GameObject);
 
 	
 public:

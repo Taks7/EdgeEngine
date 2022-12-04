@@ -28,6 +28,7 @@ public:
 	inline const ResourceType& GetType() const { return type; }
 	inline const uint& GetUID() const { return uid; }
 	inline const std::string& GetAssetsPath() const { return assetsPath; }
+	inline const std::string& GetAssetsFile() const { return assetsFile; }
 	inline const std::string& GetLibraryPath() const { return libraryPath; }
 	inline const std::string& GetName() const { return name; }
 
@@ -36,6 +37,7 @@ protected:
 	ResourceType type;
 
 	std::string assetsPath;
+	std::string assetsFile;
 	std::string libraryPath;
 	std::string name;
 };

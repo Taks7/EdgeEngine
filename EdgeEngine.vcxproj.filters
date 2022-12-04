@@ -49,6 +49,9 @@
     <Filter Include="Sources\Modules\UI\Project">
       <UniqueIdentifier>{3ce957fa-3cb2-4def-992a-55ab65e330f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Resources">
+      <UniqueIdentifier>{310abbe6-8bdd-4a60-a774-47ccc4cad8e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -366,9 +369,6 @@
     <ClInclude Include="ModuleFileSystem.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="AssimpDefs.h">
       <Filter>Sources\Tools\Assimp</Filter>
     </ClInclude>
@@ -416,6 +416,9 @@
     </ClInclude>
     <ClInclude Include="FSdefinitions.h">
       <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Sources\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

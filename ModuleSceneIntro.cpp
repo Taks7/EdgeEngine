@@ -20,9 +20,10 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	App->camera->LookAtFloat3(float3::zero);
-
+	
 	CreateSceneCamera();
 
+	
 	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));*/
 
@@ -107,35 +108,46 @@ bool ModuleSceneIntro::PostUpdate()
 
 ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, ModuleGameObject* parent)
 {
-	if (parent == nullptr)
+	if (game_objects.empty())
 	{
-		std::string gameObjName = name;
+		CreateMasterGameObject();
 
-		if (!game_objects.empty())
+		return rootObject;
+	}
+	else if (!game_objects.empty())
+	{
+		if (parent == nullptr)
 		{
-			gameObjName += std::to_string(game_objects.size());
+			std::string gameObjName = name;
+
+			if (!game_objects.empty())
+			{
+				gameObjName += std::to_string(game_objects.size());
+			}
+			ModuleGameObject* gameObject = new ModuleGameObject(game_objects.size(), gameObjName, true, false);
+			gameObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
+			gameObject->CreateComponent(COMPONENT_TYPES::MESH);
+			gameObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
+			//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
+			game_objects.push_back(gameObject);
+			rootObject->childs.push_back(gameObject);
+			return gameObject;
 		}
-		ModuleGameObject* gameObject = new ModuleGameObject(game_objects.size(), gameObjName, true, false);
-		gameObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
-		gameObject->CreateComponent(COMPONENT_TYPES::MESH);
-		gameObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
-		//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
-		game_objects.push_back(gameObject);
-		return gameObject;
+
+
+		if (parent != nullptr)
+		{
+			ModuleGameObject* gameObject_child = new ModuleGameObject(parent->childs.size(), name, true, false);
+			gameObject_child->CreateComponent(COMPONENT_TYPES::MATERIAL);
+			gameObject_child->CreateComponent(COMPONENT_TYPES::MESH);
+			gameObject_child->CreateComponent(COMPONENT_TYPES::TRANSFORM);
+			//gameObject_child->CreateComponent(COMPONENT_TYPES::CAMERA);
+			parent->childs.push_back(gameObject_child);
+			return gameObject_child;
+
+		}
 	}
 	
-
-	if (parent != nullptr)
-	{
-		ModuleGameObject* gameObject_child = new ModuleGameObject(parent->childs.size(), name, true, false);
-		gameObject_child->CreateComponent(COMPONENT_TYPES::MATERIAL);
-		gameObject_child->CreateComponent(COMPONENT_TYPES::MESH);
-		gameObject_child->CreateComponent(COMPONENT_TYPES::TRANSFORM);
-		//gameObject_child->CreateComponent(COMPONENT_TYPES::CAMERA);
-		parent->childs.push_back(gameObject_child);
-		return gameObject_child;
-
-	}
 	
 }
 void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, ModuleGameObject*>& hits)
@@ -198,8 +210,10 @@ void ModuleSceneIntro::SelectItem(ModuleGameObject* game_object)
 		}
 	}
 	
-	game_object->selectedForInspector = !game_object->selectedForInspector;
-	App->scene_intro->rootObject = game_object;
+	game_object->selectedForInspector = true;
+
+	selectedGameObject = game_object;
+	//App->scene_intro->rootObject = game_object;
 }
 
 
@@ -257,4 +271,21 @@ void ModuleSceneIntro::CreateSceneCamera()
 //	}
 //
 //}
+
+
+ModuleGameObject* ModuleSceneIntro::CreateMasterGameObject()
+{
+	rootObject = new ModuleGameObject(game_objects.size(), "Main scene", true, true);
+	rootObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
+	rootObject->CreateComponent(COMPONENT_TYPES::MESH);
+	rootObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
+	//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
+	game_objects.push_back(rootObject);
+	return rootObject;
+}
+
+ModuleGameObject* ModuleSceneIntro::GetSelectedGameObject()
+{
+	return selectedGameObject;
+}
 

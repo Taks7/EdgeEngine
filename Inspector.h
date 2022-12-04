@@ -9,16 +9,15 @@ public:
 	InspectorMenu();
 	virtual ~InspectorMenu();
 
-	ModuleGameObject* GetSelectedGameObject();
 	void DrawInfoOfGameObject(ModuleGameObject* game_object);
-	void DrawGameObjectComponents();
-	void DrawTransformComponent();
-	void DrawMeshComponent();
-	void DrawMaterialComponent();
-	void DrawCameraComponent();
+	void DrawGameObjectComponents(ModuleGameObject* selectedGameObject);
+	void DrawTransformComponent(ModuleGameObject* selectedGameObject);
+	void DrawMeshComponent(ModuleGameObject* selectedGameObject);
+	void DrawMaterialComponent(ModuleGameObject* selectedGameObject);
+	void DrawCameraComponent(ModuleGameObject* selectedGameObject);
 	void Draw() override;
 
-	ModuleGameObject* selectedGameObject;
+	
 
 };
 #endif // !_ABOUT_MENU_H

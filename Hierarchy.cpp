@@ -22,70 +22,10 @@ void Hierarchy::Draw()
 	{
 		ImGui::SetWindowPos({ 0,20 });
 		ImGui::SetWindowSize({ 300,550});
-		GameObjectList();
+		ProcessGameObject(App->scene_intro->rootObject);
 	}
 	ImGui::End();
 
-}
-
-void Hierarchy::GameObjectList()
-{
-	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
-	
-
-	if (!App->scene_intro->game_objects.empty())
-	{
-		for (uint i = 0; i < App->scene_intro->game_objects.size(); i++)
-		{
-			
-			if (App->scene_intro->game_objects[i]->childs.empty())
-			{
-				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
-				{
-					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
-					{
-						App->scene_intro->SelectItem(App->scene_intro->game_objects[i]);
-					}
-				}
-			}
-			
-			if (!App->scene_intro->game_objects[i]->childs.empty())
-			{
-				ImGui::MenuItem(App->scene_intro->game_objects[i]->GetName().c_str());
-				{
-					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
-					{
-						App->scene_intro->SelectItem(App->scene_intro->game_objects[i]);
-					}
-				}
-				//if(ImGui::TreeNodeEx(App->scene_intro->game_objects[i]->GetName().c_str(),flags))
-				//{
-				//	//ChildrenList((App->scene_intro->game_objects[i]));
-
-				//	if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
-				//	{
-				//		App->scene_intro->game_objects[i]->SelectItem();
-
-				//	}
-
-				//	if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
-				//	{
-				//		PopUpOptions(App->scene_intro->game_objects[i]);
-				//	}
-				//	//Por ahora dejamos esto comentado que no workea del todo bien //
-				//	
-				//	
-				//
-				//	ImGui::TreePop();
-				//}
-			
-			}
-
-		}
-		
-	}
-
-	
 }
 
 void Hierarchy::PopUpOptions(ModuleGameObject* gameObject)
@@ -109,20 +49,47 @@ void Hierarchy::PopUpOptions(ModuleGameObject* gameObject)
 	ImGui::End();
 }
 
-
-void Hierarchy::ChildrenList(ModuleGameObject* gameObject)
+void Hierarchy::ProcessGameObject(ModuleGameObject* GameObject)
 {
-	for (int j = 0; j < gameObject->childs.size(); j++)
-	{
-		ImGui::MenuItem(gameObject->childs.at(j)->GetName().c_str());
-		{
-			/*if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
-			{
-				gameObject->childs.at(j)->SelectItem();
+	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
 
-			}*/
+
+	if (GameObject->childs.empty())
+	{
+		node_flags |= ImGuiTreeNodeFlags_Leaf;
+	}
+	if (GameObject == App->scene_intro->rootObject)
+	{
+		node_flags |= ImGuiTreeNodeFlags_DefaultOpen;
+	}
+	if (GameObject ==App->scene_intro->GetSelectedGameObject())
+	{
+		node_flags |= ImGuiTreeNodeFlags_Selected;
+	}
+	if (ImGui::TreeNodeEx(GameObject->GetName().c_str(), node_flags))
+	{
+		if (GameObject != App->scene_intro->rootObject)
+		{
+			if (ImGui::IsItemClicked(ImGuiMouseButton_Left))								
+			{																				
+				App->scene_intro->SelectItem(GameObject);
+			}																				
+
+			if (ImGui::IsItemClicked(ImGuiMouseButton_Right))								
+			{																				
+				App->scene_intro->SelectItem(GameObject);
+			}																				
+			
 		}
 
+		if (!GameObject->childs.empty())
+		{
+			for (uint i = 0; i < GameObject->childs.size(); ++i)
+			{
+				ProcessGameObject(GameObject->childs[i]);
+			}
+		}
 
+		ImGui::TreePop();
 	}
 }
