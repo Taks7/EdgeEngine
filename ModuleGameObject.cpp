@@ -12,12 +12,16 @@ ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool
 ,parent(nullptr)
 {
 	name = "GameObject";
+
+	aabb.SetNegativeInfinity();
+	obb.SetNegativeInfinity();
+
+	
 }
 
 // Destructor
 ModuleGameObject::~ModuleGameObject()
 {
-
 }
 bool ModuleGameObject::Update()
 {

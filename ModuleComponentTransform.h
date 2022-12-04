@@ -7,6 +7,7 @@
 #include "MathGeo/src/Math/float4x4.h"
 #include "MathGeo/src/Math/float3.h"
 #include "MathGeo/src/Math/float3x3.h"
+#include "MathGeo/src/Math/TransformOps.h"
 #include <string>
 
 class ModuleGameObject;
@@ -20,39 +21,43 @@ public:
 	virtual bool	Update();
 	virtual bool	CleanUp();
 
-	void Transform();
-
-	float3 GetPosition() const;
-	float3 GetRotation() const;
-	float3 GetScale() const;
-
-	void SetPosition(const float3& position_);
-	void SetRotation(const float3& rotation_);
-	void SetScale(const float3& scale_);
+	void SyncLocalToWorld();
+	void SyncWorldToLocal();
 
 	void UpdateWorldTransform();
 	void UpdateLocalTransform();
 
-	void SyncLocalToWorld();
 
-	float4x4 GetGlobalMatrix();
-	float3 GetGlobalPosition();
+	
+	//LOCAL
+	void SetLocalTransform(const float4x4& localTransform);
+	
+	void SetPosition(const float3& position_);
+	void SetRotation(const float3& rotation_);
+	void SetScale(const float3& scale_);
+	void SetLocalEulerRotation(const float3& euler_rotation);
 
-	float4x4 GetWorldTransform() const;
+	float3 GetPosition() const;
+	Quat GetRotation() const;
+	float3 GetScale() const;
+	float3 GetLocalEulerRotation() const;
+	float4x4 GetLocalTransform() const;
+
+	//WORLD
 	void SetWorldTransform(const float4x4& world_transform);
-	void SetLocalPosition(const float3& new_position);
+
+	void SetGlobalPosition(const float3& position_);
+	void SetGlobalRotation(const float3& rotation_);
+	void SetGlobalScale(const float3& scale_);
+
+	float4x4 GetGlobalMatrix() const;
+	float3 GetGlobalPosition() const;
+	Quat GetGlobalRotation() const;
+	float3 GetGlobalScale() const;
+	float3 GetGlobalEulerRotation() const;
+	
 
 private:
-
-	float4x4	matrix;
-
-	float4x4	GlobalMatrix;
-
-	float3		position = {0,0,0};
-	Quat	rotation;
-	float3		scale = {1,1,1};
-
-	float3		euler_rotation = {0,0,0};
 
 	float4x4	local_transform;													
 	float4x4	world_transform;		
@@ -68,7 +73,9 @@ private:
 	bool		is_active;
 
 private: 
+	//LOCAL
 	void UpdateMatrix();
+	//WORLD
 	void UpdateGlobalMatrix();
 };
 

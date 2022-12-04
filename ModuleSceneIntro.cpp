@@ -155,7 +155,7 @@ void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, Mo
 	for (uint i = 0; i < game_objects.size(); ++i)
 	{
 		
-		if (ray.Intersects(game_objects.at(i)->GetAABB()))
+		if (ray.Intersects(game_objects[i]->GetAABB()))
 		{
 			ModuleComponentsTransform* gameObjTransform = (ModuleComponentsTransform*)game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
 			float3 position = gameObjTransform->GetGlobalPosition();
@@ -248,7 +248,7 @@ void ModuleSceneIntro::CreateSceneCamera()
 	cameraSceneCreated->SetAspectRatio(App->window->GetWidht() / App->window->GetHeight());
 
 	ModuleComponentsTransform* setLocalPos = (ModuleComponentsTransform*)scene_camera->GetComponent(COMPONENT_TYPES::TRANSFORM);
-	setLocalPos->SetLocalPosition(float3(0.0f, 5.0f, 25.0f));
+	setLocalPos->SetPosition(float3(0.0f, 5.0f, 25.0f));
 }
 
 //void ModuleCamera3D::CreateGameCamera()

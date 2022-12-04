@@ -69,7 +69,7 @@ void ModuleComponentCamera::UpdateFrustumTransform()
 {
 
 	ModuleComponentsTransform* getWorldTransfrom = (ModuleComponentsTransform*)this->GetOwner()->GetComponent(COMPONENT_TYPES::TRANSFORM);
-	float4x4 world_transform = getWorldTransfrom->GetWorldTransform();
+	float4x4 world_transform = getWorldTransfrom->GetGlobalMatrix();
 
 	float3x4 world_matrix = float3x4::identity;
 

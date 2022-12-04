@@ -144,7 +144,7 @@ void InspectorMenu::DrawTransformComponent(ModuleGameObject* selectedGameObject)
 
 			ImGui::SameLine(100.0f);
 
-			float3 rotation = transform->GetRotation() * RADTODEG;
+			float3 rotation = transform->GetLocalEulerRotation() * RADTODEG;
 			float rot[3] = { rotation.x, rotation.y, rotation.z };
 			if (ImGui::DragFloat3("Rotation", rot, 1.0f, 0.0f, 0.0f, "%.3f", NULL))
 			{
