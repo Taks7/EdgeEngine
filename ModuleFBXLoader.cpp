@@ -75,6 +75,8 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 			{
 				NewMesh = (ModuleComponentsMesh*)owner->GetComponent(COMPONENT_TYPES::MESH);
 				MaterialUsed = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
+
+				NewMesh->meshPath = file_path;
 				
 			}
 			if (i > 0)
@@ -83,6 +85,8 @@ bool ModuleFBXLoader::LoadMeshToGameObject(ModuleGameObject* owner,const char* f
 
 				NewMesh = (ModuleComponentsMesh*)child->GetComponent(COMPONENT_TYPES::MESH);
 				MaterialUsed = (ModuleComponentMaterial*)child->GetComponent(COMPONENT_TYPES::MATERIAL);
+
+				NewMesh->meshPath = file_path;
 
 			}
 			

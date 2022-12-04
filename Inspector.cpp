@@ -180,11 +180,13 @@ void InspectorMenu::DrawMeshComponent(ModuleGameObject* selectedGameObject)
 
 			ImGui::Separator();
 
-			ImGui::Text("File path:");
+			if (mesh->meshPath != nullptr)
+			{
+				std::string meshPath = mesh->meshPath;
 
-			ImGui::SameLine();
-
-			ImGui::Text("WIP");
+				ImGui::Text("File: %s", meshPath);
+			}
+			
 			ImGui::Separator();
 
 			ImGui::Text("Mesh Info:");
