@@ -43,6 +43,8 @@ public:
 	void SetAspectRatio(const float& aspect_ratio);
 	void SetFrustumIsHidden(const bool& set_to);
 
+	void LookAt(const float3& target);
+
 
 private:
 	Frustum frustum;																						

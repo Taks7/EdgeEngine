@@ -22,6 +22,7 @@ public:
 	float3 GetPosition() const;
 	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
 	void LookAt(const vec3 &Spot);
+	void LookAtFloat3(const float3& Spot);
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
 	void CastRay();
@@ -50,6 +51,8 @@ public:
 
 	ModuleGameObject* game_camera;
 	ModuleComponentCamera* current_camera;
+
+	float3 reference;
 
 private:
 

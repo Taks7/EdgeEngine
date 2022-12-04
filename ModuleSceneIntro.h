@@ -7,6 +7,7 @@
 #include "ModuleGameObject.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
+#include "ModuleComponentCamera.h"
 
 class Primitive;
 class  PhysBody3D;
@@ -32,6 +33,8 @@ public:
 
 
 	float2 getWorldMosuePosition();
+
+	void CreateSceneCamera();
 
 	void SelectItem(ModuleGameObject* game_object);
 

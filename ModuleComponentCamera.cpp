@@ -65,6 +65,26 @@ void ModuleComponentCamera::InitFrustum()
 	UpdateFrustumVertices();
 }
 
+void ModuleComponentCamera::UpdateFrustumTransform()
+{
+
+	ModuleComponentsTransform* getWorldTransfrom = (ModuleComponentsTransform*)this->GetOwner()->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	float4x4 world_transform = getWorldTransfrom->GetWorldTransform();
+
+	float3x4 world_matrix = float3x4::identity;
+
+	world_matrix.SetTranslatePart(world_transform.TranslatePart());
+	world_matrix.SetRotatePart(world_transform.RotatePart());
+	world_matrix.Scale(world_transform.GetScale());
+
+	frustum.SetWorldMatrix(world_matrix);
+
+	UpdateFrustumPlanes();
+	UpdateFrustumVertices();
+
+	projection_update = true;
+}
+
 //void ModuleComponentCamera::UpdateFrustumTransform()
 //{
 //	float4x4 world_transform = this->GetOwner()->GetTransformComponent()->GetWorldTransform();
@@ -175,6 +195,25 @@ void ModuleComponentCamera::SetAspectRatio(const float& aspect_ratio)
 void ModuleComponentCamera::SetFrustumIsHidden(const bool& set_to)
 {
 	hide_frustum = set_to;
+}
+
+void ModuleComponentCamera::LookAt(const float3& target)
+{
+	
+	float3 new_Z = float3(target - frustum.Pos()).Normalized();											
+	float3x3 look_at_matrix = float3x3::LookAt(frustum.Front(), new_Z, frustum.Up(), float3::unitY);				
+	frustum.SetFront(look_at_matrix.MulDir(frustum.Front()).Normalized());
+	frustum.SetUp(look_at_matrix.MulDir(frustum.Up()).Normalized());
+
+	float4x4 world_matrix = frustum.WorldMatrix();
+
+	/*this->GetOwner()->GetTransformComponent()->SetWorldTransform(world_matrix);*/
+
+	ModuleComponentsTransform* transfromWorldMatrix;
+	transfromWorldMatrix = (ModuleComponentsTransform*)this->GetOwner()->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	transfromWorldMatrix->SetWorldTransform(world_matrix);
+
+
 }
 
 //Frustum ModuleComponentCamera::GetFrustum() const

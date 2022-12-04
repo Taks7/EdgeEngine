@@ -18,9 +18,15 @@ bool ModuleSceneIntro::Start()
 {
 	LOG_COMMENT("Loading Intro assets");
 	bool ret = true;
-	App->camera->CreateGameCamera();
+
+	App->camera->LookAtFloat3(float3::zero);
+
+	CreateSceneCamera();
+
 	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));*/
+
+
 
 	return ret;
 }
@@ -216,4 +222,39 @@ float2 ModuleSceneIntro::getWorldMosuePosition()
 	//return world_mouse_pos;
 	return screen_mouse_pos;
 }
+
+void ModuleSceneIntro::CreateSceneCamera()
+{
+	ModuleGameObject* scene_camera;
+
+	scene_camera = CreateEmptyGameObject("SceneCamera", nullptr);
+	scene_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
+
+	ModuleComponentCamera* cameraSceneCreated = (ModuleComponentCamera*)scene_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+	cameraSceneCreated->SetAspectRatio(App->window->GetWidht() / App->window->GetHeight());
+
+	ModuleComponentsTransform* setLocalPos = (ModuleComponentsTransform*)scene_camera->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	setLocalPos->SetLocalPosition(float3(0.0f, 5.0f, 25.0f));
+}
+
+//void ModuleCamera3D::CreateGameCamera()
+//{
+//	game_camera = App->scene_intro->CreateEmptyGameObject("SceneCamera", nullptr);
+//	//game_camera->SetName("GameCamera");
+//	game_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
+//	/*game_camera->GetCameraComponent()->SetFarPlaneDistance(1000.0f);*/
+//	ModuleComponentCamera* cameraCreated = (ModuleComponentCamera*)game_camera->GetComponent(COMPONENT_TYPES::CAMERA);
+//	cameraCreated->SetFarPlaneDistance(1000.0f);
+//
+//	SetCurrentCamera(cameraCreated);
+//
+//	if (App != nullptr)
+//	{
+//		float win_width = (float)App->window->GetWidht();
+//		float win_height = (float)App->window->GetHeight();
+//
+//		cameraCreated->SetAspectRatio(win_width / win_height);
+//	}
+//
+//}
 

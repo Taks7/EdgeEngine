@@ -340,6 +340,12 @@ void ModuleCamera3D::LookAt( const vec3 &Spot)
 	CalculateViewMatrix();
 }
 
+void ModuleCamera3D::LookAtFloat3(const float3& spot)											
+{
+	current_camera->LookAt(spot);
+	reference = spot;
+}
+
 
 // -----------------------------------------------------------------
 void ModuleCamera3D::Move(const vec3 &Movement)
