@@ -181,7 +181,7 @@ void InspectorMenu::DrawMeshComponent(ModuleGameObject* selectedGameObject)
 
 			ImGui::Separator();
 
-			if (mesh->meshPath != nullptr)
+			if (mesh->meshPath != nullptr && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA) == nullptr))
 			{
 				std::string meshPath = mesh->meshPath;
 
