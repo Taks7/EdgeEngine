@@ -23,7 +23,9 @@ public:
 	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
 	void LookAt(const vec3 &Spot);
 	void LookAtFloat3(const float3& Spot);
+	void FreeMovement();
 	void Move(const vec3 &Movement);
+	void MoveCameras(const float3& velocity);
 	float* GetViewMatrix();
 	void CastRay();
 	void CreateGameCamera();
@@ -43,6 +45,8 @@ public:
 
 	vec3 X, Y, Z, Position, Reference;
 
+	float movementSpeed;
+	float rotationSpeed;
 	float zoomSpeed;
 
 	Frustum frustum;

@@ -45,6 +45,8 @@ public:
 
 	void LookAt(const float3& target);
 
+	void Move(const float3& velocity);
+
 
 private:
 	Frustum frustum;																						

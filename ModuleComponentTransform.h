@@ -55,6 +55,8 @@ public:
 	Quat GetGlobalRotation() const;
 	float3 GetGlobalScale() const;
 	float3 GetGlobalEulerRotation() const;
+
+	void Translate(const float3& velocity);
 	
 
 private:

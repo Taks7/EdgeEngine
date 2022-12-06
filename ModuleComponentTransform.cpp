@@ -285,3 +285,10 @@ float3 ModuleComponentsTransform::GetGlobalEulerRotation() const
 {
 	return world_transform.RotatePart().ToEulerXYZ();
 }
+
+void ModuleComponentsTransform::Translate(const float3& velocity)
+{
+	local_position += velocity;
+
+	UpdateLocalTransform();
+}

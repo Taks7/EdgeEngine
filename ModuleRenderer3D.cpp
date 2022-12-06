@@ -150,8 +150,8 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 		}
 	}
 
-	glLoadMatrixf(App->camera->GetViewMatrix());
-	/*glLoadMatrixf((GLfloat*)camera->GetOGLViewMatrix());*/
+	/*glLoadMatrixf(App->camera->GetViewMatrix());*/
+	glLoadMatrixf((GLfloat*)camera->GetOGLViewMatrix());
 
 	float3 camera_position = float3::zero;
 	if (App->camera->GetCurrentCamera() != nullptr)
@@ -384,13 +384,16 @@ void ModuleRenderer3D::OnResize(int width, int height)
 {
 	glViewport(0, 0, width, height);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
-	glLoadMatrixf(&ProjectionMatrix);
+	if (App->camera->GetCurrentCamera() != nullptr)
+	{
+		App->camera->GetCurrentCamera()->SetAspectRatio(width / height);
+	}
+	else
+	{
+		LOG_COMMENT("[ERROR] Renderer 3D: Could not recalculate the aspect ratio! Error: Current Camera was nullptr.");
+	}
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	RecalculateProjectionMatrix();
 }
 
 void ModuleRenderer3D::LoadCheckerTexture()

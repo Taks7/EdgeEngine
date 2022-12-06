@@ -216,6 +216,13 @@ void ModuleComponentCamera::LookAt(const float3& target)
 
 }
 
+void ModuleComponentCamera::Move(const float3& velocity)
+{
+	ModuleComponentsTransform* moveCameras;
+	moveCameras = (ModuleComponentsTransform*)this->GetOwner()->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	moveCameras->Translate(velocity);
+}
+
 //Frustum ModuleComponentCamera::GetFrustum() const
 //{
 //	return frustum;
