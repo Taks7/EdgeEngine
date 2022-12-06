@@ -252,6 +252,10 @@ void InspectorMenu::DrawCameraComponent(ModuleGameObject* selectedGameObject)
 	{
 		ModuleComponentCamera* camera = (ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA);
 
+		
+
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Camera Selector:");
+
 		if (ImGui::Button("Set Game Camera"))
 		{
 			App->camera->SetCurrentCamera(camera);
@@ -261,5 +265,46 @@ void InspectorMenu::DrawCameraComponent(ModuleGameObject* selectedGameObject)
 		{
 			App->camera->SetMasterCameraAsCurrentCamera();
 		}
+
+		ImGui::Separator();
+
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Camera Settings:");
+
+		bool camera_is_orthogonal = camera->OrthogonalView();
+		if (ImGui::Checkbox("Select Orthogonal", &camera_is_orthogonal))
+		{
+			camera->SetOrthogonalView(camera_is_orthogonal);
+		}
+
+		bool frustum_is_hidden = camera->FrustumIsHidden();
+		if (ImGui::Checkbox("Hide Frustum", &frustum_is_hidden))
+		{
+			camera->SetFrustumIsHidden(frustum_is_hidden);
+		}
+
+		ImGui::Separator();
+
+		float near_plane_distance = camera->GetNearPlaneDistance();
+		if (ImGui::SliderFloat("Near Plane", &near_plane_distance, 0.1f, 1000.0f, "%.3f", 0))
+		{
+			camera->SetNearPlaneDistance(near_plane_distance);
+		}
+
+		float far_plane_distance = camera->GetFarPlaneDistance();
+		if (ImGui::SliderFloat("Far Plane", &far_plane_distance, 0.1f, 1000.0f, "%.3f", 0))
+		{
+			camera->SetFarPlaneDistance(far_plane_distance);
+		}
+
+		int fov = (int)camera->GetVerticalFOV();
+		uint min_fov = 0;
+		uint max_fov = 0;
+		camera->GetMinMaxFOV(min_fov, max_fov);
+		if (ImGui::SliderInt("FOV", &fov, min_fov, max_fov, "%d"))
+		{
+			camera->SetVerticalFOV((float)fov);
+		}
+
+		
 	}
 }

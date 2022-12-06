@@ -39,15 +39,33 @@ public:
 	bool FrustumCointainsAABB(const AABB& aabb) const;										
 	bool FrustumIntersectsAABB(const AABB& aabb) const;
 
-	void SetFarPlaneDistance(const float& far_distance);
 	void SetAspectRatio(const float& aspect_ratio);
-	void SetFrustumIsHidden(const bool& set_to);
 
 	void LookAt(const float3& target);
 	void Focus(const float3& target, const float& distance_to_target);
 	void SetPosition(const float3& position);
 	void Move(const float3& velocity);
 	void PointAt(const float3& position, const float3& target);
+
+	float GetNearPlaneDistance() const;
+	float GetFarPlaneDistance() const;
+	float GetHorizontalFOV() const;
+	float GetVerticalFOV() const;
+
+	void SetNearPlaneDistance(const float& near_distance);
+	void SetFarPlaneDistance(const float& far_distance);
+	void SetHorizontalFOV(const float& horizontal_fov);									
+	void SetVerticalFOV(const float& vertical_fov);
+
+	void GetMinMaxFOV(uint& min_fov, uint& max_fov) const;
+	void SetMinMaxFOV(const uint& min_fov, const uint& max_fov);																								
+	bool IsCulling() const;
+	bool OrthogonalView() const;
+	bool FrustumIsHidden() const;
+
+	/*void SetIsCulling(const bool& set_to);*/
+	void SetOrthogonalView(const bool& set_to);
+	void SetFrustumIsHidden(const bool& set_to);
 
 
 private:
@@ -57,7 +75,11 @@ private:
 	float3* frustum_vertices;																				
 	bool	show_culling;																						
 	bool	show_orthogonal;																			
-	bool	hide_frustum;																					
+	bool	hide_frustum;
+	uint	min_fov = 1;																					
+	uint	max_fov = 120;																						
+	bool	is_culling;																					
+	bool	in_orthogonal_view;																				
 	bool	projection_update;																		
 };
 

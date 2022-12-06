@@ -249,6 +249,122 @@ void ModuleComponentCamera::PointAt(const float3& position, const float3& target
 	LookAt(target);
 }
 
+float ModuleComponentCamera::GetNearPlaneDistance() const
+{
+	return frustum.NearPlaneDistance();
+}
+
+float ModuleComponentCamera::GetFarPlaneDistance() const
+{
+	return frustum.FarPlaneDistance();
+}
+
+float ModuleComponentCamera::GetHorizontalFOV() const
+{
+	return (frustum.HorizontalFov() * RADTODEG);
+}
+
+float ModuleComponentCamera::GetVerticalFOV() const
+{
+	return (frustum.VerticalFov() * RADTODEG);
+}
+
+void ModuleComponentCamera::SetNearPlaneDistance(const float& near_distance)
+{
+	if (near_distance < 0)
+	{
+		LOG_COMMENT("[ERROR] Component Camera: Cannot set the new distance of the near plane! Error: New near distance < 0.");
+		return;
+	}
+
+	if (near_distance > frustum.FarPlaneDistance())
+	{
+		LOG_COMMENT("[ERROR] Component Camera: Cannot set the new distance of the near plane! Error: New near distance > far distance.");
+		return;
+	}
+
+	frustum.SetViewPlaneDistances(near_distance, frustum.FarPlaneDistance());
+
+	UpdateFrustumPlanes();
+	UpdateFrustumVertices();
+
+	projection_update = true;
+}
+
+void ModuleComponentCamera::SetHorizontalFOV(const float& horizontal_fov)
+{
+	frustum.SetHorizontalFovAndAspectRatio((horizontal_fov * DEGTORAD), frustum.AspectRatio());
+
+	UpdateFrustumPlanes();
+	UpdateFrustumVertices();
+
+	projection_update = true;
+}
+
+void ModuleComponentCamera::SetVerticalFOV(const float& vertical_fov)
+{
+	frustum.SetVerticalFovAndAspectRatio((vertical_fov * DEGTORAD), frustum.AspectRatio());
+
+	UpdateFrustumPlanes();
+	UpdateFrustumVertices();
+
+	projection_update = true;
+}
+
+void ModuleComponentCamera::GetMinMaxFOV(uint& min_fov, uint& max_fov) const
+{
+	min_fov = this->min_fov;
+	max_fov = this->max_fov;
+}
+
+void ModuleComponentCamera::SetMinMaxFOV(const uint& min_fov, const uint& max_fov)
+{
+	this->min_fov = min_fov;
+	this->max_fov = max_fov;
+}
+
+bool ModuleComponentCamera::IsCulling() const
+{
+	return is_culling;
+}
+
+bool ModuleComponentCamera::OrthogonalView() const
+{
+	return in_orthogonal_view;
+}
+
+bool ModuleComponentCamera::FrustumIsHidden() const
+{
+	return hide_frustum;
+}
+
+//void ModuleComponentCamera::SetIsCulling(const bool& set_to)
+//{
+//	is_culling = set_to;
+//
+//	if (set_to)
+//	{
+//		App->scene->SetCullingCamera(this);
+//	}
+//	else
+//	{
+//		if (App->scene->GetCullingCamera() == this)
+//		{
+//			App->scene->SetCullingCamera(nullptr);
+//		}
+//	}
+//}
+
+void ModuleComponentCamera::SetOrthogonalView(const bool& set_to)
+{
+	in_orthogonal_view = set_to;
+
+	if (in_orthogonal_view)
+	{
+
+	}
+}
+
 //Frustum ModuleComponentCamera::GetFrustum() const
 //{
 //	return frustum;
