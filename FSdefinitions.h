@@ -10,6 +10,15 @@
 #define MATERIALS_EXTENSION		".edgeMat"
 #define SCENES_EXTENSION		".edgeScene"
 #define TEXTURES_EXTENSION		".edgeTex"
+#define MODELS_EXTENSION		".edgeModel"
+
+//LIBRARY DEFINITIONS
+#define LIBRARY_FOLDER "Library/"
+#define MODELS_FOLDER "Library/Models/"
+#define MESHES_FOLDER "Library/Meshes/"
+#define TEXTURES_FOLDER "Library/Textures/"
+#define MATERIALS_FOLDER "Library/Materials/"
+#define SCENES_FOLDER "Assets/Scenes/"
 
 #define META_EXTENSION			".meta"
 

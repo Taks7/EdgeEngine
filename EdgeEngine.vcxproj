@@ -99,6 +99,7 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Inspector.h" />
     <ClInclude Include="JsonParsing.h" />
     <ClInclude Include="json\parson.h" />
@@ -178,6 +179,10 @@
     <ClInclude Include="MathGeo\src\Math\TransformOps.h" />
     <ClInclude Include="MathGeo\src\Math\vec2d.h" />
     <ClInclude Include="MathGeo\src\Time\Clock.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshImporter.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelImporter.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleComponent.h" />
     <ClInclude Include="ModuleComponentCamera.h" />
@@ -185,10 +190,8 @@
     <ClInclude Include="ModuleComponentMesh.h" />
     <ClInclude Include="ModuleComponentTransform.h" />
     <ClInclude Include="ModuleConsole.h" />
-    <ClInclude Include="ModuleFBXLoader.h" />
     <ClInclude Include="ModuleFileSystem.h" />
     <ClInclude Include="ModuleGameObject.h" />
-    <ClInclude Include="ModuleMaterials.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Module.h" />
@@ -200,8 +203,12 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureImporter.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutMenu.cpp" />
@@ -219,6 +226,7 @@
     <ClCompile Include="ImGui\imgui_impl_sdl.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="Inspector.cpp" />
     <ClCompile Include="JsonParsing.cpp" />
     <ClCompile Include="json\parson.c" />
@@ -267,27 +275,32 @@
     <ClCompile Include="MathGeo\src\Math\SSEMath.cpp" />
     <ClCompile Include="MathGeo\src\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeo\src\Time\Clock.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshImporter.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelImporter.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
-    <ClCompile Include="ModuleComponent.cpp" />
     <ClCompile Include="ModuleComponentCamera.cpp" />
     <ClCompile Include="ModuleComponentMaterial.cpp" />
     <ClCompile Include="ModuleComponentMesh.cpp" />
     <ClCompile Include="ModuleComponentTransform.cpp" />
     <ClCompile Include="ModuleConsole.cpp" />
-    <ClCompile Include="ModuleFBXLoader.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
     <ClCompile Include="ModuleGameObject.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
-    <ClCompile Include="ModuleMaterials.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Project.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureImporter.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeo\src\Geometry\KDTree.inl" />

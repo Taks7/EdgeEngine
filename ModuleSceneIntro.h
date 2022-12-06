@@ -24,11 +24,11 @@ public:
 	bool CleanUp();
 
 	//TODO 9: Create an "OnCollision" method specific for this module
-	ModuleGameObject* CreateEmptyGameObject(const char* name = nullptr, ModuleGameObject* parent = nullptr);
+	GameObject* CreateEmptyGameObject(const char* name = nullptr, GameObject* parent = nullptr);
 
-	ModuleGameObject* CreateMasterGameObject();
+	GameObject* CreateMasterGameObject();
 	//RAYCASTING GAMEOBJECTS
-	void getRaycastHits(const LineSegment& ray, std::map<float, ModuleGameObject*>& hits);
+	void getRaycastHits(const LineSegment& ray, std::map<float, GameObject*>& hits);
 	bool RaycastSelection(const LineSegment& ray);
 
 	//bool SetSelectedGameObject(ModuleGameObject* game_object);
@@ -38,16 +38,16 @@ public:
 
 	void CreateSceneCamera();
 
-	void SelectItem(ModuleGameObject* game_object);
+	void SelectItem(GameObject* game_object);
 
-	ModuleGameObject* GetSelectedGameObject();
+	GameObject* GetSelectedGameObject();
 
 public:
 
-	std::vector<ModuleGameObject*> game_objects;
-	ModuleGameObject* rootObject;
+	std::vector<GameObject*> game_objects;
+	GameObject* rootObject;
 
-	ModuleGameObject* selectedGameObject = nullptr;
+	GameObject* selectedGameObject = nullptr;
 private:
 	std::vector<Primitive*> primitives;
 };

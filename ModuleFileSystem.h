@@ -37,11 +37,23 @@ public:
 	const char* GetReadPaths() const;
 	std::string GetFileExtension(const char* path);
 
-	void DiscoverFiles(const char* directory, std::vector<std::string>& file_list, std::vector<std::string>& dir_list) const;
+	void GetFilenameWithExtension(std::string& path);
+	
+	void GetFilenameWithoutExtension(std::string& path);
+
+	void DiscoverFiles(const char* directory, std::vector<std::string>& file_list);
+
+	void DiscoverDirs(const char* directory, std::vector<std::string>& dirList);
+
+	void DiscoverFilesAndDirs(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList);
 
 	bool IsDirectory(const char* file) const;
 
 	const char* GetValidPath(const char* path);
+
+	ResourceType CheckExtension(std::string& path);
+
+	bool RemoveFile(const char* file);
 
 private:
 	const char* name;

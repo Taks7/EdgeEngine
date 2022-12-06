@@ -3,7 +3,6 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
-#include "ModuleFBXLoader.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleCamera3D.h"
 #include "Frustum.h"
@@ -39,7 +38,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	void DrawGameObjects(ModuleGameObject gameObject,float4x4 transform);
+	void DrawGameObjects(GameObject gameObject,float4x4 transform);
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;

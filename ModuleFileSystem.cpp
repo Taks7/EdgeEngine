@@ -222,25 +222,39 @@ std::string ModuleFileSystem::FixPath(const char* path) const
 	return normalized_path;
 }
 
-void ModuleFileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& file_list, std::vector<std::string>& dir_list) const
+void ModuleFileSystem::DiscoverFilesAndDirs(const char* directory, std::vector<std::string>& fileList, std::vector<std::string>& dirList)
 {
-	char** file_listing = PHYSFS_enumerateFiles(directory);									
+	char** rc = PHYSFS_enumerateFiles(directory);
+	char** i;
 
-	for (char** file = file_listing; *file != nullptr; ++file)								
+	std::string dir(directory);
+
+	for (i = rc; *i != nullptr; ++i)
 	{
-		std::string path = std::string(directory) + std::string("/") + std::string(*file);	
-
-		if (IsDirectory(path.c_str()))
-		{
-			dir_list.push_back(*file);													
-		}
+		if (PHYSFS_isDirectory((dir + *i).c_str()))
+			dirList.push_back(dir + *i + "/");
 		else
-		{
-			file_list.push_back(*file);												
-		}
+			fileList.push_back(dir + *i);
 	}
 
-	PHYSFS_freeList(file_listing);												
+	PHYSFS_freeList(rc);
+}
+
+void ModuleFileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& file_list) 
+{
+	char** rc = PHYSFS_enumerateFiles(directory);
+	char** i;
+
+	std::string dir(directory);
+
+	for (i = rc; *i != nullptr; ++i)
+	{
+		if (!PHYSFS_isDirectory((dir + *i).c_str()))
+			file_list.push_back(*i);
+	}
+
+	PHYSFS_freeList(rc);
+
 }
 
 
@@ -267,4 +281,88 @@ const char* ModuleFileSystem::GetValidPath(const char* path)
 	norm_path.clear();
 
 	return path;
+}
+
+void ModuleFileSystem::GetFilenameWithExtension(std::string& path)
+{
+	FixPath(path.c_str());
+
+	if (path.find("/") != std::string::npos)
+		path = path.substr(path.find_last_of("/") + 1, path.length());
+}
+
+void ModuleFileSystem::GetFilenameWithoutExtension(std::string& path)
+{
+	FixPath(path.c_str());
+
+	if (path.find("/") != std::string::npos)
+	{
+		path = path.substr(path.find_last_of("/") + 1, path.length());
+	}
+	path = path.substr(0, path.find_last_of("."));
+}
+
+void ModuleFileSystem::DiscoverDirs(const char* directory, std::vector<std::string>& dirList)
+{
+	char** rc = PHYSFS_enumerateFiles(directory);
+	char** i;
+
+	std::string dir(directory);
+
+	for (i = rc; *i != nullptr; ++i)
+	{
+		if (PHYSFS_isDirectory((dir + *i).c_str()))
+			dirList.push_back(dir + *i + "/");
+	}
+
+	PHYSFS_freeList(rc);
+}
+
+ResourceType ModuleFileSystem::CheckExtension(std::string& path)
+{
+	std::string extension = path.substr(path.find_last_of(".", path.length()));
+	std::list<std::string>::iterator s;
+	std::list<std::string>::iterator end = modelExtension.end();
+
+	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
+
+	for (s = modelExtension.begin(); s != end; ++s)
+	{
+		if (*s == extension)
+		{
+			LOG_COMMENT("Importing Model");
+			return ResourceType::MODEL;
+		}
+	}
+
+	end = texExtension.end();
+
+	for (s = texExtension.begin(); s != end; ++s)
+	{
+		if (*s == extension)
+		{
+			LOG_COMMENT("Importing Texture");
+			return ResourceType::TEXTURE;
+		}
+	}
+
+	return ResourceType::NONE;
+}
+
+bool ModuleFileSystem::RemoveFile(const char* file)
+{
+	bool ret = false;
+
+	if (file != nullptr)
+	{
+		if (PHYSFS_delete(file) == 0)
+		{
+			LOG_COMMENT("File deleted: [%s]", file);
+			ret = true;
+		}
+		else
+			LOG_COMMENT("File System error while trying to delete [%s]: ", file, PHYSFS_getLastError());
+	}
+
+	return ret;
 }

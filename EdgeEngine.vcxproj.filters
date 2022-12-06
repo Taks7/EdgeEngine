@@ -55,6 +55,12 @@
     <Filter Include="Sources\Tools\ImGuizmo">
       <UniqueIdentifier>{b644b78f-cd0c-4e9a-abf1-48f16e2280a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Resources\Importers">
+      <UniqueIdentifier>{4e25a137-d902-436a-a579-f76d056e2bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Helpers\Buffers">
+      <UniqueIdentifier>{13668e1e-8f8e-4ff3-80be-645277a53869}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -378,14 +384,8 @@
     <ClInclude Include="PhysFS\include\physfs.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFBXLoader.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="DevIL.h">
       <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleMaterials.h">
-      <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleGameObject.h">
       <Filter>Sources\Modules\GameObject</Filter>
@@ -425,6 +425,33 @@
     </ClInclude>
     <ClInclude Include="ImGuizmo\ImGuizmo.h">
       <Filter>Sources\Tools\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureImporter.h">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Sources\Helpers\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Sources\Helpers\Buffers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -641,17 +668,8 @@
     <ClCompile Include="AssimpDefs.cpp">
       <Filter>Sources\Tools\Assimp</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleFBXLoader.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleMaterials.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleGameObject.cpp">
       <Filter>Sources\Modules\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleComponent.cpp">
-      <Filter>Sources\Modules\GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="ModuleComponentMesh.cpp">
       <Filter>Sources\Modules\GameObject\Components</Filter>
@@ -679,6 +697,33 @@
     </ClCompile>
     <ClCompile Include="ImGuizmo\ImGuizmo.cpp">
       <Filter>Sources\Tools\ImGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureImporter.cpp">
+      <Filter>Sources\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Sources\Helpers\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Sources\Helpers\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
