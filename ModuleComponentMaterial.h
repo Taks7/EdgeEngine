@@ -4,12 +4,11 @@
 #include "Module.h"
 #include "ModuleGameObject.h"
 #include <string>
-
+#include "ModuleImporter.h"
 class ModuleGameObject;
 class ModuleMaterial;
-class ModuleFBXLoader;
 
-struct Texture;
+struct TextureData;
 
 class ModuleComponentMaterial : public ModuleComponents
 {
@@ -20,17 +19,17 @@ public:
 	bool	Update();
 	bool	CleanUp();
 
-	Texture* GetTexture();
+	TextureData* GetTexture();
 
-	void SetTexture(Texture* texture);
+	void SetTexture(TextureData* texture);
 
 
 public:
-	std::vector<Texture*> textures;
+	std::vector<TextureData*> textures;
 
 	bool defaultTexture;
 
-	Texture* materialUsed;
+	TextureData* materialUsed;
 	
 };
 

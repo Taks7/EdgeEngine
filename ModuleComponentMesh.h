@@ -3,11 +3,11 @@
 
 #include "Module.h"
 #include "ModuleGameObject.h"
-#include "ModuleFBXLoader.h"
+#include "ModuleImporter.h"
 #include <string>
 
+
 class ModuleGameObject;
-class ModuleFBXLoader;
 
 class ModuleComponentsMesh : public ModuleComponents
 {
@@ -19,12 +19,12 @@ public:
 	virtual bool	CleanUp();
 
 public:
-	ModuleFBXLoader* GetMesh() const;
-	void SetMesh(VertexData mesh);
+	MeshVertexData* GetMesh() const;
+	void SetMesh(MeshVertexData mesh);
 
-	VertexData GetMesh();
+	MeshVertexData GetMesh();
 
-	VertexData mesh;
+	MeshVertexData mesh;
 
 	const char* meshPath;
 

@@ -10,7 +10,6 @@
 
 #include "Assimp/include/assimp/cimport.h"
 #include "AssimpDefs.h"
-#include "Resource.h"
 
 #include <vector>
 #include <stack>
@@ -317,38 +316,6 @@ void ModuleFileSystem::DiscoverDirs(const char* directory, std::vector<std::stri
 
 	PHYSFS_freeList(rc);
 }
-
-ResourceType ModuleFileSystem::CheckExtension(std::string& path)
-{
-	std::string extension = path.substr(path.find_last_of(".", path.length()));
-	std::list<std::string>::iterator s;
-	std::list<std::string>::iterator end = modelExtension.end();
-
-	if (extension.data() == std::string(".ragnar")) return ResourceType::SCENE;
-
-	for (s = modelExtension.begin(); s != end; ++s)
-	{
-		if (*s == extension)
-		{
-			LOG_COMMENT("Importing Model");
-			return ResourceType::MODEL;
-		}
-	}
-
-	end = texExtension.end();
-
-	for (s = texExtension.begin(); s != end; ++s)
-	{
-		if (*s == extension)
-		{
-			LOG_COMMENT("Importing Texture");
-			return ResourceType::TEXTURE;
-		}
-	}
-
-	return ResourceType::NONE;
-}
-
 bool ModuleFileSystem::RemoveFile(const char* file)
 {
 	bool ret = false;

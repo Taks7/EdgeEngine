@@ -46,17 +46,11 @@
     <Filter Include="Sources\Modules\UI\Project">
       <UniqueIdentifier>{3ce957fa-3cb2-4def-992a-55ab65e330f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Resources">
-      <UniqueIdentifier>{310abbe6-8bdd-4a60-a774-47ccc4cad8e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Tools\MathGeo">
       <UniqueIdentifier>{1ca6fb7b-db1c-40d8-a259-c078d3bfa006}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Tools\ImGuizmo">
       <UniqueIdentifier>{b644b78f-cd0c-4e9a-abf1-48f16e2280a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Resources\Importers">
-      <UniqueIdentifier>{4e25a137-d902-436a-a579-f76d056e2bec}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Helpers\Buffers">
       <UniqueIdentifier>{13668e1e-8f8e-4ff3-80be-645277a53869}</UniqueIdentifier>
@@ -420,38 +414,17 @@
     <ClInclude Include="FSdefinitions.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Sources\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="ImGuizmo\ImGuizmo.h">
       <Filter>Sources\Tools\ImGuizmo</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshImporter.h">
-      <Filter>Sources\Resources\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelImporter.h">
-      <Filter>Sources\Resources\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureImporter.h">
-      <Filter>Sources\Resources\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Sources\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Sources\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Sources\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Sources\Resources</Filter>
     </ClInclude>
     <ClInclude Include="VertexBuffer.h">
       <Filter>Sources\Helpers\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="IndexBuffer.h">
       <Filter>Sources\Helpers\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleImporter.h">
+      <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -698,32 +671,14 @@
     <ClCompile Include="ImGuizmo\ImGuizmo.cpp">
       <Filter>Sources\Tools\ImGuizmo</Filter>
     </ClCompile>
-    <ClCompile Include="MeshImporter.cpp">
-      <Filter>Sources\Resources\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelImporter.cpp">
-      <Filter>Sources\Resources\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureImporter.cpp">
-      <Filter>Sources\Resources\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Sources\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Sources\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Sources\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Sources\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>Sources\Helpers\Buffers</Filter>
     </ClCompile>
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>Sources\Helpers\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleImporter.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

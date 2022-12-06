@@ -2,7 +2,6 @@
 #include "Application.h"
 #include "ModuleUI.h"
 #include "ModuleInput.h"
-#include "ModuleFBXLoader.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "MathGeo/src/MathGeoLib.h"
 #include "Assimp/include/assimp/cimport.h"
@@ -118,12 +117,12 @@ bool ModuleInput::PreUpdate(float dt)
 
 				if (App->fs->GetFileExtension(dropped_filedir) == "fbx" || App->fs->GetFileExtension(dropped_filedir) == "FBX")
 				{
-					App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), path.c_str(), nullptr);
+					//App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), path.c_str(), nullptr);
 				}
 				if (App->fs->GetFileExtension(dropped_filedir) == "png" || App->fs->GetFileExtension(dropped_filedir) == "PNG" || App->fs->GetFileExtension(dropped_filedir) == "dds" || App->fs->GetFileExtension(dropped_filedir) == "DDS")
 				{
 					//Add here function to change texture for the object
-					for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+					/*for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 					{
 						if (App->scene_intro->game_objects[i]->IsSelected())
 						{
@@ -145,7 +144,7 @@ bool ModuleInput::PreUpdate(float dt)
 							if (material->materialUsed != nullptr) material->materialUsed = nullptr;
 							material->materialUsed = newTexture;
 						}
-					}
+					}*/
 				}
 
 				SDL_free(&dropped_filedir);

@@ -192,9 +192,9 @@ void InspectorMenu::DrawMeshComponent(ModuleGameObject* selectedGameObject)
 
 			ImGui::Text("Mesh Info:");
 
-			ImGui::Text("Vertices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "  %u", mesh->mesh.num_vertex);
-			ImGui::Text("Indices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_index);
-			ImGui::Text("UVS:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_uvs);
+			ImGui::Text("Vertices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "  %u", mesh->mesh.num_vertices);
+			ImGui::Text("Indices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_indices);
+			ImGui::Text("UVS:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_UVs);
 
 			ImGui::Separator();
 
@@ -231,7 +231,7 @@ void InspectorMenu::DrawMaterialComponent(ModuleGameObject* selectedGameObject)
 				
 				ImGui::Text("File: %s",texturePath.c_str());
 				
-				ImGui::Image(ImTextureID(material->materialUsed->id), { 128,128 });
+				ImGui::Image(ImTextureID(material->materialUsed->image_ID), { 128,128 });
 
 				ImGui::Separator();
 

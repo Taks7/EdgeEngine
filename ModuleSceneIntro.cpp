@@ -4,7 +4,6 @@
 #include "Primitive.h"
 #include "ModuleUI.h"
 #include "AABB.h"
-#include "ResourceManager.h"
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
 	name = "scene";
@@ -27,10 +26,6 @@ bool ModuleSceneIntro::Start()
 	
 	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));*/
-
-	ResourceManager::GetInstance()->ImportResourcesFromLibrary();
-	ResourceManager::GetInstance()->ImportAllResources();
-	ResourceManager::GetInstance()->LoadResource(std::string("Assets/Resources/Street environment_V01.FBX"));
 
 
 	return ret;

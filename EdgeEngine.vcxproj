@@ -179,10 +179,6 @@
     <ClInclude Include="MathGeo\src\Math\TransformOps.h" />
     <ClInclude Include="MathGeo\src\Math\vec2d.h" />
     <ClInclude Include="MathGeo\src\Time\Clock.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshImporter.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="ModelImporter.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleComponent.h" />
     <ClInclude Include="ModuleComponentCamera.h" />
@@ -192,6 +188,7 @@
     <ClInclude Include="ModuleConsole.h" />
     <ClInclude Include="ModuleFileSystem.h" />
     <ClInclude Include="ModuleGameObject.h" />
+    <ClInclude Include="ModuleImporter.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Module.h" />
@@ -202,10 +199,6 @@
     <ClInclude Include="PhysFS\include\physfs.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Project.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureImporter.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="VertexBuffer.h" />
@@ -275,10 +268,6 @@
     <ClCompile Include="MathGeo\src\Math\SSEMath.cpp" />
     <ClCompile Include="MathGeo\src\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeo\src\Time\Clock.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshImporter.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ModelImporter.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleComponentCamera.cpp" />
@@ -288,6 +277,7 @@
     <ClCompile Include="ModuleConsole.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
     <ClCompile Include="ModuleGameObject.cpp" />
+    <ClCompile Include="ModuleImporter.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
@@ -295,9 +285,6 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Project.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TextureImporter.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />

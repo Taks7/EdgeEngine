@@ -2,7 +2,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
-#include "ModuleMaterials.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
 #include "ModuleComponentCamera.h"
@@ -122,10 +121,6 @@ bool ModuleRenderer3D::Init()
 		LOG_COMMENT("Glew failed error %s\n", glewGetErrorString(error));
 	}
 	LOG_COMMENT("Glew version: %s\n", glewGetString(GLEW_VERSION));
-
-	App->materialImport->Init();
-
-
 
 	return ret;
 }
@@ -273,11 +268,11 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 
 
 				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-				glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_uvs);
+				glBindBuffer(GL_ARRAY_BUFFER, NewMesh->mesh.id_UV);
 
 				if (GameObject.bouindingBoxes)
 				{
-					glBegin(GL_LINES);
+			/*		glBegin(GL_LINES);
 
 					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.maxPoint.y, NewMesh->mesh.aabb.maxPoint.z);
 					glVertex3f(NewMesh->mesh.aabb.maxPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.maxPoint.z);
@@ -316,14 +311,14 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 					glVertex3f(NewMesh->mesh.aabb.minPoint.x, NewMesh->mesh.aabb.minPoint.y, NewMesh->mesh.aabb.minPoint.z);
 
 
-					glEnd();
+					glEnd();*/
 				}
 				if (NewMaterial->IsActive())
 				{
 					if (NewMaterial->materialUsed != nullptr)
 					{
 						glTexCoordPointer(3, GL_FLOAT, 0, nullptr);
-						glBindTexture(GL_TEXTURE_2D, NewMaterial->materialUsed->id);
+						glBindTexture(GL_TEXTURE_2D, NewMaterial->materialUsed->image_ID);
 					}
 				}
 
@@ -334,7 +329,7 @@ void ModuleRenderer3D::DrawGameObjects(ModuleGameObject GameObject,float4x4 tran
 
 
 
-				glDrawElements(GL_TRIANGLES, NewMesh->mesh.num_index, GL_UNSIGNED_INT, nullptr);
+				glDrawElements(GL_TRIANGLES, NewMesh->mesh.num_indices, GL_UNSIGNED_INT, nullptr);
 
 				glBindTexture(GL_TEXTURE_2D, 0);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

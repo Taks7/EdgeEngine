@@ -196,12 +196,12 @@ void ModuleGameObject::UpdateBoundingBoxes()
 		{
 			continue;
 		}
-		obb = mesh->mesh.GetAABB();
+		/*obb = mesh->mesh.();
 		ModuleComponentsTransform* transform = (ModuleComponentsTransform*)this->GetComponent(COMPONENT_TYPES::TRANSFORM);
 		obb.Transform(transform->GetGlobalMatrix());
 
 		aabb.SetNegativeInfinity();
-		aabb.Enclose(obb);
+		aabb.Enclose(obb);*/
 	}
 }
 

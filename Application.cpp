@@ -9,7 +9,6 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleFileSystem.h"
-#include "Resource.h"
 
 #include "glew/glew-2.2.0/include/GL/glew.h"
 //#include "MathGeo/src/MathGeoLib.h"
@@ -28,8 +27,7 @@ Application::Application() : debug(false)
 	audio = new ModuleAudio();
 
 	fs = new ModuleFileSystem(RESOURCES_FOLDER);
-	loaderModels = new ModuleFBXLoader();
-	materialImport = new ModuleMaterial();
+	
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -45,8 +43,7 @@ Application::Application() : debug(false)
 	// Scenes
 	AddModule(scene_intro);
 	AddModule(renderer3D);
-	AddModule(loaderModels);
-	AddModule(materialImport);
+	
 	AddModule(ui);
 
 	loadRequest = false;

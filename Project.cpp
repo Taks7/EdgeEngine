@@ -43,7 +43,7 @@ void Project::DrawDirectoriesTree(const char* root_directory, const char* extens
 
 	std::string root_dir = root_directory;
 
-	App->fs->DiscoverFiles(root_dir.c_str(), files, directories);
+	App->fs->DiscoverFilesAndDirs(root_dir.c_str(), files, directories);
 
 	for (uint i = 0; i < directories.size(); ++i)
 	{
@@ -91,14 +91,14 @@ void Project::HandleSelectedItem(const char* file_path)
 
 	if (App->fs->GetFileExtension(file_path) == "fbx" || App->fs->GetFileExtension(file_path) == "FBX")
 	{
-		App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), path.c_str(), nullptr);
+		//App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("Dropped"), path.c_str(), nullptr);
 	}
 	if (App->fs->GetFileExtension(file_path) == "png" || App->fs->GetFileExtension(file_path) == "PNG" || App->fs->GetFileExtension(file_path) == "dds" || App->fs->GetFileExtension(file_path) == "DDS")
 	{
 		//Add here function to change texture for the object
 		for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 		{
-			if (App->scene_intro->game_objects[i]->IsSelected())
+			/*if (App->scene_intro->game_objects[i]->IsSelected())
 			{
 				ModuleComponentMaterial* material = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::MATERIAL);
 
@@ -116,8 +116,8 @@ void Project::HandleSelectedItem(const char* file_path)
 				Texture* newTexture = new Texture();
 				App->materialImport->Import(path.c_str(), newTexture);
 				if (material->materialUsed != nullptr) material->materialUsed = nullptr;
-				material->materialUsed = newTexture;
-			}
+				material->materialUsed = newTexture;*/
+			//}
 		}
 	}
 }

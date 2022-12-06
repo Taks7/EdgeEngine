@@ -6,7 +6,6 @@
 #include "ModuleGameObject.h"
 #include "ModuleComponentCamera.h"
 #include "ModuleCamera3D.h"
-#include "ModuleFBXLoader.h"
 
 #include <vector>
 #include "MathGeoLib.h"

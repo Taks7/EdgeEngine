@@ -4,7 +4,7 @@
 #include "ModuleComponent.h"
 #include "ModuleGameObject.h"
 #include "ModuleComponentMaterial.h"
-#include "ModuleFBXLoader.h"
+#include "ModuleImporter.h"
 
 ModuleComponentMaterial::ModuleComponentMaterial(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::MATERIAL, "Material"),
 materialUsed(nullptr),
@@ -36,12 +36,12 @@ bool ModuleComponentMaterial::CleanUp()
 	return ret;
 }
 
-Texture* ModuleComponentMaterial::GetTexture()
+TextureData* ModuleComponentMaterial::GetTexture()
 {
 	return materialUsed;
 }
 
-void ModuleComponentMaterial::SetTexture(Texture* texture)
+void ModuleComponentMaterial::SetTexture(TextureData* texture)
 {
 	materialUsed = texture;
 }

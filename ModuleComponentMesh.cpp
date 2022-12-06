@@ -5,7 +5,7 @@
 
 #include "ModuleGameObject.h"
 
-#include "ModuleFBXLoader.h"
+#include "ModuleImporter.h"
 
 ModuleComponentsMesh::ModuleComponentsMesh(ModuleGameObject* owner) : ModuleComponents(owner,COMPONENT_TYPES::MESH,"Mesh")
 {
@@ -30,12 +30,12 @@ bool ModuleComponentsMesh::CleanUp()
 	return ret;
 }
 
-void ModuleComponentsMesh::SetMesh(VertexData mesh)
+void ModuleComponentsMesh::SetMesh(MeshVertexData mesh)
 {
 	this->mesh = mesh;
 }
 
-VertexData ModuleComponentsMesh::GetMesh()
+MeshVertexData ModuleComponentsMesh::GetMesh()
 {
 	return mesh;
 }
