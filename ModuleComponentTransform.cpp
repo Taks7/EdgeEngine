@@ -292,3 +292,15 @@ void ModuleComponentsTransform::Translate(const float3& velocity)
 
 	UpdateLocalTransform();
 }
+
+void ModuleComponentsTransform::SetWorldPosition(const float3& new_position)
+{
+	world_transform.SetTranslatePart(new_position);
+
+	SyncLocalToWorld();
+}
+
+float3 ModuleComponentsTransform::GetWorldPosition() const
+{
+	return world_transform.TranslatePart();
+}

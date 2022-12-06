@@ -57,6 +57,8 @@ public:
 	float3 GetGlobalEulerRotation() const;
 
 	void Translate(const float3& velocity);
+	void SetWorldPosition(const float3& new_position);
+	float3 GetWorldPosition() const;
 	
 
 private:

@@ -36,6 +36,8 @@ private:
 
 	void CalculateViewMatrix();
 	void Zoom();
+	void PointAt(const float3& position, const float3& target, bool RotateAroundReference);
+	void Focus(const float3& target, const float& distance_from_target);
 	void SetZoomSpeed(const float& zoom_speed);
 	float GetZoomSpeed() const;
 	vec3 ToVec3(float3 float3);

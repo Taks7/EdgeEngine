@@ -44,8 +44,10 @@ public:
 	void SetFrustumIsHidden(const bool& set_to);
 
 	void LookAt(const float3& target);
-
+	void Focus(const float3& target, const float& distance_to_target);
+	void SetPosition(const float3& position);
 	void Move(const float3& velocity);
+	void PointAt(const float3& position, const float3& target);
 
 
 private:

@@ -235,6 +235,15 @@ float2 ModuleSceneIntro::getWorldMosuePosition()
 
 	//return world_mouse_pos;
 	return screen_mouse_pos;
+	//-------------------------------------------------------
+	/*float2 win_mouse_motion = float2((float)App->input->GetMouseXMotion(), (float)App->input->GetMouseYMotion());
+	float2 win_size = float2((float)App->window->GetWidht(), (float)App->window->GetHeight());
+	float2 tex_size = float2(this->tex_size.x, this->tex_size.y);
+
+	float2 local_motion = float2(win_mouse_motion.x / tex_size.x, win_mouse_motion.y / tex_size.y);
+	float2 world_mouse_motion = float2(local_motion.x * win_size.x, local_motion.y * win_size.y);
+
+	return world_mouse_motion;*/
 }
 
 void ModuleSceneIntro::CreateSceneCamera()

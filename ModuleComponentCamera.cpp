@@ -216,11 +216,37 @@ void ModuleComponentCamera::LookAt(const float3& target)
 
 }
 
+void ModuleComponentCamera::Focus(const float3& target, const float& distance_to_target)
+{
+	float abs_distance = (distance_to_target < 0) ? -distance_to_target : distance_to_target;
+
+	float3 distance = float3(target - frustum.Pos()).Normalized();
+
+	float3 position = frustum.Pos() - target;
+
+	position = target + distance * position.Length();
+
+	PointAt(position, target);
+}
+
+void ModuleComponentCamera::SetPosition(const float3& position)
+{
+	ModuleComponentsTransform* setPosition;
+	setPosition = (ModuleComponentsTransform*)this->GetOwner()->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	setPosition->SetWorldPosition(position);
+}
+
 void ModuleComponentCamera::Move(const float3& velocity)
 {
 	ModuleComponentsTransform* moveCameras;
 	moveCameras = (ModuleComponentsTransform*)this->GetOwner()->GetComponent(COMPONENT_TYPES::TRANSFORM);
 	moveCameras->Translate(velocity);
+}
+
+void ModuleComponentCamera::PointAt(const float3& position, const float3& target)
+{
+	SetPosition(position);
+	LookAt(target);
 }
 
 //Frustum ModuleComponentCamera::GetFrustum() const
