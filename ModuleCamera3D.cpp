@@ -221,6 +221,9 @@ void ModuleCamera3D::CreateGameCamera()
 	ModuleComponentCamera* cameraCreated = (ModuleComponentCamera*)game_camera->GetComponent(COMPONENT_TYPES::CAMERA);
 	cameraCreated->SetFarPlaneDistance(1000.0f);
 
+	float3 initialPos = float3(10, 5, 5);
+	cameraCreated->SetPosition(initialPos);
+
 	SetCurrentCamera(cameraCreated);
 
 	if (App != nullptr)
