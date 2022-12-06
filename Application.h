@@ -14,6 +14,7 @@
 #include "ModuleUI.h"
 #include "JsonParsing.h"
 #include "ModuleFileSystem.h"
+#include "ModuleImporter.h"
 
 // USAR PARA STL: https://github.com/karansaxena/STL_Cheat_Sheets
 
@@ -33,6 +34,8 @@ public:
 	ModuleUI* ui;
 
 	ModuleFileSystem* fs;
+
+	ModuleImporter* importer;
 
 	JsonParsing jsonFile;
 

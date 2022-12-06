@@ -1,5 +1,6 @@
 #include "glew/glew-2.2.0/include/GL/glew.h"
 
+#include "Module.h"
 #include "Application.h"
 #include "Globals.h"
 #include "ModuleRenderer3D.h"
@@ -26,16 +27,16 @@
 
 //#pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
-ModuleModelImport::ModuleModelImport(bool start_enabled) : Module(start_enabled = true)
+ModuleImporter::ModuleImporter(bool start_enabled) : Module(start_enabled = true)
 {
 
 }
 
-ModuleModelImport::~ModuleModelImport()
+ModuleImporter::~ModuleImporter()
 {
 }
 
-bool ModuleModelImport::Init()
+bool ModuleImporter::Init()
 {
 	// Stream log messages to Debug window
 	struct aiLogStream stream;
@@ -58,13 +59,13 @@ bool ModuleModelImport::Init()
 	return true;
 }
 
-bool ModuleModelImport::Update(float dt)
+bool ModuleImporter::Update(float dt)
 {
 
 	return true;
 }
 
-bool ModuleModelImport::CleanUp()
+bool ModuleImporter::CleanUp()
 {
 	// detach log stream
 	aiDetachAllLogStreams();
@@ -75,7 +76,7 @@ bool ModuleModelImport::CleanUp()
 	return true;
 }
 
-bool ModuleModelImport::Save_Mesh(ModuleComponentsMesh* mesh, char** pointer)
+bool ModuleImporter::Save_Mesh(ModuleComponentsMesh* mesh, char** pointer)
 {
 	bool success = true;
 
@@ -143,7 +144,7 @@ bool ModuleModelImport::Save_Mesh(ModuleComponentsMesh* mesh, char** pointer)
 	return success;
 }
 
-bool ModuleModelImport::Load_Mesh(ModuleComponentsMesh* mesh, char* pointer)
+bool ModuleImporter::Load_Mesh(ModuleComponentsMesh* mesh, char* pointer)
 {
 	bool success = true;
 
@@ -175,7 +176,7 @@ bool ModuleModelImport::Load_Mesh(ModuleComponentsMesh* mesh, char* pointer)
 	return success;
 }
 
-bool ModuleModelImport::Save_Texture(ModuleComponentMaterial* texture, char** pointer)
+bool ModuleImporter::Save_Texture(ModuleComponentMaterial* texture, char** pointer)
 {
 	bool success = true;
 
@@ -232,7 +233,7 @@ bool ModuleModelImport::Save_Texture(ModuleComponentMaterial* texture, char** po
 	return success;
 }
 
-bool ModuleModelImport::Load_Texture(ModuleComponentMaterial* texture, char** pointer, uint size)
+bool ModuleImporter::Load_Texture(ModuleComponentMaterial* texture, char** pointer, uint size)
 {
 	bool success = true;
 
@@ -285,11 +286,6 @@ bool ModuleModelImport::Load_Texture(ModuleComponentMaterial* texture, char** po
 		glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE, ilGetData());
 		glGenerateMipmap(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);
-
-		//texture->objectTexture->width = il_info.Width;
-		//texture->objectTexture->height = il_info.Height;
-		//texture->objectTexture->image_ID = il_info.Id;
-		//texture->objectTexture->format = il_info.Format;
 	}
 
 	ilDeleteImages(1, &il_image);
@@ -297,7 +293,7 @@ bool ModuleModelImport::Load_Texture(ModuleComponentMaterial* texture, char** po
 	return success;
 }
 
-void ModuleModelImport::LoadModel_Textured(ModuleGameObject* objMain, const char* meshPath, const char* texturePath)
+void ModuleImporter::LoadModel_Textured(ModuleGameObject* objMain, const char* meshPath, const char* texturePath)
 {
 	//Mesh Loading part
 
@@ -495,7 +491,7 @@ void ModuleModelImport::LoadModel_Textured(ModuleGameObject* objMain, const char
 	}
 }
 
-uint ModuleModelImport::LoadTexture(ModuleGameObject* objMain, const char* path)
+uint ModuleImporter::LoadTexture(ModuleGameObject* objMain, const char* path)
 {
 	//GameObject newGameObject;
 
@@ -572,7 +568,7 @@ uint ModuleModelImport::LoadTexture(ModuleGameObject* objMain, const char* path)
 
 
 
-uint ModuleModelImport::CheckerTexture()
+uint ModuleImporter::CheckerTexture()
 {
 	GLubyte checkerImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
 

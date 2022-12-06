@@ -9,7 +9,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleFileSystem.h"
-
+#include "ModuleImporter.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 //#include "MathGeo/src/MathGeoLib.h"
 
@@ -25,7 +25,7 @@ Application::Application() : debug(false)
 	camera = new ModuleCamera3D();
 	ui = new ModuleUI();
 	audio = new ModuleAudio();
-
+	importer = new ModuleImporter();
 	fs = new ModuleFileSystem(RESOURCES_FOLDER);
 	
 

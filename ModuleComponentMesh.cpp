@@ -30,12 +30,12 @@ bool ModuleComponentsMesh::CleanUp()
 	return ret;
 }
 
-void ModuleComponentsMesh::SetMesh(MeshVertexData mesh)
-{
-	this->mesh = mesh;
-}
-
-MeshVertexData ModuleComponentsMesh::GetMesh()
-{
-	return mesh;
-}
+//void ModuleComponentsMesh::SetMesh(MeshVertexData mesh)
+//{
+//	this->mesh = mesh;
+//}
+//
+//MeshVertexData ModuleComponentsMesh::GetMesh()
+//{
+//	return mesh;
+//}

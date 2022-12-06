@@ -1,7 +1,7 @@
-#ifndef _MESH_IMPORTER_H_
-#define _MESH_IMPORTER_H_
+#ifndef __ModuleImporter_H__
+#define __ModuleImporter_H__
 
-//#include "Application.h"
+#include "Application.h"
 #include "Module.h"
 #include "ModuleGameObject.h"
 #include "ModuleComponentMesh.h"
@@ -13,9 +13,8 @@
 #define CHECKERS_HEIGHT 50
 #define CHECKERS_WIDTH 50
 
-//struct TransformComponent;
-
-
+class ModuleComponentsMesh;
+class ModuleComponentMaterial;
 enum class TextureMaterialType
 {
 	NONE = 0,
@@ -30,7 +29,6 @@ enum class TextureMaterialType
 struct TextureData
 {
 	TextureMaterialType materialType;
-
 	uint texture_ID = 0;
 	uint image_ID = 0;
 
@@ -46,43 +44,32 @@ struct TextureData
 
 struct MeshVertexData
 {
-
-	uint id_index = 0; // index in VRAM
+	uint id_index = 0; 
 	uint num_indices = 0;
 	uint* indices = nullptr;
 
-	uint id_vertex = 0; // unique vertex in VRAM
+	uint id_vertex = 0; 
 	uint num_vertices = 0;
 	float* vertices = nullptr;
 
-	/*GLuint id_normal = 0;
-	aiVector3D num_normals[3] = {};
-	float* normals = nullptr;
-	GLuint id_normalVertices = 0;
-	GLfloat* normalVertices = nullptr;*/
 
-	uint id_UV = 0; // id of the UV
+	uint id_UV = 0; 
 	uint num_UVs = 0;
 	GLfloat* texture_coords_indices = nullptr;
 
 	TextureData meshTexturesData;
 	std::string	path;
-
-	//TransformComponent* transform = nullptr;
 };
 
-class ModuleModelImport : public Module
+class ModuleImporter : public Module
 {
 public:
-	ModuleModelImport(bool start_enabled = true);
-	~ModuleModelImport();
+	ModuleImporter(bool start_enabled = true);
+	~ModuleImporter();
 
 	bool Init();
 	bool Update(float dt);
 	bool CleanUp();
-
-	//void Import_Mesh(MeshComponent* mesh); Already done in LoadModel_Textured()
-	//void Import_Texture(MeshComponent* mesh); Already done in LoadModel_Textured()
 
 	bool Save_Mesh(ModuleComponentsMesh* mesh, char** pointer);
 
@@ -92,18 +79,16 @@ public:
 
 	bool Load_Texture(ModuleComponentMaterial* texture, char** pointer, uint size);
 
-	void LoadModel_Textured(ModuleGameObject* objMain, const char* meshPath, const char* texturePath); //Loads the model (meshes and its textures) and assigns texture IDs to it
-	uint LoadTexture(ModuleGameObject* objMain, const char* path); //Loads the textures
+	void LoadModel_Textured(ModuleGameObject* objMain, const char* meshPath, const char* texturePath); 
+	uint LoadTexture(ModuleGameObject* objMain, const char* path); 
 
 	uint CheckerTexture();
 
 public:
-	//std::vector<MeshVertexData> meshes;
-	//std::vector<TextureData> textures;
 
 	uint childPostfix = 0;
 	uint textPostfix = 0;
 
 };
 
-#endif // !_MESH_IMPORTER_H_
+#endif

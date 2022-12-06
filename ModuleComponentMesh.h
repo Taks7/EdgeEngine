@@ -6,7 +6,7 @@
 #include "ModuleImporter.h"
 #include <string>
 
-
+//struct MeshVertexData;
 class ModuleGameObject;
 
 class ModuleComponentsMesh : public ModuleComponents
@@ -19,10 +19,9 @@ public:
 	virtual bool	CleanUp();
 
 public:
-	MeshVertexData* GetMesh() const;
-	void SetMesh(MeshVertexData mesh);
+	//void SetMesh(MeshVertexData mesh);
 
-	MeshVertexData GetMesh();
+	//MeshVertexData GetMesh();
 
 	MeshVertexData mesh;
 
