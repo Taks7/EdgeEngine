@@ -15,7 +15,7 @@
 #pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
 
 #define ZOOM_SPEED 200.0f
-#define ROTATION_SPEED 0.2f
+#define ROTATION_SPEED 0.00009f
 #define MOVEMENT_SPEED 8.0f
 
 
@@ -467,13 +467,13 @@ void ModuleCamera3D::FreeMovement()
 
 			if (mouse_motion.x != 0.0f)
 			{
-				Quat new_X = Quat(frustum.Up(), -mouse_motion.x);
+				Quat new_X = Quat(frustum.Up(), -mouse_motion.x * sensitivity);
 				new_Z = new_X.Transform(new_Z);
 			}
 
 			if (mouse_motion.y != 0.0f)
 			{
-				Quat new_Y = Quat(frustum.WorldRight(), -mouse_motion.y);
+				Quat new_Y = Quat(frustum.WorldRight(), -mouse_motion.y * sensitivity);
 				new_Z = new_Y.Transform(new_Z);
 			}
 
