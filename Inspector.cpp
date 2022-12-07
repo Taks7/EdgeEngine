@@ -137,7 +137,21 @@ void InspectorMenu::DrawTransformComponent(ModuleGameObject* selectedGameObject)
 			float pos[3] = { position.x, position.y, position.z };
 			if (ImGui::DragFloat3("Position", pos, 1.0f, 0.0f, 0.0f, "%.3f", NULL))
 			{
-				transform->SetPosition(float3(pos[0], pos[1], pos[2]));
+				if (App->back_to_original == false && App->pause == false)
+				{
+					transform->SetPosition(float3(pos[0], pos[1], pos[2]));
+				}
+				/*transform->SetPosition(float3(pos[0], pos[1], pos[2]));*/
+			}
+
+			if (App->back_to_original == true && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA) == nullptr))
+			{
+				transform->SetPosition(float3(0, 0, 0));
+			}
+
+			if (App->back_to_original == true && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA) != nullptr))
+			{
+				transform->SetPosition(float3(0, 5, 25));
 			}
 
 			ImGui::Text("Rotation");
@@ -148,7 +162,16 @@ void InspectorMenu::DrawTransformComponent(ModuleGameObject* selectedGameObject)
 			float rot[3] = { rotation.x, rotation.y, rotation.z };
 			if (ImGui::DragFloat3("Rotation", rot, 1.0f, 0.0f, 0.0f, "%.3f", NULL))
 			{
-				transform->SetRotation(float3(rot[0] * DEGTORAD, rot[1] * DEGTORAD, rot[2] * DEGTORAD));
+				if (App->back_to_original == false && App->pause == false)
+				{
+					transform->SetRotation(float3(rot[0] * DEGTORAD, rot[1] * DEGTORAD, rot[2] * DEGTORAD));
+				}
+				/*transform->SetRotation(float3(rot[0] * DEGTORAD, rot[1] * DEGTORAD, rot[2] * DEGTORAD));*/
+			}
+
+			if (App->back_to_original == true)
+			{
+				transform->SetRotation(float3(0, 0, 0));
 			}
 
 			ImGui::Text("Scale");
@@ -159,7 +182,16 @@ void InspectorMenu::DrawTransformComponent(ModuleGameObject* selectedGameObject)
 			float scl[3] = { scale.x, scale.y, scale.z };
 			if (ImGui::DragFloat3("Scale", scl, 1.0f, 0.0f, 0.0f, "%.3f", NULL))
 			{
-				transform->SetScale(float3(scl[0], scl[1], scl[2]));
+				if (App->back_to_original == false && App->pause == false)
+				{
+					transform->SetScale(float3(scl[0], scl[1], scl[2]));
+				}
+				/*transform->SetScale(float3(scl[0], scl[1], scl[2]));*/
+			}
+
+			if (App->back_to_original == true && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA) == nullptr))
+			{
+				transform->SetScale(float3(1.0f, 1.0f, 1.0f));
 			}
 		}
 	}

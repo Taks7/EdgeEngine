@@ -322,16 +322,23 @@ void ModuleUI::MainMenu()
 
 		}
 
-		if (ImGui::BeginMenu("Play/Stop"))
+		if (ImGui::BeginMenu("Play/Pause/Stop"))
 		{
 			if (ImGui::MenuItem("Play"))
 			{
 				App->pause = false;
+				App->back_to_original = false;
 			}
-			if (ImGui::MenuItem("Stop"))
+			if (ImGui::MenuItem("Pause the Edge Engine"))
 			{
 				App->pause = true;
 			}
+			if (ImGui::MenuItem("Stop and get back to Original State"))
+			{
+				App->pause = true;
+				App->back_to_original = true;
+			}
+
 			ImGui::EndMenu();
 
 		}
