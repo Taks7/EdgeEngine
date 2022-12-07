@@ -254,6 +254,15 @@ std::string ModuleGameObject::GetTexturePath()
 			App->fs->FixPath(materialUsed->materialUsed->path.c_str());
 			return materialUsed->materialUsed->path;
 		}
+		for (int j = 0; j < App->scene_intro->game_objects.at(i)->childs.size(); j++)
+		{
+			if (App->scene_intro->game_objects.at(i)->childs.at(j)->IsSelected())
+			{
+				ModuleComponentMaterial* materialUsedchild = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->childs.at(j)->GetComponent(COMPONENT_TYPES::MATERIAL);
+				App->fs->FixPath(materialUsedchild->materialUsed->path.c_str());
+				return materialUsedchild->materialUsed->path;
+			}
+		}
 	}
 }
 

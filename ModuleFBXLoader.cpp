@@ -539,9 +539,9 @@ bool ModuleFBXLoader::SaveScene(JsonParsing& node) const
 {
 	node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "Parent mesh", App->scene_intro->selectedGameObject->GetMeshPath().c_str());
 	node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "Parent texture", App->scene_intro->selectedGameObject->GetTexturePath().c_str());
-	node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent position", App->scene_intro->selectedGameObject->GetGlobalPosition());
-	node.SetNewJson4Number(node.ValueToObject(node.GetRootValue()), "Parent rotation", App->scene_intro->selectedGameObject->GetGlobalRotation());
-	node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent scale", App->scene_intro->selectedGameObject->GetGlobalScale());
+	//node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent position", App->scene_intro->selectedGameObject->GetGlobalPosition());
+	//node.SetNewJson4Number(node.ValueToObject(node.GetRootValue()), "Parent rotation", App->scene_intro->selectedGameObject->GetGlobalRotation());
+	//node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent scale", App->scene_intro->selectedGameObject->GetGlobalScale());
 	for (int i = 0 ; i < App->scene_intro->selectedGameObject->childs.size(); i++)
 	{
 		node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "child texture" , App->scene_intro->selectedGameObject->childs.at(i)->GetTexturePath().c_str());
@@ -552,6 +552,16 @@ bool ModuleFBXLoader::SaveScene(JsonParsing& node) const
 }
 bool ModuleFBXLoader::LoadScene(JsonParsing& node)
 {
+	ModuleGameObject* parent = App->scene_intro->CreateEmptyGameObject("Parent");
+	LoadMeshToGameObject(parent, node.GetJsonString("Parent mesh"), node.GetJsonString("Parent texture"));
+	for (int i = 0; i < parent->childs.size(); i++)
+	{
+		ModuleComponentMaterial* materialChild = (ModuleComponentMaterial*)parent->childs[i]->GetComponent(COMPONENT_TYPES::MATERIAL);
+		Texture* newTexture = new Texture();
+		App->materialImport->Import(node.GetJsonString("child texture"), newTexture);
+		if (materialChild->materialUsed != nullptr) materialChild->materialUsed = nullptr;
+		materialChild->materialUsed = newTexture;
+	}
 
 	return true;
 }
