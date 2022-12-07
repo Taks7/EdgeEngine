@@ -42,7 +42,7 @@ public:
 
 	bool debug;
 	bool pause;
-	bool play;
+	bool back_to_original;
 private:
 
 	std::list<Module*> list_modules;

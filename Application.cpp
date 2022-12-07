@@ -52,6 +52,7 @@ Application::Application() : debug(false)
 	loadRequest = false;
 	saveRequest = false;
 	pause = false;
+	back_to_original = false;
 }
 
 Application::~Application()
