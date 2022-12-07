@@ -63,7 +63,7 @@ public:
 	bool OrthogonalView() const;
 	bool FrustumIsHidden() const;
 
-	/*void SetIsCulling(const bool& set_to);*/
+	void SetIsCulling(const bool& set_to);
 	void SetOrthogonalView(const bool& set_to);
 	void SetFrustumIsHidden(const bool& set_to);
 

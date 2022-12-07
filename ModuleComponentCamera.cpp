@@ -1,4 +1,6 @@
 
+#include "Application.h"
+#include "ModuleSceneIntro.h"
 #include "Globals.h"
 #include "Module.h"
 #include "ModuleComponent.h"
@@ -46,6 +48,10 @@ bool ModuleComponentCamera::CleanUp()
 {
 	bool ret = true;
 
+	if (is_culling)
+	{
+		App->scene_intro->SetCullingCamera(nullptr);
+	}
 
 	return ret;
 }
@@ -85,23 +91,6 @@ void ModuleComponentCamera::UpdateFrustumTransform()
 	projection_update = true;
 }
 
-//void ModuleComponentCamera::UpdateFrustumTransform()
-//{
-//	float4x4 world_transform = this->GetOwner()->GetTransformComponent()->GetWorldTransform();
-//	float3x4 world_matrix = float3x4::identity;
-//
-//	world_matrix.SetTranslatePart(world_transform.TranslatePart());
-//	world_matrix.SetRotatePart(world_transform.RotatePart());
-//	world_matrix.Scale(world_transform.GetScale());
-//
-//	frustum.SetWorldMatrix(world_matrix);
-//
-//	UpdateFrustumPlanes();
-//	UpdateFrustumVertices();
-//
-//	projection_update = true;
-//}
-
 Frustum ModuleComponentCamera::GetFrustum() const
 {
 	return frustum;
@@ -139,11 +128,6 @@ void ModuleComponentCamera::UpdateFrustumPlanes()
 {
 	frustum.GetPlanes(frustum_planes);
 }
-
-//void ModuleComponentCamera::SetPosition(const float3& position)
-//{
-//	this->GetOwner()->GetTransformComponent()->SetWorldPosition(position);
-//}
 
 void ModuleComponentCamera::UpdateFrustumVertices()
 {
@@ -206,8 +190,6 @@ void ModuleComponentCamera::LookAt(const float3& target)
 	frustum.SetUp(look_at_matrix.MulDir(frustum.Up()).Normalized());
 
 	float4x4 world_matrix = frustum.WorldMatrix();
-
-	/*this->GetOwner()->GetTransformComponent()->SetWorldTransform(world_matrix);*/
 
 	ModuleComponentsTransform* transfromWorldMatrix;
 	transfromWorldMatrix = (ModuleComponentsTransform*)this->GetOwner()->GetComponent(COMPONENT_TYPES::TRANSFORM);
@@ -338,22 +320,22 @@ bool ModuleComponentCamera::FrustumIsHidden() const
 	return hide_frustum;
 }
 
-//void ModuleComponentCamera::SetIsCulling(const bool& set_to)
-//{
-//	is_culling = set_to;
-//
-//	if (set_to)
-//	{
-//		App->scene->SetCullingCamera(this);
-//	}
-//	else
-//	{
-//		if (App->scene->GetCullingCamera() == this)
-//		{
-//			App->scene->SetCullingCamera(nullptr);
-//		}
-//	}
-//}
+void ModuleComponentCamera::SetIsCulling(const bool& set_to)
+{
+	is_culling = set_to;
+
+	if (set_to)
+	{
+		App->scene_intro->SetCullingCamera(this);
+	}
+	else
+	{
+		if (App->scene_intro->GetCullingCamera() == this)
+		{
+			App->scene_intro->SetCullingCamera(nullptr);
+		}
+	}
+}
 
 void ModuleComponentCamera::SetOrthogonalView(const bool& set_to)
 {

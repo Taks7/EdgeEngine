@@ -27,8 +27,6 @@ bool ModuleSceneIntro::Start()
 	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));*/
 
-
-
 	return ret;
 }
 
@@ -81,6 +79,15 @@ bool ModuleSceneIntro::Update(float dt)
 	for (uint j = 0; j < game_objects.size(); j++)
 	{
 		game_objects.at(j)->Render();
+
+		ModuleComponentCamera* cameraobject = (ModuleComponentCamera*)game_objects.at(j)->GetComponent(COMPONENT_TYPES::CAMERA);
+		if (cameraobject != nullptr)
+		{
+			if (cameraobject->IsCulling())
+			{
+				culling_camera = cameraobject;
+			}
+		}
 	}
 	
 	return true;
@@ -296,5 +303,25 @@ ModuleGameObject* ModuleSceneIntro::CreateMasterGameObject()
 ModuleGameObject* ModuleSceneIntro::GetSelectedGameObject()
 {
 	return selectedGameObject;
+}
+
+ModuleComponentCamera* ModuleSceneIntro::GetCullingCamera() const
+{
+	return culling_camera;
+}
+
+void ModuleSceneIntro::SetCullingCamera(ModuleComponentCamera* culling_camera)
+{
+	ModuleComponentCamera* prev_cull_cam = this->culling_camera;
+
+	this->culling_camera = culling_camera;
+
+	if (prev_cull_cam != nullptr)
+	{
+		if (prev_cull_cam != culling_camera)
+		{
+			prev_cull_cam->SetIsCulling(false);
+		}
+	}
 }
 

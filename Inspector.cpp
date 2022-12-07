@@ -276,6 +276,12 @@ void InspectorMenu::DrawCameraComponent(ModuleGameObject* selectedGameObject)
 
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Camera Settings:");
 
+		bool camera_is_culling = camera->IsCulling();
+		if (ImGui::Checkbox("Culling", &camera_is_culling))
+		{
+			camera->SetIsCulling(camera_is_culling);
+		}
+
 		bool camera_is_orthogonal = camera->OrthogonalView();
 		if (ImGui::Checkbox("Select Orthogonal", &camera_is_orthogonal))
 		{

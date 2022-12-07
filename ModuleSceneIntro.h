@@ -42,10 +42,14 @@ public:
 
 	ModuleGameObject* GetSelectedGameObject();
 
+	ModuleComponentCamera* GetCullingCamera() const;
+	void SetCullingCamera(ModuleComponentCamera* culling_camera);
+
 public:
 
 	std::vector<ModuleGameObject*> game_objects;
 	ModuleGameObject* rootObject;
+	ModuleComponentCamera* culling_camera;
 
 	ModuleGameObject* selectedGameObject = nullptr;
 private:
