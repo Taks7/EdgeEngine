@@ -238,7 +238,7 @@ std::string ModuleGameObject::GetMeshPath()
 		if (App->scene_intro->game_objects[i]->IsSelected())
 		{
 			ModuleComponentsMesh* meshUsed = (ModuleComponentsMesh*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::MESH);
-
+			App->fs->FixPath(meshUsed->meshPath);
 			return meshUsed->meshPath;
 		}
 	}
@@ -251,7 +251,7 @@ std::string ModuleGameObject::GetTexturePath()
 		if (App->scene_intro->game_objects[i]->IsSelected())
 		{
 			ModuleComponentMaterial* materialUsed = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::MATERIAL);
-
+			App->fs->FixPath(materialUsed->materialUsed->path.c_str());
 			return materialUsed->materialUsed->path;
 		}
 	}
@@ -260,4 +260,42 @@ std::string ModuleGameObject::GetTexturePath()
 AABB ModuleGameObject::GetAABB()
 {
 	return aabb;
+}
+
+float3  ModuleGameObject::GetGlobalPosition() 
+{
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		if (App->scene_intro->game_objects[i]->IsSelected())
+		{
+			ModuleComponentsTransform* transform = (ModuleComponentsTransform*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
+			const float3 Helper = transform->GetGlobalPosition();
+			return Helper;
+		}
+	}
+}
+Quat ModuleGameObject::GetGlobalRotation() 
+{
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		if (App->scene_intro->game_objects[i]->IsSelected())
+		{
+			ModuleComponentsTransform* transform = (ModuleComponentsTransform*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
+
+			const Quat Helper = transform->GetGlobalRotation();
+			return Helper;
+		}
+	}
+}
+float3 ModuleGameObject::GetGlobalScale() 
+{
+	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
+	{
+		if (App->scene_intro->game_objects[i]->IsSelected())
+		{
+			ModuleComponentsTransform* transform = (ModuleComponentsTransform*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
+			const float3 Helper = transform->GetGlobalScale();
+			return Helper;
+		}
+	}
 }

@@ -50,6 +50,9 @@ private:
 	float	dt;
 	bool saveRequest;
 	bool loadRequest;
+
+	bool saveSceneRequest = false;
+	bool loadSceneRequest = false;
 	
 public:
 
@@ -67,6 +70,8 @@ public:
 
 	inline void SaveConfigRequest() { saveRequest = true; }
 	inline void LoadConfigRequest() { loadRequest = true; }
+	inline void SaveSceneRequest() { saveSceneRequest = true; }
+	inline void LoadSceneRequesst() { loadSceneRequest = true; }
 
 	float Dt() const;
 
@@ -83,4 +88,7 @@ private:
 
 	void SaveConfig();
 	void LoadConfig();
+
+	void SaveScene();
+	void LoadScene();
 };

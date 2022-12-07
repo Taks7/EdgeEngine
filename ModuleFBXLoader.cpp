@@ -535,54 +535,23 @@ uint64 VertexData::Save(const VertexData* mesh, char** buffer)
 	return written;
 }
 
-bool ModuleFBXLoader::SaveScene()
+bool ModuleFBXLoader::SaveScene(JsonParsing& node) const
 {
-	//App->fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
-	char* buffer = nullptr;
-	App->fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
-	//App->fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
-
-
-	if (buffer != nullptr)
+	
+	node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "Parent mesh", App->scene_intro->selectedGameObject->GetMeshPath().c_str());
+	node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "Parent texture", App->scene_intro->selectedGameObject->GetTexturePath().c_str());
+	node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent position", App->scene_intro->selectedGameObject->GetGlobalPosition());
+	node.SetNewJson4Number(node.ValueToObject(node.GetRootValue()), "Parent rotation", App->scene_intro->selectedGameObject->GetGlobalRotation());
+	node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent scale", App->scene_intro->selectedGameObject->GetGlobalScale());
+	for (int i = 0 ; i < App->scene_intro->selectedGameObject->childs.size(); i++)
 	{
-		JsonParsing jsonFile((const char*)buffer);
-		jsonFile.ValueToObject(jsonFile.GetRootValue());
+		node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "child texture" , App->scene_intro->selectedGameObject->childs.at(i)->GetTexturePath().c_str());
 
-		JsonParsing& node = jsonFile;
-
-		//PARENT OF THE SCENE
-		node.SetChild(node.GetRootValue(), "parent");
-		node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "pathMesh", App->scene_intro->selectedGameObject->GetMeshPath().c_str());
-		node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "textureOrigin", App->scene_intro->selectedGameObject->GetTexturePath().c_str());
-
-		for (int i = 0; i < App->scene_intro->selectedGameObject->childs.size(); i++)
-		{
-
-			jsonFile.SetChild(jsonFile.GetRootValue(), App->scene_intro->selectedGameObject->childs.at(i)->name.c_str());
-			node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "textureChildPath", App->scene_intro->selectedGameObject->childs.at(i)->GetTexturePath().c_str());
-		}
-
-
-
-		char* buf;
-		uint size = node.Save(&buf);
-
-		if (App->fs->Save(ASSETS_SCENES_PATH "scene.json", buf, size) > 0)
-		{
-			LOG_COMMENT("Saved Engine Preferences");
-		}
-
-		return true;
 	}
-		
-	
 
-
-	
-	
-	
+	return true;
 }
-bool ModuleFBXLoader::LoadScene()
+bool ModuleFBXLoader::LoadScene(JsonParsing& node)
 {
 	return true;
 }

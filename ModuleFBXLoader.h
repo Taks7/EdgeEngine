@@ -88,8 +88,9 @@ public:
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
-	bool SaveScene();
-	bool LoadScene();
+	bool LoadScene(JsonParsing& node) override;
+	bool SaveScene(JsonParsing& node) const override;
+
 
 public:
 	std::vector<VertexData> meshes;

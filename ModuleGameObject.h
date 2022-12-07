@@ -48,6 +48,10 @@ public:
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 	void UpdateBoundingBoxes();
 
+	 float3 GetGlobalPosition() ;
+	 Quat GetGlobalRotation() ;
+	 float3 GetGlobalScale() ;
+
 	AABB GetAABB();
 
 public:

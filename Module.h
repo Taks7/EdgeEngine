@@ -57,5 +57,15 @@ public:
 		return true;
 	}
 
+	virtual bool LoadScene(JsonParsing& node)
+	{
+		return true;
+	}
+
+	virtual bool SaveScene(JsonParsing& node) const
+	{
+		return true;
+	}
+
 	//TODO 7: Create virtual method "On Collision", that recieves the two colliding PhysBodies
 };

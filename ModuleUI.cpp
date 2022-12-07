@@ -347,11 +347,11 @@ void ModuleUI::MainMenu()
 		{
 			if (ImGui::MenuItem("SAVE"))
 			{
-				App->loaderModels->SaveScene();
+				App->SaveSceneRequest();
 			}
 			if (ImGui::MenuItem("LOAD"))
 			{
-				App->loaderModels->LoadScene();
+				App->LoadSceneRequesst();
 			}
 			ImGui::EndMenu();
 
