@@ -10,7 +10,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleFileSystem.h"
 #include "Resource.h"
-
+#include "FSdefinitions.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 //#include "MathGeo/src/MathGeoLib.h"
 

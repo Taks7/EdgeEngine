@@ -335,6 +335,20 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
+
+		if (ImGui::BeginMenu("SAVE/LOAD scenes"))
+		{
+			if (ImGui::MenuItem("SAVE"))
+			{
+				App->loaderModels->SaveScene();
+			}
+			if (ImGui::MenuItem("LOAD"))
+			{
+				App->loaderModels->LoadScene();
+			}
+			ImGui::EndMenu();
+
+		}
 	}
 
 	if (showGUIPreferences)

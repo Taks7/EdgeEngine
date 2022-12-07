@@ -102,6 +102,11 @@ void Project::HandleSelectedItem(const char* file_path)
 			{
 				ModuleComponentMaterial* material = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->GetComponent(COMPONENT_TYPES::MATERIAL);
 
+				Texture* newTexture = new Texture();
+				App->materialImport->Import(path.c_str(), newTexture);
+				if (material->materialUsed != nullptr) material->materialUsed = nullptr;
+				material->materialUsed = newTexture;
+
 				if (App->scene_intro->game_objects[i]->childs.size() > 0)
 				{
 					for (int j = 0; j < App->scene_intro->game_objects[i]->childs.size(); j++)
@@ -113,13 +118,19 @@ void Project::HandleSelectedItem(const char* file_path)
 						materialChild->materialUsed = newTexture;
 					}
 				}
-				Texture* newTexture = new Texture();
-				App->materialImport->Import(path.c_str(), newTexture);
-				if (material->materialUsed != nullptr) material->materialUsed = nullptr;
-				
-				
-				//material->materialUsed->Import(path.c_str(), material->materialUsed);
 			}
+			for (int j = 0; j < App->scene_intro->game_objects[i]->childs.size(); j++)
+			{
+				if (App->scene_intro->game_objects[i]->childs.at(j)->IsSelected())
+				{
+					ModuleComponentMaterial* materialChild = (ModuleComponentMaterial*)App->scene_intro->game_objects[i]->childs[j]->GetComponent(COMPONENT_TYPES::MATERIAL);
+					Texture* newTexture = new Texture();
+					App->materialImport->Import(path.c_str(), newTexture);
+					if (materialChild->materialUsed != nullptr) materialChild->materialUsed = nullptr;
+					materialChild->materialUsed = newTexture;
+				}
+			}
+			
 		}
 	}
 }

@@ -28,6 +28,17 @@
 ModuleFBXLoader::ModuleFBXLoader(bool start_enabled) : Module(start_enabled)
 {
 	name = "FBXloader";
+
+	const char* dirs[] = {
+		ASSETS_SCENES_PATH
+	};
+
+	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)
+	{
+		if (PHYSFS_exists(dirs[i]) == 0)
+			PHYSFS_mkdir(dirs[i]);
+	}
+
 }
 
 // Destructor
@@ -414,17 +425,17 @@ uint Texture::CreateTexture(const void* data, uint width, uint height, uint targ
 	glTexParameteri(target, GL_TEXTURE_WRAP_S, wrapping);
 	glTexParameteri(target, GL_TEXTURE_WRAP_T, wrapping);
 
-	if (filter == GL_NEAREST)																					// Nearest filtering gets the color of the nearest neighbour pixel.
+	if (filter == GL_NEAREST)																					
 	{
 		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	}
-	else if (filter == GL_LINEAR)																				// Linear filtering interpolates the color of the neighbour pixels.
+	else if (filter == GL_LINEAR)																				
 	{
 		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-		if (glewIsSupported("GL_EXT_texture_filter_anisotropic"))												// In case Anisotropic filtering is available, it will be used.
+		if (glewIsSupported("GL_EXT_texture_filter_anisotropic"))												
 		{
 			GLfloat max_anisotropy;
 
@@ -522,4 +533,33 @@ uint64 VertexData::Save(const VertexData* mesh, char** buffer)
 	path.clear();
 
 	return written;
+}
+
+bool ModuleFBXLoader::SaveScene()
+{
+	char* buffer = nullptr;
+	App->fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
+
+	if (buffer != nullptr)
+	{
+		JsonParsing jsonFile((const char*)buffer);
+		jsonFile.ValueToObject(jsonFile.GetRootValue());
+	
+		
+
+		jsonFile.SetNewJsonString(jsonFile.ValueToObject(jsonFile.GetRootValue()), "pathMesh", App->scene_intro->selectedGameObject->GetMeshPath().c_str());
+
+		for (int i = 0; i < App->scene_intro->selectedGameObject->childs.size(); i++)
+		{
+
+		}
+
+		RELEASE_ARRAY(buffer);
+		return true;
+	}
+	
+}
+bool ModuleFBXLoader::LoadScene()
+{
+	return true;
 }
