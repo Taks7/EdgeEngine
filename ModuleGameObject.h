@@ -48,9 +48,9 @@ public:
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
 	void UpdateBoundingBoxes();
 
-	 float3 GetGlobalPosition() ;
-	 Quat GetGlobalRotation() ;
-	 float3 GetGlobalScale() ;
+	const float3 GetGlobalPosition()const;
+	const Quat GetGlobalRotation()const;
+	const float3 GetGlobalScale()const;
 
 	AABB GetAABB();
 

@@ -262,7 +262,7 @@ AABB ModuleGameObject::GetAABB()
 	return aabb;
 }
 
-float3  ModuleGameObject::GetGlobalPosition() 
+float3 const ModuleGameObject::GetGlobalPosition()const
 {
 	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 	{
@@ -274,7 +274,7 @@ float3  ModuleGameObject::GetGlobalPosition()
 		}
 	}
 }
-Quat ModuleGameObject::GetGlobalRotation() 
+Quat const ModuleGameObject::GetGlobalRotation() const
 {
 	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 	{
@@ -287,7 +287,7 @@ Quat ModuleGameObject::GetGlobalRotation()
 		}
 	}
 }
-float3 ModuleGameObject::GetGlobalScale() 
+float3 const ModuleGameObject::GetGlobalScale() const
 {
 	for (int i = 0; i < App->scene_intro->game_objects.size(); i++)
 	{

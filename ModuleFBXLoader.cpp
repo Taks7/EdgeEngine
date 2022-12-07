@@ -537,7 +537,6 @@ uint64 VertexData::Save(const VertexData* mesh, char** buffer)
 
 bool ModuleFBXLoader::SaveScene(JsonParsing& node) const
 {
-	
 	node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "Parent mesh", App->scene_intro->selectedGameObject->GetMeshPath().c_str());
 	node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "Parent texture", App->scene_intro->selectedGameObject->GetTexturePath().c_str());
 	node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent position", App->scene_intro->selectedGameObject->GetGlobalPosition());
@@ -553,5 +552,6 @@ bool ModuleFBXLoader::SaveScene(JsonParsing& node) const
 }
 bool ModuleFBXLoader::LoadScene(JsonParsing& node)
 {
+
 	return true;
 }
