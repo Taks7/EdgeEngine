@@ -241,6 +241,12 @@ void InspectorMenu::DrawMaterialComponent(ModuleGameObject* selectedGameObject)
 				ImGui::Text("Height:");	ImGui::SameLine(); ImGui::Text("%u", material->materialUsed->height);
 
 				ImGui::Separator();
+
+				if (ImGui::Button("Save Texture", {100,100}))
+				{
+					char* buffer = nullptr;
+					material->materialUsed->Save_texture(material->materialUsed, &buffer);
+				}
 			}		
 		}		
 	}

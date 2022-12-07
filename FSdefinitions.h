@@ -10,7 +10,10 @@
 #define MATERIALS_EXTENSION		".edgeMat"
 #define SCENES_EXTENSION		".edgeScene"
 #define TEXTURES_EXTENSION		".edgeTex"
-
+#define LIBRARY_PATH			"Library/"
+#define LIBRARY_SCENES_PATH		"Library/Scenes/"
+#define LIBRARY_TEXTURES_PATH	"Library/Textures/"
+#define LIBRARY_MESHES_PATH		"Library/Meshes/"
 #define META_EXTENSION			".meta"
 
 #define JSON_EXTENSION			".json"

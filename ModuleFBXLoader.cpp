@@ -16,6 +16,8 @@
 #include "ModuleComponent.h"
 #include "ModuleComponentMaterial.h"
 #include "FSdefinitions.h"
+#include "DevIL/include/il.h"
+#include "DevIL.h"
 #include <vector>
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
@@ -192,4 +194,209 @@ bool ModuleFBXLoader::SaveConfig(JsonParsing& node) const
 AABB VertexData::GetAABB()
 {
 	return aabb;
+}
+
+
+uint64 Texture::Save_texture(Texture* texture, char** buffer)
+{
+	uint64 written = 0;
+
+	std::string directory = LIBRARY_TEXTURES_PATH;																	
+	std::string file = std::to_string(texture->uid) + std::string(TEXTURES_EXTENSION);				 
+	std::string full_path = directory + file;																	
+
+	ilEnable(IL_FILE_OVERWRITE);																				
+	ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);																		
+
+	ILuint size = ilSaveL(IL_DDS, nullptr, 0);																	
+	if (size > 0)
+	{
+		ILubyte* data = new ILubyte[size];																		
+
+		if (ilSaveL(IL_DDS, data, size) > 0)																	
+		{
+			*buffer = (char*)data;
+			written = App->fs->Save(full_path.c_str(), *buffer, size, false);							
+
+			if (written > 0)
+			{
+				LOG_COMMENT("[IMPORTER] Successfully saved %s in %s", file.c_str(), directory.c_str());
+			}
+			else
+			{
+				*buffer = nullptr;
+				LOG_COMMENT("[ERROR] Could not save %s!", file.c_str());
+			}
+		}
+		else
+		{
+			LOG_COMMENT("[ERROR] Could not save the texture! ilSaveL() Error: %s", iluErrorString(ilGetError()));
+		}
+	}
+	else
+	{
+		LOG_COMMENT("[ERROR] Could not get the size of the texture to save! ilSaveL() Error: %s", iluErrorString(ilGetError()));
+	}
+
+	directory.clear();
+	file.clear();
+	full_path.clear();
+
+	return written;
+}
+
+uint Texture::Import(const char* path, Texture* texture)											// FIX: FLIP TEXTURE
+{
+	uint tex_id = 0;
+
+	LOG_COMMENT("[IMPORTER] Loading %s texture.", path);
+
+	if (path == nullptr || texture == nullptr)
+	{
+		LOG_COMMENT("[ERROR] Texture could not be imported: Path and/or R_Texture* was nullptr!");
+		return 0;
+	}
+
+	char* tex_data = nullptr;
+	uint file_size = App->fs->Load(path, &tex_data);
+
+	if (tex_data != nullptr && file_size > 0)
+	{
+		bool success = ilLoadL(IL_TYPE_UNKNOWN, (const void*)tex_data, file_size);
+		if (success)
+		{
+			char* buffer = nullptr;
+			uint written = Texture::Save_texture(texture, &buffer);
+
+			if (buffer != nullptr && written > 0)
+			{
+				//texture->SetAssetsPath(path);
+				//texture->SetAssetsFile(App->fs->GetFileAndExtension(path).c_str());
+
+				//Importer::Textures::Load(buffer, written, r_texture);
+				success = Texture::Load(texture);
+				if (success)
+				{
+					tex_id = texture->uid;
+					//LOG_COMMENT("[IMPORTER] Successfully loaded %s from Library!", texture->GetAssetsFile());
+				}
+				else
+				{
+					//LOG_COMMENT("[IMPORTER] Could not load %s from Library!", texture->GetAssetsFile());
+				}
+			}
+			else
+			{
+				LOG_COMMENT("[ERROR] Could not Save() %s in the Library!", path);
+			}
+
+			RELEASE_ARRAY(buffer);
+		}
+		else
+		{
+			LOG_COMMENT("[ERROR] Could not load %s from Assets! ilLoadL() Error: %s", path, iluErrorString(ilGetError()));
+		}
+	}
+	else
+	{
+		LOG_COMMENT("[ERROR] File System could not load %s!", path);
+	}
+
+	RELEASE_ARRAY(tex_data);
+
+	return tex_id;
+}
+
+bool Texture::Load(Texture* texture)
+{
+	bool ret = true;
+
+	char* tex_data = nullptr;																			
+	uint file_size = App->fs->Load(texture->path.c_str(), &tex_data);
+
+	if (tex_data == nullptr || file_size == 0)
+	{
+		LOG_COMMENT("[ERROR] File System could not load tex data! Path: %s", ASSETS_TEXTURES_PATH);
+		return false;
+	}
+
+	ILuint il_image = 0;																				// Will be used to generate, bind and delete the buffers created by DevIL.
+	ilGenImages(1, &il_image);																			// DevIL's buffers work pretty much the same way as OpenGL's do.
+	ilBindImage(il_image);																				// The first step is to generate a buffer and then bind it.
+
+	bool success = ilLoadL(IL_TYPE_UNKNOWN, (const void*)tex_data, file_size);							// ilLoadL() loads a texture from some buffer data. size == 0 = no bounds check.
+	if (success)																						// --- When type is IL_TYPE_UNKNOWN, DevIL will try to find the type on it's own.
+	{
+		uint color_channels = ilGetInteger(IL_IMAGE_CHANNELS);
+		if (color_channels == 3)
+		{
+			success = ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);											// ilConvertImage() will convert the image to the given format and type.
+		}
+		else if (color_channels == 4)
+		{
+			success = ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);										// ilConvertImage() will return false if the system cannot store the image with
+		}																								// its new format or the operation is invalid (no bound img. or invalid identifier).
+		else
+		{
+			LOG_COMMENT("[WARNING] Texture has less than 3 color channels! Path: %s", ASSETS_TEXTURES_PATH);
+		}
+
+		if (success)
+		{
+			ILinfo il_info;
+			iluGetImageInfo(&il_info);
+
+			if (il_info.Origin == IL_ORIGIN_UPPER_LEFT)
+			{
+				iluFlipImage();
+			}
+
+			uint width = il_info.Width;															
+			uint height = il_info.Height;															
+			uint depth = il_info.Depth;															
+			uint bpp = il_info.Bpp;																
+			uint size = il_info.SizeOfData;														
+			uint format = il_info.Format;															
+			uint target = (uint)GL_TEXTURE_2D;														
+			int wrapping = (int)GL_REPEAT;															
+			int filter = (int)GL_LINEAR;															
+
+			uint tex_id = App->materialImport->CreateTexture(ilGetData(), width, height, target, wrapping, filter, format, format);	
+
+			if (tex_id != 0)																							
+			{
+				Texture* newTexture = new Texture();
+				ModuleComponentMaterial* materialOfSelected = (ModuleComponentMaterial*)App->scene_intro->selectedGameObject->GetComponent(COMPONENT_TYPES::MATERIAL);
+				newTexture->SetTextureData(tex_id, width, height);
+				materialOfSelected->materialUsed = newTexture;
+			}
+			else
+			{
+				LOG_COMMENT("[ERROR] Could not get texture ID! Path: %s", ASSETS_TEXTURES_PATH);
+				ret = false;
+			}
+		}
+		else
+		{
+			LOG_COMMENT("[ERROR] ilConvertImage() Error: %s", iluErrorString(ilGetError()));
+			ret = false;
+		}
+	}
+	else
+	{
+		LOG_COMMENT("[ERROR] ilLoadL() Error: %s", iluErrorString(ilGetError()));
+		ret = false;
+	}
+
+	ilDeleteImages(1, &il_image);
+
+	return ret;
+}
+
+
+void Texture::SetTextureData(uint id, uint width, uint height)
+{
+	Texture::id = id;
+	Texture::width = width;
+	Texture::height = height;
 }

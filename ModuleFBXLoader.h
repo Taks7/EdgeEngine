@@ -29,6 +29,12 @@ struct Texture
 	uint			width;
 	uint			height;
 	uint			uid;
+
+	uint64 Save_texture(Texture* texture, char** buffer);
+	uint Import(const char* path, Texture* texture);
+	bool Load(Texture* Texture);
+
+	void SetTextureData(uint id, uint width, uint height);
 };
 struct VertexData
 {
@@ -68,6 +74,8 @@ public:
 	bool LoadMeshToGameObject(ModuleGameObject* owner,const char* file_path, const char* texture_path);
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
+
+	
 
 public:
 	std::vector<VertexData> meshes;

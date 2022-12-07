@@ -113,10 +113,13 @@ void Project::HandleSelectedItem(const char* file_path)
 						materialChild->materialUsed = newTexture;
 					}
 				}
-				Texture* newTexture = new Texture();
+				/*Texture* newTexture = new Texture();
 				App->materialImport->Import(path.c_str(), newTexture);
 				if (material->materialUsed != nullptr) material->materialUsed = nullptr;
-				material->materialUsed = newTexture;
+				material->materialUsed = newTexture;*/
+				Texture* newTexture = new Texture();
+				newTexture->path = path;
+				material->materialUsed->Load(newTexture);
 			}
 		}
 	}
