@@ -41,6 +41,8 @@ public:
 	JsonParsing jsonFile;
 
 	bool debug;
+	bool pause;
+	bool play;
 private:
 
 	std::list<Module*> list_modules;
@@ -65,6 +67,8 @@ public:
 
 	inline void SaveConfigRequest() { saveRequest = true; }
 	inline void LoadConfigRequest() { loadRequest = true; }
+
+	float Dt() const;
 
 	void GetCPU(int& count, int& size);
 	float GetRAM();

@@ -321,6 +321,20 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
+
+		if (ImGui::BeginMenu("Play/Stop"))
+		{
+			if (ImGui::MenuItem("Play"))
+			{
+				App->pause = false;
+			}
+			if (ImGui::MenuItem("Stop"))
+			{
+				App->pause = true;
+			}
+			ImGui::EndMenu();
+
+		}
 	}
 
 	if (showGUIPreferences)

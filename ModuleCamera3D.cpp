@@ -14,9 +14,9 @@
 #include "MathGeoLib.h"
 #pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
 
-#define ZOOM_SPEED 2.0f
+#define ZOOM_SPEED 200.0f
 #define ROTATION_SPEED 0.2f
-#define MOVEMENT_SPEED 0.02f
+#define MOVEMENT_SPEED 8.0f
 
 
 
@@ -367,43 +367,43 @@ void ModuleCamera3D::FreeMovement()
 
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT)								
 	{																									 
-		mov_speed = movementSpeed * 2;										
+		mov_speed = movementSpeed * 2 * App->Dt();										
 	}																									
 
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_STATE::KEY_REPEAT)									
 	{																									 
-		new_position += frustum.Front() * mov_speed;													 
+		new_position += frustum.Front() * mov_speed * App->Dt();
 	}																									 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_STATE::KEY_REPEAT)									 
 	{																									 
-		new_position -= frustum.Front() * mov_speed;													 
+		new_position -= frustum.Front() * mov_speed * App->Dt();
 	}																									
 
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_STATE::KEY_REPEAT)									
 	{																									 										
-		new_position -= frustum.WorldRight() * mov_speed;												 										
+		new_position -= frustum.WorldRight() * mov_speed * App->Dt();
 	}																									 										
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_STATE::KEY_REPEAT)									 										
 	{																									 										
-		new_position += frustum.WorldRight() * mov_speed;																					
+		new_position += frustum.WorldRight() * mov_speed * App->Dt();
 	}																									
 
 
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_STATE::KEY_REPEAT)
 	{																									
-		new_position += frustum.Up() * mov_speed;														 
+		new_position += frustum.Up() * mov_speed * App->Dt();
 	}																									
 	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_STATE::KEY_REPEAT)
 	{																									
-		new_position -= frustum.Up() * mov_speed;														
+		new_position -= frustum.Up() * mov_speed * App->Dt();
 	}	
 
 	if (App->input->GetMouseZ() != 0)
 	{
 		Frustum frustum = current_camera->GetFrustum();
-		float3 new_Z = frustum.Front() * (float)App->input->GetMouseZ() * zoomSpeed;
+		float3 new_Z = frustum.Front() * (float)App->input->GetMouseZ() * zoomSpeed * App->Dt();
 
 		MoveCameras(new_Z);
 	}
@@ -461,7 +461,7 @@ void ModuleCamera3D::FreeMovement()
 
 			Frustum frustum = current_camera->GetFrustum();
 			float2 mouse_motion = App->scene_intro->getWorldMosuePosition();
-			float sensitivity = rotationSpeed;
+			float sensitivity = rotationSpeed * App->Dt();
 
 			float3 new_Z = frustum.Pos() - reference;
 

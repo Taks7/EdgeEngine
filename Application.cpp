@@ -51,6 +51,7 @@ Application::Application() : debug(false)
 
 	loadRequest = false;
 	saveRequest = false;
+	pause = false;
 }
 
 Application::~Application()
@@ -137,7 +138,14 @@ bool Application::Update()
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
-		ret = (*item)->Update(dt);
+		if (!pause)
+		{
+			ret = (*item)->Update(dt);
+		}
+		else
+		{
+			ret = (*item)->Update(0.0f);
+		}
 	}
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
@@ -220,6 +228,19 @@ void Application::LoadConfig()
 
 	loadRequest = false;
 }
+
+float Application::Dt() const
+{
+	if (!pause)
+	{
+		return dt;
+	}
+	else
+	{
+		return 0.0f;
+	}
+}
+
 void Application::RequestBrowser(const char* string)
 {
 	const char* link = string;
