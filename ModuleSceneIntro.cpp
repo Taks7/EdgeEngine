@@ -161,7 +161,15 @@ void ModuleSceneIntro::getRaycastHits(const LineSegment& ray, std::map<float, Mo
 {
 	for (uint i = 0; i < game_objects.size(); ++i)
 	{
-		
+		for (int j = 0; j < game_objects.at(i)->childs.size(); j++)
+		{
+			if (ray.Intersects(game_objects.at(i)->childs.at(j)->GetAABB()))
+			{
+				ModuleComponentsTransform* gameObjTransform = (ModuleComponentsTransform*)game_objects.at(i)->childs.at(j)->GetComponent(COMPONENT_TYPES::TRANSFORM);
+				float3 position = gameObjTransform->GetGlobalPosition();
+				hits.emplace(ray.Distance(position), game_objects.at(i)->childs.at(j));
+			}
+		}
 		if (ray.Intersects(game_objects[i]->GetAABB()))
 		{
 			ModuleComponentsTransform* gameObjTransform = (ModuleComponentsTransform*)game_objects[i]->GetComponent(COMPONENT_TYPES::TRANSFORM);
