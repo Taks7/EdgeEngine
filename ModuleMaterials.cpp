@@ -64,7 +64,10 @@ bool ModuleMaterial::Import(const char* file_path, Texture* newMaterial)
 			{
 				type = IL_PNG;
 			}
-
+			if (App->fs->GetFileExtension(file_path) == "edgeTex")
+			{
+				type = IL_PNG;
+			}
 			if (App->fs->GetFileExtension(file_path) == "dds" || App->fs->GetFileExtension(file_path) == "DDS")
 			{
 				type = IL_DDS;

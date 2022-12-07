@@ -22,6 +22,9 @@
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
 
+
+#define HEADER_SIZE 8
+
 ModuleFBXLoader::ModuleFBXLoader(bool start_enabled) : Module(start_enabled)
 {
 	name = "FBXloader";
@@ -278,11 +281,11 @@ uint Texture::Import(const char* path, Texture* texture)											// FIX: FLIP 
 				if (success)
 				{
 					tex_id = texture->uid;
-					//LOG_COMMENT("[IMPORTER] Successfully loaded %s from Library!", texture->GetAssetsFile());
+					LOG_COMMENT("[IMPORTER] Successfully loaded %s from Library!", texture->path);
 				}
 				else
 				{
-					//LOG_COMMENT("[IMPORTER] Could not load %s from Library!", texture->GetAssetsFile());
+					LOG_COMMENT("[IMPORTER] Could not load %s from Library!", texture->path);
 				}
 			}
 			else
@@ -313,6 +316,7 @@ bool Texture::Load(Texture* texture)
 
 	char* tex_data = nullptr;																			
 	uint file_size = App->fs->Load(texture->path.c_str(), &tex_data);
+	uint texture_id;
 
 	if (tex_data == nullptr || file_size == 0)
 	{
@@ -350,7 +354,6 @@ bool Texture::Load(Texture* texture)
 			{
 				iluFlipImage();
 			}
-
 			uint width = il_info.Width;															
 			uint height = il_info.Height;															
 			uint depth = il_info.Depth;															
@@ -359,16 +362,14 @@ bool Texture::Load(Texture* texture)
 			uint format = il_info.Format;															
 			uint target = (uint)GL_TEXTURE_2D;														
 			int wrapping = (int)GL_REPEAT;															
-			int filter = (int)GL_LINEAR;															
-
-			uint tex_id = App->materialImport->CreateTexture(ilGetData(), width, height, target, wrapping, filter, format, format);	
+			int filter = (int)GL_LINEAR;
+			uint tex_id = texture->CreateTexture(ilGetData(), width, height, target, wrapping, filter, format, format);	
 
 			if (tex_id != 0)																							
 			{
-				Texture* newTexture = new Texture();
-				ModuleComponentMaterial* materialOfSelected = (ModuleComponentMaterial*)App->scene_intro->selectedGameObject->GetComponent(COMPONENT_TYPES::MATERIAL);
-				newTexture->SetTextureData(tex_id, width, height);
-				materialOfSelected->materialUsed = newTexture;
+				
+				texture->SetTextureData(tex_id, width, height);
+			
 			}
 			else
 			{
@@ -399,4 +400,126 @@ void Texture::SetTextureData(uint id, uint width, uint height)
 	Texture::id = id;
 	Texture::width = width;
 	Texture::height = height;
+}
+
+uint Texture::CreateTexture(const void* data, uint width, uint height, uint target, int wrapping, int filter, int internal_format, uint format)
+{
+	uint texture_id = 0;
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+	glGenTextures(1, (GLuint*)&texture_id);
+	glBindTexture(target, texture_id);
+
+	glTexParameteri(target, GL_TEXTURE_WRAP_S, wrapping);
+	glTexParameteri(target, GL_TEXTURE_WRAP_T, wrapping);
+
+	if (filter == GL_NEAREST)																					// Nearest filtering gets the color of the nearest neighbour pixel.
+	{
+		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+	}
+	else if (filter == GL_LINEAR)																				// Linear filtering interpolates the color of the neighbour pixels.
+	{
+		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+		if (glewIsSupported("GL_EXT_texture_filter_anisotropic"))												// In case Anisotropic filtering is available, it will be used.
+		{
+			GLfloat max_anisotropy;
+
+			glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotropy);
+			glTexParameteri(target, GL_TEXTURE_MAX_ANISOTROPY_EXT, (GLint)max_anisotropy);
+		}
+	}
+	else
+	{
+		LOG_COMMENT("[ERROR] Invalid filter type! Supported filters: GL_LINEAR and GL_NEAREST.");
+	}
+
+	glTexImage2D(target, 0, internal_format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+
+	glGenerateMipmap(target);
+
+	glBindTexture(target, 0);
+
+	if (texture_id != 0)
+	{
+		LOG_COMMENT("[STATUS] Texture Successfully loaded! Id: %u, Size: %u x %u", texture_id, width, height);
+	}
+
+	return texture_id;
+}
+
+uint64 VertexData::Save(const VertexData* mesh, char** buffer)
+{
+	uint64 written = 0;
+
+	uint header_data[HEADER_SIZE] = {
+		mesh->num_vertex,																
+		mesh->num_index,																
+		mesh->num_uvs,																	
+		mesh->textCords[0],															
+		mesh->vertex[0], 																				
+		mesh->index[0], 																				
+	};
+
+	uint header_data_size = sizeof(header_data) + sizeof(uint);
+	uint array_data_size = (header_data[0] + header_data[1] + header_data[2]) * sizeof(float) + header_data[3] * sizeof(uint);
+	uint precalculated_data_size = mesh->aabb.NumVertices() * sizeof(float) * 3;
+	uint size = header_data_size + array_data_size + precalculated_data_size;
+	
+
+	if (size == 0)
+	{
+		LOG_COMMENT("[WARNING] Mesh had no data to Save!");
+		return 0;
+	}
+
+	*buffer = new char[size];
+	char* cursor = *buffer;
+	uint bytes = 0;
+
+	// --- HEADER DATA ---
+
+	// --- VERTEX ARRAY DATA ---
+	bytes = mesh->num_vertex * sizeof(float);
+	memcpy_s(cursor, size, &mesh->vertex[0], bytes);
+	cursor += bytes;
+
+	bytes = mesh->num_uvs * sizeof(float);
+	memcpy_s(cursor, size, &mesh->textCords[0], bytes);
+	cursor += bytes;
+
+	bytes = mesh->num_index * sizeof(uint);
+	memcpy_s(cursor, size, &mesh->index[0], bytes);
+	cursor += bytes;
+
+	// --- PRECALCULATED DATA ---
+	math::vec* aabb_corners = new math::vec[8];
+	mesh->aabb.GetCornerPoints(aabb_corners);
+
+	bytes = mesh->aabb.NumVertices() * sizeof(float) * 3;
+	memcpy_s(cursor, size, aabb_corners, bytes);
+	cursor += bytes;
+
+	delete[] aabb_corners;
+
+	// --- SAVING THE BUFFER ---
+	std::string path = std::string(LIBRARY_MESHES_PATH) + std::to_string(mesh->id_index) + std::string(MESHES_EXTENSION);
+
+	written = App->fs->Save(path.c_str(), *buffer, size);
+
+	if (written > 0)
+	{
+		//LOG_COMMENT("[IMPORTER] Meshes: Successfully Saved %s into the Library!", mesh->GetAssetsFile());
+	}
+	else
+	{
+		//LOG_COMMENT("[ERROR] Meshes Importer: Could not Save %s into the Library!", r_mesh->GetAssetsFile());
+	}
+
+	path.clear();
+
+	return written;
 }

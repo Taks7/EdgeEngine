@@ -198,6 +198,11 @@ void InspectorMenu::DrawMeshComponent(ModuleGameObject* selectedGameObject)
 
 			ImGui::Separator();
 
+			if (ImGui::Button("Save mesh", { 100,100 }))
+			{
+				char* buffer = nullptr;
+				mesh->mesh.Save(&mesh->mesh, &buffer);
+			}
 
 		}
 		

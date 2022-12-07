@@ -8,6 +8,7 @@
 #include "MathGeo/src/Math/float2.h"
 #include "glew/glew-2.2.0/include/GL/glew.h"
 #include "ModuleGameObject.h"
+#include "MathGeo/src/Algorithm/Random/LCG.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
@@ -35,9 +36,21 @@ struct Texture
 	bool Load(Texture* Texture);
 
 	void SetTextureData(uint id, uint width, uint height);
+
+	
+		uint CreateTexture(const void* data, uint width,
+			uint height,
+			uint target = 0x0DE1, 				// 0x0DE1 = GL_TEXTURE_2D
+			int filter = 0x2600,				// 0x2600 = GL_NEAREST
+			int wrapping = 0x2901,				// 0x2901 = GL_REPEAT
+			int internal_format = 0x1908,		// 0x1908 = GL_RGBA
+			uint format = 0x1908); 				// 0x1908 = GL_RGBA
+	
 };
 struct VertexData
 {
+	
+
 	GLuint  id_index = 0; // index in VRAM
 	GLuint  num_index = 0;
 	GLuint* index = nullptr;
@@ -49,7 +62,6 @@ struct VertexData
 	GLuint num_uvs = 0;
 	GLuint id_uvs = 0;
 
-
 	Texture texture_data;
 
 	AABB aabb;
@@ -57,6 +69,7 @@ struct VertexData
 	AABB GetAABB();
 	void SetAABB();
 
+	uint64	Save(const VertexData* mesh, char** buffer);
 };
 class ModuleFBXLoader : public Module
 {
