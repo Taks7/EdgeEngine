@@ -11,6 +11,7 @@
 #include "Assimp/include/assimp/cimport.h"
 #include "AssimpDefs.h"
 #include "Resource.h"
+#include "FSdefinitions.h"
 
 #include <vector>
 #include <stack>
@@ -44,6 +45,8 @@ ModuleFileSystem::ModuleFileSystem(const char* assetsPath) : name("ModuleFileSys
 	//Put all the different folder paths here
 	const char* dirs[] = {
 		SETTINGS_FOLDER
+		ASSETS_SCENES_PATH
+		
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)

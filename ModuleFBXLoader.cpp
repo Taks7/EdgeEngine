@@ -527,7 +527,7 @@ uint64 VertexData::Save(const VertexData* mesh, char** buffer)
 	}
 	else
 	{
-		//LOG_COMMENT("[ERROR] Meshes Importer: Could not Save %s into the Library!", r_mesh->GetAssetsFile());
+		//LOG_COMMENT("[ERROR] Meshes Importer: Could not Save %s into the Library!", mesh->GetAssetsFile());
 	}
 
 	path.clear();
@@ -537,26 +537,49 @@ uint64 VertexData::Save(const VertexData* mesh, char** buffer)
 
 bool ModuleFBXLoader::SaveScene()
 {
+	//App->fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
 	char* buffer = nullptr;
 	App->fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
+	//App->fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
+
 
 	if (buffer != nullptr)
 	{
 		JsonParsing jsonFile((const char*)buffer);
 		jsonFile.ValueToObject(jsonFile.GetRootValue());
-	
-		
 
-		jsonFile.SetNewJsonString(jsonFile.ValueToObject(jsonFile.GetRootValue()), "pathMesh", App->scene_intro->selectedGameObject->GetMeshPath().c_str());
+		JsonParsing& node = jsonFile;
+
+		//PARENT OF THE SCENE
+		node.SetChild(node.GetRootValue(), "parent");
+		node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "pathMesh", App->scene_intro->selectedGameObject->GetMeshPath().c_str());
+		node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "textureOrigin", App->scene_intro->selectedGameObject->GetTexturePath().c_str());
 
 		for (int i = 0; i < App->scene_intro->selectedGameObject->childs.size(); i++)
 		{
 
+			jsonFile.SetChild(jsonFile.GetRootValue(), App->scene_intro->selectedGameObject->childs.at(i)->name.c_str());
+			node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "textureChildPath", App->scene_intro->selectedGameObject->childs.at(i)->GetTexturePath().c_str());
 		}
 
-		RELEASE_ARRAY(buffer);
+
+
+		char* buf;
+		uint size = node.Save(&buf);
+
+		if (App->fs->Save(ASSETS_SCENES_PATH "scene.json", buf, size) > 0)
+		{
+			LOG_COMMENT("Saved Engine Preferences");
+		}
+
 		return true;
 	}
+		
+	
+
+
+	
+	
 	
 }
 bool ModuleFBXLoader::LoadScene()
