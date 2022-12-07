@@ -13,6 +13,7 @@ class Hierarchy;
 class InspectorMenu;
 class ModuleConsole;
 class Project;
+class EditorPanel;
 
 class ModuleUI : public Module
 {
@@ -51,6 +52,7 @@ public:
 	bool showGUIPreferences = false;
 	bool exitPopUp = false;
 	bool exitTrue = false;
+	bool seeEditor = true;
 
 	AboutMenu* aboutMenu;
 	Hierarchy* hierarchy;
@@ -59,6 +61,7 @@ public:
 	ModuleConsole* consoleMenu;
 
 	Project* consoleProject;
+	EditorPanel* editor;
 
 	std::string GPUSeller;
 	std::string GPUSpecs;

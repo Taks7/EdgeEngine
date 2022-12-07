@@ -295,7 +295,9 @@ void InspectorMenu::DrawCameraComponent(ModuleGameObject* selectedGameObject)
 	{
 		ModuleComponentCamera* camera = (ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA);
 
-		
+		App->camera->game_current_camera = camera;
+
+		App->ui->seeEditor = false;
 
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Camera Selector:");
 
@@ -304,10 +306,20 @@ void InspectorMenu::DrawCameraComponent(ModuleGameObject* selectedGameObject)
 			App->camera->SetCurrentCamera(camera);
 		}
 
+		/*if (App->ui->seeEditor = true)
+		{
+			App->camera->SetCurrentCamera(camera);
+		}*/
+
 		if (ImGui::Button("Return to Editor View Camera"))
 		{
 			App->camera->SetMasterCameraAsCurrentCamera();
 		}
+
+		/*if (App->ui->seeEditor = false)
+		{
+			App->camera->SetMasterCameraAsCurrentCamera();
+		}*/
 
 		ImGui::Separator();
 

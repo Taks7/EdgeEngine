@@ -120,8 +120,6 @@ void Application::FinishUpdate()
 {
 	if (loadRequest) LoadConfig();
 	if (saveRequest) SaveConfig();
-	if (loadSceneRequest) LoadScene();
-	if (saveSceneRequest) SaveScene();
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -297,61 +295,5 @@ void Application::AddConsoleLogs(const char* log)
 		full_log.clear();
 	}
 }
-
-void Application::SaveScene()
-{
-	LOG_COMMENT("Saving scene");
-
-	JsonParsing jsonFile;
-
-	// Call Init() in all modules
-	std::list<Module*>::iterator item;
-
-	for (item = list_modules.begin(); item != list_modules.end(); ++item)
-	{
-		(*item)->SaveScene(jsonFile.SetChild(jsonFile.GetRootValue(), (*item)->name));
-	}
-
-	char* buf;
-	uint size = jsonFile.Save(&buf);
-
-	if (fs->Save(ASSETS_SCENES_PATH "scene.json", buf, size) > 0)
-	{
-		LOG_COMMENT("Saved Engine scene");
-	}
-
-
-	RELEASE_ARRAY(buf);
-
-	//jsonFile.SerializeFile(root, CONFIG_FILENAME);
-	saveSceneRequest = false;
-}
-
-void Application::LoadScene()
-{
-	LOG_COMMENT("Loading scene");
-
-	char* buffer = nullptr;
-	fs->Load(ASSETS_SCENES_PATH "scene.json", &buffer);
-
-	if (buffer != nullptr)
-	{
-		JsonParsing jsonFile((const char*)buffer);
-		jsonFile.ValueToObject(jsonFile.GetRootValue());
-
-		std::list<Module*>::iterator item;
-
-		for (item = list_modules.begin(); item != list_modules.end(); ++item)
-		{
-			(*item)->LoadScene(jsonFile.GetChild(jsonFile.GetRootValue(), (*item)->name));
-		}
-
-		RELEASE_ARRAY(buffer);
-	}
-
-	loadSceneRequest = false;
-	
-}
-
 
 Application* App = nullptr;

@@ -304,3 +304,8 @@ float3 ModuleComponentsTransform::GetWorldPosition() const
 {
 	return world_transform.TranslatePart();
 }
+
+float4x4 ModuleComponentsTransform::GetWorldTransform() const
+{
+	return world_transform;
+}

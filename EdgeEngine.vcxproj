@@ -84,7 +84,9 @@
     <ClInclude Include="AssimpDefs.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DevIL.h" />
+    <ClInclude Include="EditorPanel.h" />
     <ClInclude Include="FSdefinitions.h" />
+    <ClInclude Include="GameView.h" />
     <ClInclude Include="glmath.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Hierarchy.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SceneView.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
@@ -208,6 +211,8 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssimpDefs.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="EditorPanel.cpp" />
+    <ClCompile Include="GameView.cpp" />
     <ClCompile Include="glmath.cpp" />
     <ClCompile Include="Hierarchy.cpp" />
     <ClCompile Include="ImGuizmo\ImGuizmo.cpp" />
@@ -286,6 +291,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Project.cpp" />
+    <ClCompile Include="SceneView.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>

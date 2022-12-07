@@ -57,6 +57,7 @@ public:
 
 	ModuleGameObject* game_camera;
 	ModuleComponentCamera* current_camera;
+	ModuleComponentCamera* game_current_camera;
 
 	float3 reference;
 

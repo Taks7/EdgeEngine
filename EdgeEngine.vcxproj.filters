@@ -55,6 +55,9 @@
     <Filter Include="Sources\Tools\ImGuizmo">
       <UniqueIdentifier>{b644b78f-cd0c-4e9a-abf1-48f16e2280a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\UI\Viewports">
+      <UniqueIdentifier>{8145927f-e22d-4c03-8a97-b63740797a08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -426,6 +429,15 @@
     <ClInclude Include="ImGuizmo\ImGuizmo.h">
       <Filter>Sources\Tools\ImGuizmo</Filter>
     </ClInclude>
+    <ClInclude Include="EditorPanel.h">
+      <Filter>Sources\Modules\UI\Viewports</Filter>
+    </ClInclude>
+    <ClInclude Include="GameView.h">
+      <Filter>Sources\Modules\UI\Viewports</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneView.h">
+      <Filter>Sources\Modules\UI\Viewports</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -679,6 +691,15 @@
     </ClCompile>
     <ClCompile Include="ImGuizmo\ImGuizmo.cpp">
       <Filter>Sources\Tools\ImGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorPanel.cpp">
+      <Filter>Sources\Modules\UI\Viewports</Filter>
+    </ClCompile>
+    <ClCompile Include="GameView.cpp">
+      <Filter>Sources\Modules\UI\Viewports</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneView.cpp">
+      <Filter>Sources\Modules\UI\Viewports</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -59,6 +59,7 @@ public:
 	Gl_Attributes atributes;
 	uint ckeckerTextureid;
 	bool checkerTextureApplied = false;
+	uint scene_render_texture;
 
 
 };
