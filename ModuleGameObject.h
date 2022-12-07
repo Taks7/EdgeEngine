@@ -42,7 +42,7 @@ public:
 
 	std::string GetName();
 	std::string GetMeshPath();
-	std::string GetTexturePath();
+	std::string GetTexturePath(ModuleGameObject* gameObject);
 	void SetName(const char* newName);
 	ModuleComponents* GetComponent(COMPONENT_TYPES type);
 	ModuleComponents* CreateComponent(COMPONENT_TYPES type);
