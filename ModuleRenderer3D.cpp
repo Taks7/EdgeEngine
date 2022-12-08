@@ -447,6 +447,11 @@ void ModuleRenderer3D::RecalculateProjectionMatrix()
 	glLoadIdentity();
 }
 
+uint ModuleRenderer3D::GetSceneRenderTexture() const
+{
+	return scene_render_texture;
+}
+
 void ModuleRenderer3D::DrawRaycast()
 {
 	glBegin(GL_LINES);
