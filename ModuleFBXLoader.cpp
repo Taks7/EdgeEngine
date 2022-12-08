@@ -542,10 +542,12 @@ bool ModuleFBXLoader::SaveScene(JsonParsing& node) const
 	//node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent position", App->scene_intro->selectedGameObject->GetGlobalPosition());
 	//node.SetNewJson4Number(node.ValueToObject(node.GetRootValue()), "Parent rotation", App->scene_intro->selectedGameObject->GetGlobalRotation());
 	//node.SetNewJson3Number(node.ValueToObject(node.GetRootValue()), "Parent scale", App->scene_intro->selectedGameObject->GetGlobalScale());
+	
+	JSON_Array* array = node.SetNewJsonArray(node.GetRootValue(), "childs");
+
 	for (int i = 0 ; i < App->scene_intro->selectedGameObject->childs.size(); i++)
 	{
-		node.SetNewJsonString(node.ValueToObject(node.GetRootValue()), "child texture" , App->scene_intro->selectedGameObject->childs.at(i)->GetTexturePath(App->scene_intro->selectedGameObject->childs.at(i)).c_str());
-
+		node.SetValueToArray(array,json_value_init_string(App->scene_intro->selectedGameObject->childs.at(i)->GetTexturePath(App->scene_intro->selectedGameObject->childs.at(i)).c_str()));
 	}
 
 	return true;
@@ -554,11 +556,13 @@ bool ModuleFBXLoader::LoadScene(JsonParsing& node)
 {
 	ModuleGameObject* parent = App->scene_intro->CreateEmptyGameObject("Parent");
 	LoadMeshToGameObject(parent, node.GetJsonString("Parent mesh"), node.GetJsonString("Parent texture"));
+	JSON_Array* array = node.GetJsonArray(node.ValueToObject(node.GetRootValue()), "childs");
 	for (int i = 0; i < parent->childs.size(); i++)
 	{
 		ModuleComponentMaterial* materialChild = (ModuleComponentMaterial*)parent->childs[i]->GetComponent(COMPONENT_TYPES::MATERIAL);
 		Texture* newTexture = new Texture();
-		App->materialImport->Import(node.GetJsonString("child texture"), newTexture);
+		const char* texturepath = json_array_get_string(array, i);
+		App->materialImport->Import(texturepath,newTexture);
 		if (materialChild->materialUsed != nullptr) materialChild->materialUsed = nullptr;
 		materialChild->materialUsed = newTexture;
 	}
