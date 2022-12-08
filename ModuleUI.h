@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "SDL/include/SDL.h"
 #include "ModuleWindow.h"
+#include "ImGui/imgui.h"
+#include "float2.h"
 #include <vector>
 
 class Application;
@@ -14,6 +16,7 @@ class InspectorMenu;
 class ModuleConsole;
 class Project;
 class EditorPanel;
+class SceneView;
 
 class ModuleUI : public Module
 {
@@ -62,11 +65,12 @@ public:
 
 	Project* consoleProject;
 	EditorPanel* editor;
+	SceneView* sceneViewer;
 
 	std::string GPUSeller;
 	std::string GPUSpecs;
 	std::string GPUDrivers;
-
+	ImVec2	tex_size;
 
 private:
 

@@ -21,39 +21,12 @@ void EditorPanel::Draw()
 {
 	bool ret = true;
 
-	
-
-	////Start Dear ImGui's frame
-	//ImGui_ImplOpenGL3_NewFrame();
-	//ImGui_ImplSDL2_NewFrame(App->window->GetWindow());
-	//ImGui::NewFrame();
-
-	//if (BeginRootWindow(io, "Root window", true, ImGuiWindowFlags_MenuBar))
-	//{
-	//	bool draw = true;
-	//	for (uint i = 0; i < editor_panels.size(); ++i)
-	//	{
-	//		if (editor_panels[i]->IsActive())
-	//		{
-	//			draw = editor_panels[i]->Draw(io);
-
-	//			if (!draw)
-	//			{
-	//				LOG_COMMENT("[EDITOR] Exited through %s Panel", editor_panels[i]->GetName());
-	//				break;
-	//			}
-	//		}
-	//	}
-
-	//	ImGui::End();
-	//}
-
 	//---------------------------
 
 	ImGui::Begin("CameraView");
 	{
-		ImGui::SetNextWindowBgAlpha(0.1f);
-		/*ImGui::SetWindowPos({ float(App->window->GetWidht() - 300),400 });
+		/*ImGui::SetNextWindowBgAlpha(0.1f);
+		ImGui::SetWindowPos({ float(App->window->GetWidht() - 300),400 });
 		ImGui::SetWindowSize({ 300,550 });*/
 
 

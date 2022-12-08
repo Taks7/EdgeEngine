@@ -48,6 +48,7 @@ public:
 	void RecalculateProjectionMatrix();
 	/*void RenderScene();*/
 
+	uint GetSceneRenderTexture() const;
 	void DrawRaycast();
 
 public:
@@ -60,6 +61,7 @@ public:
 	uint ckeckerTextureid;
 	bool checkerTextureApplied = false;
 	uint scene_render_texture;
+	uint depth_buffer_texture;
 
 
 };

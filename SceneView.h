@@ -5,24 +5,30 @@
 #include "ImGui/imgui.h"
 #include "ImGuizmo/ImGuizmo.h"
 #include "EditorPanel.h"
+#include "Globals.h"
+#include "UI.h"
+#include "ModuleUI.h"
+#include "ModuleGameObject.h"
 
-class SceneView : public EditorPanel
+class ModuleGameObject;
+
+class SceneView : public UI
 {
 public:
 	SceneView();
-	~SceneView();
+	virtual ~SceneView();
 
 	void Draw();
 
-	bool CleanUp		() override;
+	virtual bool CleanUp();
 
 private:
-	void CheckSceneIsClicked		();
+	void CheckSceneIsClicked();
 
-	void AdaptTextureToWindowSize	();
-	void DrawSceneTexture			();
+	void AdaptTextureToWindowSize();
+	void DrawSceneTexture();
 
-	void HandleGuizmos				();
+	void HandleGuizmos();
 
 public:
 	float2 GetWorldMousePosition();
@@ -31,14 +37,15 @@ public:
 	float2 GetSceneTextureSize();
 
 	bool UsingGuizmo();
+	/*void SetIsHovered();
+	void SetIsClicked(const bool& set_to);*/
 
 private:
-	ImVec2					tex_size;
-	ImVec2					tex_origin;
-	ImVec2					cursor_pos;
+	ImVec2	tex_origin;
+	ImVec2	cursor_pos;
 
-	ImGuizmo::OPERATION		guizmo_operation;
-	ImGuizmo::MODE			guizmo_mode;
+	ImGuizmo::OPERATION	guizmo_operation;
+	ImGuizmo::MODE guizmo_mode;
 };
 
 #endif // !__SceneView_H__

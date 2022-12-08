@@ -15,6 +15,7 @@ public:
 	EditorPanel();
 	virtual ~EditorPanel();
 
+	/*void Start();*/
 	void Draw();
 	virtual bool CleanUp();
 
@@ -34,6 +35,8 @@ public:
 
 	bool BeginRootWindow(ImGuiIO& io, const char* window_id, bool docking, ImGuiWindowFlags window_flags);
 	void BeginDockspace(ImGuiIO& io, const char* dockspace_id, ImGuiDockNodeFlags docking_flags, ImVec2 size);
+
+	bool InitializeImGui() const;
 
 private:
 	const char*		name;

@@ -419,8 +419,8 @@ uint Texture::CreateTexture(const void* data, uint width, uint height, uint targ
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	glGenTextures(1, (GLuint*)&texture_id);
-	glBindTexture(target, texture_id);
+	glGenTextures(1, (GLuint*)&App->renderer3D->scene_render_texture);
+	glBindTexture(target, App->renderer3D->scene_render_texture);
 
 	glTexParameteri(target, GL_TEXTURE_WRAP_S, wrapping);
 	glTexParameteri(target, GL_TEXTURE_WRAP_T, wrapping);
@@ -450,6 +450,7 @@ uint Texture::CreateTexture(const void* data, uint width, uint height, uint targ
 
 	glTexImage2D(target, 0, internal_format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, App->renderer3D->scene_render_texture, 0);
 	glGenerateMipmap(target);
 
 	glBindTexture(target, 0);
