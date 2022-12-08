@@ -267,7 +267,6 @@ void ModuleSceneIntro::CreateSceneCamera()
 
 	scene_camera = CreateEmptyGameObject("SceneCamera", nullptr);
 	scene_camera->CreateComponent(COMPONENT_TYPES::CAMERA);
-
 	ModuleComponentCamera* cameraSceneCreated = (ModuleComponentCamera*)scene_camera->GetComponent(COMPONENT_TYPES::CAMERA);
 	cameraSceneCreated->SetAspectRatio(App->window->GetWidht() / App->window->GetHeight());
 

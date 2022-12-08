@@ -202,42 +202,46 @@ void InspectorMenu::DrawMeshComponent(ModuleGameObject* selectedGameObject)
 	if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		ModuleComponentsMesh* mesh = (ModuleComponentsMesh*)selectedGameObject->GetComponent(COMPONENT_TYPES::MESH);
+		ModuleComponentCamera* camera = (ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA);
 
-		if (mesh != nullptr)
+		if (camera == nullptr)
 		{
-			bool active = mesh->IsActive();
-			if (ImGui::Checkbox("Mesh Active", &active))
+			if (mesh != nullptr)
 			{
-				mesh->SetIsActive(active);
+				bool active = mesh->IsActive();
+				if (ImGui::Checkbox("Mesh Active", &active))
+				{
+					mesh->SetIsActive(active);
+				}
+
+				ImGui::Separator();
+
+				if (mesh->meshPath != nullptr && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA) == nullptr))
+				{
+					std::string meshPath = mesh->meshPath;
+
+					ImGui::Text("File: %s", meshPath);
+				}
+
+				ImGui::Separator();
+
+				ImGui::Text("Mesh Info:");
+
+				ImGui::Text("Vertices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "  %u", mesh->mesh.num_vertex);
+				ImGui::Text("Indices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_index);
+				ImGui::Text("UVS:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_uvs);
+
+				ImGui::Separator();
+
+				if (ImGui::Button("Save mesh", { 100,100 }))
+				{
+					char* buffer = nullptr;
+					mesh->mesh.Save(&mesh->mesh, &buffer);
+				}
+
 			}
-
-			ImGui::Separator();
-
-			if (mesh->meshPath != nullptr && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA) == nullptr))
-			{
-				std::string meshPath = mesh->meshPath;
-
-				ImGui::Text("File: %s", meshPath);
-			}
-			
-			ImGui::Separator();
-
-			ImGui::Text("Mesh Info:");
-
-			ImGui::Text("Vertices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "  %u", mesh->mesh.num_vertex);
-			ImGui::Text("Indices:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_index);
-			ImGui::Text("UVS:");	ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "   %u", mesh->mesh.num_uvs);
-
-			ImGui::Separator();
-
-			if (ImGui::Button("Save mesh", { 100,100 }))
-			{
-				char* buffer = nullptr;
-				mesh->mesh.Save(&mesh->mesh, &buffer);
-			}
-
 		}
-		
+
 	}
 }
 
