@@ -25,6 +25,7 @@ void EditorPanel::Draw()
 
 	ImGui::Begin("CameraView");
 	{
+		ImGui::SetWindowSize({ 300,100 });
 		/*ImGui::SetNextWindowBgAlpha(0.1f);
 		ImGui::SetWindowPos({ float(App->window->GetWidht() - 300),400 });
 		ImGui::SetWindowSize({ 300,550 });*/
@@ -148,7 +149,7 @@ bool EditorPanel::BeginRootWindow(ImGuiIO& io, const char* window_id, bool docki
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 
-	window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
+	window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
 		| ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus
 		| ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoBackground;
 
