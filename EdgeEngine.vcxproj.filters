@@ -438,6 +438,9 @@
     <ClInclude Include="SceneView.h">
       <Filter>Sources\Modules\UI\Viewports</Filter>
     </ClInclude>
+    <ClInclude Include="Framebuffer.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -700,6 +703,9 @@
     </ClCompile>
     <ClCompile Include="SceneView.cpp">
       <Filter>Sources\Modules\UI\Viewports</Filter>
+    </ClCompile>
+    <ClCompile Include="Framebuffer.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

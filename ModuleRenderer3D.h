@@ -10,6 +10,9 @@
 #include "ModuleComponent.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentMaterial.h"
+#include "Framebuffer.h"
+
+class Framebuffer;
 
 #define MAX_LIGHTS 8
 #define CWIDTH 64
@@ -53,6 +56,7 @@ public:
 
 public:
 
+	Framebuffer* mainCameraFbo;
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;

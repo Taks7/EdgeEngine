@@ -218,23 +218,52 @@ void SceneView::AdaptTextureToWindowSize()
 
 void SceneView::DrawSceneTexture()
 {
-	cursor_pos = (ImGui::GetWindowSize() - App->ui->tex_size) * 0.5f;  //des
-	ImGui::SetCursorPos(cursor_pos);
+	//cursor_pos = (ImGui::GetWindowSize() - App->ui->tex_size) * 0.5f;  //des
+	//ImGui::SetCursorPos(cursor_pos);
 
-	ImVec2 screen_cursor_pos = ImGui::GetCursorScreenPos();
+	//ImVec2 screen_cursor_pos = ImGui::GetCursorScreenPos();
 
-	if (screen_cursor_pos.x > 1920)																			
-	{
-		screen_cursor_pos.x = screen_cursor_pos.x - 1920;
-	}
+	//if (screen_cursor_pos.x > 1920)																			
+	//{
+	//	screen_cursor_pos.x = screen_cursor_pos.x - 1920;
+	//}
 
-	tex_origin		= screen_cursor_pos + ImVec2(0, App->ui->tex_size.y);		 //des									
-	tex_origin.y	= (float)App->window->GetHeight() - tex_origin.y;										
+	//tex_origin		= screen_cursor_pos + ImVec2(0, App->ui->tex_size.y);		 //des									
+	//tex_origin.y	= (float)App->window->GetHeight() - tex_origin.y;										
 
-	ImGui::Image((ImTextureID)App->renderer3D->GetSceneRenderTexture(), App->ui->tex_size, ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+	//ImGui::Render;
+	//ImGui::Image((ImTextureID)App->renderer3D->mainCameraFbo->GetId(), App->ui->tex_size, ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+	//ImGui::EndFrame;
 	
 
 	//ImGui::Image((ImTextureID)App->renderer->GetDepthBufferTexture(), tex_size, ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+	// 
+	// -------------------------------------------------------------------------
+	// 
+	ImGuiStyle& style = ImGui::GetStyle();
+	style.WindowPadding = ImVec2(0.0f, 0.0f);
+
+	ImGui::Begin("Game1", &active, ImGuiWindowFlags_NoScrollbar);
+
+	ImVec2 size = ImGui::GetContentRegionAvail();
+
+	float2 sizeViewport = float2(0, 0);
+
+	if (sizeViewport.x != size.x || sizeViewport.y != size.y)
+	{
+		sizeViewport.x = size.x;
+		sizeViewport.y = size.y;
+		App->renderer3D->mainCameraFbo->ResizeFramebuffer(size.x, size.y);
+		App->renderer3D->OnResize(size.x, size.y);
+		/*App->scene->mainCamera->UpdateFovAndScreen(size.x, size.y);*/
+	}
+	/*bounds = { ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, size.x, size.y };
+	selected = ImGui::IsWindowFocused();*/
+
+	ImGui::Image((ImTextureID)App->renderer3D->mainCameraFbo->GetId(), ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+
+	ImGui::End();
+	style.WindowPadding = ImVec2(8.0f, 8.0f);
 }
 
 void SceneView::HandleGuizmos()

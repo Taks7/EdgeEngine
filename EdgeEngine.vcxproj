@@ -85,6 +85,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="DevIL.h" />
     <ClInclude Include="EditorPanel.h" />
+    <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="FSdefinitions.h" />
     <ClInclude Include="GameView.h" />
     <ClInclude Include="glmath.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="AssimpDefs.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="EditorPanel.cpp" />
+    <ClCompile Include="Framebuffer.cpp" />
     <ClCompile Include="GameView.cpp" />
     <ClCompile Include="glmath.cpp" />
     <ClCompile Include="Hierarchy.cpp" />

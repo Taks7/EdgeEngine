@@ -33,7 +33,9 @@ ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
-{}
+{
+	RELEASE(mainCameraFbo);
+}
 
 // Called before render is available
 bool ModuleRenderer3D::Init()
@@ -125,7 +127,8 @@ bool ModuleRenderer3D::Init()
 
 	App->materialImport->Init();
 
-
+	mainCameraFbo = new Framebuffer(App->window->GetWidht(), App->window->GetHeight(), 0);
+	mainCameraFbo->Unbind();
 
 	return ret;
 }
@@ -238,6 +241,7 @@ bool ModuleRenderer3D::PostUpdate()
 {
 	/*Render();*/
 
+	mainCameraFbo->Bind();
 	SDL_GL_SwapWindow(App->window->window);
 	return true;
 }
