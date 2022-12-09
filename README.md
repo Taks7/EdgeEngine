@@ -62,6 +62,36 @@ Models and textures can be dropped directly into the engine. That's made by crea
 
 ```Caution: You can only drop .fbx and .png files from the Assets folder that is inside the current project.```
 
+### Modify a GameObject
+
+You can completely transform the selected Game Object, being able to rotate, change position and scale it in the three different axis. You can also select and drop an imported mesh, and the same applies to textures that will be automatically applied to the GameObject you want. Finally there is a Camera Component in the scene that will have different settings that can be modified such as the FOV, the Culling or the View distance and it will also feature the above mentioned transform mechanics.
+
+
+### GameObjects picking & AABB
+
+Game Objects can be picked from the world using the mouse of your computer and the selected mesh will have a bounding volume (AABB) surrounding it and can be discarded with Frustum Culling.
+
+![a2](https://user-images.githubusercontent.com/72123380/206753451-6707725e-0297-47fb-9f25-0701ba0542fa.PNG)
+
+### Save Models, Meshes, Textures and the Scene
+
+You can save your models, meshes and textures using the panel called Inspector that you will find on the left of your screen. The Scene can also be saved to a custom file.
+
+### Play, Pause & Stop
+
+The simulation can be paused and it can also be stoped, where you will recover the original state of all the scene and using the Play you can unpause the simulation again. You will find this functionality on the top of the Screen, with the top navigation bar.
+
+### Two Windows (Editor View & Main Game Camera)
+
+There are two different cameras to be selected, one being the Scene Camera and another being the Game Camera which is a game object with a camera component. They are completely independant and you can adjust the position of both of them to the place you like.
+
+```WIP: We have tested the implementation of showing the two cameras at the same time, but after an extense and difficult progression of that feature we have not achieved it succesfully```
+
+### Resource Management
+
+At the bottom of your screen, next to the console tab there is an Assets window that will display all the user assets. Dropping new assets will modify the window properly and all the resources are only once in memory regardless of how many GameObjects use it.
+
+![a1](https://user-images.githubusercontent.com/72123380/206752955-073635c1-71bb-4936-88b8-252d77bad2cb.PNG)
 
 ## Engine Controls
 
@@ -78,8 +108,6 @@ Models and textures can be dropped directly into the engine. That's made by crea
 - **C**: Move Downward
 
 - **F**: Focuses the Camera Around the Geometry
-
-- **Mouse Right Click**: Changes the Rotation of the Camera
 
 - **ALTL + Mouse Left Click**: Orbit around the Object
 
