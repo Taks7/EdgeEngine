@@ -129,6 +129,16 @@ void ModuleUI::MainMenu()
 	//MENUS 
 	ImGui::BeginMainMenuBar();
 	{
+		if (ImGui::BeginMenu("Exit"))
+		{
+			if (ImGui::MenuItem("Exit engine"))
+			{
+				exitPopUp = true;
+			}
+
+			ImGui::EndMenu();
+		}
+
 		if (ImGui::BeginMenu("Help"))
 		{
 			ImGui::SetNextWindowBgAlpha(1.0f);
@@ -147,10 +157,6 @@ void ModuleUI::MainMenu()
 			if (ImGui::MenuItem("Report a bug"))
 			{
 				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/issues");
-			}
-			if (ImGui::MenuItem("Exit engine"))
-			{
-				exitPopUp = true;
 			}
 
 			ImGui::EndMenu();
