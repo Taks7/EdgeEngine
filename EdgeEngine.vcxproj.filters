@@ -58,6 +58,9 @@
     <Filter Include="Sources\Modules\UI\Viewports">
       <UniqueIdentifier>{8145927f-e22d-4c03-8a97-b63740797a08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\GameObject\Particles">
+      <UniqueIdentifier>{7051bb05-9982-4727-9bea-ec6fb4743361}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -438,6 +441,24 @@
     <ClInclude Include="SceneView.h">
       <Filter>Sources\Modules\UI\Viewports</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleParticles.h">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles.h">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponentBillboard.h">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponentParticles.h">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="EmitterInstance.h">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticlesEmitter.h">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -700,6 +721,24 @@
     </ClCompile>
     <ClCompile Include="SceneView.cpp">
       <Filter>Sources\Modules\UI\Viewports</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleParticles.cpp">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles.cpp">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentBillboard.cpp">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentParticles.cpp">
+      <Filter>Sources\Modules\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EmitterInstance.cpp">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticlesEmitter.cpp">
+      <Filter>Sources\Modules\GameObject\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

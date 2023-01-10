@@ -63,6 +63,14 @@ enum update_status
 	UPDATE_ERROR
 };
 */
+
+template <class T>
+struct range
+{
+	T min; //Start
+	T max; //Final
+};
+
 class Application;
 //I hope no one notices this...
 extern Application* App;
