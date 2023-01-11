@@ -24,7 +24,6 @@ public:
 
 	void SetTexture(Texture* texture);
 
-
 public:
 	std::vector<Texture*> textures;
 

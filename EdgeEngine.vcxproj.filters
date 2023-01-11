@@ -459,6 +459,9 @@
     <ClInclude Include="ParticlesEmitter.h">
       <Filter>Sources\Modules\GameObject\Particles</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Users\Usuario\Desktop\TurboX-Engine-master\TurboX-Engine\Source_Code\Libraries\pcg-c-basic-0.9\pcg_basic.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -739,6 +742,9 @@
     </ClCompile>
     <ClCompile Include="ParticlesEmitter.cpp">
       <Filter>Sources\Modules\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Users\Usuario\Desktop\TurboX-Engine-master\TurboX-Engine\Source_Code\Libraries\pcg-c-basic-0.9\pcg_basic.c">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

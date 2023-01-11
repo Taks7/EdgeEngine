@@ -79,6 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Users\Usuario\Desktop\TurboX-Engine-master\TurboX-Engine\Source_Code\Libraries\pcg-c-basic-0.9\pcg_basic.h" />
     <ClInclude Include="AboutMenu.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="AssimpDefs.h" />
@@ -213,6 +214,7 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Users\Usuario\Desktop\TurboX-Engine-master\TurboX-Engine\Source_Code\Libraries\pcg-c-basic-0.9\pcg_basic.c" />
     <ClCompile Include="AboutMenu.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssimpDefs.cpp" />
