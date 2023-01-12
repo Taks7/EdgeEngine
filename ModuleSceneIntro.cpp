@@ -332,3 +332,31 @@ void ModuleSceneIntro::SetCullingCamera(ModuleComponentCamera* culling_camera)
 	}
 }
 
+void ModuleSceneIntro::DestroyGameObject(ModuleGameObject* GO)
+{
+	GO->components.clear();
+
+	for (int i = 0; i < rootObject->childs.size(); i++)
+	{
+		if (rootObject->childs[i]->childs.empty() == false)
+		{
+			for (size_t j = 0; j < rootObject->childs[i]->childs.size(); j++)
+			{
+				if (rootObject->childs[i]->childs[j] == GO)
+				{
+					rootObject->childs[i]->childs.erase(rootObject->childs[i]->childs.begin() + j);
+				}
+			}
+		}
+		if (rootObject->childs[i] == GO)
+		{
+			rootObject->childs.erase(rootObject->childs.begin() + i);
+		}
+	}
+
+	if (selectedGameObject == GO)
+	{
+		selectedGameObject = nullptr;
+	}
+}
+

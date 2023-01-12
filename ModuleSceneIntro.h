@@ -44,6 +44,7 @@ public:
 
 	ModuleComponentCamera* GetCullingCamera() const;
 	void SetCullingCamera(ModuleComponentCamera* culling_camera);
+	void DestroyGameObject(ModuleGameObject* selectedGameObject);
 
 public:
 

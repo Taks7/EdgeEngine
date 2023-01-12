@@ -291,7 +291,7 @@ void Firework::CleanUp()
 		particles_vector.erase(particles_vector.begin(), particles_vector.end());
 	}
 	fireworkOwner->SetActive(false);
-	//App->scene->DestroyGameObject(fireworkOwner); ERROR NECESITAMOS CREAR FUNCION DE DESTROY CREO
+	App->scene_intro->DestroyGameObject(fireworkOwner);
 	fireworkOwner = nullptr;
 	delete fireworkOwner;
 }
