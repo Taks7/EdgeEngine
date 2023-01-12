@@ -35,6 +35,7 @@ public:
 	ModuleUI* ui;
 	ModuleFBXLoader* loaderModels;
 	ModuleMaterial* materialImport;
+	
 
 	ModuleFileSystem* fs;
 
@@ -43,11 +44,16 @@ public:
 	bool debug;
 	bool pause;
 	bool back_to_original;
+
+	
+
 private:
 
 	std::list<Module*> list_modules;
 	Timer	ms_timer;
+	
 	float	dt;
+
 	bool saveRequest;
 	bool loadRequest;
 

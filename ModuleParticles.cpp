@@ -4,7 +4,7 @@
 #include "ModuleFBXLoader.h"
 #include "ModuleSceneIntro.h"
 #include "scene.h"
-
+#include "Color.h"
 
 ModuleParticles::ModuleParticles()
 {
@@ -214,9 +214,9 @@ Firework::Firework(ModuleGameObject* owner)
 	//Set Resource
 	particle_system->particle_material = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
 	std::string resourceName = "fire";
-	Resource* resourceFireWork = App->resources->GetResourceByName(&resourceName);
+	/*Resource* resourceFireWork = App->resources->GetResourceByName(&resourceName);
 	if (resourceFireWork != nullptr)
-		particle_system->particle_material->SetTexture(resourceFireWork->GetUID());
+		particle_system->particle_material->SetTexture(resourceFireWork->GetUID());*/
 }
 
 Firework::~Firework()
@@ -245,14 +245,14 @@ void Firework::Update(EmitterInstance* emitterInstance)
 	else if (currentTime > lifeTime * 4) { //This is when the firework should die
 		CleanUp();
 	}
-	currentTime += App->timeManagement->GetDeltaTime();
+	currentTime += App->Dt();
 
 	for (size_t i = 0; i < particles_vector.size(); i++)
 	{
 		if (particles_vector[i].active)
 		{
-			particles_vector[i].lifetime -= App->timeManagement->GetDeltaTime();
-			particles_vector[i].position += particles_vector[i].speed * particles_vector[i].direction * App->timeManagement->GetDeltaTime();
+			particles_vector[i].lifetime -= App->Dt();
+			particles_vector[i].position += particles_vector[i].speed * particles_vector[i].direction * App->Dt();
 			particles_vector[i].distanceToCamera = CalculateParticleDistanceToCamera(&particles_vector[i]);
 		}
 	}
@@ -345,8 +345,8 @@ Smoke::Smoke(ModuleGameObject* owner)
 
 	//Set Resource
 	std::string resourceName1 = "smoke1";
-	Resource* resourceSmoke1 = App->fs->GetResourceByName(&resourceName1); 
-	if (resourceSmoke1 != nullptr) particle_system->particle_material->SetTexture(resourceSmoke1->GetUID());
+	/*Resource* resourceSmoke1 = App->fs->GetResourceByName(&resourceName1); 
+	if (resourceSmoke1 != nullptr) particle_system->particle_material->SetTexture(resourceSmoke1->GetUID());*/
 }
 
 Smoke::~Smoke()
