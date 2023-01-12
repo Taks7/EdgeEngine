@@ -9,6 +9,7 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ParticlesEmitter.h"
 
+
 ModuleComponentParticles::ModuleComponentParticles(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::PARTICLES, "Particles")
 {
 	maxParticles = 200;
@@ -22,7 +23,7 @@ ModuleComponentParticles::ModuleComponentParticles(ModuleGameObject* owner) : Mo
 	particleReference->color = Blue;
 
 	particle_material = nullptr;
-	//res_mesh = App->resources->GetBillboard();
+	res_mesh = &App->loaderModels->getBillboard();
 }
 
 ModuleComponentParticles::~ModuleComponentParticles()

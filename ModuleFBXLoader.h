@@ -95,6 +95,8 @@ public:
 public:
 	std::vector<VertexData> meshes;
 	std::vector<VertexData*> textures;
+
+	ModuleComponentsMesh* billboard;
 };
 
 #endif // __ModuleWindow_H__

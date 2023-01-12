@@ -570,3 +570,61 @@ bool ModuleFBXLoader::LoadScene(JsonParsing& node)
 
 	return true;
 }
+
+
+void ModuleFBXLoader::GenerateBillboard()
+{
+	static const float vertex[] = {
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		-0.5f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.0f,
+	};
+
+	//Vertex
+	billboard->num_vertex = 4;
+	billboard->vertex = new float[billboard->num_vertex * 3];
+	memcpy(billboard->vertex, vertex, sizeof(vertex));
+
+	//Indices
+	static const uint indices[] = {
+		0,1,2,1,3,2
+	};
+	billboard->num_index = 6;
+	billboard->index = new uint[billboard->num_index];
+	memcpy(billboard->index, indices, sizeof(indices));
+
+	//Texture Coordinates
+	static const float tex[] = {
+	1,1,0,1,1,0,0,0
+	};
+
+	billboard->num_uvs = billboard->num_vertex * 2;
+	billboard->textCords = new GLfloat[billboard->num_uvs];
+	memcpy(billboard->textCords, tex, sizeof(tex));
+
+}
+
+VertexData ModuleFBXLoader::getBillboard()
+{
+	return *billboard;
+}
+
+
+void VertexData::Draw()
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
+	glVertexPointer(3, GL_FLOAT, 0, &vertex[0]);
+
+	glTexCoordPointer(2, GL_FLOAT, 0, &textCords[0]);
+	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+}
