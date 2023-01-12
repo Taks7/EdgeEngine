@@ -266,7 +266,7 @@ void Firework::Spawn(EmitterInstance* emitterInstance)
 {
 	if (existing_particles < emitterInstance->owner->maxParticles) {
 		//Create new particles until the vector is full
-		particleReference->color = GetRandomColor(rangeColor);
+		particleReference->color = GetRandomColor(rangeColor); //Error al poner el color
 		Particles* newParticle = new Particles(particleReference);
 
 		newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(COMPONENT_TYPES::BILLBOARD);
@@ -296,6 +296,7 @@ void Firework::CleanUp()
 	delete fireworkOwner;
 }
 
+//Error al poner el color
 Color Firework::GetRandomColor(range<Color> r)
 {
 	Color c;

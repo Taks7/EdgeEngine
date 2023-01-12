@@ -204,6 +204,7 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="ParticlesEmitter.h" />
+    <ClInclude Include="pcg-c-basic-0.9\pcg_basic.h" />
     <ClInclude Include="PhysFS\include\physfs.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Project.h" />
@@ -301,6 +302,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="ParticlesEmitter.cpp" />
+    <ClCompile Include="pcg-c-basic-0.9\pcg_basic.c" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="SceneView.cpp" />
