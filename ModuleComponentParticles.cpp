@@ -35,6 +35,8 @@ bool ModuleComponentParticles::Init()
 	{
 		emitters[i].Init();
 	}
+
+	return true;
 }
 
 bool ModuleComponentParticles::Update()
@@ -49,6 +51,8 @@ bool ModuleComponentParticles::Update()
 	{
 		emitters[i].Draw();
 	}
+
+	return true;
 }
 
 void ModuleComponentParticles::Reset()

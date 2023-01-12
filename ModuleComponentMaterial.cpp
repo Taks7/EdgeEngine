@@ -45,3 +45,8 @@ void ModuleComponentMaterial::SetTexture(Texture* texture)
 {
 	materialUsed = texture;
 }
+
+void ModuleComponentMaterial::SetTexture(uint texture_uid)
+{
+	materialUsed->uid = texture_uid;
+}
