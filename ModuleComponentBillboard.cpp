@@ -4,6 +4,7 @@
 #include "ModuleGameObject.h"
 #include "ModuleCamera3D.h"
 #include "ModuleComponentParticles.h"
+#include "ModuleFBXLoader.h"
 //#include "Libraries\glew\glew.h"
 //#include "Libraries\SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -12,7 +13,7 @@ ModuleComponentBillBoard::ModuleComponentBillBoard(ModuleGameObject* owner) : Mo
 {
 	this->owner = owner;
 	billboard_alignment = SCREEN_ALIGNED;
-	//res_mesh = App->resources->GetBillboard();
+	res_mesh = &App->loaderModels->getBillboard();
 	res_texture = nullptr;
 	transform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::TRANSFORM);
 }
@@ -51,7 +52,7 @@ void ModuleComponentBillBoard::Draw(Color color)
 	glPushMatrix();
 	glMultMatrixf(transform->GetLocalTransform().Transposed().ptr());
 
-	//res_mesh->Draw();
+	res_mesh->Draw();
 
 	glPopMatrix();
 }

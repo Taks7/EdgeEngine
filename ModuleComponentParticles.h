@@ -39,6 +39,6 @@ public:
 
 	ModuleComponentMaterial* particle_material;
 
-	ModuleFBXLoader* res_mesh;
+	VertexData* res_mesh;
 };
 #endif // !__ComponentMesh_H__

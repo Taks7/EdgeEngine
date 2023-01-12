@@ -69,6 +69,8 @@ struct VertexData
 	AABB GetAABB();
 	void SetAABB();
 
+	void Draw();
+
 	uint64	Save(const VertexData* mesh, char** buffer);
 };
 class ModuleFBXLoader : public Module
@@ -91,12 +93,15 @@ public:
 	bool LoadScene(JsonParsing& node) override;
 	bool SaveScene(JsonParsing& node) const override;
 
+	VertexData getBillboard();
+
+	void GenerateBillboard();
 
 public:
 	std::vector<VertexData> meshes;
 	std::vector<VertexData*> textures;
 
-	ModuleComponentsMesh* billboard;
+	VertexData* billboard;
 };
 
 #endif // __ModuleWindow_H__
