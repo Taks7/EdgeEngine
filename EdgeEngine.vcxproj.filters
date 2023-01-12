@@ -459,9 +459,6 @@
     <ClInclude Include="ParticlesEmitter.h">
       <Filter>Sources\Modules\GameObject\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleTimeManagement.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -742,9 +739,6 @@
     </ClCompile>
     <ClCompile Include="ParticlesEmitter.cpp">
       <Filter>Sources\Modules\GameObject\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTimeManagement.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

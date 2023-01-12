@@ -196,7 +196,6 @@
     <ClInclude Include="ModuleMaterials.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
-    <ClInclude Include="ModuleTimeManagement.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />
@@ -298,7 +297,6 @@
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
-    <ClCompile Include="ModuleTimeManagement.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Particles.cpp" />
