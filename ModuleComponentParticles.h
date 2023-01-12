@@ -22,11 +22,8 @@ public:
 	bool Update() override;
 	void Reset();
 
-	void Save();
-	void Load();
-
-	float GetRandomFloat(range<float> number);
-	uint GetRandomUint(range<uint> number);
+	/*float GetRandomFloat(range<float> number);*/
+	/*uint GetRandomUint(range<uint> number);*/
 	
 	void AddMaterial(std::map<uint, Resource* > resources);
 	void UpdateParticleGUI(Particles* newParticleReference);

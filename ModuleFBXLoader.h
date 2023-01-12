@@ -11,6 +11,7 @@
 #include "MathGeo/src/Algorithm/Random/LCG.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include "Globals.h"
 
 class Application;
 enum class TEXTURE_TYPE

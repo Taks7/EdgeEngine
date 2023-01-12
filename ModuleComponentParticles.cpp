@@ -64,15 +64,17 @@ void ModuleComponentParticles::Reset()
 	}
 }
 
-float ModuleComponentParticles::GetRandomFloat(range<float> number)
-{
-	return (ldexp(pcg32_random(), -32) * (number.max - number.min)) + number.min;
-}
+//Error
+// 
+//float ModuleComponentParticles::GetRandomFloat(range<float> number)
+//{
+//	return (ldexp(pcg32_random(), -32) * (number.max - number.min)) + number.min;
+//}
 
-uint ModuleComponentParticles::GetRandomUint(range<uint> number)
-{
-	return (ldexp(pcg32_random(), -32) * (number.max - number.min)) + number.min;
-}
+//uint ModuleComponentParticles::GetRandomUint(range<uint> number)
+//{
+//	return (ldexp(pcg32_random(), -32) * (number.max - number.min)) + number.min;
+//}
 
 
 //TODO: Acabar de posar materials a cada particle, metode fbxloader?
