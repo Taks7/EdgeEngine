@@ -5,6 +5,7 @@
 #include "ModuleComponent.h"
 #include "MathGeo/src/Geometry/AABB.h"
 #include "MathGeo/src/Geometry/OBB.h"
+#include "ModuleParticles.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -53,6 +54,8 @@ public:
 	const float3 GetGlobalScale()const;
 
 	AABB GetAABB();
+
+	void CreateCustomParticleSystem(ModuleParticles::Type type, float3 position = { -1,-1,-1 });
 
 public:
 
