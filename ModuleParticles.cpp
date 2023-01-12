@@ -34,7 +34,7 @@ void ModuleParticles::Spawn(EmitterInstance* emitterInstance)
 	else if (GetFirstUnusedParticle() != -1 && activeParticles < emitterInstance->owner->maxParticles)
 	{
 		uint index = GetFirstUnusedParticle();
-		particles_vector[index].active = true; activeParticles++; //Reactivate particle        
+		particles_vector[index].active = true; activeParticles++; //Reactivate particle     
 		particleReference->position = emitterInstance->owner->owner->transform->position; //Get position from C_Transform
 
 		//We update values from Particle Reference
@@ -159,7 +159,7 @@ void ModuleParticles::CreateParticle(EmitterInstance* emitterInstance)
 {
 	Particles* newParticle = new Particles(particleReference);
 
-	newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(Component::Type::Billboard);
+	newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(COMPONENT_TYPES::BILLBOARD);
 
 	if (newParticle != nullptr)
 	{
@@ -203,14 +203,15 @@ Firework::Firework(ModuleGameObject* owner)
 	particleReference->size = 2.0f;
 	particleReference->speed = 2.0f;
 
-	owner->particle_system->UpdateParticleGUI(particleReference);
+	ModuleComponentParticles* particle_system = (ModuleComponentParticles*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
+	particle_system->UpdateParticleGUI(particleReference);
 
 	//Set Resource
-	owner->particle_system->particle_material = new C_Material(Component::Type::Material, owner->parent);
+	particle_system->particle_material = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
 	std::string resourceName = "fire";
 	Resource* resourceFireWork = App->resources->GetResourceByName(&resourceName);
 	if (resourceFireWork != nullptr)
-		owner->particle_system->particle_material->SetResource(resourceFireWork->GetUUID());
+		particle_system->particle_material->SetTexture(resourceFireWork->GetUID());
 }
 
 Firework::~Firework()
@@ -261,7 +262,7 @@ void Firework::Spawn(EmitterInstance* emitterInstance)
 		particleReference->color = GetRandomColor(rangeColor);
 		Particles* newParticle = new Particles(particleReference);
 
-		newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(Component::Type::Billboard);
+		newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(COMPONENT_TYPES::BILLBOARD);
 
 		if (newParticle != nullptr)
 		{
@@ -282,8 +283,8 @@ void Firework::CleanUp()
 		particles_vector[i].~Particles();
 		particles_vector.erase(particles_vector.begin(), particles_vector.end());
 	}
-	fireworkOwner->to_delete = true;
-	App->scene->DestroyGameObject(fireworkOwner);
+	fireworkOwner->SetActive(false);
+	//App->scene->DestroyGameObject(fireworkOwner); ERROR NECESITAMOS CREAR FUNCION DE DESTROY CREO
 	fireworkOwner = nullptr;
 	delete fireworkOwner;
 }
@@ -319,7 +320,9 @@ void CustomParticle::CleanUp()
 Smoke::Smoke(ModuleGameObject* owner)
 {
 	//Set up particleReference
-	particleReference->position = owner->transform->position;
+	ModuleComponentsTransform* owner_transform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
+
+	particleReference->position = owner_transform->GetPosition();
 	particleReference->speed = 0.3f;
 	particleReference->color = { 0.3, 0.3, 0.3, 1.0 };
 	particleReference->size = 0.5f;
@@ -327,15 +330,16 @@ Smoke::Smoke(ModuleGameObject* owner)
 	particleReference->direction = { 0, 1, 0 };
 	particleReference->lifetime = 5.0f;
 
-	owner->particle_system->UpdateParticleGUI(particleReference);
+	ModuleComponentParticles* particle_system = (ModuleComponentParticles*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
+	particle_system->UpdateParticleGUI(particleReference);
 
 	//Set up material
-	owner->particle_system->particle_material = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
+	particle_system->particle_material = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
 
 	//Set Resource
 	std::string resourceName1 = "smoke1";
-	Resource* resourceSmoke1 = App->resources->GetResourceByName(&resourceName1);
-	if (resourceSmoke1 != nullptr) owner->particle_system->particle_material->SetResource(resourceSmoke1->GetUUID());
+	Resource* resourceSmoke1 = App->fs->GetResourceByName(&resourceName1);
+	if (resourceSmoke1 != nullptr) particle_system->particle_material->SetTexture(resourceSmoke1->GetUID());
 }
 
 Smoke::~Smoke()
