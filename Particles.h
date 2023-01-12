@@ -5,7 +5,7 @@
 #include "MathGeo/src/Math/float4.h"
 #include "MathGeo/src/Math/Quat.h"
 
-//#include "Component_Billboard.h"  //TODO:ModuleComponentBillboard
+#include "ModuleComponentBillBoard.h"  //TODO:ModuleComponentBillboard
 #include "Color.h"
 
 class Particles {
@@ -24,7 +24,7 @@ public:
 	bool active;
 	float distanceToCamera;
 
-	/*ModuleComponentBillboard* billboard;*/ //TODO:ModuleComponentBillboard
+	ModuleComponentBillBoard* billboard; //TODO:ModuleComponentBillboard
 };
 
 #endif // !__PARTICLES_H__

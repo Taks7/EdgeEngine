@@ -14,11 +14,11 @@ Particles::Particles(Particles* particleReference)
 	size = particleReference->size;
 	dirVariation = particleReference->dirVariation;
 	active = true;
-	/*billboard = particleReference->billboard;*/  //TODO:ModuleComponentBillboard
+	billboard = particleReference->billboard;  //TODO:ModuleComponentBillboard
 	distanceToCamera = 0.0f;
 }
 
 Particles::~Particles()
 {
-	/*billboard = nullptr;*/  //TODO:ModuleComponentBillboard
+	billboard = nullptr;  //TODO:ModuleComponentBillboard
 }
