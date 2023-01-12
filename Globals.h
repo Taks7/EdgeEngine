@@ -53,8 +53,6 @@ typedef unsigned __int64 uint64;
 #define LIB_UI_PATH "Library/UI/"
 #define SETTINGS_PATH "Settings/"
 #define ASSETS_PATH "Assets/"
-#define OWN_FILE_FORMAT ".turbox"
-#define OWN_FILE_FORMAT_CAP ".TURBOX"
 #define DDS_FORMAT ".dds"
 #define FBX_FORMAT ".fbx"
 #define FBX_FORMAT_CAP ".FBX"
