@@ -8,7 +8,7 @@
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentCamera.h"
 #include "ModuleComponentBillboard.h"
-#include "ModuleParticles.h"
+#include "ModuleComponentParticles.h"
 
 ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic) 
 ,parent(nullptr)
@@ -91,6 +91,10 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 		break;
 	case COMPONENT_TYPES::BILLBOARD:
 		component = new ModuleComponentBillBoard(this);
+		findDuplicates = true;
+		break;
+	case COMPONENT_TYPES::PARTICLES:
+		component = new ModuleComponentParticles(this);
 		findDuplicates = true;
 		break;
 	}
