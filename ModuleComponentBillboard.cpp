@@ -13,7 +13,7 @@ ModuleComponentBillBoard::ModuleComponentBillBoard(ModuleGameObject* owner) : Mo
 {
 	this->owner = owner;
 	billboard_alignment = SCREEN_ALIGNED;
-	res_mesh = &App->loaderModels->getBillboard();
+	res_mesh = App->loaderModels->getBillboard();
 	res_texture = nullptr;
 	transform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::TRANSFORM);
 }

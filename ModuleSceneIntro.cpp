@@ -24,7 +24,8 @@ bool ModuleSceneIntro::Start()
 	
 	CreateSceneCamera();
 
-	
+	//ERROR AL GENERAR EL BILLBOARD (ERROR ACCESO DE LECTURA)
+	//App->loaderModels->GenerateBillboard();
 	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));*/
 
@@ -303,6 +304,7 @@ ModuleGameObject* ModuleSceneIntro::CreateMasterGameObject()
 	rootObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
 	rootObject->CreateComponent(COMPONENT_TYPES::MESH);
 	rootObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
+	rootObject->CreateComponent(COMPONENT_TYPES::PARTICLES);
 	//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
 	game_objects.push_back(rootObject);
 	return rootObject;

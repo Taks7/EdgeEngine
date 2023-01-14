@@ -19,6 +19,7 @@
 #include "DevIL/include/il.h"
 #include "DevIL.h"
 #include <vector>
+#include "ModuleComponentBillboard.h"
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
 
@@ -56,6 +57,7 @@ bool ModuleFBXLoader::Init()
 	struct aiLogStream stream;
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
+
 
 	//LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
 	App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/Models/BakerHouse.fbx", "Assets/Textures/Baker_House.png");
@@ -605,17 +607,16 @@ void ModuleFBXLoader::GenerateBillboard()
 
 }
 
-VertexData ModuleFBXLoader::getBillboard()
+VertexData* ModuleFBXLoader::getBillboard()
 {
-	return *billboard;
+	return billboard;
 }
-
 
 void VertexData::Draw()
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
+	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
 	glVertexPointer(3, GL_FLOAT, 0, &vertex[0]);
 

@@ -23,7 +23,7 @@ ModuleComponentParticles::ModuleComponentParticles(ModuleGameObject* owner) : Mo
 	particleReference->color = Blue;
 
 	particle_material = nullptr;
-	res_mesh = &App->loaderModels->getBillboard();
+	res_mesh = App->loaderModels->getBillboard();
 }
 
 ModuleComponentParticles::~ModuleComponentParticles()
@@ -64,7 +64,6 @@ void ModuleComponentParticles::Reset()
 	}
 }
 
-//Error
 // 
 //float ModuleComponentParticles::GetRandomFloat(range<float> number)
 //{

@@ -94,7 +94,7 @@ public:
 	bool LoadScene(JsonParsing& node) override;
 	bool SaveScene(JsonParsing& node) const override;
 
-	VertexData getBillboard();
+	VertexData* getBillboard();
 
 	void GenerateBillboard();
 

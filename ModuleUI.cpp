@@ -366,6 +366,15 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
+
+		if (ImGui::BeginMenu("PARTICLES"))
+		{
+			if (ImGui::MenuItem("1"))
+			{
+				App->scene_intro->CreateCustomParticleSystem(2, { 0,0,0 }, App->scene_intro->rootObject);
+			}
+			ImGui::EndMenu();
+		}
 	}
 
 	if (showGUIPreferences)
