@@ -70,7 +70,7 @@ bool ModuleFBXLoader::Init()
 
 	float3 smoke1Pos = { 24.76f, 10.13f, 40.55f };
 	App->scene_intro->CreateCustomParticleSystem(ModuleParticles::Type::Smoke, smoke1Pos, smoke1);*/
-
+	GenerateBillboard();
 	return true;
 }
 
@@ -591,7 +591,7 @@ void ModuleFBXLoader::GenerateBillboard()
 		-0.5f, 0.5f, 0.0f,
 		0.5f, 0.5f, 0.0f,
 	};
-
+	billboard = new VertexData;
 	//Vertex
 	billboard->num_vertex = 4;
 	billboard->vertex = new float[billboard->num_vertex * 3];

@@ -19,13 +19,12 @@ bool ModuleSceneIntro::Start()
 {
 	LOG_COMMENT("Loading Intro assets");
 	bool ret = true;
-
 	App->camera->LookAtFloat3(float3::zero);
 	
 	CreateSceneCamera();
 
 	//ERROR AL GENERAR EL BILLBOARD (ERROR ACCESO DE LECTURA)
-	//App->loaderModels->GenerateBillboard();
+	
 	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));*/
 
