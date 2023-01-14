@@ -605,11 +605,28 @@ void ModuleFBXLoader::GenerateBillboard()
 	billboard->textCords = new GLfloat[billboard->num_uvs];
 	memcpy(billboard->textCords, tex, sizeof(tex));
 
+	billboard->GenerateBillboardGPU();
+
 }
 
 VertexData* ModuleFBXLoader::getBillboard()
 {
 	return billboard;
+}
+
+void VertexData::GenerateBillboardGPU()
+{
+	glGenBuffers(1, (GLuint*)&(id_vertex));
+	
+	glBindBuffer(GL_ARRAY_BUFFER, id_vertex); // set the type of buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float3) * num_vertex, &vertex[0], GL_STATIC_DRAW);
+
+	if (num_index > 0) {
+		glGenBuffers(1, (GLuint*)&(id_index));
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * num_index, &index[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
 }
 
 void VertexData::Draw()

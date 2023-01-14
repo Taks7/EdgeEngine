@@ -71,6 +71,7 @@ struct VertexData
 	void SetAABB();
 
 	void Draw();
+	void GenerateBillboardGPU();
 
 	uint64	Save(const VertexData* mesh, char** buffer);
 };
