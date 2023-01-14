@@ -20,6 +20,8 @@
 #include "DevIL.h"
 #include <vector>
 #include "ModuleComponentBillboard.h"
+#include "ModuleParticles.h"
+#include "ModuleComponentParticles.h"
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
 
@@ -61,6 +63,13 @@ bool ModuleFBXLoader::Init()
 
 	//LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
 	App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/Models/BakerHouse.fbx", "Assets/Textures/Baker_House.png");
+	
+	/*ModuleGameObject* smoke1 = App->scene_intro->CreateEmptyGameObject("Smoke1", nullptr);
+
+	App->loaderModels->LoadMeshToGameObject(smoke1, "Assets/Models/BakerHouse.fbx", "Assets/Textures/smoke1.png");
+
+	float3 smoke1Pos = { 24.76f, 10.13f, 40.55f };
+	App->scene_intro->CreateCustomParticleSystem(ModuleParticles::Type::Smoke, smoke1Pos, smoke1);*/
 
 	return true;
 }

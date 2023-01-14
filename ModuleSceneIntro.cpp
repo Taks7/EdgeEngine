@@ -137,6 +137,9 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 			gameObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
 			gameObject->CreateComponent(COMPONENT_TYPES::MESH);
 			gameObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
+			gameObject->CreateComponent(COMPONENT_TYPES::PARTICLES);
+			gameObject->CreateComponent(COMPONENT_TYPES::BILLBOARD);
+
 			//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
 			game_objects.push_back(gameObject);
 			rootObject->childs.push_back(gameObject);
@@ -150,6 +153,8 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 			gameObject_child->CreateComponent(COMPONENT_TYPES::MATERIAL);
 			gameObject_child->CreateComponent(COMPONENT_TYPES::MESH);
 			gameObject_child->CreateComponent(COMPONENT_TYPES::TRANSFORM);
+			gameObject_child->CreateComponent(COMPONENT_TYPES::PARTICLES);
+			gameObject_child->CreateComponent(COMPONENT_TYPES::BILLBOARD);
 			//gameObject_child->CreateComponent(COMPONENT_TYPES::CAMERA);
 			parent->childs.push_back(gameObject_child);
 			return gameObject_child;
