@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "ModuleUI.h"
 #include "AABB.h"
+#include "ParticlesEmitter.h"
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
 	name = "scene";
@@ -360,3 +361,59 @@ void ModuleSceneIntro::DestroyGameObject(ModuleGameObject* GO)
 	}
 }
 
+void ModuleSceneIntro::CreateCustomParticleSystem(int type, float3 position, ModuleGameObject* owner)
+{
+	float3 defaultPos = { -1, -1, -1 };
+	ModuleComponentsTransform* ownerTransform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	if (position.x != defaultPos.x && position.y != defaultPos.y && position.z != defaultPos.z)
+		ownerTransform->SetPosition(position);
+
+	//We make sure that particle_system is valid, or else we create it
+	ModuleComponentParticles* ownerParticles = (ModuleComponentParticles*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
+	if (ownerParticles == nullptr)
+		owner->CreateComponent(COMPONENT_TYPES::PARTICLES);
+
+	switch (type)
+	{
+	case ModuleParticles::None:
+		LOG_COMMENT("Error. You are trying to create a <None Particle System>");
+		break;
+	case ModuleParticles::Custom:
+	{
+		//TODO: Create emitters elsewhere
+		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter()));
+		ownerParticles->emitters.back().owner = ownerParticles;	//Set EmitterInstance's owner
+		ownerParticles->emitters.back().Init();
+		CustomParticle* defaultParticle = new CustomParticle(owner);
+		defaultParticle->name = "defaultParticle";
+		ownerParticles->emitters[0].emitter->modules.push_back(defaultParticle);
+		ownerParticles->emitters[0].UpdateParticleReference();
+		//delete emitterReference;
+		break;
+	}
+	case ModuleParticles::Smoke:
+	{
+		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter));
+
+		Smoke* newSmoke = new Smoke(owner);
+		ownerParticles->emitters[0].emitter->modules.push_back(newSmoke);
+
+		ownerParticles->emitters.back().owner = ownerParticles;
+		ownerParticles->emitters.back().Init();
+		break;
+	}
+	case ModuleParticles::Firework:
+	{
+		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter()));
+		ownerParticles->emitters.back().owner = ownerParticles;
+		ownerParticles->emitters.back().Init();
+		ownerParticles->emitters.back().UpdateParticleReference();
+		Firework* firework = new Firework(owner);
+		firework->name = "firework";
+		ownerParticles->emitters.back().emitter->modules.push_back(firework);
+		break;
+	}
+	default:
+		break;
+	}
+}

@@ -9,7 +9,6 @@
 #include <string>
 
 class ModuleGameObject;
-class ModuleComponentMaterial;
 
 enum Billboarding_Alignment {
 	SCREEN_ALIGNED = 0,

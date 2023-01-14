@@ -25,7 +25,7 @@ void EmitterInstance::Init()
 {
     for (uint i = 0; i < emitter->modules.size(); ++i)
     {
-       /* emitter->modules[i]->Init(this);*/
+        emitter->modules[i]->Init(this);
     }
 }
 
@@ -33,7 +33,7 @@ void EmitterInstance::UpdateModules()
 {
     for (uint i = 0; i < emitter->modules.size(); ++i)
     {
-       /* emitter->modules[i]->Update(this);*/
+        emitter->modules[i]->Update(this);
     }
 }
 
@@ -41,7 +41,7 @@ void EmitterInstance::Draw()
 {
     for (uint i = 0; i < emitter->modules.size(); ++i)
     {
-        /*emitter->modules[i]->DrawParticles();*/
+        emitter->modules[i]->DrawParticles();
     }
 }
 
@@ -49,7 +49,7 @@ void EmitterInstance::UpdateParticleReference()
 {
     for (uint i = 0; i < emitter->modules.size(); ++i)
     {
-       /* emitter->modules[i]->UpdateParticleReference(this);*/
+        emitter->modules[i]->UpdateParticleReference(this);
     }
 }
 
@@ -57,7 +57,7 @@ void EmitterInstance::Reset()
 {
     for (uint i = 0; i < emitter->modules.size(); ++i)
     {
-       /* emitter->modules[i]->Reset();*/
+        emitter->modules[i]->Reset();
     }
 }
 
