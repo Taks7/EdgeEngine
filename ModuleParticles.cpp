@@ -83,9 +83,18 @@ void ModuleParticles::DrawParticles()
 		if (particles_vector[i].active)
 		{
 
-			particles_vector[i].billboard->transform->GetPosition() = particles_vector[i].position;
+			/*particles_vector[i].billboard->transform->GetPosition() = particles_vector[i].position;
 			particles_vector[i].billboard->transform->GetScale() = float3(particles_vector[i].size);
-			particles_vector[i].billboard->Draw(particles_vector[i].color);
+			particles_vector[i].billboard->Draw(particles_vector[i].color);*/
+
+
+			//Particula dibujada con GL_POINTS, no esta claro si funciona bieen
+			glColor4f(particles_vector[i].color.r, particles_vector[i].color.g, particles_vector[i].color.b, particles_vector[i].color.a);
+			glPointSize(particles_vector[i].size);
+			glBegin(GL_POINTS);
+			glVertex3f(particles_vector[i].position.x, particles_vector[i].position.y, particles_vector[i].position.z);
+			glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+			glEnd();
 
 		}
 	}
