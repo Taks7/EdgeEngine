@@ -83,8 +83,8 @@ void ModuleParticles::DrawParticles()
 		if (particles_vector[i].active)
 
 		{
-			particles_vector[i].billboard->transform->GetPosition() = particles_vector[i].position;
-			particles_vector[i].billboard->transform->GetScale() = float3(particles_vector[i].size);
+			particles_vector[i].billboard->transform->SetPosition(particles_vector[i].position);
+			particles_vector[i].billboard->transform->SetScale(float3(particles_vector[i].size));
 			particles_vector[i].billboard->Draw(particles_vector[i].color);
 
 			//Particula dibujada con GL_POINTS, no esta claro si funciona bieen
@@ -180,16 +180,12 @@ void ModuleParticles::CreateParticle(EmitterInstance* emitterInstance)
 	{
 		newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::BILLBOARD);
 	}
-	
-	
-	//newParticle->billboard = emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::BILLBOARD);
-	
+		
 	if (newParticle != nullptr)
 	{
 		particles_vector.push_back(newParticle);
 		existing_particles++;
 		activeParticles++;
-		//particles_vector[particles_vector.size()-1].color = owner->GetRandomColor(owner->color);
 		particles_vector[particles_vector.size() - 1].direction = particleReference->direction + SetRandomDirection();
 	}
 	else LOG_COMMENT("Error creating particles in the Particle Emitter Instance. newParticle was nulltr.")
@@ -369,19 +365,17 @@ Smoke::Smoke(ModuleGameObject* owner)
 
 	Texture* newTexture = new Texture();
 	App->materialImport->Import("Assets/Textures/smoke1.png", newTexture);
-	//particle_system->particle_material->materialUsed = newTexture;
 	particle_system->particle_material->SetTexture(newTexture);
-	/*Resource* resourceSmoke1 = App->fs->GetResourceByName(&resourceName1); 
-	if (resourceSmoke1 != nullptr) particle_system->particle_material->SetTexture(resourceSmoke1->GetUID());*/
+	
 }
 
 Smoke::~Smoke()
 {
 }
 
-/*void Smoke::Update(EmitterInstance* emitterInstance)
-{
-}*/
+//void Smoke::Update(EmitterInstance* emitterInstance)
+//{
+//}
 
 void Smoke::CleanUp()
 {

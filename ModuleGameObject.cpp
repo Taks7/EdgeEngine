@@ -213,64 +213,7 @@ void ModuleGameObject::UpdateBoundingBoxes()
 		aabb.Enclose(obb);
 	}
 }
-// ERROR ESTO HACE FALTA METERLO EN OTRO LADO, PETA PORQUE NO HAN CARGADO AUN LOS COMPONENTES Y ESTAMOS LLAMANDOLOS CON ESTA FUNCION
-//void ModuleGameObject::CreateCustomParticleSystem(ModuleParticles::Type type, float3 position)
-//{
-//	float3 defaultPos = { -1, -1, -1 };
-//	ModuleComponentsTransform* ownerTransform = (ModuleComponentsTransform*)this->GetComponent(COMPONENT_TYPES::TRANSFORM);
-//	if (position.x != defaultPos.x && position.y != defaultPos.y && position.z != defaultPos.z)
-//		ownerTransform->SetPosition(position);
-//
-//	//We make sure that particle_system is valid, or else we create it
-//	ModuleComponentParticles* ownerParticles = (ModuleComponentParticles*)this->GetComponent(COMPONENT_TYPES::PARTICLES);
-//	if (ownerParticles == nullptr)
-//		CreateComponent(COMPONENT_TYPES::PARTICLES);
-//
-//	switch (type)
-//	{
-//	case ModuleParticles::None:
-//		LOG_COMMENT("Error. You are trying to create a <None Particle System>");
-//		break;
-//	case ModuleParticles::Custom:
-//	{
-//		//TODO: Create emitters elsewhere
-//		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter()));
-//		ownerParticles->emitters.back().owner = ownerParticles;	//Set EmitterInstance's owner
-//		ownerParticles->emitters.back().Init();
-//		CustomParticle* defaultParticle = new CustomParticle(this);
-//		defaultParticle->name = "defaultParticle";
-//		ownerParticles->emitters[0].emitter->modules.push_back(defaultParticle);
-//		ownerParticles->emitters[0].UpdateParticleReference();
-//		//delete emitterReference;
-//		break;
-//	}
-//	case ModuleParticles::Smoke:
-//	{
-//		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter));
-//
-//		Smoke* newSmoke = new Smoke(this);
-//		ownerParticles->emitters[0].emitter->modules.push_back(newSmoke);
-//
-//		ownerParticles->emitters.back().owner = ownerParticles;
-//		ownerParticles->emitters.back().Init();
-//		break;
-//	}
-//	case ModuleParticles::Firework:
-//	{
-//		name = "firework";
-//		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter()));
-//		ownerParticles->emitters.back().owner = ownerParticles;
-//		ownerParticles->emitters.back().Init();
-//		ownerParticles->emitters.back().UpdateParticleReference();
-//		Firework* firework = new Firework(this);
-//		firework->name = "firework";
-//		ownerParticles->emitters.back().emitter->modules.push_back(firework);
-//		break;
-//	}
-//	default:
-//		break;
-//	}
-//}
+
 
 bool ModuleGameObject::AddChild(ModuleGameObject* child)
 {
