@@ -14,7 +14,6 @@
 
 
 
-//Arreglar el module particles
 
 EmitterInstance::EmitterInstance(ParticleEmitter* emitterReference)
 {

@@ -12,7 +12,7 @@ ModuleParticles::ModuleParticles()
 	existing_particles = 0;
 	activeParticles = 0;
 	lastUsedParticle = 0;
-	particleReference = new Particles(); //TODO: Duplicate data. particleReference in EmitterInstance and C_ParticleSystem should only be initialized once
+	particleReference = new Particles(); 
 	particleReference->position = { 0,0,0 };
 	particleReference->lifetime = 0;
 	particleReference->billboard = nullptr;
@@ -35,10 +35,9 @@ void ModuleParticles::Spawn(EmitterInstance* emitterInstance)
 	{
 		ModuleComponentsTransform* emmiterTransform = (ModuleComponentsTransform*)emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::TRANSFORM);
 		uint index = GetFirstUnusedParticle();
-		particles_vector[index].active = true; activeParticles++; //Reactivate particle     
-		particleReference->position = emmiterTransform->GetPosition(); //Get position from C_Transform
+		particles_vector[index].active = true; activeParticles++;    
+		particleReference->position = { 0.0f,0.0f,0.0f }; 
 
-		//We update values from Particle Reference
 		particles_vector[index].position = particleReference->position;
 		particles_vector[index].lifetime = particleReference->lifetime;
 		particles_vector[index].direction = particleReference->direction + SetRandomDirection();
@@ -58,6 +57,7 @@ void ModuleParticles::Update(EmitterInstance* emitterInstance)
 		{
 			particles_vector[i].position += particles_vector[i].speed * particles_vector[i].direction;
 			particles_vector[i].distanceToCamera = CalculateParticleDistanceToCamera(&particles_vector[i]);
+			particles_vector[i].lifetime -= App->Dt();
 		}
 	}
 
@@ -86,16 +86,6 @@ void ModuleParticles::DrawParticles()
 			particles_vector[i].billboard->transform->SetPosition(particles_vector[i].position);
 			particles_vector[i].billboard->transform->SetScale(float3(particles_vector[i].size));
 			particles_vector[i].billboard->Draw(particles_vector[i].color);
-
-			//Particula dibujada con GL_POINTS, no esta claro si funciona bieen
-			//particles_vector[i].position += particles_vector[i].speed * particles_vector[i].direction * App->Dt();
-			////particles_vector[i].lifetime -= App->Dt();
-			//glColor4f(particles_vector[i].color.r, particles_vector[i].color.g, particles_vector[i].color.b, particles_vector[i].color.a);
-			//glPointSize(particles_vector[i].size);
-			//glBegin(GL_POINTS);
-			//glVertex3f(particles_vector[i].position.x, particles_vector[i].position.y, particles_vector[i].position.z);
-			//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-			//glEnd();
 
 		}
 	}
@@ -207,21 +197,20 @@ float3 ModuleParticles::SetRandomDirection()
 
 Firework::Firework(ModuleGameObject* owner)
 {
-	ModuleComponentsTransform* fireworkOwnerTransform = (ModuleComponentsTransform*)fireworkOwner->GetComponent(COMPONENT_TYPES::TRANSFORM);
+	ModuleComponentsTransform* fireworkOwnerTransform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::TRANSFORM);
 
 	fireworkOwner = owner;
 	currentTime = 0.0f;
-	lifeTime = 0.7f; //Firework goes up for x seconds
+	lifeTime = 0.7f; 
 	particleReference->active = false;
 	particleReference->billboard = nullptr;
-	//particleReference->color = Green; //Color not initialized because it's latter overwritten by the rangeColor
 	rangeColor = { {0,0,0,1}, {1,1,1,1} };
 	particleReference->direction = { 0,1,0 };
 	particleReference->dirVariation = 0.0f;
 	particleReference->distanceToCamera = NULL;
 	particleReference->lifetime = 1.0; //Particle lifetime
 	particleReference->position = fireworkOwnerTransform->GetPosition();
-	particleReference->size = 2.0f;
+	particleReference->size = 1.0f;
 	particleReference->speed = 2.0f;
 
 	ModuleComponentParticles* particle_system = (ModuleComponentParticles*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
@@ -230,9 +219,7 @@ Firework::Firework(ModuleGameObject* owner)
 	//Set Resource
 	particle_system->particle_material = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
 	std::string resourceName = "fire";
-	/*Resource* resourceFireWork = App->resources->GetResourceByName(&resourceName);
-	if (resourceFireWork != nullptr)
-		particle_system->particle_material->SetTexture(resourceFireWork->GetUID());*/
+	
 }
 
 Firework::~Firework()
@@ -242,9 +229,9 @@ Firework::~Firework()
 
 void Firework::Update(EmitterInstance* emitterInstance)
 {
-	if (currentTime < lifeTime) //This is when the firework should go up
+	if (currentTime < lifeTime) 
 	{
-		ModuleComponentsTransform* fireworkOwnerTransform = (ModuleComponentsTransform*)fireworkOwner->GetComponent(COMPONENT_TYPES::TRANSFORM);
+		ModuleComponentsTransform* fireworkOwnerTransform = (ModuleComponentsTransform*)emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::TRANSFORM);
 
 		float3 lastPos = fireworkOwnerTransform->GetPosition();
 
@@ -252,14 +239,11 @@ void Firework::Update(EmitterInstance* emitterInstance)
 		particleReference->position = fireworkOwnerTransform->GetPosition();
 		Spawn(emitterInstance);
 	}
-	else if (currentTime < lifeTime * 2) { //This is when the firework should explode
+	else if (currentTime < lifeTime * 2) {
 		particleReference->dirVariation = 360.0f;
 		particleReference->speed = 100.0f;
 		particleReference->size = 5.0f;
 		Spawn(emitterInstance);
-	}
-	else if (currentTime > lifeTime * 4) { //This is when the firework should die
-		CleanUp();
 	}
 	currentTime += App->Dt();
 
@@ -285,7 +269,14 @@ void Firework::Spawn(EmitterInstance* emitterInstance)
 		particleReference->color = GetRandomColor(rangeColor); //Error al poner el color
 		Particles* newParticle = new Particles(particleReference);
 
-		newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(COMPONENT_TYPES::BILLBOARD);
+		if (emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::BILLBOARD) == false)
+		{
+			newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(COMPONENT_TYPES::BILLBOARD);
+		}
+		else
+		{
+			newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::BILLBOARD);
+		}
 
 		if (newParticle != nullptr)
 		{
@@ -344,10 +335,10 @@ void CustomParticle::CleanUp()
 Smoke::Smoke(ModuleGameObject* owner)
 {
 	//Set up particleReference
-	ModuleComponentsTransform* owner_transform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
+	ModuleComponentsTransform* owner_transform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::TRANSFORM);
 
 	particleReference->position = owner_transform->GetPosition();
-	particleReference->speed = 0.03f;
+	particleReference->speed = 0.005f;
 	particleReference->color = { 0.3, 0.3, 0.3, 1.0 };
 	particleReference->size = 0.5f;
 	particleReference->dirVariation = 40;
@@ -365,7 +356,10 @@ Smoke::Smoke(ModuleGameObject* owner)
 
 	Texture* newTexture = new Texture();
 	App->materialImport->Import("Assets/Textures/smoke1.png", newTexture);
-	particle_system->particle_material->SetTexture(newTexture);
+	particle_system->particle_material->materialUsed = newTexture;
+	particle_system->particle_material->textures.push_back(newTexture);
+
+	
 	
 }
 

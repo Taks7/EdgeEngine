@@ -385,7 +385,6 @@ void InspectorMenu::DrawParticlesComponent(ModuleGameObject* selectedGameObject)
 {
 	ModuleComponentParticles* particle_system = (ModuleComponentParticles*)selectedGameObject->GetComponent(COMPONENT_TYPES::PARTICLES);
 
-	
 		if (ImGui::CollapsingHeader("Particle Values", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::Text("Particle Emitter");
@@ -409,8 +408,20 @@ void InspectorMenu::DrawParticlesComponent(ModuleGameObject* selectedGameObject)
 			if (ImGui::SliderFloat("Dir. variation", &particle_system->particleReference->dirVariation, 0, 360, "Max: %.1f"))
 				particle_system->emitters[0].UpdateParticleReference();
 
-			if (ImGui::SliderFloat("Speed", &particle_system->particleReference->speed, 0, 20, "Max: %.1f"))
+			if (ImGui::SliderFloat("Speed", &particle_system->particleReference->speed, 0.00, 0.20, "Max: %0.01f"))
 				particle_system->emitters[0].UpdateParticleReference();
+
+			if (ImGui::CollapsingHeader("Color"))
+			{
+				//ModuleComponentMaterial* particle_system_material = (ModuleComponentMaterial*)selectedGameObject->GetComponent(COMPONENT_TYPES::MATERIAL);
+
+				//if (particle_system_material->materialUsed == nullptr)
+				//{
+					ImGui::Text("Color");
+					if (ImGui::ColorPicker4("Color##4", &particle_system->particleReference->color))
+						particle_system->emitters[0].UpdateParticleReference();
+				//}
+			}
 		}
 	
 }

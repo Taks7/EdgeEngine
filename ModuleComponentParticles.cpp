@@ -77,35 +77,35 @@ void ModuleComponentParticles::Reset()
 
 
 //TODO: Acabar de posar materials a cada particle, metode fbxloader?
-void ModuleComponentParticles::AddMaterial(std::map<uint, Resource*> resources)
-{
-	uint flags = 0;
-	flags |= ImGuiTreeNodeFlags_Leaf;
-
-	for (std::map<uint, Resource*>::iterator goIterator = resources.begin(); goIterator != resources.end(); goIterator++)
-	{
-		Resource* res = (*goIterator).second;
-
-		std::string name = res->GetName();
-
-		if (App->input->GetFileType(res->GetAssetsPath()) == FileType::PNG)
-		{
-			if (ImGui::TreeNodeEx(name.c_str(), flags)) {
-
-				ImGui::TreePop();
-
-				if (ImGui::IsItemClicked())
-				{
-					ModuleComponentMaterial* particle_material;
-					particle_material = (ModuleComponentMaterial*)this->GetOwner()->GetComponent(COMPONENT_TYPES::MATERIAL);
-					particle_material->SetTexture(res->GetUID());
-				}
-			}
-		}
-
-		res = nullptr;
-	}
-}
+//void ModuleComponentParticles::AddMaterial(std::map<uint, Resource*> resources)
+//{
+//	uint flags = 0;
+//	flags |= ImGuiTreeNodeFlags_Leaf;
+//
+//	for (std::map<uint, Resource*>::iterator goIterator = resources.begin(); goIterator != resources.end(); goIterator++)
+//	{
+//		Resource* res = (*goIterator).second;
+//
+//		std::string name = res->GetName();
+//
+//		if (App->input->GetFileType(res->GetAssetsPath()) == FileType::PNG)
+//		{
+//			if (ImGui::TreeNodeEx(name.c_str(), flags)) {
+//
+//				ImGui::TreePop();
+//
+//				if (ImGui::IsItemClicked())
+//				{
+//					ModuleComponentMaterial* particle_material;
+//					particle_material = (ModuleComponentMaterial*)this->GetOwner()->GetComponent(COMPONENT_TYPES::MATERIAL);
+//					particle_material->SetTexture(res->GetUID());
+//				}
+//			}
+//		}
+//
+//		res = nullptr;
+//	}
+//}
 
 void ModuleComponentParticles::UpdateParticleGUI(Particles* newParticleReference)
 {
