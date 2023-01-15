@@ -371,7 +371,7 @@ void ModuleUI::MainMenu()
 		{
 			if (ImGui::MenuItem("1"))
 			{
-				App->scene_intro->CreateCustomParticleSystem(2, { 0,0,0 }, App->scene_intro->rootObject);
+				App->scene_intro->CreateCustomParticleSystem(2, { 0,0,0 }, App->scene_intro->selectedGameObject);
 			}
 			ImGui::EndMenu();
 		}

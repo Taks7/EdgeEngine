@@ -7,6 +7,7 @@
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
 #include "ModuleComponentCamera.h"
+#include "ModuleComponentParticles.h"
 
 InspectorMenu::InspectorMenu()
 {
@@ -100,6 +101,11 @@ void InspectorMenu::DrawGameObjectComponents(ModuleGameObject* selectedGameObjec
 				case COMPONENT_TYPES::CAMERA:
 				{
 					DrawCameraComponent(selectedGameObject);
+					break;
+				}
+				case COMPONENT_TYPES::PARTICLES:
+				{
+					DrawParticlesComponent(selectedGameObject);
 					break;
 				}
 
@@ -216,7 +222,7 @@ void InspectorMenu::DrawMeshComponent(ModuleGameObject* selectedGameObject)
 
 				ImGui::Separator();
 
-				if (mesh->meshPath != nullptr && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::CAMERA) == nullptr))
+				if (mesh->meshPath != nullptr && ((ModuleComponentCamera*)selectedGameObject->GetComponent(COMPONENT_TYPES::MESH) == nullptr))
 				{
 					std::string meshPath = mesh->meshPath;
 
@@ -372,4 +378,39 @@ void InspectorMenu::DrawCameraComponent(ModuleGameObject* selectedGameObject)
 
 		
 	}
+}
+
+
+void InspectorMenu::DrawParticlesComponent(ModuleGameObject* selectedGameObject)
+{
+	ModuleComponentParticles* particle_system = (ModuleComponentParticles*)selectedGameObject->GetComponent(COMPONENT_TYPES::PARTICLES);
+
+	
+		if (ImGui::CollapsingHeader("Particle Values", ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			ImGui::Text("Particle Emitter");
+
+			if (ImGui::SliderFloat("Lifetime", &particle_system->particleReference->lifetime, 0, 100, "Max: %.1f"))
+				particle_system->emitters[0].UpdateParticleReference();
+
+			if (ImGui::SliderInt("Max Particles", &particle_system->maxParticles, 0, 200, "Max: %i"))
+				particle_system->emitters[0].UpdateParticleReference();
+
+			if (ImGui::SliderFloat("Particle Size", &particle_system->particleReference->size, 0, 10, "Max: %.1f"))
+				particle_system->emitters[0].UpdateParticleReference();
+
+			float3 direction = particle_system->particleReference->direction;
+			float dr[3] = { direction.x, direction.y, direction.z };
+			if (ImGui::DragFloat3("Direction particles", dr, 0.0f, 0.0f, 0.0f, "%.3f", NULL))
+			{
+				particle_system->emitters[0].UpdateParticleReference();
+			}
+
+			if (ImGui::SliderFloat("Dir. variation", &particle_system->particleReference->dirVariation, 0, 360, "Max: %.1f"))
+				particle_system->emitters[0].UpdateParticleReference();
+
+			if (ImGui::SliderFloat("Speed", &particle_system->particleReference->speed, 0, 20, "Max: %.1f"))
+				particle_system->emitters[0].UpdateParticleReference();
+		}
+	
 }

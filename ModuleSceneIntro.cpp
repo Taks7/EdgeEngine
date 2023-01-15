@@ -136,8 +136,7 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 			gameObject->CreateComponent(COMPONENT_TYPES::MATERIAL);
 			gameObject->CreateComponent(COMPONENT_TYPES::MESH);
 			gameObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
-			gameObject->CreateComponent(COMPONENT_TYPES::PARTICLES);
-			gameObject->CreateComponent(COMPONENT_TYPES::BILLBOARD);
+			//gameObject->CreateComponent(COMPONENT_TYPES::BILLBOARD);
 
 			//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
 			game_objects.push_back(gameObject);
@@ -152,8 +151,8 @@ ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, Modu
 			gameObject_child->CreateComponent(COMPONENT_TYPES::MATERIAL);
 			gameObject_child->CreateComponent(COMPONENT_TYPES::MESH);
 			gameObject_child->CreateComponent(COMPONENT_TYPES::TRANSFORM);
-			gameObject_child->CreateComponent(COMPONENT_TYPES::PARTICLES);
-			gameObject_child->CreateComponent(COMPONENT_TYPES::BILLBOARD);
+			//gameObject_child->CreateComponent(COMPONENT_TYPES::PARTICLES);
+			//gameObject_child->CreateComponent(COMPONENT_TYPES::BILLBOARD);
 			//gameObject_child->CreateComponent(COMPONENT_TYPES::CAMERA);
 			parent->childs.push_back(gameObject_child);
 			return gameObject_child;
@@ -309,6 +308,7 @@ ModuleGameObject* ModuleSceneIntro::CreateMasterGameObject()
 	rootObject->CreateComponent(COMPONENT_TYPES::MESH);
 	rootObject->CreateComponent(COMPONENT_TYPES::TRANSFORM);
 	rootObject->CreateComponent(COMPONENT_TYPES::PARTICLES);
+	rootObject->CreateComponent(COMPONENT_TYPES::BILLBOARD);
 	//gameObject->CreateComponent(COMPONENT_TYPES::CAMERA);
 	game_objects.push_back(rootObject);
 	return rootObject;
@@ -374,10 +374,11 @@ void ModuleSceneIntro::CreateCustomParticleSystem(int type, float3 position, Mod
 	if (position.x != defaultPos.x && position.y != defaultPos.y && position.z != defaultPos.z)
 		ownerTransform->SetPosition(position);
 
+	owner->CreateComponent(COMPONENT_TYPES::PARTICLES);
 	//We make sure that particle_system is valid, or else we create it
 	ModuleComponentParticles* ownerParticles = (ModuleComponentParticles*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
-	if (ownerParticles == nullptr)
-		owner->CreateComponent(COMPONENT_TYPES::PARTICLES);
+	//if (ownerParticles == nullptr)
+	
 
 	switch (type)
 	{
@@ -387,7 +388,7 @@ void ModuleSceneIntro::CreateCustomParticleSystem(int type, float3 position, Mod
 	case ModuleParticles::Custom:
 	{
 		//TODO: Create emitters elsewhere
-		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter()));
+		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter));
 		ownerParticles->emitters.back().owner = ownerParticles;	//Set EmitterInstance's owner
 		ownerParticles->emitters.back().Init();
 		CustomParticle* defaultParticle = new CustomParticle(owner);
@@ -410,7 +411,7 @@ void ModuleSceneIntro::CreateCustomParticleSystem(int type, float3 position, Mod
 	}
 	case ModuleParticles::Firework:
 	{
-		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter()));
+		ownerParticles->emitters.push_back(EmitterInstance(new ParticleEmitter));
 		ownerParticles->emitters.back().owner = ownerParticles;
 		ownerParticles->emitters.back().Init();
 		ownerParticles->emitters.back().UpdateParticleReference();

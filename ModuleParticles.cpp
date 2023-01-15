@@ -81,20 +81,21 @@ void ModuleParticles::DrawParticles()
 	for (size_t i = 0; i < particles_vector.size(); i++)
 	{
 		if (particles_vector[i].active)
+
 		{
-
-			/*particles_vector[i].billboard->transform->GetPosition() = particles_vector[i].position;
+			particles_vector[i].billboard->transform->GetPosition() = particles_vector[i].position;
 			particles_vector[i].billboard->transform->GetScale() = float3(particles_vector[i].size);
-			particles_vector[i].billboard->Draw(particles_vector[i].color);*/
-
+			particles_vector[i].billboard->Draw(particles_vector[i].color);
 
 			//Particula dibujada con GL_POINTS, no esta claro si funciona bieen
-			glColor4f(particles_vector[i].color.r, particles_vector[i].color.g, particles_vector[i].color.b, particles_vector[i].color.a);
-			glPointSize(particles_vector[i].size);
-			glBegin(GL_POINTS);
-			glVertex3f(particles_vector[i].position.x, particles_vector[i].position.y, particles_vector[i].position.z);
-			glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-			glEnd();
+			//particles_vector[i].position += particles_vector[i].speed * particles_vector[i].direction * App->Dt();
+			////particles_vector[i].lifetime -= App->Dt();
+			//glColor4f(particles_vector[i].color.r, particles_vector[i].color.g, particles_vector[i].color.b, particles_vector[i].color.a);
+			//glPointSize(particles_vector[i].size);
+			//glBegin(GL_POINTS);
+			//glVertex3f(particles_vector[i].position.x, particles_vector[i].position.y, particles_vector[i].position.z);
+			//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+			//glEnd();
 
 		}
 	}
@@ -170,9 +171,19 @@ void ModuleParticles::SortParticles(std::vector<Particles>& particles)
 void ModuleParticles::CreateParticle(EmitterInstance* emitterInstance)
 {
 	Particles* newParticle = new Particles(particleReference);
-
-	newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(COMPONENT_TYPES::BILLBOARD);
-
+	
+	if (emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::BILLBOARD) == false)
+	{
+		newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->CreateComponent(COMPONENT_TYPES::BILLBOARD);
+	}
+	else
+	{
+		newParticle->billboard = (ModuleComponentBillBoard*)emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::BILLBOARD);
+	}
+	
+	
+	//newParticle->billboard = emitterInstance->owner->owner->GetComponent(COMPONENT_TYPES::BILLBOARD);
+	
 	if (newParticle != nullptr)
 	{
 		particles_vector.push_back(newParticle);
@@ -355,6 +366,11 @@ Smoke::Smoke(ModuleGameObject* owner)
 
 	//Set Resource
 	std::string resourceName1 = "smoke1";
+
+	Texture* newTexture = new Texture();
+	App->materialImport->Import("Assets/Textures/smoke1.png", newTexture);
+	//particle_system->particle_material->materialUsed = newTexture;
+	particle_system->particle_material->SetTexture(newTexture);
 	/*Resource* resourceSmoke1 = App->fs->GetResourceByName(&resourceName1); 
 	if (resourceSmoke1 != nullptr) particle_system->particle_material->SetTexture(resourceSmoke1->GetUID());*/
 }

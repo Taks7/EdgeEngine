@@ -15,6 +15,7 @@ public:
 	void DrawMeshComponent(ModuleGameObject* selectedGameObject);
 	void DrawMaterialComponent(ModuleGameObject* selectedGameObject);
 	void DrawCameraComponent(ModuleGameObject* selectedGameObject);
+	void DrawParticlesComponent(ModuleGameObject* selectedGameObject);
 	void Draw() override;
 
 	
