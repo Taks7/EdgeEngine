@@ -347,7 +347,7 @@ Smoke::Smoke(ModuleGameObject* owner)
 	ModuleComponentsTransform* owner_transform = (ModuleComponentsTransform*)owner->GetComponent(COMPONENT_TYPES::PARTICLES);
 
 	particleReference->position = owner_transform->GetPosition();
-	particleReference->speed = 0.3f;
+	particleReference->speed = 0.03f;
 	particleReference->color = { 0.3, 0.3, 0.3, 1.0 };
 	particleReference->size = 0.5f;
 	particleReference->dirVariation = 40;

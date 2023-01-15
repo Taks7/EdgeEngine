@@ -407,6 +407,7 @@ void ModuleSceneIntro::CreateCustomParticleSystem(int type, float3 position, Mod
 
 		ownerParticles->emitters.back().owner = ownerParticles;
 		ownerParticles->emitters.back().Init();
+		ownerParticles->emitters.back().UpdateParticleReference();
 		break;
 	}
 	case ModuleParticles::Firework:
