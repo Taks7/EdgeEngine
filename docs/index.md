@@ -65,11 +65,11 @@ We have created three base particles, one customizable, a smoke particle and a f
 Each particle works like it's own class another time similar to how entities work, each type has it's own variations and can be coded to generate even more like in the firework example.
 
 ### Smoke example:
-![](https://github.com/Taks7/EdgeEngine/blob/main/docs/ParticleVideoExample.gif)
+![](ParticleVideoExample.gif)
 
 In this gif we can see all the functionalities of our particles, this allowing the users to create customizable particles for different projects.
 
 ### Firework example:
-![](https://github.com/Taks7/EdgeEngine/blob/main/docs/FireworkExample.gif)
+![](FireworkExample.gif)
 
 In this gif we see the firework working, we can create multiple fireworks, for it to be perfect we would also delete the gameObject holding the particle after explosion.
