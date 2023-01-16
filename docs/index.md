@@ -86,6 +86,8 @@ In this gif we see the firework working, we can create multiple fireworks. As we
 ![Captura](2023-01-16%2020-21-20.gif)
 ```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
+In this gif we can see the functionality of our engine in general,things such as loading meshes and textures, changing parts of the gameObject through the inspector, the hierarchy system and also the capability of swapping textures of gameObjects with just the user interface.
+
 ## LICENSE
 ### MIT LICENSE
 ![Captura](https://user-images.githubusercontent.com/72123380/198901514-4c3111b2-d181-493a-9e2d-350ec0a65e48.PNG)
