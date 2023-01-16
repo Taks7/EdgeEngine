@@ -8,6 +8,7 @@
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentTransform.h"
 #include "ModuleComponentCamera.h"
+#include "ModuleParticles.h"
 
 class Primitive;
 class  PhysBody3D;
@@ -44,6 +45,10 @@ public:
 
 	ModuleComponentCamera* GetCullingCamera() const;
 	void SetCullingCamera(ModuleComponentCamera* culling_camera);
+	void DestroyGameObject(ModuleGameObject* selectedGameObject);
+
+	
+	void CreateCustomParticleSystem(int type, float3 position,ModuleGameObject* owner);
 
 public:
 

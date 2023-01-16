@@ -7,6 +7,8 @@
 #include "ModuleComponentTransform.h"
 #include "ModuleComponentMesh.h"
 #include "ModuleComponentCamera.h"
+#include "ModuleComponentBillboard.h"
+#include "ModuleComponentParticles.h"
 
 ModuleGameObject::ModuleGameObject(uint id, std::string name,bool isActive, bool isStatic) : id(id),name(name), is_active(isActive), is_static(isStatic) 
 ,parent(nullptr)
@@ -87,7 +89,14 @@ ModuleComponents* ModuleGameObject::CreateComponent(COMPONENT_TYPES type)
 		component = new ModuleComponentCamera(this);
 		findDuplicates = true;
 		break;
-
+	case COMPONENT_TYPES::BILLBOARD:
+		component = new ModuleComponentBillBoard(this);
+		findDuplicates = true;
+		break;
+	case COMPONENT_TYPES::PARTICLES:
+		component = new ModuleComponentParticles(this);
+		findDuplicates = true;
+		break;
 	}
 
 	if (component != nullptr)
@@ -205,6 +214,7 @@ void ModuleGameObject::UpdateBoundingBoxes()
 	}
 }
 
+
 bool ModuleGameObject::AddChild(ModuleGameObject* child)
 {
 	child->parent = this;
@@ -295,3 +305,5 @@ float3 const ModuleGameObject::GetGlobalScale() const
 		}
 	}
 }
+
+

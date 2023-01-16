@@ -175,6 +175,28 @@ bool ModuleInput::PreUpdate(float dt)
 	return true;
 }
 
+FileType ModuleInput::GetFileType(std::string file)
+{
+	std::string dFile = file;
+	if (dFile.length() > 4) {
+		std::string formatStr = dFile.substr(dFile.length() - 4);
+		if (formatStr == FBX_FORMAT || formatStr == FBX_FORMAT_CAP)
+			return FileType::FBX;
+		else if (formatStr == PNG_FORMAT || formatStr == PNG_FORMAT_CAP)
+			return FileType::PNG;
+		else if (formatStr == JPG_FORMAT || formatStr == JPG_FORMAT_CAP || formatStr == JPEG_FORMAT || formatStr == JPEG_FORMAT_CAP)
+			return FileType::JPG;
+		else if (formatStr == DDS_FORMAT || formatStr == DDS_FORMAT_CAP)
+			return FileType::DDS;
+		else if (formatStr == TGA_FORMAT || formatStr == TGA_FORMAT_CAP)
+			return FileType::TGA;
+	}
+	else
+		LOG_COMMENT("Cannot load %s file.  Format not recognized", file)
+		return FileType::UNDEFINED;
+
+}
+
 bool ModuleInput::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)

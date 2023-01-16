@@ -19,6 +19,9 @@
 #include "DevIL/include/il.h"
 #include "DevIL.h"
 #include <vector>
+#include "ModuleComponentBillboard.h"
+#include "ModuleParticles.h"
+#include "ModuleComponentParticles.h"
 
 #pragma comment (lib, "Assimp/lib/assimp-vc142-mt.lib")
 
@@ -57,9 +60,17 @@ bool ModuleFBXLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
+
 	//LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
 	App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/Models/BakerHouse.fbx", "Assets/Textures/Baker_House.png");
+	
+	/*ModuleGameObject* smoke1 = App->scene_intro->CreateEmptyGameObject("Smoke1", nullptr);
 
+	App->loaderModels->LoadMeshToGameObject(smoke1, "Assets/Models/BakerHouse.fbx", "Assets/Textures/smoke1.png");
+
+	float3 smoke1Pos = { 24.76f, 10.13f, 40.55f };
+	App->scene_intro->CreateCustomParticleSystem(ModuleParticles::Type::Smoke, smoke1Pos, smoke1);*/
+	GenerateBillboard();
 	return true;
 }
 
@@ -569,4 +580,78 @@ bool ModuleFBXLoader::LoadScene(JsonParsing& node)
 	}
 
 	return true;
+}
+
+
+void ModuleFBXLoader::GenerateBillboard()
+{
+	static const float vertex[] = {
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		-0.5f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.0f,
+	};
+	billboard = new VertexData;
+	//Vertex
+	billboard->num_vertex = 4;
+	billboard->vertex = new float[billboard->num_vertex * 3];
+	memcpy(billboard->vertex, vertex, sizeof(vertex));
+
+	//Indices
+	static const uint indices[] = {
+		0,1,2,1,3,2
+	};
+	billboard->num_index = 6;
+	billboard->index = new uint[billboard->num_index];
+	memcpy(billboard->index, indices, sizeof(indices));
+
+	//Texture Coordinates
+	static const float tex[] = {
+	1,1,0,1,1,0,0,0
+	};
+
+	billboard->num_uvs = billboard->num_vertex * 2;
+	billboard->textCords = new GLfloat[billboard->num_uvs];
+	memcpy(billboard->textCords, tex, sizeof(tex));
+
+	billboard->GenerateBillboardGPU();
+
+}
+
+VertexData* ModuleFBXLoader::getBillboard()
+{
+	return billboard;
+}
+
+void VertexData::GenerateBillboardGPU()
+{
+	glGenBuffers(1, (GLuint*)&(id_vertex));
+	
+	glBindBuffer(GL_ARRAY_BUFFER, id_vertex); // set the type of buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float3) * num_vertex, &vertex[0], GL_STATIC_DRAW);
+
+	if (num_index > 0) {
+		glGenBuffers(1, (GLuint*)&(id_index));
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * num_index, &index[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+}
+
+void VertexData::Draw()
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
+	glVertexPointer(3, GL_FLOAT, 0, &vertex[0]);
+
+	glTexCoordPointer(2, GL_FLOAT, 0, &textCords[0]);
+	glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }

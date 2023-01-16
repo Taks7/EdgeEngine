@@ -366,6 +366,23 @@ void ModuleUI::MainMenu()
 			ImGui::EndMenu();
 
 		}
+
+		if (ImGui::BeginMenu("PARTICLES"))
+		{
+			if (ImGui::MenuItem("Custom"))
+			{
+				App->scene_intro->CreateCustomParticleSystem(1, { 0,0,0 }, App->scene_intro->CreateEmptyGameObject("CustomParticle"));
+			}
+			if (ImGui::MenuItem("Smoke"))
+			{
+				App->scene_intro->CreateCustomParticleSystem(2, { 0,0,0 }, App->scene_intro->CreateEmptyGameObject("SmokeParticle"));
+			}
+			if (ImGui::MenuItem("FireWork"))
+			{
+				App->scene_intro->CreateCustomParticleSystem(3, { 0,0,0 }, App->scene_intro->CreateEmptyGameObject("FireworkParticle"));
+			}
+			ImGui::EndMenu();
+		}
 	}
 
 	if (showGUIPreferences)

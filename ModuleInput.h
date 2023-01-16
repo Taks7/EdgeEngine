@@ -12,6 +12,15 @@ enum KEY_STATE
 	KEY_UP
 };
 
+enum class FileType {
+	FBX,
+	PNG,
+	DDS,
+	JPG,
+	TGA,
+	UNDEFINED
+};
+
 class ModuleInput : public Module
 {
 public:
@@ -58,6 +67,8 @@ public:
 	{
 		return mouse_y_motion;
 	}
+
+	FileType GetFileType(std::string file);
 
 
 private:

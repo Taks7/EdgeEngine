@@ -54,6 +54,8 @@ public:
 
 	AABB GetAABB();
 
+	//void CreateCustomParticleSystem(ModuleParticles::Type type, float3 position);
+
 public:
 
 	std::vector<ModuleComponents*>	components;

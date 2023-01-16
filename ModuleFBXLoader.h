@@ -11,6 +11,7 @@
 #include "MathGeo/src/Algorithm/Random/LCG.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include "Globals.h"
 
 class Application;
 enum class TEXTURE_TYPE
@@ -69,6 +70,9 @@ struct VertexData
 	AABB GetAABB();
 	void SetAABB();
 
+	void Draw();
+	void GenerateBillboardGPU();
+
 	uint64	Save(const VertexData* mesh, char** buffer);
 };
 class ModuleFBXLoader : public Module
@@ -85,16 +89,22 @@ public:
 
 	bool LoadMesh(const char* file_path,const char* texture_path);
 	bool LoadMeshToGameObject(ModuleGameObject* owner,const char* file_path, const char* texture_path);
+	//bool LoadMeshToGameObject(ModuleGameObject* owner, const char* file_path, const char* texture_path);
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
 	bool LoadScene(JsonParsing& node) override;
 	bool SaveScene(JsonParsing& node) const override;
 
+	VertexData* getBillboard();
+
+	void GenerateBillboard();
 
 public:
 	std::vector<VertexData> meshes;
 	std::vector<VertexData*> textures;
+
+	VertexData* billboard;
 };
 
 #endif // __ModuleWindow_H__

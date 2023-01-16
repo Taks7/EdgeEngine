@@ -44,6 +44,31 @@ typedef unsigned __int64 uint64;
 
 #define RESOURCES_FOLDER "Assets/Resources/"
 #define SETTINGS_FOLDER "Settings/"
+#define NUM_PATHS 6
+#define TEXTURES_PATH "Assets/Textures/"
+#define MODELS_PATH "Assets/Models/"
+#define AUDIO_PATH "Assets/Audio/"
+#define LIB_TEXTURES_PATH "Library/Textures/"
+#define LIB_MODELS_PATH "Library/Models/"
+#define LIB_UI_PATH "Library/UI/"
+#define SETTINGS_PATH "Settings/"
+#define ASSETS_PATH "Assets/"
+#define DDS_FORMAT ".dds"
+#define FBX_FORMAT ".fbx"
+#define FBX_FORMAT_CAP ".FBX"
+#define META_FORMAT ".meta"
+#define DDS_FORMAT ".dds"
+#define DDS_FORMAT_CAP ".DDS"
+#define FBX_FORMAT ".fbx"
+#define FBX_FORMAT_CAP ".FBX"
+#define PNG_FORMAT ".png"
+#define PNG_FORMAT_CAP ".PNG"
+#define TGA_FORMAT ".tga"
+#define TGA_FORMAT_CAP ".TGA"
+#define JPG_FORMAT ".jpg"
+#define JPG_FORMAT_CAP ".JPG"
+#define JPEG_FORMAT ".jpeg"
+#define JPEG_FORMAT_CAP ".JPEG"
 
 #define RELEASE_ARRAY( x )\
 	{\
@@ -63,6 +88,14 @@ enum update_status
 	UPDATE_ERROR
 };
 */
+
+template <class T>
+struct range
+{
+	T min; //Start
+	T max; //Final
+};
+
 class Application;
 //I hope no one notices this...
 extern Application* App;

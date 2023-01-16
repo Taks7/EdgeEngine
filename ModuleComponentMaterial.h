@@ -24,6 +24,7 @@ public:
 
 	void SetTexture(Texture* texture);
 
+	void SetTexture(uint texture_uid);
 
 public:
 	std::vector<Texture*> textures;
