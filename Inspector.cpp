@@ -26,8 +26,8 @@ void InspectorMenu::Draw()
 	ImGui::Begin("Inspector");
 	{
 		ImGui::SetNextWindowBgAlpha(1.0f);
-		ImGui::SetWindowPos({ float(App->window->GetWidht() - 300),20});
-		ImGui::SetWindowSize({ 300,550 });
+		ImGui::SetWindowPos({ float(App->window->GetWidht() - 400),20});
+		ImGui::SetWindowSize({ 400,550 });
 		
 		
 		
@@ -398,29 +398,25 @@ void InspectorMenu::DrawParticlesComponent(ModuleGameObject* selectedGameObject)
 			if (ImGui::SliderFloat("Particle Size", &particle_system->particleReference->size, 0, 10, "Max: %.1f"))
 				particle_system->emitters[0].UpdateParticleReference();
 
-			float3 direction = particle_system->particleReference->direction;
-			float dr[3] = { direction.x, direction.y, direction.z };
-			if (ImGui::DragFloat3("Direction particles", dr, 0.0f, 0.0f, 0.0f, "%.3f", NULL))
-			{
+			if (ImGui::SliderFloat("Particle Dir X", &particle_system->particleReference->direction.x, -1, 1, "Max: %.1f"))
 				particle_system->emitters[0].UpdateParticleReference();
-			}
-
-			if (ImGui::SliderFloat("Dir. variation", &particle_system->particleReference->dirVariation, 0, 360, "Max: %.1f"))
+			if (ImGui::SliderFloat("Particle Dir Y", &particle_system->particleReference->direction.y, -1, 1, "Max: %.1f"))
+				particle_system->emitters[0].UpdateParticleReference();
+			if (ImGui::SliderFloat("Particle Dir Z", &particle_system->particleReference->direction.z, -1, 1, "Max: %.1f"))
 				particle_system->emitters[0].UpdateParticleReference();
 
-			if (ImGui::SliderFloat("Speed", &particle_system->particleReference->speed, 0.00, 0.20, "Max: %0.01f"))
+			if (ImGui::SliderFloat("Dir variation", &particle_system->particleReference->dirVariation, 0, 360, "Max: %.1f"))
+				particle_system->emitters[0].UpdateParticleReference();
+
+			if (ImGui::SliderFloat("Speed", &particle_system->particleReference->speed, 0, 20, "Max: %.1f"))
 				particle_system->emitters[0].UpdateParticleReference();
 
 			if (ImGui::CollapsingHeader("Color"))
 			{
-				//ModuleComponentMaterial* particle_system_material = (ModuleComponentMaterial*)selectedGameObject->GetComponent(COMPONENT_TYPES::MATERIAL);
-
-				//if (particle_system_material->materialUsed == nullptr)
-				//{
+				
 					ImGui::Text("Color");
 					if (ImGui::ColorPicker4("Color##4", &particle_system->particleReference->color))
 						particle_system->emitters[0].UpdateParticleReference();
-				//}
 			}
 		}
 	

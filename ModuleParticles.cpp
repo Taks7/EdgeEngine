@@ -55,7 +55,7 @@ void ModuleParticles::Update(EmitterInstance* emitterInstance)
 	{
 		if (particles_vector[i].active)
 		{
-			particles_vector[i].position += particles_vector[i].speed * particles_vector[i].direction;
+			particles_vector[i].position += particles_vector[i].speed * particles_vector[i].direction * 0.02f;
 			particles_vector[i].distanceToCamera = CalculateParticleDistanceToCamera(&particles_vector[i]);
 			particles_vector[i].lifetime -= App->Dt();
 		}
