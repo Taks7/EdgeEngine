@@ -62,7 +62,7 @@ bool ModuleFBXLoader::Init()
 
 
 	//LoadMesh("Assets/BakerHouse.fbx","Assets/Resources/Baker_House.png");
-	App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/Models/BakerHouse.fbx", "Assets/Textures/Baker_House.png");
+	//App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/Models/BakerHouse.fbx", "Assets/Textures/Baker_House.png");
 	
 	/*ModuleGameObject* smoke1 = App->scene_intro->CreateEmptyGameObject("Smoke1", nullptr);
 
