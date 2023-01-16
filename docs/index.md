@@ -68,13 +68,13 @@ Each particle works like it's own class another time similar to how entities wor
 ![](ParticleVideoExample.gif)
 ```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
-In this gif we can see all the functionalities of our particles, this allowing the users to create customizable particles for different projects.
+In this gif we can see all the functionalities of our particles, this allowing the users to create customizable particles for different projects. As seen in the GIF before we can modify multiple seetings of the particles as the lifetime, the amount of them or its size to say a few. Another functionality added is that the particles created can have the color changed in the inspector tab.
 
 ### Firework example:
 ![](FireworkExample.gif)
 ```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
-In this gif we see the firework working, we can create multiple fireworks, for it to be perfect we would also delete the gameObject holding the particle after explosion.
+In this gif we see the firework working, we can create multiple fireworks. As we can observe in the image from above the fireworks that are spammed with the key 1 are created with enough randomization that the explosion dont always feel the same one. For it to be perfect we would also delete the gameObject holding the particle after explosion.
 
 ## LICENSE
 ### MIT LICENSE
