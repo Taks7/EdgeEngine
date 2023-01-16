@@ -4,11 +4,17 @@
 
 Edge Engine its a 3D graphics Engine for Game Development developed with C++ and [OpenGL](https://www.opengl.org/). It has been developed by students of the [Degree in Videogame Design and Development](https://www.citm.upc.edu/ing/estudis/graus-videojocs/) of the [Universitat Politècnica de Catalunya](https://www.upc.edu/ca). You can check out our webpage [here](https://taks7.github.io/EdgeEngine/).
 
-# Authors:
+# Developers:
 - Alejandro Martin:
   - Github Account: [Alejandromo125](https://github.com/Alejandromo125)
+  - GameObject structure and Components
+  - MousePicking and AABB
+  - User Interface (Inspector,hierarchy,...)
 - Albert Ramisa:
   - Github Account: [Taks7](https://github.com/taks7)
+  - Importer resources (Models and textures)
+  - Resource management
+  - Camera component & frustrum
 
 # Particle system:
 
