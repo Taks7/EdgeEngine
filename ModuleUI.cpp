@@ -369,6 +369,10 @@ void ModuleUI::MainMenu()
 
 		if (ImGui::BeginMenu("PARTICLES"))
 		{
+			if (ImGui::MenuItem("Custom"))
+			{
+				App->scene_intro->CreateCustomParticleSystem(1, { 0,0,0 }, App->scene_intro->selectedGameObject);
+			}
 			if (ImGui::MenuItem("Smoke"))
 			{
 				App->scene_intro->CreateCustomParticleSystem(2, { 0,0,0 }, App->scene_intro->selectedGameObject);

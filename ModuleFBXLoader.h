@@ -89,6 +89,7 @@ public:
 
 	bool LoadMesh(const char* file_path,const char* texture_path);
 	bool LoadMeshToGameObject(ModuleGameObject* owner,const char* file_path, const char* texture_path);
+	//bool LoadMeshToGameObject(ModuleGameObject* owner, const char* file_path, const char* texture_path);
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 

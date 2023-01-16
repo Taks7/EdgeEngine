@@ -40,10 +40,10 @@ void ModuleComponentBillBoard::Draw(Color color)
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-			if (ownerParticleSystem->particle_material->materialUsed != nullptr && ownerParticleSystem->particle_material->defaultTexture)
+			if (ownerParticleSystem->particle_material->materialUsed != nullptr)
+			{
 				glBindTexture(GL_TEXTURE_2D, ownerParticleSystem->particle_material->materialUsed->id);
-			//else
-				//glColor4f(mat->color.r, mat->color.g, mat->color.b, mat->color.a);
+			}
 		}
 	}
 
