@@ -148,22 +148,16 @@ We have created three base particles, one customizable, a smoke particle and a f
 Each particle works like it's own class another time similar to how entities work, each type has it's own variations and can be coded to generate even more like in the firework example.
 
 ### Smoke example:
-![](ParticleVideoExample.gif)
-```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
-In this gif we can see all the functionalities of our particles, this allowing the users to create customizable particles for different projects. As seen in the GIF before we can modify multiple settings of the particles as the lifetime, the amount of them or its size to say a few. Another functionality added is that the particles created can have the color changed in the inspector tab.
+We can modify multiple settings of the particles as the lifetime, the amount of them or its size to say a few. Another functionality added is that the particles created can have the color changed in the inspector tab.
 
 ### Firework example:
-![](FireworkExample.gif)
-```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
-In this gif we see the firework working, we can create multiple fireworks. As we can observe in the image from above the fireworks that are spammed with the key 1 are created with enough randomization that the explosion dont always feel the same one. For it to be perfect we would also delete the gameObject holding the particle after explosion.
+The fireworks that are spammed with the key 1 are created with enough randomization that the explosion dont always feel the same one. For it to be perfect we would also delete the gameObject holding the particle after explosion.
 
 ### Authoring Scenes in the Editor
-![Captura](2023-01-16%2020-21-20.gif)
-```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
-In this gif we can see the functionality of our engine in general,things such as loading meshes and textures, changing parts of the gameObject through the inspector, the hierarchy system and also the capability of swapping textures of gameObjects with just the user interface.
+Functionality of our engine in general,things such as loading meshes and textures, changing parts of the gameObject through the inspector, the hierarchy system and also the capability of swapping textures of gameObjects with just the user interface.
 
 ## Engine Controls
 
