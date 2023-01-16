@@ -218,7 +218,12 @@ Firework::Firework(ModuleGameObject* owner)
 
 	//Set Resource
 	particle_system->particle_material = (ModuleComponentMaterial*)owner->GetComponent(COMPONENT_TYPES::MATERIAL);
-	std::string resourceName = "fire";
+
+	std::string resourceName = "firework";
+	Texture* newTextureFirework = new Texture();
+	App->materialImport->Import("Assets/Textures/firework.png", newTextureFirework);
+	particle_system->particle_material->materialUsed = newTextureFirework;
+	particle_system->particle_material->textures.push_back(newTextureFirework);
 	
 }
 
@@ -287,6 +292,7 @@ void Firework::Spawn(EmitterInstance* emitterInstance)
 			particles_vector[particles_vector.size() - 1].direction = particleReference->direction + SetRandomDirection();
 		}
 		else LOG_COMMENT("Error creating particles in the Particle Emitter Instance. newParticle was nulltr.")
+
 	}
 }
 
