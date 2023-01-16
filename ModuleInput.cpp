@@ -171,6 +171,11 @@ bool ModuleInput::PreUpdate(float dt)
 	{
 		App->ui->exitPopUp = true;
 	}
+
+	if (keyboard[SDL_SCANCODE_1] == KEY_UP)
+	{
+		App->scene_intro->CreateCustomParticleSystem(3, { 0,0,0 }, App->scene_intro->CreateEmptyGameObject("FireworkParticle"));
+	}
 	
 	return true;
 }
