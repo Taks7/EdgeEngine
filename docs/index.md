@@ -66,11 +66,13 @@ Each particle works like it's own class another time similar to how entities wor
 
 ### Smoke example:
 ![](ParticleVideoExample.gif)
+```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
 In this gif we can see all the functionalities of our particles, this allowing the users to create customizable particles for different projects.
 
 ### Firework example:
 ![](FireworkExample.gif)
+```Caution: If you click right and open the .gif in a new tab the resolution improves drastically.```
 
 In this gif we see the firework working, we can create multiple fireworks, for it to be perfect we would also delete the gameObject holding the particle after explosion.
 
